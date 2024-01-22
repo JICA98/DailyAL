@@ -1,0 +1,25 @@
+name: dal_api
+description: A sample command-line application.
+version: 1.0.0
+publish_to: none
+# homepage: https://www.example.com
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+
+dependencies:
+  shelf: ^1.3.2
+  intl: ^0.18.1
+  html: ^0.15.0
+  html_unescape: ^2.0.0
+  retry: ^3.1.0
+  http: ^0.13.3
+  aws_lambda_dart_runtime: ^1.0.3+2
+  dal_commons:
+    path: dal_commons
+
+dev_dependencies:
+  lints: ^2.0.0
+  test: ^1.16.0
+  json_serializable: ^6.1.4
+  build_runner: ^2.1.7

@@ -1,0 +1,95 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"editor.fontFamily": "Agave Nerd Font",
+		"editor.fontLigatures": true,
+		"editor.fontWeight": "100",
+		"editor.insertSpaces": true,
+		"editor.fontSize": 16,
+		"dart.flutterSdkPath": "~/src/flutter/flutter_linux_3.13.1-stable/flutter"
+	},
+	"tasks": {
+		"version": "2.0.0",
+		"tasks": [
+			{
+				"type": "flutter",
+				"command": "flutter",
+				"args": [
+					"build",
+					"apk"
+				],
+				"group": "build",
+				"problemMatcher": [],
+				"label": "flutter: flutter build apk",
+				"detail": ""
+			},
+			{
+				"type": "flutter",
+				"label": "clean",
+				"args": [
+					"clean"
+				]
+			},
+			{
+				"type": "dart",
+				"command": "dart",
+				"label": "intl generate",
+				"args": [
+					"run",
+					"intl_utils:generate"
+				]
+			},
+			{
+				"type": "shell",
+				"command": "python3",
+				"label": "python translate",
+				"args": [
+					"python/init.py"
+				]
+			},
+			{
+				"type": "dart",
+				"command": "dart",
+				"label": "build_runner",
+				"args": [
+					"run",
+					"build_runner",
+					"build",
+					"--delete-conflicting-outputs",
+				]
+			}
+		]
+	},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+			{
+				"name": "dailyanimelist",
+				"request": "launch",
+				"type": "dart",
+				"flutterMode": "debug",
+				"env": {
+					"MAL_CLIENT_ID": "",
+					"MAL_CLIENT_SECRET": "",
+					"APP_CONFIG_URL": "",
+					"SUPABASE_URL": "",
+					"SUPABASE_KEY": ""
+				},
+			}
+		]
+	},
+	"extensions": {
+		"recommendations": [
+			"Dart-Code.dart-code",
+			"Dart-Code.flutter",
+			"localizely.flutter-intl",
+			"PKief.material-icon-theme",
+			"eamodio.gitlens",
+			"github.github-vscode-theme"
+		]
+	}
+}

@@ -1,0 +1,3 @@
+mixin AnimeDetailedMixin {
+  int? numEpisodes;
+}
