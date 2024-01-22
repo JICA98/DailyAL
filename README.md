@@ -1,17 +1,21 @@
-# dailyanimelist
+# DailyAL
 
-A new Flutter project.
+Unofficial client for MyAnimeList
 
-## Getting Started
+### Getting Started
 
-This project is a starting point for a Flutter application.
+- To run this project, you need to have [Flutter](https://flutter.dev/docs/get-started/install) installed on your machine.
+- Clone this repo to your machine: `git clone`
+- Use `dal-code.code-workspace` to open the project in VSCode
+- Run `flutter pub get` to install dependencies
+- Fill in necessary environment variables in launch configuration
+- Enjoy!
 
-A few resources to get you started if this is your first Flutter project:
+### Additional Setup
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+- Run user task - `intl generate` to generate localization files
+- Run user task - `build runner` to generate necessary files
+- Run user task - `python translate` to generate translation files
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-"# DailyAnimeList" 
+#### PS
+- Please don't suggest any state management solutions.

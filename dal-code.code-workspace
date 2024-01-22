@@ -54,7 +54,7 @@
 			{
 				"type": "dart",
 				"command": "dart",
-				"label": "build_runner",
+				"label": "build runner",
 				"args": [
 					"run",
 					"build_runner",
