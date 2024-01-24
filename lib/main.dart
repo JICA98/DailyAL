@@ -23,6 +23,7 @@ import 'package:provider/provider.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:restart_app/restart_app.dart';
 import 'package:supabase_flutter/supabase_flutter.dart' as supa;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 /// Global UserData
 late User user;
@@ -38,6 +39,7 @@ void main() async {
   try {
     // Universal Log Config for DailyAL
     dalLogConfig.debugMode = kDebugMode;
+    await dotenv.load();
     Environment.i.malClientId = CredMal.clientId;
     WidgetsFlutterBinding.ensureInitialized();
     ErrorReporting.init();

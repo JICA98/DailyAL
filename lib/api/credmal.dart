@@ -1,8 +1,8 @@
-import 'dart:io';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class CredMal {
   static Map<String, Object> get environment {
-    return Platform.environment;
+    return dotenv.env;
   }
 
   ///EndPoint
