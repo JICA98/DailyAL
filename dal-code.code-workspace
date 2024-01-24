@@ -71,14 +71,7 @@
 				"name": "dailyanimelist",
 				"request": "launch",
 				"type": "dart",
-				"flutterMode": "debug",
-				"env": {
-					"MAL_CLIENT_ID": "",
-					"MAL_CLIENT_SECRET": "",
-					"APP_CONFIG_URL": "",
-					"SUPABASE_URL": "",
-					"SUPABASE_KEY": ""
-				},
+				"flutterMode": "debug"
 			}
 		]
 	},

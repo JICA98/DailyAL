@@ -8,8 +8,13 @@ Unofficial client for MyAnimeList
 - Clone this repo to your machine: `git clone`
 - Use `dal-code.code-workspace` to open the project in VSCode
 - Run `flutter pub get` to install dependencies
-- Fill in necessary environment variables in launch configuration
-- Enjoy!
+- Create .env file in the root directory with the following keys:
+    - MAL_CLIENT_ID
+    - MAL_CLIENT_SECRET
+    - APP_CONFIG_URL
+    - SUPABASE_URL
+    - SUPABASE_KEY
+- Launch the app using `flutter run` or `F5` in VSCode
 
 ### Additional Setup
 
