@@ -516,19 +516,11 @@ class _ContentAllWidgetState extends State<ContentAllWidget>
                     aspectRatio: widget.aspectRatio,
                     child: Stack(
                       children: [
-                        (widget.showImage && widget.showBackgroundImage)
-                            ? Container(
-                                width: double.infinity,
-                                child: Opacity(
-                                  opacity: .1,
-                                  child: CachedNetworkImage(
-                                      fit: BoxFit.cover,
-                                      imageUrl: widget.dynContent?.content
-                                              ?.mainPicture?.large ??
-                                          ''),
-                                ),
-                              )
-                            : const SizedBox(),
+                        if (widget.showImage &&
+                            widget.showBackgroundImage &&
+                            _imageUrl.isNotBlank &&
+                            !user.pref.showAnimeMangaCard)
+                          _coverImage(),
                         Container(
                           // height: 90,
                           child: Row(
@@ -667,6 +659,16 @@ class _ContentAllWidgetState extends State<ContentAllWidget>
     );
   }
 
+  Container _coverImage() {
+    return Container(
+      width: double.infinity,
+      child: Opacity(
+        opacity: .1,
+        child: CachedNetworkImage(fit: BoxFit.cover, imageUrl: _imageUrl),
+      ),
+    );
+  }
+
   bool _hasUpperBar(NodeStatusValue nsv) {
     return widget.showIndex ||
         _hasMeanStars ||
@@ -710,7 +712,7 @@ class _ContentAllWidgetState extends State<ContentAllWidget>
   }
 
   Widget leadingImage(BuildContext context) {
-    if (widget.showImage) {
+    if (widget.showImage && _imageUrl.isNotBlank) {
       var unseenWidget = _unseenWidget();
       Widget child;
       if (unseenWidget == null) {

@@ -170,6 +170,7 @@ class _BookMarksWidgetState extends State<BookMarksWidget> {
   ];
   final scrollController = ScrollController();
   bool isSorted = false;
+  final _nonImageTypes = [BookmarkType.malUser];
   final _categoryMap = {
     'malUser': 'user',
     'clubs': 'club',
@@ -274,7 +275,7 @@ class _BookMarksWidgetState extends State<BookMarksWidget> {
         returnSlivers: true,
         cardHeight: 170,
         cardWidth: 160,
-        showImage: contentTypes.contains(type.name),
+        showImage: true,
         showEdit: contentTypes.contains(type.name),
         padding: const EdgeInsets.symmetric(horizontal: 15.0),
         contentList: adaptToBaseNodes(nodes),
@@ -357,7 +358,7 @@ class _BookMarksWidgetState extends State<BookMarksWidget> {
       } else if (e is ForumHtml) {
         return e;
       } else if (e is UserProf) {
-        return BaseNode(content: MUser(e.name!, '', ''));
+        return BaseNode(content: MUser(e.name!, e.picture ?? '', ''));
       } else {
         throw Error();
       }

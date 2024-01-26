@@ -237,7 +237,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
       child,
       autoIncludeSearch: false,
       appbarTitle: widget.username,
-      floatingActionButton: _floatingActionBtn(),
+      floatingActionButton: _floatingActionBtn(prof),
       actions: [
         SB.w20,
         if (id != null)
@@ -298,11 +298,14 @@ class _UserProfilePageState extends State<UserProfilePage> {
     _expandUserProfile.update(!_expandUserProfile.currentValue!);
   }
 
-  Widget _floatingActionBtn() {
+  Widget _floatingActionBtn(UserProf? prof) {
     return BookMarkFloatingButton(
       type: BookmarkType.malUser,
       id: widget.username,
-      data: UserProf(name: widget.username),
+      data: UserProf(
+        name: widget.username,
+        picture: prof?.picture,
+      ),
     );
   }
 
