@@ -262,7 +262,8 @@ class _ContentDetailedScreenState extends State<ContentDetailedScreen>
   }
 
   bool get isStreamingBlank {
-    return animeDetailedHtml == null ||
+    return (animeDetailedHtml == null &&
+            user.pref.preferredLinkType != LinkType.otherLists) ||
         _scheduleData?.relatedLinks == null &&
             nullOrEmpty(
               animeDetailedHtml?.links
