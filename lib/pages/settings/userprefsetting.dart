@@ -8,6 +8,7 @@ import 'package:dailyanimelist/screens/generalsearchscreen.dart';
 import 'package:dailyanimelist/widgets/avatarwidget.dart';
 import 'package:dailyanimelist/widgets/bottomnavbar.dart';
 import 'package:dotted_border/dotted_border.dart';
+import 'package:line_icons/line_icons.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:dailyanimelist/widgets/custombutton.dart';
 import 'package:dailyanimelist/widgets/home/accordion.dart';
@@ -175,6 +176,18 @@ class _UserPrefSettingsState extends State<UserPrefSettings> {
             trailing: ToggleButton(
               toggleValue: user.pref.showAnimeMangaCard,
               onToggled: (value) => changeShowAnimeMangaCard(value),
+            ),
+          ),
+          OptionTile(
+            text: S.current.Allow_YT_Player,
+            iconData: LineIcons.youtube,
+            multiLine: false,
+            desc: S.current.Allow_YT_Player_Desc,
+            onPressed: () =>
+                changeAllowYoutubePlayer(!user.pref.allowYoutubePlayer),
+            trailing: ToggleButton(
+              toggleValue: user.pref.allowYoutubePlayer,
+              onToggled: (value) => changeAllowYoutubePlayer(value),
             ),
           ),
           OptionTile(
@@ -459,6 +472,12 @@ class _UserPrefSettingsState extends State<UserPrefSettings> {
 
   changeShowAnimeMangaCard(bool showAnimeMangaCard) {
     user.pref.showAnimeMangaCard = showAnimeMangaCard;
+    user.setIntance();
+    setState(() {});
+  }
+
+  void changeAllowYoutubePlayer(bool allowYoutubePlayer) {
+    user.pref.allowYoutubePlayer = allowYoutubePlayer;
     user.setIntance();
     setState(() {});
   }

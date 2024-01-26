@@ -47,6 +47,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "All": MessageLookupByLibrary.simpleMessage("Tudo"),
         "All_time_Favorites":
             MessageLookupByLibrary.simpleMessage("Todos os favoritos"),
+        "Allow_YT_Player":
+            MessageLookupByLibrary.simpleMessage("Permitir player do Youtube"),
+        "Allow_YT_Player_Desc": MessageLookupByLibrary.simpleMessage(
+            "Permitir que o player do YouTube reproduza vídeos no aplicativo"),
         "Analysis": MessageLookupByLibrary.simpleMessage("Análise"),
         "Animals": MessageLookupByLibrary.simpleMessage("Animais"),
         "Animation": MessageLookupByLibrary.simpleMessage("Animação"),

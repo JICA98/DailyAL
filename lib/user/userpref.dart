@@ -38,6 +38,7 @@ class UserPreferences {
   AnimeMangaPagePreferences animeMangaPagePreferences;
   int startUpPage;
   LinkType preferredLinkType;
+  bool allowYoutubePlayer;
   UserPreferences({
     required this.firstTime,
     required this.homePageTileSize,
@@ -71,6 +72,7 @@ class UserPreferences {
     required this.startUpPage,
     required this.showAnimeMangaCard,
     required this.preferredLinkType,
+    required this.allowYoutubePlayer,
   });
 
   factory UserPreferences.fromJson(Map<String, dynamic>? json) {
@@ -214,6 +216,7 @@ class UserPreferences {
               (e) => e.name == json['preferredLinkType'],
               orElse: () => LinkType.streaming,
             ),
+            allowYoutubePlayer: json['allowYoutubePlayer'] ?? false,
             showAnimeMangaCard: json['showAnimeMangaCard'] ?? false,
             animeMangaPagePreferences: _animeMangaPagePreferences ??
                 AnimeMangaPagePreferences.defaultObject())
@@ -249,6 +252,7 @@ class UserPreferences {
             startUpPage: 0,
             preferredLinkType: LinkType.streaming,
             showAnimeMangaCard: false,
+            allowYoutubePlayer: false,
             animeMangaPagePreferences:
                 AnimeMangaPagePreferences.defaultObject(),
           );
@@ -286,6 +290,7 @@ class UserPreferences {
       'animeMangaPagePreferences': animeMangaPagePreferences,
       'showAnimeMangaCard': showAnimeMangaCard,
       'startUpPage': startUpPage,
+      'allowYoutubePlayer': allowYoutubePlayer,
       'preferredLinkType': preferredLinkType.name,
     };
   }

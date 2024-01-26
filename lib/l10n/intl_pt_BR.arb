@@ -913,5 +913,7 @@
     "Resources": "Recursos",
     "Available_At": "Dispon\u00edvel em",
     "Other_Lists": "Outras listas",
-    "AdditionalTitles": "T\u00edtulos Adicionais"
+    "AdditionalTitles": "T\u00edtulos Adicionais",
+    "Allow_YT_Player": "Permitir player do Youtube",
+    "Allow_YT_Player_Desc": "Permitir que o player do YouTube reproduza v\u00eddeos no aplicativo"
 }

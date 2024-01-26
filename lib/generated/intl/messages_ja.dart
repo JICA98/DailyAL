@@ -45,6 +45,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "All": MessageLookupByLibrary.simpleMessage("全て"),
         "All_time_Favorites":
             MessageLookupByLibrary.simpleMessage("すべての時間お気に入り"),
+        "Allow_YT_Player":
+            MessageLookupByLibrary.simpleMessage("Youtube プレーヤーを許可する"),
+        "Allow_YT_Player_Desc": MessageLookupByLibrary.simpleMessage(
+            "Youtube プレーヤーがアプリ内でビデオを再生できるようにする"),
         "Analysis": MessageLookupByLibrary.simpleMessage("分析"),
         "Animals": MessageLookupByLibrary.simpleMessage("動物"),
         "Animation": MessageLookupByLibrary.simpleMessage("アニメーション"),

@@ -45,6 +45,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "All": MessageLookupByLibrary.simpleMessage("모두"),
         "All_time_Favorites":
             MessageLookupByLibrary.simpleMessage("모든 시간 즐겨 찾기"),
+        "Allow_YT_Player": MessageLookupByLibrary.simpleMessage("유튜브 플레이어 허용"),
+        "Allow_YT_Player_Desc": MessageLookupByLibrary.simpleMessage(
+            "YouTube 플레이어가 앱에서 동영상을 재생하도록 허용"),
         "Analysis": MessageLookupByLibrary.simpleMessage("분석"),
         "Animals": MessageLookupByLibrary.simpleMessage("동물"),
         "Animation": MessageLookupByLibrary.simpleMessage("생기"),

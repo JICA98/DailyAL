@@ -9150,6 +9150,26 @@ class S {
     );
   }
 
+  /// `Allow Youtube Player`
+  String get Allow_YT_Player {
+    return Intl.message(
+      'Allow Youtube Player',
+      name: 'Allow_YT_Player',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Allow Youtube player to play videos in the app`
+  String get Allow_YT_Player_Desc {
+    return Intl.message(
+      'Allow Youtube player to play videos in the app',
+      name: 'Allow_YT_Player_Desc',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Published End Date`
   String get publishedEndDate {
     return Intl.message(

@@ -7,6 +7,7 @@ import 'package:dal_commons/dal_commons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:webviewtube/webviewtube.dart';
 
 class VideoTile {
   final String? title;
@@ -147,8 +148,10 @@ class _VideosWidgetState extends State<VideosWidget> {
                         ),
                         onTap: tiles[i].url == null
                             ? () {}
-                            : () => launchURLWithConfirmation(tiles[i].url!,
-                                context: context),
+                            : () {
+                                showYouTubeVideo(
+                                    url: tiles[i].url!, context: context);
+                              },
                       ),
                     ),
                   ),
@@ -270,4 +273,65 @@ class _VideosWidgetState extends State<VideosWidget> {
     } catch (e) {}
     return null;
   }
+}
+
+Future<void> showYouTubeVideo({
+  required String url,
+  required BuildContext context,
+}) async {
+  if (user.pref.allowYoutubePlayer) {
+    final uri = Uri.tryParse(url);
+    if (uri != null) {
+      final queryParameters = uri.queryParameters;
+      if (queryParameters.containsKey('v')) {
+        await showDialog(
+          context: context,
+          builder: (_) {
+            final aspectRatio = MediaQuery.of(context).size.aspectRatio;
+            final landscapeRadius = RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20),
+                bottomLeft: Radius.circular(20),
+              ),
+            );
+            final portraitRadius = RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            );
+
+            final closeButton = ShadowButton(
+              padding: const EdgeInsets.all(10),
+              shape: aspectRatio > 1 ? landscapeRadius : portraitRadius,
+              child: Icon(Icons.close),
+              onPressed: () => Navigator.pop(context),
+            );
+            return SizedBox(
+              height: MediaQuery.of(context).size.height,
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  WebviewtubePlayer(
+                    videoId: queryParameters['v']!,
+                  ),
+                  if (aspectRatio > 1)
+                    Positioned(
+                      top: MediaQuery.of(context).size.height * .5,
+                      right: 0,
+                      child: closeButton,
+                    )
+                  else
+                    Positioned(
+                      right: 10,
+                      bottom: 60,
+                      child: closeButton,
+                    ),
+                ],
+              ),
+            );
+          },
+        );
+        return;
+      }
+    }
+  }
+  launchURLWithConfirmation(url, context: context);
 }
