@@ -9100,6 +9100,46 @@ class S {
     );
   }
 
+  /// `More Links`
+  String get moreLinks {
+    return Intl.message(
+      'More Links',
+      name: 'moreLinks',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Resources`
+  String get Resources {
+    return Intl.message(
+      'Resources',
+      name: 'Resources',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Available At`
+  String get Available_At {
+    return Intl.message(
+      'Available At',
+      name: 'Available_At',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Other Lists`
+  String get Other_Lists {
+    return Intl.message(
+      'Other Lists',
+      name: 'Other_Lists',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Published End Date`
   String get publishedEndDate {
     return Intl.message(

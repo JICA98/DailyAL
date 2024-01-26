@@ -12,58 +12,6 @@
 		"editor.fontSize": 16,
 		"dart.flutterSdkPath": "~/src/flutter/flutter_linux_3.13.1-stable/flutter"
 	},
-	"tasks": {
-		"version": "2.0.0",
-		"tasks": [
-			{
-				"type": "flutter",
-				"command": "flutter",
-				"args": [
-					"build",
-					"apk"
-				],
-				"group": "build",
-				"problemMatcher": [],
-				"label": "flutter: flutter build apk",
-				"detail": ""
-			},
-			{
-				"type": "flutter",
-				"label": "clean",
-				"args": [
-					"clean"
-				]
-			},
-			{
-				"type": "dart",
-				"command": "dart",
-				"label": "intl generate",
-				"args": [
-					"run",
-					"intl_utils:generate"
-				]
-			},
-			{
-				"type": "shell",
-				"command": "python3",
-				"label": "python translate",
-				"args": [
-					"python/init.py"
-				]
-			},
-			{
-				"type": "dart",
-				"command": "dart",
-				"label": "build runner",
-				"args": [
-					"run",
-					"build_runner",
-					"build",
-					"--delete-conflicting-outputs",
-				]
-			}
-		]
-	},
 	"launch": {
 		"version": "0.2.0",
 		"configurations": [

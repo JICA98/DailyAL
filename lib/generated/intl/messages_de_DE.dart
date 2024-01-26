@@ -117,6 +117,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Fügt automatisch Start- und Enddatum hinzu, wenn der Status auf \"Beobachtet/abgeschlossen\" verschoben wird."),
         "Auto_Translate_Synopsis":
             MessageLookupByLibrary.simpleMessage("Auto Translate Synopsis."),
+        "Available_At": MessageLookupByLibrary.simpleMessage("Verfügbar um"),
         "Avant_Garde": MessageLookupByLibrary.simpleMessage("Avantgarde"),
         "Average": MessageLookupByLibrary.simpleMessage("Durchschnitt"),
         "Award_Winning": MessageLookupByLibrary.simpleMessage("Preisgekrönt"),
@@ -741,6 +742,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Organisiertes Verbrechen"),
         "Otakon": MessageLookupByLibrary.simpleMessage("Otakon."),
         "Otaku_Culture": MessageLookupByLibrary.simpleMessage("Otaku-Kultur"),
+        "Other_Lists": MessageLookupByLibrary.simpleMessage("Andere Listen"),
         "Others": MessageLookupByLibrary.simpleMessage("Andere"),
         "PTW": MessageLookupByLibrary.simpleMessage("Ptw."),
         "Parody": MessageLookupByLibrary.simpleMessage("Parodie"),
@@ -859,6 +861,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Homepage zurücksetzen."),
         "Reset_homepage_warning": MessageLookupByLibrary.simpleMessage(
             "Dadurch wird das Homepage-Layout auf den ursprünglichen Zustand zurückgesetzt und nicht machbar."),
+        "Resources": MessageLookupByLibrary.simpleMessage("Ressourcen"),
         "Restacks": MessageLookupByLibrary.simpleMessage("stapelt"),
         "Restart_to_see_changes": MessageLookupByLibrary.simpleMessage(
             "Sie müssen neu starten, um die Änderungen zu sehen \""),
@@ -1258,6 +1261,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "month_ago": MessageLookupByLibrary.simpleMessage("vor einem Monat"),
         "months_ago":
             MessageLookupByLibrary.simpleMessage("vor wenigen Monaten"),
+        "moreLinks": MessageLookupByLibrary.simpleMessage("Weitere Links"),
         "numChapters":
             MessageLookupByLibrary.simpleMessage("Anzahl der Kapitel"),
         "numEpisodes":

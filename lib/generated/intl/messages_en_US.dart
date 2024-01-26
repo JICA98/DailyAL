@@ -111,6 +111,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Automatically adds start and end date when status is moved to watching/completed."),
         "Auto_Translate_Synopsis":
             MessageLookupByLibrary.simpleMessage("Auto Translate Synopsis"),
+        "Available_At": MessageLookupByLibrary.simpleMessage("Available At"),
         "Avant_Garde": MessageLookupByLibrary.simpleMessage("Avant_Garde"),
         "Average": MessageLookupByLibrary.simpleMessage("Average"),
         "Award_Winning": MessageLookupByLibrary.simpleMessage("Award_Winning"),
@@ -714,6 +715,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Organized_Crime"),
         "Otakon": MessageLookupByLibrary.simpleMessage("Otakon"),
         "Otaku_Culture": MessageLookupByLibrary.simpleMessage("Otaku_Culture"),
+        "Other_Lists": MessageLookupByLibrary.simpleMessage("Other Lists"),
         "Others": MessageLookupByLibrary.simpleMessage("Others"),
         "PTW": MessageLookupByLibrary.simpleMessage("PTW"),
         "Parody": MessageLookupByLibrary.simpleMessage("Parody"),
@@ -829,6 +831,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Reset homepage"),
         "Reset_homepage_warning": MessageLookupByLibrary.simpleMessage(
             "This will reset the homepage layout to its original state and is un-doable."),
+        "Resources": MessageLookupByLibrary.simpleMessage("Resources"),
         "Restacks": MessageLookupByLibrary.simpleMessage("restacks"),
         "Restart_to_see_changes": MessageLookupByLibrary.simpleMessage(
             "You will have to restart to see the changes\'"),
@@ -1213,6 +1216,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "monday": MessageLookupByLibrary.simpleMessage("Monday"),
         "month_ago": MessageLookupByLibrary.simpleMessage("a month ago"),
         "months_ago": MessageLookupByLibrary.simpleMessage("months ago"),
+        "moreLinks": MessageLookupByLibrary.simpleMessage("More Links"),
         "numChapters": MessageLookupByLibrary.simpleMessage("No. of Chapters"),
         "numEpisodes": MessageLookupByLibrary.simpleMessage("No. of Episodes"),
         "numListUsers":

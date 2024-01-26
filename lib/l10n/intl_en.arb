@@ -905,5 +905,9 @@
     "My_List2": "My List",
     "showAnimeMangaCard": "Show content card",
     "showAnimeMangaCardDesc": "Show card around the content in list view (comfirtable) wherever possible",
+    "moreLinks": "More Links",
+    "Resources": "Resources",
+    "Available_At": "Available At",
+    "Other_Lists": "Other Lists",
     "publishedEndDate": "Published End Date"
 }

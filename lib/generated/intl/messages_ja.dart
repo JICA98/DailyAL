@@ -102,6 +102,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Auto_Add_Start_End_Date_Desc": MessageLookupByLibrary.simpleMessage(
             "ステータスが監視/完了に移行すると、開始日と終了日が自動的に追加されます。"),
         "Auto_Translate_Synopsis": MessageLookupByLibrary.simpleMessage("翻訳概要"),
+        "Available_At": MessageLookupByLibrary.simpleMessage("利用可能場所"),
         "Avant_Garde": MessageLookupByLibrary.simpleMessage("アバンギャルド"),
         "Average": MessageLookupByLibrary.simpleMessage("平均"),
         "Award_Winning": MessageLookupByLibrary.simpleMessage("Award_Winning"),
@@ -649,6 +650,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Organized_Crime": MessageLookupByLibrary.simpleMessage("組織犯罪"),
         "Otakon": MessageLookupByLibrary.simpleMessage("オタコン"),
         "Otaku_Culture": MessageLookupByLibrary.simpleMessage("オタク文化"),
+        "Other_Lists": MessageLookupByLibrary.simpleMessage("その他のリスト"),
         "Others": MessageLookupByLibrary.simpleMessage("他人"),
         "PTW": MessageLookupByLibrary.simpleMessage("PTW."),
         "Parody": MessageLookupByLibrary.simpleMessage("パロディー"),
@@ -752,6 +754,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("ホームページをリセットします"),
         "Reset_homepage_warning": MessageLookupByLibrary.simpleMessage(
             "これにより、ホームページのレイアウトが元の状態にリセットされ、実行不能です。"),
+        "Resources": MessageLookupByLibrary.simpleMessage("リソース"),
         "Restacks": MessageLookupByLibrary.simpleMessage("再スタック"),
         "Restart_to_see_changes":
             MessageLookupByLibrary.simpleMessage("変更を確認するために再起動する必要があります"),
@@ -1100,6 +1103,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "monday": MessageLookupByLibrary.simpleMessage("月曜"),
         "month_ago": MessageLookupByLibrary.simpleMessage("一ヶ月前"),
         "months_ago": MessageLookupByLibrary.simpleMessage("数か月前"),
+        "moreLinks": MessageLookupByLibrary.simpleMessage("その他のリンク"),
         "numChapters": MessageLookupByLibrary.simpleMessage("章の数"),
         "numEpisodes": MessageLookupByLibrary.simpleMessage("話数"),
         "numListUsers": MessageLookupByLibrary.simpleMessage("リストユーザー数"),

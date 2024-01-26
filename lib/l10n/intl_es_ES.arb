@@ -908,5 +908,9 @@
     "Grid_Height": "Altura de la rejilla",
     "My_List2": "Mi lista",
     "showAnimeMangaCard": "Mostrar tarjeta de contenido",
-    "showAnimeMangaCardDesc": "Muestre el cable alrededor del contenido en la vista de lista (c\u00f3modo) siempre que sea posible"
+    "showAnimeMangaCardDesc": "Muestre el cable alrededor del contenido en la vista de lista (c\u00f3modo) siempre que sea posible",
+    "moreLinks": "M\u00e1s enlaces",
+    "Resources": "Recursos",
+    "Available_At": "Disponible en",
+    "Other_Lists": "Otras listas"
 }

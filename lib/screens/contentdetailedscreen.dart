@@ -15,6 +15,7 @@ import 'package:dailyanimelist/pages/animedetailed/animepictures.dart';
 import 'package:dailyanimelist/pages/animedetailed/animestatisticswidget.dart';
 import 'package:dailyanimelist/pages/animedetailed/articlepage.dart';
 import 'package:dailyanimelist/pages/animedetailed/intereststackwidget.dart';
+import 'package:dailyanimelist/pages/animedetailed/media_platforms.dart';
 import 'package:dailyanimelist/pages/animedetailed/recommanimewidget.dart';
 import 'package:dailyanimelist/pages/animedetailed/relatedanimewidget.dart';
 import 'package:dailyanimelist/pages/animedetailed/reviewpage.dart';
@@ -70,41 +71,6 @@ class VisibleSection {
   });
 }
 
-class StreamingPlatform extends StatelessWidget {
-  final List<Streaming> streamingPlatforms;
-  const StreamingPlatform(this.streamingPlatforms, {Key? key})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 45,
-      child: Material(
-        color: Colors.transparent,
-        elevation: 0,
-        child: ListView(
-          scrollDirection: Axis.horizontal,
-          padding: EdgeInsets.symmetric(horizontal: 25),
-          children: streamingPlatforms
-              .where((e) => e.link!.isNotBlank && e.title!.isNotBlank)
-              .map((e) => Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 7, vertical: 7),
-                    child: AvatarAspect(
-                      useUserImageOnError: false,
-                      url:
-                          'https://dailyanimelist.web.app/assets/streaming/${e.title?.trim()}.png',
-                      onTap: () =>
-                          launchURLWithConfirmation(e.link!, context: context),
-                    ),
-                  ))
-              .toList(),
-        ),
-      ),
-    );
-  }
-}
-
 class ContentDetailedScreen extends StatefulWidget {
   final Node? node;
   final int? id;
@@ -156,6 +122,7 @@ class _ContentDetailedScreenState extends State<ContentDetailedScreen>
   bool showContentEdit = false;
   final GlobalKey _listKey = GlobalKey();
   List<GlobalKey> _globalKeys = [];
+  ScheduleData? _scheduleData;
 
   int get _id => (widget.node != null ? widget.node!.id : widget.id)!;
   String get _title =>
@@ -214,14 +181,19 @@ class _ContentDetailedScreenState extends State<ContentDetailedScreen>
     contentDetailed = await (widget.category.equals('anime')
         ? MalApi.getAnimeDetails(_id)
         : MalApi.getMangaDetails(_id));
+    await _setScheduleData();
     setStatus();
     updateVisibleSections();
     _setHistory();
   }
 
+  Future<void> _setScheduleData() async {
+    _scheduleData = (await DalApi.i.scheduleForMalIds)[_id];
+  }
+
   void getMalApiHtmlContent() async {
     animeDetailedHtml =
-        (await DalApi.i.getContent(widget.category, _id, htmlOnly: true))?.html;
+        (await DalApi.i.getContent(widget.category, _id, htmlOnly: true)).html;
     updateVisibleSections();
   }
 
@@ -290,15 +262,20 @@ class _ContentDetailedScreenState extends State<ContentDetailedScreen>
   }
 
   bool get isStreamingBlank {
-    return nullOrEmpty(
-      animeDetailedHtml?.broadcasts
-          ?.where((e) => e.link!.isNotBlank && e.title!.isNotBlank)
-          .toList(),
-    );
+    return animeDetailedHtml == null ||
+        _scheduleData?.relatedLinks == null &&
+            nullOrEmpty(
+              animeDetailedHtml?.links
+                  ?.where((e) => e.url.isNotBlank && e.name.isNotBlank)
+                  .toList(),
+            );
   }
 
   Widget get _buildMediaWidget {
-    final sp = StreamingPlatform(animeDetailedHtml?.broadcasts ?? []);
+    final sp = AddtionalMediaPlatforms(
+      animeDetailedHtml?.links ?? [],
+      relatedLinks: _scheduleData?.relatedLinks,
+    );
     final vW = VideosWidget(
       videos: animeVideoV4,
       horizPadding: horizPadding,

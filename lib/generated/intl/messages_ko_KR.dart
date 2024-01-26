@@ -103,6 +103,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "상태가 시청/완료로 전환되면 시작 날짜와 종료 날짜를 자동으로 추가합니다."),
         "Auto_Translate_Synopsis":
             MessageLookupByLibrary.simpleMessage("자동 번역 시놉시스"),
+        "Available_At": MessageLookupByLibrary.simpleMessage("사용 가능 시간"),
         "Avant_Garde": MessageLookupByLibrary.simpleMessage("아방가르드"),
         "Average": MessageLookupByLibrary.simpleMessage("평균"),
         "Award_Winning": MessageLookupByLibrary.simpleMessage("수상_우승"),
@@ -653,6 +654,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Organized_Crime": MessageLookupByLibrary.simpleMessage("조직범죄"),
         "Otakon": MessageLookupByLibrary.simpleMessage("오타 콘"),
         "Otaku_Culture": MessageLookupByLibrary.simpleMessage("오타쿠 문화"),
+        "Other_Lists": MessageLookupByLibrary.simpleMessage("기타 목록"),
         "Others": MessageLookupByLibrary.simpleMessage("기타"),
         "PTW": MessageLookupByLibrary.simpleMessage("PTW."),
         "Parody": MessageLookupByLibrary.simpleMessage("풍자적 개작 시문"),
@@ -757,6 +759,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Reset_homepage": MessageLookupByLibrary.simpleMessage("홈페이지를 재설정하십시오"),
         "Reset_homepage_warning": MessageLookupByLibrary.simpleMessage(
             "이렇게하면 홈페이지 레이아웃이 원래 상태로 재설정되며 사용할 수 없습니다."),
+        "Resources": MessageLookupByLibrary.simpleMessage("자원"),
         "Restacks": MessageLookupByLibrary.simpleMessage("다시 쌓다"),
         "Restart_to_see_changes":
             MessageLookupByLibrary.simpleMessage("변경 사항을 보려면 다시 시작해야합니다. \'"),
@@ -1105,6 +1108,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "monday": MessageLookupByLibrary.simpleMessage("월요일"),
         "month_ago": MessageLookupByLibrary.simpleMessage("한 달 전"),
         "months_ago": MessageLookupByLibrary.simpleMessage("몇달 전"),
+        "moreLinks": MessageLookupByLibrary.simpleMessage("더 많은 링크"),
         "numChapters": MessageLookupByLibrary.simpleMessage("장 수"),
         "numEpisodes": MessageLookupByLibrary.simpleMessage("에피소드 수"),
         "numListUsers": MessageLookupByLibrary.simpleMessage("목록 사용자 수"),

@@ -2,6 +2,7 @@ import 'package:dailyanimelist/screens/contentdetailedscreen.dart';
 import 'package:dailyanimelist/screens/generalsearchscreen.dart';
 import 'package:dailyanimelist/user/anime_manga_pref.dart';
 import 'package:dailyanimelist/user/hompagepref.dart';
+import 'package:dal_commons/commons.dart';
 import 'package:flutter/services.dart';
 
 class UserPreferences {
@@ -36,6 +37,7 @@ class UserPreferences {
   TitleLang preferredAnimeTitle;
   AnimeMangaPagePreferences animeMangaPagePreferences;
   int startUpPage;
+  LinkType preferredLinkType;
   UserPreferences({
     required this.firstTime,
     required this.homePageTileSize,
@@ -68,6 +70,7 @@ class UserPreferences {
     required this.animeMangaPagePreferences,
     required this.startUpPage,
     required this.showAnimeMangaCard,
+    required this.preferredLinkType,
   });
 
   factory UserPreferences.fromJson(Map<String, dynamic>? json) {
@@ -207,6 +210,10 @@ class UserPreferences {
             preferredAnimeTitle: TitleLang.values
                 .elementAt(json['preferredAnimeTitle'] ?? TitleLang.ro.index),
             startUpPage: json['startUpPage'] ?? 0,
+            preferredLinkType: LinkType.values.firstWhere(
+              (e) => e.name == json['preferredLinkType'],
+              orElse: () => LinkType.streaming,
+            ),
             showAnimeMangaCard: json['showAnimeMangaCard'] ?? false,
             animeMangaPagePreferences: _animeMangaPagePreferences ??
                 AnimeMangaPagePreferences.defaultObject())
@@ -240,6 +247,7 @@ class UserPreferences {
             homePageTileSize: HomePageTileSize.l,
             preferredAnimeTitle: TitleLang.ro,
             startUpPage: 0,
+            preferredLinkType: LinkType.streaming,
             showAnimeMangaCard: false,
             animeMangaPagePreferences:
                 AnimeMangaPagePreferences.defaultObject(),
@@ -278,6 +286,7 @@ class UserPreferences {
       'animeMangaPagePreferences': animeMangaPagePreferences,
       'showAnimeMangaCard': showAnimeMangaCard,
       'startUpPage': startUpPage,
+      'preferredLinkType': preferredLinkType.name,
     };
   }
 }

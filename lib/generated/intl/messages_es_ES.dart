@@ -117,6 +117,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Agrega automáticamente la fecha de inicio y finalización cuando el estado se mueve a viendo/completado."),
         "Auto_Translate_Synopsis":
             MessageLookupByLibrary.simpleMessage("Auto traducir sinopsis"),
+        "Available_At": MessageLookupByLibrary.simpleMessage("Disponible en"),
         "Avant_Garde": MessageLookupByLibrary.simpleMessage("Primer plano"),
         "Average": MessageLookupByLibrary.simpleMessage("Promedio"),
         "Award_Winning":
@@ -752,6 +753,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Crimen organizado"),
         "Otakon": MessageLookupByLibrary.simpleMessage("Otakon"),
         "Otaku_Culture": MessageLookupByLibrary.simpleMessage("Cultura Otaku"),
+        "Other_Lists": MessageLookupByLibrary.simpleMessage("Otras listas"),
         "Others": MessageLookupByLibrary.simpleMessage("Others"),
         "PTW": MessageLookupByLibrary.simpleMessage("Ptw"),
         "Parody": MessageLookupByLibrary.simpleMessage("Parodia"),
@@ -874,6 +876,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Restablecer la página de inicio"),
         "Reset_homepage_warning": MessageLookupByLibrary.simpleMessage(
             "Esto restablecerá el diseño de la página de inicio a su estado original y no es factible."),
+        "Resources": MessageLookupByLibrary.simpleMessage("Recursos"),
         "Restacks": MessageLookupByLibrary.simpleMessage("vuelve a apilar"),
         "Restart_to_see_changes": MessageLookupByLibrary.simpleMessage(
             "Tendrás que reiniciar para ver los cambios \'"),
@@ -1283,6 +1286,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "monday": MessageLookupByLibrary.simpleMessage("lunes"),
         "month_ago": MessageLookupByLibrary.simpleMessage("hace un mes"),
         "months_ago": MessageLookupByLibrary.simpleMessage("Hace meses"),
+        "moreLinks": MessageLookupByLibrary.simpleMessage("Más enlaces"),
         "numChapters": MessageLookupByLibrary.simpleMessage("No. de Capítulos"),
         "numEpisodes": MessageLookupByLibrary.simpleMessage("No. de episodios"),
         "numListUsers":

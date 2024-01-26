@@ -111,6 +111,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "يضيف تاريخ البدء والانتهاء تلقائيًا عند نقل الحالة إلى المشاهدة / الاكتمال."),
         "Auto_Translate_Synopsis":
             MessageLookupByLibrary.simpleMessage("ترجمة السيارات ملخص"),
+        "Available_At": MessageLookupByLibrary.simpleMessage("متواجد في"),
         "Avant_Garde": MessageLookupByLibrary.simpleMessage("الطليعية"),
         "Average": MessageLookupByLibrary.simpleMessage("متوسط"),
         "Award_Winning": MessageLookupByLibrary.simpleMessage("جائزة_الفوز"),
@@ -718,6 +719,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Organized_Crime": MessageLookupByLibrary.simpleMessage("جريمة منظمة"),
         "Otakon": MessageLookupByLibrary.simpleMessage("otakon."),
         "Otaku_Culture": MessageLookupByLibrary.simpleMessage("ثقافة أوتاكو"),
+        "Other_Lists": MessageLookupByLibrary.simpleMessage("قوائم أخرى"),
         "Others": MessageLookupByLibrary.simpleMessage("آحرون"),
         "PTW": MessageLookupByLibrary.simpleMessage("بات"),
         "Parody": MessageLookupByLibrary.simpleMessage("محاكاة ساخرة"),
@@ -834,6 +836,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("إعادة تعيين الصفحة الرئيسية"),
         "Reset_homepage_warning": MessageLookupByLibrary.simpleMessage(
             "سيؤدي ذلك إلى إعادة تعيين تخطيط الصفحة الرئيسية إلى حالته الأصلية وهو غير قابل للقيام به."),
+        "Resources": MessageLookupByLibrary.simpleMessage("موارد"),
         "Restacks": MessageLookupByLibrary.simpleMessage("يستعيد"),
         "Restart_to_see_changes": MessageLookupByLibrary.simpleMessage(
             "يجب عليك إعادة التشغيل لرؤية التغييرات"),
@@ -1217,6 +1220,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "monday": MessageLookupByLibrary.simpleMessage("الاثنين"),
         "month_ago": MessageLookupByLibrary.simpleMessage("قبل شهر"),
         "months_ago": MessageLookupByLibrary.simpleMessage("منذ اشهر"),
+        "moreLinks": MessageLookupByLibrary.simpleMessage("المزيد من الروابط"),
         "numChapters": MessageLookupByLibrary.simpleMessage("عدد الفصول"),
         "numEpisodes": MessageLookupByLibrary.simpleMessage("عدد الحلقات"),
         "numListUsers":

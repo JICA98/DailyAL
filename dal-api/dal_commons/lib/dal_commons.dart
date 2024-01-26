@@ -60,7 +60,6 @@ export './src/model/dal/userfavV4.dart';
 export './src/model/dal_render_content.dart';
 export './src/model/servers.dart';
 export './src/model/clubs/ClubHtml.dart';
-export './src/model/html/anime/streaming.dart';
 export './src/model/html/anime/animereviewhtml.dart';
 export './src/model/html/anime/animedetailedhtml.dart';
 export './src/model/html/anime/animecharacterhtml.dart';

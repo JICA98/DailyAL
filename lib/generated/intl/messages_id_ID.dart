@@ -113,6 +113,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Secara otomatis menambahkan tanggal mulai dan berakhir saat status dipindahkan ke menonton/selesai."),
         "Auto_Translate_Synopsis":
             MessageLookupByLibrary.simpleMessage("Auto Terjemahkan Sinopsis."),
+        "Available_At": MessageLookupByLibrary.simpleMessage("Tersedia di"),
         "Avant_Garde": MessageLookupByLibrary.simpleMessage("Avant-garde"),
         "Average": MessageLookupByLibrary.simpleMessage("Rata-rata"),
         "Award_Winning":
@@ -731,6 +732,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Kejahatan Terorganisir"),
         "Otakon": MessageLookupByLibrary.simpleMessage("Otakon."),
         "Otaku_Culture": MessageLookupByLibrary.simpleMessage("Budaya Otaku"),
+        "Other_Lists": MessageLookupByLibrary.simpleMessage("Daftar Lainnya"),
         "Others": MessageLookupByLibrary.simpleMessage("Yang lain"),
         "PTW": MessageLookupByLibrary.simpleMessage("Ptw."),
         "Parody": MessageLookupByLibrary.simpleMessage("Parodi"),
@@ -847,6 +849,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Atur Ulang Homepage"),
         "Reset_homepage_warning": MessageLookupByLibrary.simpleMessage(
             "Ini akan mengatur ulang tata letak beranda ke keadaan semula dan tidak bisa dilakukan."),
+        "Resources": MessageLookupByLibrary.simpleMessage("Sumber daya"),
         "Restacks": MessageLookupByLibrary.simpleMessage("repack"),
         "Restart_to_see_changes": MessageLookupByLibrary.simpleMessage(
             "Anda harus memulai kembali untuk melihat perubahan \'"),
@@ -1271,6 +1274,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "monday": MessageLookupByLibrary.simpleMessage("Senin"),
         "month_ago": MessageLookupByLibrary.simpleMessage("sebulan yang lalu"),
         "months_ago": MessageLookupByLibrary.simpleMessage("bulan lalu"),
+        "moreLinks": MessageLookupByLibrary.simpleMessage("Tautan Lainnya"),
         "numChapters": MessageLookupByLibrary.simpleMessage("Jumlah Bab"),
         "numEpisodes": MessageLookupByLibrary.simpleMessage("Jumlah Episode"),
         "numListUsers":

@@ -114,6 +114,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Автоматически добавляет дату начала и окончания, когда статус меняется на просмотр/завершено."),
         "Auto_Translate_Synopsis":
             MessageLookupByLibrary.simpleMessage("Это резюме перевода"),
+        "Available_At": MessageLookupByLibrary.simpleMessage("Доступны на"),
         "Avant_Garde": MessageLookupByLibrary.simpleMessage("Авангард"),
         "Average": MessageLookupByLibrary.simpleMessage("Средний"),
         "Award_Winning": MessageLookupByLibrary.simpleMessage("Награда_Победа"),
@@ -737,6 +738,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Организованная преступность"),
         "Otakon": MessageLookupByLibrary.simpleMessage("Отакон"),
         "Otaku_Culture": MessageLookupByLibrary.simpleMessage("Культура Отаку"),
+        "Other_Lists": MessageLookupByLibrary.simpleMessage("Другие списки"),
         "Others": MessageLookupByLibrary.simpleMessage("Другие"),
         "PTW": MessageLookupByLibrary.simpleMessage("ПТВ"),
         "Parody": MessageLookupByLibrary.simpleMessage("Пародия"),
@@ -857,6 +859,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Сбросить домашнюю страницу"),
         "Reset_homepage_warning": MessageLookupByLibrary.simpleMessage(
             "Это вернет макет домашней страницы в исходное состояние, и это невозможно."),
+        "Resources": MessageLookupByLibrary.simpleMessage("Ресурсы"),
         "Restacks": MessageLookupByLibrary.simpleMessage("перекладывает"),
         "Restart_to_see_changes": MessageLookupByLibrary.simpleMessage(
             "Вам придется перезагрузить компьютер, чтобы увидеть изменения»"),
@@ -1260,6 +1263,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "month_ago": MessageLookupByLibrary.simpleMessage("месяц назад"),
         "months_ago":
             MessageLookupByLibrary.simpleMessage("несколько месяцев назад"),
+        "moreLinks":
+            MessageLookupByLibrary.simpleMessage("Дополнительные ссылки"),
         "numChapters": MessageLookupByLibrary.simpleMessage("Количество глав"),
         "numEpisodes": MessageLookupByLibrary.simpleMessage("Количество серий"),
         "numListUsers": MessageLookupByLibrary.simpleMessage(

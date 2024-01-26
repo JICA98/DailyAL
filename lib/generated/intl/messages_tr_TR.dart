@@ -114,6 +114,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Durum izleniyor/tamamlandı durumuna geçtiğinde otomatik olarak başlangıç ​​ve bitiş tarihini ekler."),
         "Auto_Translate_Synopsis":
             MessageLookupByLibrary.simpleMessage("Bu Çeviri Özeti"),
+        "Available_At": MessageLookupByLibrary.simpleMessage("Mevcut"),
         "Avant_Garde": MessageLookupByLibrary.simpleMessage("Avangard"),
         "Average": MessageLookupByLibrary.simpleMessage("Ortalama"),
         "Award_Winning": MessageLookupByLibrary.simpleMessage("Ödüllü_Kazanan"),
@@ -724,6 +725,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Organized_Crime": MessageLookupByLibrary.simpleMessage("Organize suç"),
         "Otakon": MessageLookupByLibrary.simpleMessage("Otakon"),
         "Otaku_Culture": MessageLookupByLibrary.simpleMessage("Otaku Kültürü"),
+        "Other_Lists": MessageLookupByLibrary.simpleMessage("Diğer Listeler"),
         "Others": MessageLookupByLibrary.simpleMessage("Diğerleri"),
         "PTW": MessageLookupByLibrary.simpleMessage("PTW"),
         "Parody": MessageLookupByLibrary.simpleMessage("Parodi"),
@@ -842,6 +844,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Ana sayfayı sıfırla"),
         "Reset_homepage_warning": MessageLookupByLibrary.simpleMessage(
             "Bu, ana sayfa düzenini orijinal durumuna sıfırlayacaktır ve bu yapılamaz."),
+        "Resources": MessageLookupByLibrary.simpleMessage("Kaynaklar"),
         "Restacks": MessageLookupByLibrary.simpleMessage("yeniden istifler"),
         "Restart_to_see_changes": MessageLookupByLibrary.simpleMessage(
             "Değişiklikleri görmek için yeniden başlatmanız gerekecek\'"),
@@ -1239,6 +1242,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "monday": MessageLookupByLibrary.simpleMessage("Pazartesi"),
         "month_ago": MessageLookupByLibrary.simpleMessage("bir ay önce"),
         "months_ago": MessageLookupByLibrary.simpleMessage("aylar önce"),
+        "moreLinks":
+            MessageLookupByLibrary.simpleMessage("Daha Fazla Bağlantı"),
         "numChapters": MessageLookupByLibrary.simpleMessage("Bölüm Sayısı"),
         "numEpisodes": MessageLookupByLibrary.simpleMessage("Bölüm Sayısı"),
         "numListUsers": MessageLookupByLibrary.simpleMessage(

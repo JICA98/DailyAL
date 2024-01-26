@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dal_commons/dal_commons.dart';
 import 'package:dal_commons/src/model/global/node.dart' as dal;
+import 'package:dal_commons/src/model/html/anime/animelinks.dart';
 import 'package:dal_commons/src/model/html/anime/intereststack.dart';
 import 'package:dal_commons/src/model/html/anime/mangacharahtml.dart';
 import 'package:html/dom.dart';
@@ -854,14 +855,7 @@ class HtmlParsers {
       featured: featuredFromHtml(animeDetailed, null),
       news: featuredFromHtml(animeDetailed, null, category: 'news'),
       forumTopicsHtml: forumTopicsHtmlFromHtml(animeDetailed),
-      broadcasts: animeDetailed
-              .querySelectorAll('.broadcasts .broadcast a')
-              .map((e) => Streaming(
-                    link: e.attributes['href'],
-                    title: e.attributes['title'],
-                  ))
-              .toList() ??
-          [],
+      links: _getAnimeLinks(animeDetailed),
       animeReviewList: [],
       adaptedNodes: _getAdaptedNodes(animeDetailed),
       mangaCharaList: type == ContentType.anime
@@ -896,6 +890,49 @@ class HtmlParsers {
       interestStacks: interestStackListFromHtml(
           animeDetailed.querySelectorAll('.detail-stack-block .column-item')),
     );
+  }
+
+  static List<AnimeLink> _getAnimeLinks(Document document) {
+    final streamLinks = document
+        .querySelectorAll('.broadcasts .broadcast a')
+        .map((e) {
+          var title = e.attributes['title'] ?? e.text.trim();
+          return AnimeLink(
+              url: e.attributes['href'] ?? '',
+              name: title,
+              linkType: LinkType.streaming,
+              imageUrl: getDomainAsset(title),
+            );
+        })
+        .toList();
+    final externalLinks =
+        document.querySelectorAll('.external_links').expand((element) {
+      LinkType linkType = LinkType.resources;
+      var previousElementSibling = element.previousElementSibling;
+      if (previousElementSibling != null) {
+        if (previousElementSibling.text
+            .trim()
+            .toLowerCase()
+            .contains('available')) {
+          linkType = LinkType.availableAt;
+        } else {
+          linkType = LinkType.resources;
+        }
+      }
+      return element.querySelectorAll('a.link').map((e) {
+        return AnimeLink(
+          url: e.attributes['href'] ?? '',
+          name: e.text.trim(),
+          linkType: linkType,
+          imageUrl: e.querySelector('img')?.attributes['src'],
+        );
+      });
+    }).toList();
+
+    return [
+      ...streamLinks,
+      ...externalLinks,
+    ];
   }
 
   static List<dal.Node> _getAdaptedNodes(Document document) {

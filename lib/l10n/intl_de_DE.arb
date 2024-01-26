@@ -908,5 +908,9 @@
     "Grid_Height": "Rasterh\u00f6he",
     "My_List2": "Meine Liste",
     "showAnimeMangaCard": "Inhaltskarte anzeigen",
-    "showAnimeMangaCardDesc": "Zeigen Sie nach M\u00f6glichkeit eine Schnur um den Inhalt in der Listenansicht an (komfortabel)."
+    "showAnimeMangaCardDesc": "Zeigen Sie nach M\u00f6glichkeit eine Schnur um den Inhalt in der Listenansicht an (komfortabel).",
+    "moreLinks": "Weitere Links",
+    "Resources": "Ressourcen",
+    "Available_At": "Verf\u00fcgbar um",
+    "Other_Lists": "Andere Listen"
 }

@@ -907,5 +907,9 @@
     "Grid_Height": "Hauteur de la grille",
     "My_List2": "Ma liste",
     "showAnimeMangaCard": "Afficher la fiche de contenu",
-    "showAnimeMangaCardDesc": "Afficher le cordon autour du contenu dans la liste (confortable) dans la mesure du possible"
+    "showAnimeMangaCardDesc": "Afficher le cordon autour du contenu dans la liste (confortable) dans la mesure du possible",
+    "moreLinks": "Plus de liens",
+    "Resources": "Ressources",
+    "Available_At": "Disponible \u00e0",
+    "Other_Lists": "Autres listes"
 }
