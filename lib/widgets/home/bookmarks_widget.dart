@@ -170,7 +170,6 @@ class _BookMarksWidgetState extends State<BookMarksWidget> {
   ];
   final scrollController = ScrollController();
   bool isSorted = false;
-  final _nonImageTypes = [BookmarkType.malUser];
   final _categoryMap = {
     'malUser': 'user',
     'clubs': 'club',
@@ -245,7 +244,7 @@ class _BookMarksWidgetState extends State<BookMarksWidget> {
         alignment: Alignment.topCenter,
         child: Padding(
           padding: const EdgeInsets.only(top: 35.0),
-          child: title('${S.current.Nothing_bookmarked_in} ${type}'),
+          child: title('${S.current.Nothing_bookmarked_in} $type'),
         ),
       );
     } else {
