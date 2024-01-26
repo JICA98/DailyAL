@@ -9140,6 +9140,16 @@ class S {
     );
   }
 
+  /// `Additional Titles`
+  String get AdditionalTitles {
+    return Intl.message(
+      'Additional Titles',
+      name: 'AdditionalTitles',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Published End Date`
   String get publishedEndDate {
     return Intl.message(

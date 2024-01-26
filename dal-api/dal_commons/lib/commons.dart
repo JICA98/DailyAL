@@ -75,6 +75,7 @@ export './src/model/userprof.dart/animestatistics.dart';
 export './src/model/userprof.dart/userprof.dart';
 export './src/model/html/anime/mangacharahtml.dart';
 export './src/model/html/anime/intereststack.dart';
+export './src/model/html/anime/additional_title.dart';
 export './src/model/html/anime/animecharacterhtml.dart';
 export './src/model/html/anime/animedetailedhtml.dart';
 export './src/model/html/anime/animelinks.dart';

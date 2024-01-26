@@ -35,6 +35,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Add_Friend": MessageLookupByLibrary.simpleMessage("友人を追加する"),
         "Add_an_Item": MessageLookupByLibrary.simpleMessage("アイテムを追加してください"),
         "Add_to_List": MessageLookupByLibrary.simpleMessage("リストに追加する"),
+        "AdditionalTitles": MessageLookupByLibrary.simpleMessage("追加タイトル"),
         "Adult_Cast": MessageLookupByLibrary.simpleMessage("Adult_Cast"),
         "Adventure": MessageLookupByLibrary.simpleMessage("冒険"),
         "Age_high": MessageLookupByLibrary.simpleMessage("age high"),

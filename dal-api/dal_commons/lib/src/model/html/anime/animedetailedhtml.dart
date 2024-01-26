@@ -1,5 +1,6 @@
 import 'package:dal_commons/src/model/featured/featured.dart';
 import 'package:dal_commons/src/model/forum/html/forumtopicshtml.dart';
+import 'package:dal_commons/src/model/html/anime/additional_title.dart';
 import 'package:dal_commons/src/model/html/anime/animecharacterhtml.dart';
 import 'package:dal_commons/src/model/html/anime/animelinks.dart';
 import 'package:dal_commons/src/model/html/anime/animereviewhtml.dart';
@@ -16,6 +17,7 @@ class AnimeDetailedHtml {
   final ForumTopicsHtml? forumTopicsHtml;
   final String? videoUrl;
   final List<AnimeLink>? links;
+  final List<AdditionalTitle>? additionalTitles;
   final Featured? news;
   final Featured? featured;
   final List<Node>? adaptedNodes;
@@ -37,6 +39,7 @@ class AnimeDetailedHtml {
     this.news,
     this.adaptedNodes,
     this.links,
+    this.additionalTitles,
   });
 
   factory AnimeDetailedHtml.fromJson(Map<String, dynamic>? json) {
@@ -55,6 +58,9 @@ class AnimeDetailedHtml {
                 .map((e) => e!)
                 .toList(),
             videoUrl: json["videoUrl"],
+            additionalTitles: List.from(json["additionalTitles"] ?? [])
+                .map((e) => AdditionalTitle.fromJson(e))
+                .toList(),
             animeReviewList: List.from(json["animeReviewList"] ?? [])
                 .map((e) => AnimeReviewHtml.fromJson(e))
                 .toList(),
@@ -89,6 +95,7 @@ class AnimeDetailedHtml {
       'interestStacks': interestStacks,
       'adaptedNodes': adaptedNodes,
       'links': links,
+      'additionalTitles': additionalTitles,
     };
   }
 }

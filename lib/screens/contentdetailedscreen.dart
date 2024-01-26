@@ -440,6 +440,7 @@ class _ContentDetailedScreenState extends State<ContentDetailedScreen>
                 MoreInfoAnime(
                   contentDetailed: contentDetailed,
                   horizPadding: horizPadding,
+                  additionalTitles: animeDetailedHtml?.additionalTitles,
                 ),
               )),
       TabType.Stats => _nullIf(
@@ -599,6 +600,7 @@ class _ContentDetailedScreenState extends State<ContentDetailedScreen>
                   contentDetailed: contentDetailed,
                   category: "manga",
                   horizPadding: horizPadding,
+                  additionalTitles: animeDetailedHtml?.additionalTitles,
                 ),
               )),
       TabType.Stats => null,
@@ -1562,8 +1564,21 @@ class _ContentDetailedScreenState extends State<ContentDetailedScreen>
               ),
             ),
             Positioned(top: 5, right: 5, child: langChangeWidget()),
+            Positioned(bottom: 5, right: 5, child: _moreInfoButton()),
           ],
         ),
+      ),
+    );
+  }
+
+  SizedBox _moreInfoButton() {
+    return SizedBox(
+      width: 40,
+      height: 40,
+      child: ShadowButton(
+        padding: EdgeInsets.zero,
+        onPressed: () => _openMoreInfo(),
+        child: Icon(Icons.info),
       ),
     );
   }
@@ -1602,6 +1617,7 @@ class _ContentDetailedScreenState extends State<ContentDetailedScreen>
         contentDetailed: contentDetailed,
         horizPadding: 0,
         isModal: true,
+        additionalTitles: animeDetailedHtml?.additionalTitles,
       ),
     );
   }

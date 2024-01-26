@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dal_commons/dal_commons.dart';
 import 'package:dal_commons/src/model/global/node.dart' as dal;
+import 'package:dal_commons/src/model/html/anime/additional_title.dart';
 import 'package:dal_commons/src/model/html/anime/animelinks.dart';
 import 'package:dal_commons/src/model/html/anime/intereststack.dart';
 import 'package:dal_commons/src/model/html/anime/mangacharahtml.dart';
@@ -858,6 +859,7 @@ class HtmlParsers {
       links: _getAnimeLinks(animeDetailed),
       animeReviewList: [],
       adaptedNodes: _getAdaptedNodes(animeDetailed),
+      additionalTitles: _getAddtionaTitles(animeDetailed),
       mangaCharaList: type == ContentType.anime
           ? []
           : animeDetailed
@@ -892,19 +894,37 @@ class HtmlParsers {
     );
   }
 
-  static List<AnimeLink> _getAnimeLinks(Document document) {
-    final streamLinks = document
-        .querySelectorAll('.broadcasts .broadcast a')
-        .map((e) {
-          var title = e.attributes['title'] ?? e.text.trim();
-          return AnimeLink(
-              url: e.attributes['href'] ?? '',
-              name: title,
-              linkType: LinkType.streaming,
-              imageUrl: getDomainAsset(title),
-            );
+  static List<AdditionalTitle> _getAddtionaTitles(Document document) {
+    return document
+        .querySelectorAll('.js-alternative-titles .spaceit_pad')
+        .expand((e) {
+          final langElement = e.querySelector('.dark_text');
+          final language = langElement?.text.trim() ?? '';
+          if (!language.equalsIgnoreCase('English:')) {
+            langElement?.remove();
+            final title = e.text.trim();
+            if (title.isNotBlank && language.isNotBlank) {
+              return [AdditionalTitle(title: title, language: language)];
+            }
+          }
+          return [null];
         })
+        .where(_nonNull)
+        .map((e) => e!)
         .toList();
+  }
+
+  static List<AnimeLink> _getAnimeLinks(Document document) {
+    final streamLinks =
+        document.querySelectorAll('.broadcasts .broadcast a').map((e) {
+      var title = e.attributes['title'] ?? e.text.trim();
+      return AnimeLink(
+        url: e.attributes['href'] ?? '',
+        name: title,
+        linkType: LinkType.streaming,
+        imageUrl: getDomainAsset(title),
+      );
+    }).toList();
     final externalLinks =
         document.querySelectorAll('.external_links').expand((element) {
       LinkType linkType = LinkType.resources;

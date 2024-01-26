@@ -37,6 +37,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Ajouter un article"),
         "Add_to_List":
             MessageLookupByLibrary.simpleMessage("Ajouter à la liste"),
+        "AdditionalTitles":
+            MessageLookupByLibrary.simpleMessage("Titres supplémentaires"),
         "Adult_Cast": MessageLookupByLibrary.simpleMessage("Adulte_Cast"),
         "Adventure": MessageLookupByLibrary.simpleMessage("Aventure"),
         "Age_high": MessageLookupByLibrary.simpleMessage("Âge élevé"),

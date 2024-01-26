@@ -36,6 +36,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "Add_Friend": MessageLookupByLibrary.simpleMessage("Arkadaş Ekle"),
         "Add_an_Item": MessageLookupByLibrary.simpleMessage("Bir Öğe Ekle"),
         "Add_to_List": MessageLookupByLibrary.simpleMessage("Listeye ekle"),
+        "AdditionalTitles":
+            MessageLookupByLibrary.simpleMessage("Ek Başlıklar"),
         "Adult_Cast": MessageLookupByLibrary.simpleMessage("Yetişkin_Oyuncu"),
         "Adventure": MessageLookupByLibrary.simpleMessage("Macera"),
         "Age_high": MessageLookupByLibrary.simpleMessage("Yaş yüksek"),

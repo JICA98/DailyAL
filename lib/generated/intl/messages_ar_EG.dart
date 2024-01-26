@@ -35,6 +35,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "Add_Friend": MessageLookupByLibrary.simpleMessage("إضافة صديق"),
         "Add_an_Item": MessageLookupByLibrary.simpleMessage("إضافة عنصر"),
         "Add_to_List": MessageLookupByLibrary.simpleMessage("أضف إلى القائمة"),
+        "AdditionalTitles":
+            MessageLookupByLibrary.simpleMessage("عناوين إضافية"),
         "Adult_Cast": MessageLookupByLibrary.simpleMessage("Adult_Cast"),
         "Adventure": MessageLookupByLibrary.simpleMessage("مفامرة"),
         "Age_high": MessageLookupByLibrary.simpleMessage("العمر عالية"),

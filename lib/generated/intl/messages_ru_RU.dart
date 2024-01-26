@@ -37,6 +37,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "Add_an_Item": MessageLookupByLibrary.simpleMessage("Добавить элемент"),
         "Add_to_List":
             MessageLookupByLibrary.simpleMessage("Добавить в список"),
+        "AdditionalTitles":
+            MessageLookupByLibrary.simpleMessage("Дополнительные названия"),
         "Adult_Cast": MessageLookupByLibrary.simpleMessage("Adult_Cast"),
         "Adventure": MessageLookupByLibrary.simpleMessage("Приключение"),
         "Age_high": MessageLookupByLibrary.simpleMessage("Возраст высокий"),
