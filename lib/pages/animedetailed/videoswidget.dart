@@ -142,9 +142,14 @@ class _VideosWidgetState extends State<VideosWidget> {
                       ),
                       child: InkWell(
                         borderRadius: borderRadius,
-                        child: Align(
-                          alignment: Alignment.bottomLeft,
-                          child: _videoIconWidget(borderRadius, useYTIcon),
+                        child: Stack(
+                          children: [
+                            Align(
+                              alignment: Alignment.bottomLeft,
+                              child: _videoIconWidget(borderRadius, useYTIcon),
+                            ),
+                            if (tiles[i].url != null) _copyButton(tiles, i),
+                          ],
                         ),
                         onTap: tiles[i].url == null
                             ? () {}
@@ -161,6 +166,24 @@ class _VideosWidgetState extends State<VideosWidget> {
               ],
             ),
           ),
+        ),
+      ),
+    );
+  }
+
+  Positioned _copyButton(List<VideoTile> tiles, int i) {
+    return Positioned(
+      top: 5.0,
+      left: 5.0,
+      child: SizedBox(
+        height: 30.0,
+        width: 30.0,
+        child: IconButton.filledTonal(
+          onPressed: () => Clipboard.setData(
+            ClipboardData(text: tiles[i].url!),
+          ),
+          icon: Icon(Icons.copy),
+          iconSize: 14.0,
         ),
       ),
     );
