@@ -8,6 +8,7 @@ import 'package:dailyanimelist/api/credmal.dart';
 import 'package:dailyanimelist/enums.dart';
 import 'package:dailyanimelist/generated/l10n.dart';
 import 'package:dailyanimelist/main.dart';
+import 'package:dailyanimelist/pages/animedetailed/videoswidget.dart';
 import 'package:dailyanimelist/pages/userpage.dart';
 import 'package:dailyanimelist/screens/generalsearchscreen.dart';
 import 'package:dailyanimelist/screens/homescreen.dart';
@@ -775,12 +776,11 @@ Widget wrapScrollTag({
   Color? highlightColor,
 }) {
   return AutoScrollTag(
-    key: ValueKey(index),
-    controller: controller,
-    index: index,
-    child: child,
-    highlightColor: highlightColor
-  );
+      key: ValueKey(index),
+      controller: controller,
+      index: index,
+      child: child,
+      highlightColor: highlightColor);
 }
 
 void launchURL(String url) async {
@@ -1158,6 +1158,13 @@ class _HtmlWState extends State<HtmlW> {
 void onLinkTap(String? url, BuildContext context) {
   logDal(url);
   if (url != null) {
+    try {
+      Uri uri = Uri.parse(url);
+      if (uri.host.equals('www.youtube.com')) {
+        showYouTubeVideo(url: url, context: context);
+        return;
+      }
+    } catch (e) {}
     launchURLWithConfirmation(url, context: context);
   }
 }
