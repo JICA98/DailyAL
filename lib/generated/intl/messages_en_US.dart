@@ -448,6 +448,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "Home_Page_items":
             MessageLookupByLibrary.simpleMessage("Home Page items"),
         "Honor": MessageLookupByLibrary.simpleMessage("Honor"),
+        "Horizontal_List":
+            MessageLookupByLibrary.simpleMessage("Horizontal List"),
         "Horrible": MessageLookupByLibrary.simpleMessage("Horrible"),
         "Horror": MessageLookupByLibrary.simpleMessage("Horror"),
         "Hot": MessageLookupByLibrary.simpleMessage("Hot"),

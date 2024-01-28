@@ -915,5 +915,6 @@
     "Other_Lists": "Otras listas",
     "AdditionalTitles": "T\u00edtulos adicionales",
     "Allow_YT_Player": "Permitir reproductor de Youtube",
-    "Allow_YT_Player_Desc": "Permitir que el reproductor de Youtube reproduzca v\u00eddeos en la aplicaci\u00f3n"
+    "Allow_YT_Player_Desc": "Permitir que el reproductor de Youtube reproduzca v\u00eddeos en la aplicaci\u00f3n",
+    "Horizontal_List": "Lista horizontal"
 }

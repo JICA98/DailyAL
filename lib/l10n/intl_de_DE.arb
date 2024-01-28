@@ -915,5 +915,6 @@
     "Other_Lists": "Andere Listen",
     "AdditionalTitles": "Zus\u00e4tzliche Titel",
     "Allow_YT_Player": "Youtube-Player zulassen",
-    "Allow_YT_Player_Desc": "Erlauben Sie dem YouTube-Player, Videos in der App abzuspielen"
+    "Allow_YT_Player_Desc": "Erlauben Sie dem YouTube-Player, Videos in der App abzuspielen",
+    "Horizontal_List": "Horizontale Liste"
 }

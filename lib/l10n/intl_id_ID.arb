@@ -914,5 +914,6 @@
     "Other_Lists": "Daftar Lainnya",
     "AdditionalTitles": "Judul Tambahan",
     "Allow_YT_Player": "Izinkan Pemutar Youtube",
-    "Allow_YT_Player_Desc": "Izinkan pemutar Youtube memutar video di aplikasi"
+    "Allow_YT_Player_Desc": "Izinkan pemutar Youtube memutar video di aplikasi",
+    "Horizontal_List": "Daftar Horisontal"
 }

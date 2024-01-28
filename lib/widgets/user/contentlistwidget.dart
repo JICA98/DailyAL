@@ -1,11 +1,13 @@
 import 'dart:math';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:collection/collection.dart';
 import 'package:dailyanimelist/api/auth/auth.dart';
 import 'package:dailyanimelist/api/dalapi.dart';
 import 'package:dailyanimelist/api/malapi.dart';
 import 'package:dailyanimelist/api/maluser.dart';
 import 'package:dailyanimelist/enums.dart';
+import 'package:dailyanimelist/extensions.dart';
 import 'package:dailyanimelist/generated/l10n.dart';
 import 'package:dailyanimelist/pages/animedetailed/intereststackwidget.dart';
 import 'package:dailyanimelist/pages/animedetailed/synopsiswidget.dart';
@@ -24,6 +26,7 @@ import 'package:dailyanimelist/widgets/customfuture.dart';
 import 'package:dailyanimelist/widgets/featured/tagswidget.dart';
 import 'package:dailyanimelist/widgets/home/animecard.dart';
 import 'package:dailyanimelist/widgets/home/nodebadge.dart';
+import 'package:dailyanimelist/widgets/listsortfilter.dart';
 import 'package:dailyanimelist/widgets/web/c_webview.dart';
 import 'package:dal_commons/commons.dart';
 import 'package:dal_commons/dal_commons.dart';
@@ -217,6 +220,12 @@ listStatus(
   return _myListStatus;
 }
 
+final _axisTileSizeMap = {
+  2: HomePageTileSize.xl,
+  3: HomePageTileSize.m,
+  4: HomePageTileSize.xs,
+};
+
 Widget _baseBaseNode(
   String category,
   BaseNode node,
@@ -226,6 +235,8 @@ Widget _baseBaseNode(
   HomePageTileSize? homePageTileSize,
   DisplaySubType? displaySubType,
   double? gridHeight,
+  bool updateCacheOnEdit = false,
+  bool showTime = false,
 }) {
   return ContentAllWidget(
     key: Key(MalAuth.codeChallenge(10)),
@@ -241,6 +252,8 @@ Widget _baseBaseNode(
     homePageTileSize: homePageTileSize,
     displaySubType: displaySubType,
     gridHeight: gridHeight,
+    updateCacheOnEdit: updateCacheOnEdit,
+    showTime: showTime,
   );
 }
 
@@ -254,11 +267,22 @@ Widget buildBaseNodePageItem(
   DisplaySubType? displaySubType,
   required int gridAxisCount,
   required double gridHeight,
+  bool updateCacheOnEdit = false,
+  bool showTime = false,
 }) {
   if (displayType == DisplayType.list_vert) {
-    return _baseBaseNode(category, item.rowItems[0], index, displayType,
-        showEdit: showEdit, displaySubType: displaySubType);
+    return _baseBaseNode(
+      category,
+      item.rowItems[0],
+      index,
+      displayType,
+      showEdit: showEdit,
+      displaySubType: displaySubType,
+      updateCacheOnEdit: updateCacheOnEdit,
+      showTime: showTime,
+    );
   } else {
+    homePageTileSize = _axisTileSizeMap[gridAxisCount];
     return SizedBox(
       height: gridHeight,
       child: Padding(
@@ -277,11 +301,60 @@ Widget buildBaseNodePageItem(
                       homePageTileSize: homePageTileSize,
                       displaySubType: displaySubType,
                       gridHeight: gridHeight,
+                      updateCacheOnEdit: updateCacheOnEdit,
+                      showTime: showTime,
                     ),
                   ))
               .toList(),
         ),
       ),
+    );
+  }
+}
+
+class ContentListWithDisplayType extends StatelessWidget {
+  final String category;
+  final List<BaseNode> items;
+  final SortFilterDisplay sortFilterDisplay;
+  final bool showTime;
+  const ContentListWithDisplayType({
+    super.key,
+    required this.category,
+    required this.items,
+    required this.sortFilterDisplay,
+    this.showTime = false,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final List<PageItem<BaseNode>> pageItems;
+    DisplayType displayType = sortFilterDisplay.displayOption.displayType;
+    final gridAxisCount = sortFilterDisplay.displayOption.gridCrossAxisCount;
+    final gridHeight = sortFilterDisplay.displayOption.gridHeight;
+    final displaySubType = sortFilterDisplay.displayOption.displaySubType;
+
+    if (displayType == DisplayType.list_vert) {
+      pageItems = items.map((e) => PageItem([e])).toList();
+    } else {
+      pageItems = items.chunked(gridAxisCount).map((e) => PageItem(e)).toList();
+    }
+    return SliverList.list(
+      children: pageItems
+          .mapIndexed(
+            (index, item) => buildBaseNodePageItem(
+              category,
+              item,
+              index,
+              displayType,
+              gridAxisCount: gridAxisCount,
+              gridHeight: gridHeight,
+              displaySubType: displaySubType,
+              homePageTileSize: _axisTileSizeMap[gridAxisCount],
+              updateCacheOnEdit: true,
+              showTime: showTime,
+            ),
+          )
+          .toList(),
     );
   }
 }
@@ -310,6 +383,7 @@ class ContentAllWidget extends StatefulWidget {
   final int? index;
   final bool showSelfScoreInsteadOfStatus;
   final DisplaySubType? displaySubType;
+  final bool showTime;
 
   const ContentAllWidget({
     Key? key,
@@ -336,6 +410,7 @@ class ContentAllWidget extends StatefulWidget {
     this.homePageTileSize,
     this.displaySubType,
     this.gridHeight,
+    this.showTime = false,
   }) : super(key: key);
 
   @override
@@ -453,6 +528,7 @@ class _ContentAllWidgetState extends State<ContentAllWidget>
             showCardBar: true,
             updateCache: false,
             showGenres: true,
+            showTime: widget.showTime,
             height: widget.cardHeight,
             width: widget.cardWidth,
             parentNsv: nsv,
@@ -479,6 +555,22 @@ class _ContentAllWidgetState extends State<ContentAllWidget>
     } else {
       return DisplaySubType.comfortable;
     }
+  }
+
+  String? get time {
+    if (widget.showTime) {
+      var dynContent = widget.dynContent;
+      if (dynContent is BaseNode) {
+        dynContent = dynContent.content;
+      }
+      if (dynContent is Node) {
+        var broadcast = dynContent.broadcast;
+        if (broadcast != null) {
+          return MalApi.getFormattedAiringDate(broadcast);
+        }
+      }
+    }
+    return null;
   }
 
   bool get _compact => _displaySubType == DisplaySubType.compact;
@@ -597,7 +689,7 @@ class _ContentAllWidgetState extends State<ContentAllWidget>
                                           tags: widget
                                                   .dynContent?.content?.tags ??
                                               []),
-                                    countdownWidget(),
+                                    _timeWidget(),
                                     genreWidget,
                                   ],
                                 ),
@@ -1258,11 +1350,26 @@ class _ContentAllWidgetState extends State<ContentAllWidget>
       leading: avatarWidget,
       title: text,
       onTap: () => _onTileTap(),
-      subtitle: countdownWidget(),
+      subtitle: _timeWidget(),
       trailing: widget.showStatus
           ? editIconButton(nsv, () => showEditSheet(context))
           : null,
     );
+  }
+
+  Widget _timeWidget() {
+    final timeText = time;
+
+    if (timeText != null)
+      return Text(
+        timeText,
+        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+              overflow: TextOverflow.fade,
+              fontSize: 11,
+            ),
+      );
+    else
+      return countdownWidget();
   }
 
   Widget _buildSpaciousTile(NodeStatusValue nsv, String nodeTitle) {
@@ -1275,8 +1382,13 @@ class _ContentAllWidgetState extends State<ContentAllWidget>
             child: child,
           ),
         );
-    final _countdownWidget =
-        countdownWidget(padding: EdgeInsets.zero, wrapper: wrapper);
+    final _countdownWidget = time != null
+        ? Text(time!,
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  overflow: TextOverflow.fade,
+                  fontSize: 11,
+                ))
+        : countdownWidget(padding: EdgeInsets.zero, wrapper: wrapper);
 
     return SpaciousContentWidget(
       category: widget.category,

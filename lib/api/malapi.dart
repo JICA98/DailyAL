@@ -311,6 +311,11 @@ class MalApi {
         }
       }
     }
+    for (int i = 1; i <= 8; i++) {
+      if (result[i] == null) {
+        result[i] = [];
+      }
+    }
     return result.values.toList();
   }
 

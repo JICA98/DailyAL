@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dailyanimelist/api/malapi.dart';
 import 'package:dailyanimelist/constant.dart';
@@ -95,7 +96,7 @@ class AnimeGridCard extends StatelessWidget {
     if (_compact || _coverOnly) {
       return Padding(
         padding: const EdgeInsets.only(top: 4.0, left: 6.0, right: 6.0),
-        child: cardWidget(context, nodeTitle),
+        child: cardWidget(context, nodeTitle, time: time),
       );
     }
 
@@ -353,8 +354,12 @@ class AnimeGridCard extends StatelessWidget {
               ));
   }
 
-  Widget cardWidget(BuildContext context, String nodeTitle,
-      {double borderRadius = 6.0}) {
+  Widget cardWidget(
+    BuildContext context,
+    String nodeTitle, {
+    double borderRadius = 6.0,
+    String? time,
+  }) {
     return Material(
       borderRadius: BorderRadius.circular(borderRadius),
       child: Stack(
@@ -367,6 +372,7 @@ class AnimeGridCard extends StatelessWidget {
               : animePicture(context, borderRadius),
           if (_compact) _blackBGforText(borderRadius),
           if (_compact) _editAndText(context, nodeTitle),
+          if (_compact) _timeCard(time),
           if (numRecommendations != null) _recomWidget(context, borderRadius),
           if (addtionalWidget != null && !_coverOnly) addtionalWidget!,
         ],
@@ -443,6 +449,33 @@ class AnimeGridCard extends StatelessWidget {
                 IconButton.filled(onPressed: onClose!, icon: Icon(Icons.clear)),
           ),
       ],
+    );
+  }
+
+  Widget _timeCard(String? time) {
+    return Positioned(
+      top: 0,
+      left: 0,
+      right: 0,
+      child: Container(
+        height: 20,
+        decoration: BoxDecoration(
+          color: Colors.black.withOpacity(0.5),
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(borderRadius),
+            topRight: Radius.circular(borderRadius),
+          ),
+        ),
+        child: Center(
+          child: AutoSizeText(
+            time ?? "",
+            textAlign: TextAlign.center,
+            maxFontSize: 12.0,
+            minFontSize: 7.0,
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
+      ),
     );
   }
 }

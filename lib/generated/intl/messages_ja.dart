@@ -406,6 +406,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Home_Page_Setting": MessageLookupByLibrary.simpleMessage("ホームページ設定"),
         "Home_Page_items": MessageLookupByLibrary.simpleMessage("ホームページアイテム"),
         "Honor": MessageLookupByLibrary.simpleMessage("名誉"),
+        "Horizontal_List": MessageLookupByLibrary.simpleMessage("水平リスト"),
         "Horrible": MessageLookupByLibrary.simpleMessage("最悪"),
         "Horror": MessageLookupByLibrary.simpleMessage("ホラー"),
         "Hot": MessageLookupByLibrary.simpleMessage("ホット"),

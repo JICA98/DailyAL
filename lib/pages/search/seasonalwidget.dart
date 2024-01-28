@@ -92,15 +92,13 @@ class _SeasonalWidgetState extends State<SeasonalWidget> {
             ),
             ShadowButton(
               onPressed: () => gotoPage(
-                  context: context,
-                  newPage: TitlebarScreen(
-                    WeeklyAnimeWidget(
-                      seasonType: seasonMap.keys.elementAt(currentSeasonIndex),
-                      year: int.tryParse(yearList.elementAt(currentYearIndex)) ?? DateTime.now().year,
-                    ),
-                    appbarTitle:
-                        '${seasonMapCaps.values.elementAt(currentSeasonIndex)} ${yearList.elementAt(currentYearIndex)}',
-                  )),
+                context: context,
+                newPage: WeeklySchedulePage(
+                  seasonType: seasonMap.keys.elementAt(currentSeasonIndex),
+                  year: int.tryParse(yearList.elementAt(currentYearIndex)) ??
+                      DateTime.now().year,
+                ),
+              ),
               child: Text(S.current.WeeklyAnime),
             ),
           ],

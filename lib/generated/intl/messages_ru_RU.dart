@@ -457,6 +457,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "Home_Page_items":
             MessageLookupByLibrary.simpleMessage("Элементы главной страницы"),
         "Honor": MessageLookupByLibrary.simpleMessage("Честь"),
+        "Horizontal_List":
+            MessageLookupByLibrary.simpleMessage("Горизонтальный список"),
         "Horrible": MessageLookupByLibrary.simpleMessage("Ужасный"),
         "Horror": MessageLookupByLibrary.simpleMessage("Ужастик"),
         "Hot": MessageLookupByLibrary.simpleMessage("Горячий"),

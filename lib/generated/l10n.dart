@@ -9170,6 +9170,16 @@ class S {
     );
   }
 
+  /// `Horizontal List`
+  String get Horizontal_List {
+    return Intl.message(
+      'Horizontal List',
+      name: 'Horizontal_List',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Published End Date`
   String get publishedEndDate {
     return Intl.message(

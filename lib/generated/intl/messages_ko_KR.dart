@@ -407,6 +407,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Home_Page_Setting": MessageLookupByLibrary.simpleMessage("홈 페이지 설정"),
         "Home_Page_items": MessageLookupByLibrary.simpleMessage("홈 페이지 항목"),
         "Honor": MessageLookupByLibrary.simpleMessage("명예"),
+        "Horizontal_List": MessageLookupByLibrary.simpleMessage("수평 목록"),
         "Horrible": MessageLookupByLibrary.simpleMessage("끔찍한"),
         "Horror": MessageLookupByLibrary.simpleMessage("공포"),
         "Hot": MessageLookupByLibrary.simpleMessage("더운"),

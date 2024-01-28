@@ -22,7 +22,6 @@ import 'package:dailyanimelist/widgets/slivers.dart';
 import 'package:dailyanimelist/widgets/user/signinpage.dart';
 import 'package:dailyanimelist/widgets/user/stats_screen.dart';
 import 'package:dailyanimelist/widgets/user/user_header.dart';
-import 'package:dailyanimelist/widgets/user/weeklyanime.dart';
 import 'package:dal_commons/dal_commons.dart';
 import 'package:flutter/material.dart';
 
@@ -39,8 +38,6 @@ final profileHeaders = [
       (name, _) => UserHeader().favoritesWidget(name)),
   UserProfileType(S.current.History, Icons.history,
       (name, _) => UserHistoryWidget(username: name)),
-  UserProfileType(
-      S.current.WeeklyAnime, Icons.weekend, (name, _) => WeeklyAnimeWidget()),
 ];
 
 PreferredSize profileHeaderWidget({

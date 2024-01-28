@@ -453,6 +453,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Home_Page_items":
             MessageLookupByLibrary.simpleMessage("Ana Sayfa öğeleri"),
         "Honor": MessageLookupByLibrary.simpleMessage("Onur"),
+        "Horizontal_List": MessageLookupByLibrary.simpleMessage("Yatay Liste"),
         "Horrible": MessageLookupByLibrary.simpleMessage("Berbat"),
         "Horror": MessageLookupByLibrary.simpleMessage("Korku"),
         "Hot": MessageLookupByLibrary.simpleMessage("Sıcak"),

@@ -457,6 +457,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "Home_Page_items":
             MessageLookupByLibrary.simpleMessage("Halaman Utama item"),
         "Honor": MessageLookupByLibrary.simpleMessage("Menghormati"),
+        "Horizontal_List":
+            MessageLookupByLibrary.simpleMessage("Daftar Horisontal"),
         "Horrible": MessageLookupByLibrary.simpleMessage("Mengerikan"),
         "Horror": MessageLookupByLibrary.simpleMessage("Kengerian"),
         "Hot": MessageLookupByLibrary.simpleMessage("Panas"),
