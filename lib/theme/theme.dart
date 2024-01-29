@@ -1,9 +1,8 @@
-import 'package:dailyanimelist/user/user.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'theme.g.dart';
 
-enum UserThemeMode { Auto, Light, Dark }
+enum UserThemeMode { Auto, Light, Dark, Black }
 
 enum UserThemeColor {
   Auto,

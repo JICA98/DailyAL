@@ -137,7 +137,7 @@ class MyApp extends StatelessWidget {
           return DynamicColorBuilder(
               builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
             final colorScheme =
-                currentColorScheme(context, lightDynamic, darkDynamic);
+                currentColorScheme(context, lightDynamic, darkDynamic, user.theme.themeMode);
             return MaterialApp(
               debugShowCheckedModeBanner: false,
               navigatorKey: navigatorKey,
@@ -145,9 +145,9 @@ class MyApp extends StatelessWidget {
               home: OpenScreen(notifNode: notifNode),
               themeMode: user.theme.themeMode == UserThemeMode.Auto
                   ? ThemeMode.system
-                  : (user.theme.themeMode == UserThemeMode.Dark
-                      ? ThemeMode.dark
-                      : ThemeMode.light),
+                  : (user.theme.themeMode == UserThemeMode.Light
+                      ? ThemeMode.light
+                      : ThemeMode.dark),
               darkTheme: ThemeData(
                 colorScheme: colorScheme,
                 useMaterial3: true,

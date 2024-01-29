@@ -9,7 +9,6 @@ import 'package:dailyanimelist/enums.dart';
 import 'package:dailyanimelist/generated/l10n.dart';
 import 'package:dailyanimelist/main.dart';
 import 'package:dailyanimelist/pages/animedetailed/videoswidget.dart';
-import 'package:dailyanimelist/pages/userpage.dart';
 import 'package:dailyanimelist/screens/generalsearchscreen.dart';
 import 'package:dailyanimelist/screens/homescreen.dart';
 import 'package:dailyanimelist/screens/user_profile.dart';
@@ -20,7 +19,6 @@ import 'package:dailyanimelist/widgets/avatarwidget.dart';
 import 'package:dailyanimelist/widgets/common/image_preview.dart';
 import 'package:dailyanimelist/widgets/custombutton.dart';
 import 'package:dailyanimelist/widgets/forum/bbcodewidget.dart';
-import 'package:dailyanimelist/widgets/home/bookmarks_widget.dart';
 import 'package:dailyanimelist/widgets/shimmecolor.dart';
 import 'package:dailyanimelist/widgets/slivers.dart';
 import 'package:dailyanimelist/widgets/user/contenteditwidget.dart';
@@ -33,8 +31,6 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:html/dom.dart' as dom;
 import 'package:intl/intl.dart';
-import 'package:photo_view/photo_view.dart';
-import 'package:photo_view/photo_view_gallery.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -866,26 +862,48 @@ Brightness currentBrightness(BuildContext context, [UserThemeMode? themeMode]) {
   return switch (themeMode ?? user.theme.themeMode) {
     UserThemeMode.Auto => MediaQuery.of(context).platformBrightness,
     UserThemeMode.Dark => Brightness.dark,
+    UserThemeMode.Black => Brightness.dark,
     UserThemeMode.Light => Brightness.light,
   };
 }
 
 ColorScheme? currentColorScheme(
-    BuildContext context, ColorScheme? lightDynamic, ColorScheme? darkDynamic,
-    [UserThemeMode? themeMode]) {
+  BuildContext context,
+  ColorScheme? lightDynamic,
+  ColorScheme? darkDynamic, [
+  UserThemeMode? themeMode,
+]) {
+  final ColorScheme? colorScheme;
   final color = UserThemeData.colorSchemeMap[user.theme.color];
   if (color != null) {
-    return ColorScheme.fromSeed(
+    colorScheme = ColorScheme.fromSeed(
       seedColor: color,
       brightness: currentBrightness(context, themeMode),
     );
   } else {
     final brightness = currentBrightness(context, themeMode);
     if (brightness == Brightness.dark) {
-      return darkDynamic;
+      colorScheme = darkDynamic;
     } else {
-      return lightDynamic;
+      colorScheme = lightDynamic;
     }
+  }
+  return _blackTheme(colorScheme, themeMode);
+}
+
+ColorScheme? _blackTheme(
+  ColorScheme? colorScheme, [
+  UserThemeMode? themeMode,
+]) {
+  if (themeMode != UserThemeMode.Black) {
+    return colorScheme;
+  } else {
+    return colorScheme?.copyWith(
+      background: Color(0xff000000),
+      surface: Color(0xff000000),
+      onBackground: Color(0xffFFFFFF),
+      onSurface: Color(0xffFFFFFF),
+    );
   }
 }
 

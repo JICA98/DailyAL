@@ -1,20 +1,16 @@
 import 'package:dailyanimelist/generated/l10n.dart';
 import 'package:dailyanimelist/theme/theme.dart';
 import 'package:dailyanimelist/theme/themedata.dart';
-import 'package:dailyanimelist/pages/settings/optiontile.dart';
 import 'package:dailyanimelist/pages/settings/settingheader.dart';
-import 'package:dailyanimelist/painter.dart';
 import 'package:dailyanimelist/user/userpref.dart';
 import 'package:dailyanimelist/widgets/avatarwidget.dart';
 import 'package:dailyanimelist/widgets/custombutton.dart';
 import 'package:dailyanimelist/widgets/loading/expandedwidget.dart';
 import 'package:dailyanimelist/widgets/selectbottom.dart';
 import 'package:dailyanimelist/widgets/togglebutton.dart';
-import 'package:dal_commons/dal_commons.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../../constant.dart';
 import '../../main.dart';
@@ -41,6 +37,7 @@ class _ThemeSettingsState extends State<ThemeSettings> {
     'auto': UserThemeMode.Auto,
     'light': UserThemeMode.Light,
     'dark': UserThemeMode.Dark,
+    'black': UserThemeMode.Black,
   };
   @override
   void initState() {
