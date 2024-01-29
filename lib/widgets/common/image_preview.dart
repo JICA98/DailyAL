@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:math';
+import 'dart:ui';
 
 import 'package:dailyanimelist/constant.dart';
 import 'package:dailyanimelist/util/file_service.dart';
@@ -20,17 +21,20 @@ void zoomInImage(BuildContext context, String url, [bool showButtons = true]) {
         return SizedBox(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
-          child: Stack(
-            children: [
-              PhotoView(
-                imageProvider: Image.network(url).image,
-                backgroundDecoration: BoxDecoration(
-                  color: Colors.transparent,
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+            child: Stack(
+              children: [
+                PhotoView(
+                  imageProvider: Image.network(url).image,
+                  backgroundDecoration: BoxDecoration(
+                    color: Colors.transparent,
+                  ),
+                  loadingBuilder: (context, event) => _imageLoader(event),
                 ),
-                loadingBuilder: (context, event) => _imageLoader(event),
-              ),
-              imageButtons(url, context, showButtons),
-            ],
+                imageButtons(url, context, showButtons),
+              ],
+            ),
           ),
         );
       });
