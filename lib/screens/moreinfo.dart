@@ -233,9 +233,7 @@ class MoreInfoAnime extends StatelessWidget {
             category.equals("anime")
                 ? "${S.current.Aired} "
                 : "${S.current.Published} ",
-            (contentDetailed?.startDate?.toString().toDate() ?? "?") +
-                " to " +
-                (contentDetailed?.endDate?.toString().toDate() ?? '?'),
+            _getAiredText(),
           ),
           if (category.equals('anime')) ...[
             _field(
@@ -249,12 +247,7 @@ class MoreInfoAnime extends StatelessWidget {
               ),
             _field(
               S.current.Duration,
-              (contentDetailed?.averageEpisodeDuration != null
-                  ? (contentDetailed.averageEpisodeDuration / 60)
-                          .round()
-                          .toString() +
-                      " min"
-                  : "?"),
+              _getContentDuration(),
             ),
             _field(
               S.current.Rating,
@@ -308,7 +301,7 @@ class MoreInfoAnime extends StatelessWidget {
                   " ) ",
             ),
           if (!nullOrEmpty(contentDetailed.genres)) ..._genreWidgets(),
-          if (!nullOrEmpty(additionalTitles))
+          if (_hasValidAlternateTitles())
             _field(
               S.current.AdditionalTitles,
               additionalTitles!
@@ -326,5 +319,27 @@ class MoreInfoAnime extends StatelessWidget {
       );
     else
       return scrollView;
+  }
+
+  bool _hasValidAlternateTitles() {
+    return additionalTitles != null &&
+        additionalTitles!.where((e) => e.title.notEquals('N/A')).isNotEmpty;
+  }
+
+  String _getAiredText() {
+    final startDate = contentDetailed?.startDate?.toString().toDate() ?? "?";
+    final endDate = contentDetailed?.endDate?.toString().toDate() ?? '?';
+    if (startDate.equals(endDate)) return startDate;
+    return startDate + " to " + endDate;
+  }
+
+  String _getContentDuration() {
+    final durationInSeconds = contentDetailed?.averageEpisodeDuration;
+    if (durationInSeconds != null && durationInSeconds > 0) {
+      Duration duration = Duration(seconds: durationInSeconds);
+      final minDiff = duration.inMinutes.remainder(60);
+      return '${duration.inHours > 0 ? duration.inHours.toString() + '${duration.inHours == 1 ? 'hr' : 'hrs'} ' : ''}${minDiff.toString().padLeft(2, '0')}${minDiff == 1 ? 'min' : 'mins'}';
+    }
+    return "?";
   }
 }
