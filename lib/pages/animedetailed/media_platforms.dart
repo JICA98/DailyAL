@@ -259,6 +259,7 @@ class _DetailedLinksState extends State<DetailedLinks> {
             onChanged: (value) {
               if (value == true) {
                 user.pref.preferredLinkType = type;
+                user.setMetadata();
                 setState(() {});
               }
             },
