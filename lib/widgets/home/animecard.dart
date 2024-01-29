@@ -191,34 +191,34 @@ class AnimeGridCard extends StatelessWidget {
 
   bool get _coverOnly => _displaySubType == DisplaySubType.cover_only_grid;
 
-  Widget _editAndText(BuildContext context, String nodeTitle) {
+  Widget _editAndText(
+      BuildContext context, String nodeTitle, double borderRadius) {
     final value = parentNsv ?? NodeStatusValue.fromStatus(node);
-    return Positioned(
-      bottom: 5,
-      left: 5,
-      right: 3,
+    return Align(
+      alignment: AlignmentDirectional.bottomCenter,
       child: Row(
         mainAxisSize: MainAxisSize.max,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Expanded(
             child: ConstrainedBox(
-              constraints: BoxConstraints(maxHeight: 80.0),
+              constraints: BoxConstraints(maxHeight: 40.0),
               child: Padding(
-                padding: const EdgeInsets.only(bottom: 10),
+                padding: const EdgeInsets.fromLTRB(5, 0, 5, 8),
                 child: Text(
                   nodeTitle,
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         fontSize: 11,
                         color: Colors.white,
-                        overflow: TextOverflow.fade,
+                        overflow: TextOverflow.ellipsis,
                       ),
                 ),
               ),
             ),
           ),
           SB.w10,
-          if (isEditable) editIconButton(value, () => _onEdit(context)),
+          if (isEditable)
+            editIconButton(value, () => _onEdit(context), borderRadius),
         ],
       ),
     );
@@ -371,8 +371,8 @@ class AnimeGridCard extends StatelessWidget {
                 )
               : animePicture(context, borderRadius),
           if (_compact) _blackBGforText(borderRadius),
-          if (_compact) _editAndText(context, nodeTitle),
-          if (_compact) _timeCard(time),
+          if (_compact) _editAndText(context, nodeTitle, borderRadius),
+          if (_compact && time != null) _timeCard(time),
           if (numRecommendations != null) _recomWidget(context, borderRadius),
           if (addtionalWidget != null && !_coverOnly) addtionalWidget!,
         ],
@@ -386,14 +386,15 @@ class AnimeGridCard extends StatelessWidget {
       left: 0,
       right: 0,
       child: SizedBox(
-        height: 70,
+        height: 30,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(borderRadius),
           child: CustomPaint(
               foregroundPainter: FadingEffect(
                 color: Colors.black,
                 start: 5,
-                end: 250,
+                end: 255,
+                extend: 5,
               ),
               child: SB.z),
         ),
@@ -452,7 +453,7 @@ class AnimeGridCard extends StatelessWidget {
     );
   }
 
-  Widget _timeCard(String? time) {
+  Widget _timeCard(String time) {
     return Positioned(
       top: 0,
       left: 0,
@@ -468,7 +469,7 @@ class AnimeGridCard extends StatelessWidget {
         ),
         child: Center(
           child: AutoSizeText(
-            time ?? "",
+            time,
             textAlign: TextAlign.center,
             maxFontSize: 12.0,
             minFontSize: 7.0,
@@ -480,7 +481,27 @@ class AnimeGridCard extends StatelessWidget {
   }
 }
 
-Widget editIconButton(NodeStatusValue? value, VoidCallback onEdit) {
+Widget editIconButton(
+  NodeStatusValue? value,
+  VoidCallback onEdit,
+  double borderRadius,
+) {
+  Widget child;
+  if (value?.status != null) {
+    child = Text(
+      value!.status!,
+      style: TextStyle(
+        color: Colors.white,
+        fontSize: 12,
+      ),
+    );
+  } else {
+    child = Icon(
+      Icons.edit,
+      size: 16,
+      color: Colors.white,
+    );
+  }
   return SizedBox(
     width: 30,
     height: 30,
@@ -488,14 +509,12 @@ Widget editIconButton(NodeStatusValue? value, VoidCallback onEdit) {
       backgroundColor: value?.color,
       padding: EdgeInsets.zero,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(6),
-      ),
+          borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(borderRadius * 2),
+        bottomRight: Radius.circular(borderRadius),
+      )),
       onPressed: onEdit,
-      child: Icon(
-        Icons.edit,
-        size: 16,
-        color: Colors.white,
-      ),
+      child: child,
     ),
   );
 }

@@ -152,37 +152,40 @@ void zoomInImageList(BuildContext context, List<String> urlList,
         return SizedBox(
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
-            child: Stack(
-              children: [
-                PhotoViewGallery.builder(
-                  pageController: pageController,
-                  scrollPhysics: const BouncingScrollPhysics(),
-                  builder: (BuildContext context, int i) {
-                    var url = urlList[i];
-                    return PhotoViewGalleryPageOptions(
-                      imageProvider: Image.network(url).image,
-                      initialScale: PhotoViewComputedScale.contained * 0.8,
-                    );
-                  },
-                  backgroundDecoration: BoxDecoration(
-                    color: Colors.transparent,
-                  ),
-                  itemCount: urlList.length,
-                  loadingBuilder: (context, event) => _imageLoader(event),
-                ),
-                StreamBuilder<int>(
-                    stream: listener.stream,
-                    builder: (context, snapshot) {
-                      var imageIndex = snapshot.data ?? 0;
-                      return Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          imageButtons(urlList[imageIndex], context),
-                          _pageIndicator(imageIndex, urlList),
-                        ],
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+              child: Stack(
+                children: [
+                  PhotoViewGallery.builder(
+                    pageController: pageController,
+                    scrollPhysics: const BouncingScrollPhysics(),
+                    builder: (BuildContext context, int i) {
+                      var url = urlList[i];
+                      return PhotoViewGalleryPageOptions(
+                        imageProvider: Image.network(url).image,
+                        initialScale: PhotoViewComputedScale.contained * 0.8,
                       );
-                    }),
-              ],
+                    },
+                    backgroundDecoration: BoxDecoration(
+                      color: Colors.transparent,
+                    ),
+                    itemCount: urlList.length,
+                    loadingBuilder: (context, event) => _imageLoader(event),
+                  ),
+                  StreamBuilder<int>(
+                      stream: listener.stream,
+                      builder: (context, snapshot) {
+                        var imageIndex = snapshot.data ?? 0;
+                        return Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            imageButtons(urlList[imageIndex], context),
+                            _pageIndicator(imageIndex, urlList),
+                          ],
+                        );
+                      }),
+                ],
+              ),
             ));
       });
 }

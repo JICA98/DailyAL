@@ -306,14 +306,15 @@ class _ContentHomeWidgetState extends State<ContentHomeWidget>
     if (apiPref.value.userCategory != null) {
       category = apiPref.value.userCategory!;
     }
-    final tile = tileMap.tryAt(user.pref.homePageTileSize);
+    final tile = tileMap.tryAt(user.pref.homePageTileSize)!;
+    var height2 = tile.containerHeight;
     return Column(children: [
       SB.h15,
       HomePageTitleWidget(content, apiPref),
       SB.h15,
       (content?.data != null && content.data.isNotEmpty)
           ? Container(
-              height: tile!.containerHeight,
+              height: height2,
               child: ListView.builder(
                   padding: const EdgeInsets.only(left: 15, right: 15),
                   itemCount: content.data.length,
@@ -322,32 +323,38 @@ class _ContentHomeWidgetState extends State<ContentHomeWidget>
                     var heroTag = MalAuth.codeChallenge(10);
                     return Hero(
                       tag: heroTag,
-                      child: AnimeGridCard(
-                        node: content.data[index].content,
-                        category: category,
-                        showEdit: true,
-                        showCardBar: true,
-                        updateCache: true,
-                        showGenres: true,
-                        height: tile.contentHeight,
-                        width: tile.contentWidth,
-                        homePageTileSize: user.pref.homePageTileSize,
-                        parentNsv: apiPref.contentType == HomePageType.user_list
-                            ? NodeStatusValue.fromStatus(content.data[index])
-                            : null,
-                        onTap: () => navigateTo(
-                            context,
-                            ContentDetailedScreen(
-                              node: content.data[index].content,
-                              category: category,
-                            )),
+                      child: SizedBox(
+                        height: height2,
+                        width: height2 * (2 / 3),
+                        child: AnimeGridCard(
+                          node: content.data[index].content,
+                          category: category,
+                          showEdit: true,
+                          showCardBar: true,
+                          updateCache: true,
+                          showGenres: true,
+                          height: tile.contentHeight,
+                          width: tile.contentWidth,
+                          displaySubType: DisplaySubType.compact,
+                          homePageTileSize: user.pref.homePageTileSize,
+                          parentNsv: apiPref.contentType ==
+                                  HomePageType.user_list
+                              ? NodeStatusValue.fromStatus(content.data[index])
+                              : null,
+                          onTap: () => navigateTo(
+                              context,
+                              ContentDetailedScreen(
+                                node: content.data[index].content,
+                                category: category,
+                              )),
+                        ),
                       ),
                     );
                   }),
             )
           : ShimmerColor(
               Container(
-                height: tile!.loadingContainerHeight,
+                height: tile.loadingContainerHeight,
                 child: ListView.builder(
                   padding: EdgeInsets.only(left: 15, right: 15),
                   itemCount: 10,
