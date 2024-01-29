@@ -377,21 +377,31 @@ class NotificationService {
       final currStatus =
           await NotificationPermissions.getNotificationPermissionStatus();
       if (currStatus == PermissionStatus.denied) {
-        final allowed = await showConfirmationDialog(
+        bool allowed = await showConfirmationDialog(
           alertTitle: S.current.ConfirmNotifPerm,
           desc: S.current.ConfirmNotifPermDesc,
           context: MyApp.navigatorKey.currentContext!,
         );
         if (allowed) {
-          await NotificationPermissions.requestNotificationPermissions(
-              openSettings: false);
-        } else {
+          allowed = await _askNotifPermissionUsingLocal();
+        }
+        if (!allowed) {
           user.pref.notifPref.onPTWGoesToWatching = false;
           user.pref.notifPref.onWatchingListUpdated = false;
           user.setIntance();
         }
       }
     }
+  }
+
+  Future<bool> _askNotifPermissionUsingLocal() async {
+    FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+        FlutterLocalNotificationsPlugin();
+    return (await flutterLocalNotificationsPlugin
+            .resolvePlatformSpecificImplementation<
+                AndroidFlutterLocalNotificationsPlugin>()
+            ?.requestNotificationsPermission()) ??
+        false;
   }
 
   static void onDidReceiveBackgroundNotificationResponse(
