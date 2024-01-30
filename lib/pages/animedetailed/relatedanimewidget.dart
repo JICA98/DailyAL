@@ -4,6 +4,7 @@ import 'package:dailyanimelist/screens/generalsearchscreen.dart';
 import 'package:dailyanimelist/util/pathutils.dart';
 import 'package:dailyanimelist/widgets/common/share_builder.dart';
 import 'package:dailyanimelist/widgets/customappbar.dart';
+import 'package:dailyanimelist/widgets/listsortfilter.dart';
 import 'package:dailyanimelist/widgets/slivers.dart';
 import 'package:dailyanimelist/widgets/user/contentlistwidget.dart';
 import 'package:dal_commons/dal_commons.dart';
@@ -143,16 +144,16 @@ class _RelatedAnimeWidgetState extends State<RelatedAnimeWidget>
     );
   }
 
-  ContentListWidget _contentListWidget(List<BaseNode>? nodeList) {
-    return ContentListWidget(
-      displayType: widget.displayType,
-      padding: EdgeInsets.symmetric(horizontal: widget.horizPadding + 5),
-      contentList: nodeList ?? [],
-      returnSlivers: !isHoriz,
-      cardHeight: isHoriz ? 150 : 180,
-      cardWidth: isHoriz ? 140 : 180,
-      updateCacheOnEdit: true,
+  Widget _contentListWidget(List<BaseNode>? nodeList) {
+    return ContentListWithDisplayType(
       category: widget.category,
+      items: nodeList ?? [],
+      sortFilterDisplay: SortFilterDisplay.withDisplayType(
+        DisplayOption(
+          displayType: DisplayType.grid,
+          displaySubType: DisplaySubType.compact,
+        ),
+      ),
     );
   }
 

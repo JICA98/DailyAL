@@ -907,6 +907,14 @@ class SortFilterDisplay {
     });
   }
 
+  factory SortFilterDisplay.withDisplayType(DisplayOption option) {
+    return SortFilterDisplay(
+      sort: SortOption(name: '_', value: '_'),
+      displayOption: option,
+      filterOutputs: {},
+    );
+  }
+
   SortFilterDisplay copyWith(
       {SortOption? sort,
       String? filterBy,
