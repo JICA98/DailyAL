@@ -9,6 +9,7 @@ import 'package:dailyanimelist/generated/l10n.dart';
 import 'package:dailyanimelist/main.dart';
 import 'package:dailyanimelist/screens/contentdetailedscreen.dart';
 import 'package:dailyanimelist/screens/generalsearchscreen.dart';
+import 'package:dailyanimelist/theme/theme.dart';
 import 'package:dailyanimelist/user/hompagepref.dart';
 import 'package:dailyanimelist/widgets/common/image_preview.dart';
 import 'package:dailyanimelist/widgets/custombutton.dart';
@@ -16,6 +17,7 @@ import 'package:dailyanimelist/widgets/fadingeffect.dart';
 import 'package:dailyanimelist/widgets/home/nodebadge.dart';
 import 'package:dailyanimelist/widgets/user/contentlistwidget.dart';
 import 'package:dailyanimelist/widgets/user/stats_screen.dart';
+import 'package:dal_commons/commons.dart';
 import 'package:dal_commons/dal_commons.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -51,6 +53,7 @@ class AnimeGridCard extends StatelessWidget {
   final Widget? addtionalWidget;
   final HomePageTileSize? homePageTileSize;
   final DisplaySubType? displaySubType;
+  final ScheduleData? scheduleData;
   final double? gridHeight;
 
   AnimeGridCard({
@@ -81,6 +84,7 @@ class AnimeGridCard extends StatelessWidget {
     this.homePageTileSize,
     this.displaySubType,
     this.gridHeight,
+    this.scheduleData,
   });
   @override
   Widget build(BuildContext context) {
@@ -96,7 +100,8 @@ class AnimeGridCard extends StatelessWidget {
     if (_compact || _coverOnly) {
       return Padding(
         padding: const EdgeInsets.only(top: 4.0, left: 6.0, right: 6.0),
-        child: cardWidget(context, nodeTitle, time: time),
+        child: cardWidget(context, nodeTitle,
+            time: time, myListStatus: myListStatus),
       );
     }
 
@@ -192,7 +197,11 @@ class AnimeGridCard extends StatelessWidget {
   bool get _coverOnly => _displaySubType == DisplaySubType.cover_only_grid;
 
   Widget _editAndText(
-      BuildContext context, String nodeTitle, double borderRadius) {
+    BuildContext context,
+    String nodeTitle,
+    double borderRadius,
+    MyListStatus? myListStatus,
+  ) {
     final value = parentNsv ?? NodeStatusValue.fromStatus(node);
     return Align(
       alignment: AlignmentDirectional.bottomCenter,
@@ -210,7 +219,7 @@ class AnimeGridCard extends StatelessWidget {
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         fontSize: 11,
                         color: Colors.white,
-                        overflow: TextOverflow.ellipsis,
+                        overflow: TextOverflow.fade,
                       ),
                 ),
               ),
@@ -218,7 +227,8 @@ class AnimeGridCard extends StatelessWidget {
           ),
           SB.w10,
           if (isEditable)
-            editIconButton(value, () => _onEdit(context), borderRadius),
+            editIconButton(
+                value, () => _onEdit(context), borderRadius, myListStatus),
         ],
       ),
     );
@@ -359,6 +369,7 @@ class AnimeGridCard extends StatelessWidget {
     String nodeTitle, {
     double borderRadius = 6.0,
     String? time,
+    MyListStatus? myListStatus,
   }) {
     return Material(
       borderRadius: BorderRadius.circular(borderRadius),
@@ -370,9 +381,13 @@ class AnimeGridCard extends StatelessWidget {
                   child: animePicture(context, borderRadius),
                 )
               : animePicture(context, borderRadius),
-          if (_compact) _blackBGforText(borderRadius),
-          if (_compact) _editAndText(context, nodeTitle, borderRadius),
-          if (_compact && time != null) _timeCard(time),
+          if (_compact) ...[
+            _blackBGforText(borderRadius),
+            _editAndText(context, nodeTitle, borderRadius, myListStatus),
+            if (time != null) _timeCard(time),
+            _episodeWatchProgressBar(myListStatus),
+            _memberCountMeanScore(),
+          ],
           if (numRecommendations != null) _recomWidget(context, borderRadius),
           if (addtionalWidget != null && !_coverOnly) addtionalWidget!,
         ],
@@ -397,6 +412,86 @@ class AnimeGridCard extends StatelessWidget {
                 extend: 5,
               ),
               child: SB.z),
+        ),
+      ),
+    );
+  }
+
+  Widget _memberCountMeanScore() {
+    if (showMemberCount && (node is AnimeDetailed || node is MangaDetailed)) {
+      final content = node as dynamic;
+      final int? memberCount = content.numListUsers;
+      final double? meanScore = content.mean;
+      if (memberCount == null && meanScore == null) return SB.z;
+      return Positioned(
+        top: 7,
+        left: 5,
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.black.withOpacity(0.5),
+            borderRadius: BorderRadius.circular(borderRadius),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: Center(
+              child: Text(
+                "${meanScore == null ? '' : meanScore.toStringAsFixed(2) + ' | '}${memberCount == null ? '' : userCountFormat.format(memberCount)}",
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.white, fontSize: 9),
+              ),
+            ),
+          ),
+        ),
+      );
+    }
+
+    return SB.z;
+  }
+
+  Widget _episodeWatchProgressBar(MyListStatus? myListStatus) {
+    double? watchProgress;
+    double? releaseProgress;
+    final episodes = scheduleData?.episode;
+    if (node is AnimeDetailed) {
+      final listStatus = myListStatus as MyAnimeListStatus?;
+      final watched = listStatus?.numEpisodesWatched;
+      int? numEpisodes = node.numEpisodes;
+      if (episodes != null && episodes > 1) {
+        numEpisodes = (episodes + 5);
+        releaseProgress = (episodes - 1) / numEpisodes;
+      }
+      if (watched != null && numEpisodes != null && numEpisodes > 0) {
+        watchProgress = watched / numEpisodes;
+      }
+    }
+    if (watchProgress == null) return SB.z;
+
+    return Align(
+      alignment: AlignmentDirectional.topCenter,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 1.5),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(borderRadius * 2),
+          child: Container(
+            height: 2.5,
+            width: width,
+            color: Colors.grey[500],
+            child: Stack(
+              children: [
+                if (releaseProgress != null)
+                  LinearProgressIndicator(
+                    value: releaseProgress,
+                    backgroundColor: Colors.transparent,
+                    valueColor: AlwaysStoppedAnimation<Color>(Colors.amber),
+                  ),
+                LinearProgressIndicator(
+                  value: watchProgress,
+                  backgroundColor: Colors.transparent,
+                  valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );
@@ -484,29 +579,40 @@ class AnimeGridCard extends StatelessWidget {
 Widget editIconButton(
   NodeStatusValue? value,
   VoidCallback onEdit,
-  double borderRadius,
-) {
+  double borderRadius, [
+  dynamic myListStatus,
+]) {
   Widget child;
-  if (value?.status != null) {
-    child = Text(
-      value!.status!,
-      style: TextStyle(
-        color: Colors.white,
-        fontSize: 12,
-      ),
+  final score = myListStatus?.score as int?;
+  final hasScore = score != null && score > 0;
+  final bgColor = value?.color ?? Colors.black;
+  final textColor = getTextColor(bgColor);
+  if (hasScore) {
+    child = Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(Icons.star, size: 16, color: textColor),
+        Text(
+          score.toString(),
+          style: TextStyle(
+            color: textColor,
+            fontSize: 12,
+          ),
+        ),
+      ],
     );
   } else {
     child = Icon(
       Icons.edit,
       size: 16,
-      color: Colors.white,
+      color: textColor,
     );
   }
   return SizedBox(
-    width: 30,
+    width: hasScore ? 40 : 30,
     height: 30,
     child: ShadowButton(
-      backgroundColor: value?.color,
+      backgroundColor: bgColor,
       padding: EdgeInsets.zero,
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(

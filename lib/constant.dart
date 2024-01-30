@@ -899,8 +899,8 @@ ColorScheme? _blackTheme(
     return colorScheme;
   } else {
     return colorScheme?.copyWith(
-      background: Color(0xff000000),
-      surface: Color(0xff000000),
+      background: Color(0xff0C0404),
+      surface: Color(0xff0C0404),
       onBackground: Color(0xffFFFFFF),
       onSurface: Color(0xffFFFFFF),
     );

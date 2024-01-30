@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'theme.g.dart';
@@ -42,6 +43,14 @@ const backgroundMap = {
   UserThemeBg.spring: 'assets/images/cherry.jpg',
   UserThemeBg.winter: 'assets/images/winter.png',
 };
+
+Color getTextColor(Color backgroundColor) {
+  // Calculate the relative luminance of the background color
+  final luminance = (0.2126 * backgroundColor.red + 0.7152 * backgroundColor.green + 0.0722 * backgroundColor.blue) / 255;
+
+  // Choose white or black based on the luminance
+  return luminance > 0.5 ? Colors.black : Colors.white;
+}
 
 @JsonSerializable()
 class UserTheme {

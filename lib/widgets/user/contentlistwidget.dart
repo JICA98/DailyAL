@@ -520,26 +520,31 @@ class _ContentAllWidgetState extends State<ContentAllWidget>
     return ((widget.displayType == DisplayType.grid ||
                 widget.displayType == DisplayType.list_horiz) &&
             contentTypes.contains(widget.category))
-        ? AnimeGridCard(
-            node: widget.dynContent?.content,
-            category: widget.category,
-            showEdit: widget.showEdit,
-            myListStatus: myListStatus,
-            showCardBar: true,
-            updateCache: false,
-            showGenres: true,
-            showTime: widget.showTime,
-            height: widget.cardHeight,
-            width: widget.cardWidth,
-            parentNsv: nsv,
-            onClose: widget.onClose,
-            onEdit: () => showEditSheet(context),
-            onTap: () => _onTileTap(),
-            showSelfScoreInsteadOfStatus: widget.showSelfScoreInsteadOfStatus,
-            addtionalWidget: _unseenWidget(),
-            homePageTileSize: widget.homePageTileSize,
-            displaySubType: widget.displaySubType,
-            gridHeight: widget.gridHeight,
+        ? CFutureBuilder(
+            future: DalApi.i.scheduleForMalIds,
+            loadingChild: SB.z,
+            done: (AsyncSnapshot<Map<int, ScheduleData>> data) => AnimeGridCard(
+              scheduleData: data.data?[id],
+              node: widget.dynContent?.content,
+              category: widget.category,
+              showEdit: widget.showEdit,
+              myListStatus: myListStatus,
+              showCardBar: true,
+              updateCache: false,
+              showGenres: true,
+              showTime: widget.showTime,
+              height: widget.cardHeight,
+              width: widget.cardWidth,
+              parentNsv: nsv,
+              onClose: widget.onClose,
+              onEdit: () => showEditSheet(context),
+              onTap: () => _onTileTap(),
+              showSelfScoreInsteadOfStatus: widget.showSelfScoreInsteadOfStatus,
+              addtionalWidget: _unseenWidget(),
+              homePageTileSize: widget.homePageTileSize,
+              displaySubType: widget.displaySubType,
+              gridHeight: widget.gridHeight,
+            ),
           )
         : _buildListTile(nsv, nodeTitle);
   }
@@ -919,7 +924,7 @@ class _ContentAllWidgetState extends State<ContentAllWidget>
       );
     } else {
       return Positioned(
-        top: 3,
+        top: 7,
         right: 3,
         child: child,
       );

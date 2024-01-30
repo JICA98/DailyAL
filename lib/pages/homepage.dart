@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:dailyanimelist/api/auth/auth.dart';
+import 'package:dailyanimelist/api/dalapi.dart';
 import 'package:dailyanimelist/constant.dart';
 import 'package:dailyanimelist/generated/l10n.dart';
 import 'package:dailyanimelist/main.dart';
@@ -18,6 +19,7 @@ import 'package:dailyanimelist/widgets/homeappbar.dart';
 import 'package:dailyanimelist/widgets/loading/loadingcard.dart';
 import 'package:dailyanimelist/widgets/shimmecolor.dart';
 import 'package:dailyanimelist/widgets/slivers.dart';
+import 'package:dal_commons/commons.dart';
 import 'package:dal_commons/dal_commons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -213,6 +215,7 @@ class _ContentHomeWidgetState extends State<ContentHomeWidget>
     with AutomaticKeepAliveClientMixin {
   dynamic content;
   late HomePageApiPref apiPref;
+  late Map<int, ScheduleData> scheduleDataMap;
 
   @override
   void initState() {
@@ -237,6 +240,7 @@ class _ContentHomeWidgetState extends State<ContentHomeWidget>
   void getData([bool forceUpdate = false]) async {
     try {
       content = await HomePageUtils().getFuture(apiPref, forceUpdate);
+      scheduleDataMap = await DalApi.i.scheduleForMalIds;
       if (mounted) setState(() {});
     } catch (e) {
       logDal(e);
@@ -308,6 +312,8 @@ class _ContentHomeWidgetState extends State<ContentHomeWidget>
     }
     final tile = tileMap.tryAt(user.pref.homePageTileSize)!;
     var height2 = tile.containerHeight;
+    var width2 = height2 * (2 / 3);
+
     return Column(children: [
       SB.h15,
       HomePageTitleWidget(content, apiPref),
@@ -321,22 +327,25 @@ class _ContentHomeWidgetState extends State<ContentHomeWidget>
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) {
                     var heroTag = MalAuth.codeChallenge(10);
+                    var node = (content.data[index].content as Node?)!;
                     return Hero(
                       tag: heroTag,
                       child: SizedBox(
                         height: height2,
-                        width: height2 * (2 / 3),
+                        width: width2,
                         child: AnimeGridCard(
-                          node: content.data[index].content,
+                          node: node,
                           category: category,
                           showEdit: true,
                           showCardBar: true,
                           updateCache: true,
                           showGenres: true,
-                          height: tile.contentHeight,
-                          width: tile.contentWidth,
+                          height: height2,
+                          width: width2,
+                          scheduleData: scheduleDataMap[node.id],
                           displaySubType: DisplaySubType.compact,
                           homePageTileSize: user.pref.homePageTileSize,
+                          myListStatus: node.myListStatus,
                           parentNsv: apiPref.contentType ==
                                   HomePageType.user_list
                               ? NodeStatusValue.fromStatus(content.data[index])
@@ -354,14 +363,14 @@ class _ContentHomeWidgetState extends State<ContentHomeWidget>
             )
           : ShimmerColor(
               Container(
-                height: tile.loadingContainerHeight,
+                height: height2,
                 child: ListView.builder(
                   padding: EdgeInsets.only(left: 15, right: 15),
                   itemCount: 10,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) => LoadingCard(
-                    height: tile.contentHeight,
-                    width: tile.contentWidth,
+                    height: height2,
+                    width: width2,
                   ),
                 ),
               ),

@@ -46,6 +46,7 @@ class HomePageUtils {
       "num_list_users",
       "genres",
       'alternative_titles',
+      'num_episodes',
     ];
     switch (apiPref.contentType) {
       case HomePageType.top_anime:
