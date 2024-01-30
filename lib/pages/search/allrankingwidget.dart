@@ -45,7 +45,7 @@ class AllRankingWidget extends StatelessWidget {
     final _rankingMap = isAnime ? desiredTopAnimeOrder : desiredMangaRankingMap;
     final _rankingTypeMap = isAnime ? rankingMap : mangaRankingMap;
     return Container(
-      height: 165,
+      height: 130,
       child: ListView.builder(
         itemCount: _rankingMap.length,
         scrollDirection: Axis.horizontal,
@@ -56,7 +56,7 @@ class AllRankingWidget extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 5),
             child: Container(
-              width: 140,
+              width: 165,
               padding: const EdgeInsets.only(bottom: 25),
               child: Material(
                 color: Theme.of(context).cardColor,

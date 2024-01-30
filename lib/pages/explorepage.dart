@@ -2,7 +2,6 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dailyanimelist/api/credmal.dart';
 import 'package:dailyanimelist/api/dalapi.dart';
-import 'package:dailyanimelist/api/malapi.dart';
 import 'package:dailyanimelist/api/maluser.dart';
 import 'package:dailyanimelist/constant.dart';
 import 'package:dailyanimelist/enums.dart';
@@ -10,9 +9,9 @@ import 'package:dailyanimelist/generated/l10n.dart';
 import 'package:dailyanimelist/main.dart';
 import 'package:dailyanimelist/pages/animedetailed/intereststackwidget.dart';
 import 'package:dailyanimelist/pages/animedetailed/reviewpage.dart';
+import 'package:dailyanimelist/pages/search/all_genre_widget.dart';
 import 'package:dailyanimelist/pages/search/allrankingwidget.dart';
 import 'package:dailyanimelist/pages/search/seasonalwidget.dart';
-import 'package:dailyanimelist/pages/settingspage.dart';
 import 'package:dailyanimelist/screens/characterscreen.dart';
 import 'package:dailyanimelist/screens/contentdetailedscreen.dart';
 import 'package:dailyanimelist/screens/generalsearchscreen.dart';
@@ -21,18 +20,13 @@ import 'package:dailyanimelist/user/user.dart';
 import 'package:dailyanimelist/widgets/avatarwidget.dart';
 import 'package:dailyanimelist/widgets/custombutton.dart';
 import 'package:dailyanimelist/widgets/customfuture.dart';
-import 'package:dailyanimelist/widgets/headerwidget.dart';
 import 'package:dailyanimelist/widgets/home/animecard.dart';
 import 'package:dailyanimelist/widgets/homeappbar.dart';
 import 'package:dailyanimelist/widgets/loading/loadingcard.dart';
-import 'package:dailyanimelist/widgets/loading/shimmerwidget.dart';
 import 'package:dailyanimelist/widgets/shimmecolor.dart';
 import 'package:dailyanimelist/widgets/translator.dart';
-import 'package:dailyanimelist/widgets/user/weeklyanime.dart';
 import 'package:dal_commons/commons.dart';
-import 'package:dal_commons/dal_commons.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class ExplorePage extends StatefulWidget {
   const ExplorePage({Key? key}) : super(key: key);
@@ -87,6 +81,12 @@ class _ExplorePageState extends State<ExplorePage> {
           _leadingWidget(
             VisibleSection(
                 S.current.Categories, AllRankingWidget(category: category)),
+          ),
+        ),
+        _wrapSliver(
+          _leadingWidget(
+            VisibleSection(
+                S.current.Genres, AllGenreWidget(category: category)),
           ),
         ),
         SliverList(
@@ -398,57 +398,45 @@ class _ExplorePageState extends State<ExplorePage> {
   }
 
   Widget get _randomPickerWidget {
-    return Container(
-      height: 140,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: horizPadding),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            _randomButton(
-              S.current.Random,
-              Colors.green,
-              Color.fromARGB(255, 43, 49, 43),
-              Icons.shuffle,
-              () => openFutureAndNavigate<int?>(
-                text: isAnime
-                    ? S.current.Loading_Random_Anime
-                    : S.current.Loading_Random_Manga,
-                future: DalApi.i.getRandom(category),
-                onData: _onGetId,
-                context: context,
-              ),
-              category,
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      padding: const EdgeInsets.symmetric(horizontal: horizPadding),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          _randomButton(
+            S.current.Random,
+            Colors.green,
+            Color.fromARGB(255, 43, 49, 43),
+            Icons.shuffle,
+            () => openFutureAndNavigate<int?>(
+              text: isAnime
+                  ? S.current.Loading_Random_Anime
+                  : S.current.Loading_Random_Manga,
+              future: DalApi.i.getRandom(category),
+              onData: _onGetId,
+              context: context,
             ),
-            SB.w30,
-            Column(
-              children: [
-                Expanded(
-                  child: _randomButton(
-                    isAnime ? S.current.Plan_To_Watch : S.current.Plan_To_Read,
-                    Colors.orange,
-                    Color.fromARGB(255, 98, 59, 0),
-                    Icons.history,
-                    () => _openRandomWithStatus(
-                        isAnime ? MyStatus.planToWatch : MyStatus.planToRead),
-                    S.current.Random,
-                  ),
-                ),
-                SB.h20,
-                Expanded(
-                    child: _randomButton(
-                  isAnime ? S.current.Watching : S.current.Reading,
-                  Colors.amber,
-                  Color.fromARGB(255, 126, 94, 0),
-                  isAnime ? Icons.tv : Icons.book,
-                  () => _openRandomWithStatus(
-                      isAnime ? MyStatus.watching : MyStatus.reading),
-                  S.current.Random,
-                )),
-              ],
-            )
-          ],
-        ),
+          ),
+          SB.w10,
+          _randomButton(
+            isAnime ? S.current.Watching : S.current.Reading,
+            Colors.amber,
+            Color.fromARGB(255, 126, 94, 0),
+            isAnime ? Icons.tv : Icons.book,
+            () => _openRandomWithStatus(
+                isAnime ? MyStatus.watching : MyStatus.reading),
+          ),
+          SB.w10,
+          _randomButton(
+            isAnime ? S.current.Plan_To_Watch : S.current.Plan_To_Read,
+            Colors.orange,
+            Color.fromARGB(255, 98, 59, 0),
+            Icons.history,
+            () => _openRandomWithStatus(
+                isAnime ? MyStatus.planToWatch : MyStatus.planToRead),
+          ),
+        ],
       ),
     );
   }
@@ -476,59 +464,32 @@ class _ExplorePageState extends State<ExplorePage> {
     }
   }
 
-  Container _randomButton(
+  Widget _randomButton(
     String text,
     Color iconColor,
     Color overlayColor,
     IconData iconData,
     VoidCallback onPressed,
-    String secondText,
   ) {
-    return Container(
-      width: 160,
-      child: ShadowButton(
-        onPressed: onPressed,
-        elevation: 12.0,
-        overlayColor: overlayColor,
-        shape: RoundedRectangleBorder(borderRadius: borderRadius),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Icon(iconData, size: 26, color: iconColor),
-            SB.w10,
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SB.h5,
-                  Expanded(
-                    child: Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Text(
-                        text,
-                        overflow: TextOverflow.ellipsis,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 13),
-                      ),
-                    ),
-                  ),
-                  SB.h5,
-                  Expanded(
-                    child: Align(
-                      alignment: Alignment.topCenter,
-                      child: Text(
-                        secondText.standardize() ?? '',
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(fontSize: 10),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            )
-          ],
-        ),
+    return ShadowButton(
+      onPressed: onPressed,
+      elevation: 12.0,
+      overlayColor: overlayColor,
+      shape: RoundedRectangleBorder(borderRadius: borderRadius),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Icon(iconData, size: 26, color: iconColor),
+          SB.w10,
+          Text(
+            text,
+            overflow: TextOverflow.ellipsis,
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 13),
+          ),
+        ],
       ),
     );
   }
@@ -547,7 +508,8 @@ class _ExplorePageState extends State<ExplorePage> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(section.title, style: Theme.of(context).textTheme.titleLarge),
+              Text(section.title,
+                  style: Theme.of(context).textTheme.titleLarge),
               if (section.onViewAll != null) ...[
                 Expanded(child: SB.z),
                 Padding(
