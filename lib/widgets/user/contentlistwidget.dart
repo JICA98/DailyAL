@@ -270,17 +270,23 @@ Widget buildBaseNodePageItem(
   bool updateCacheOnEdit = false,
   bool showTime = false,
 }) {
-  if (displayType == DisplayType.list_vert) {
+  Widget fromItem(int index, BaseNode node, [HomePageTileSize? tileSize]) {
     return _baseBaseNode(
       category,
-      item.rowItems[0],
+      node,
       index,
       displayType,
       showEdit: showEdit,
+      homePageTileSize: tileSize,
       displaySubType: displaySubType,
+      gridHeight: gridHeight,
       updateCacheOnEdit: updateCacheOnEdit,
       showTime: showTime,
     );
+  }
+
+  if (displayType == DisplayType.list_vert) {
+    return fromItem(index, item.rowItems.first);
   } else {
     homePageTileSize = _axisTileSizeMap[gridAxisCount];
     return SizedBox(
@@ -291,20 +297,8 @@ Widget buildBaseNodePageItem(
           children: item.rowItems
               .asMap()
               .entries
-              .map((e) => Expanded(
-                    child: _baseBaseNode(
-                      category,
-                      e.value,
-                      e.key,
-                      displayType,
-                      showEdit: showEdit,
-                      homePageTileSize: homePageTileSize,
-                      displaySubType: displaySubType,
-                      gridHeight: gridHeight,
-                      updateCacheOnEdit: updateCacheOnEdit,
-                      showTime: showTime,
-                    ),
-                  ))
+              .map((e) =>
+                  Expanded(child: fromItem(e.key, e.value, homePageTileSize)))
               .toList(),
         ),
       ),
@@ -312,17 +306,44 @@ Widget buildBaseNodePageItem(
   }
 }
 
+Widget horizontalList({
+  required String category,
+  required List<BaseNode> items,
+  double? height,
+  bool showTime = false,
+}) {
+  return ContentListWithDisplayType(
+    category: category,
+    items: items,
+    showTime: showTime,
+    sortFilterDisplay: SortFilterDisplay(
+      sort: SortOption(name: '_', value: '_'),
+      displayOption: DisplayOption(
+        displayType: DisplayType.list_horiz,
+        displaySubType: DisplaySubType.compact,
+        gridHeight: height ??
+            tileMap.tryAt(user.pref.homePageTileSize)!.containerHeight,
+        gridCrossAxisCount: 1,
+      ),
+      filterOutputs: {},
+    ),
+    tileSize: user.pref.homePageTileSize,
+  );
+}
+
 class ContentListWithDisplayType extends StatelessWidget {
   final String category;
   final List<BaseNode> items;
   final SortFilterDisplay sortFilterDisplay;
   final bool showTime;
+  final HomePageTileSize? tileSize;
   const ContentListWithDisplayType({
     super.key,
     required this.category,
     required this.items,
     required this.sortFilterDisplay,
     this.showTime = false,
+    this.tileSize,
   });
 
   @override
@@ -332,29 +353,50 @@ class ContentListWithDisplayType extends StatelessWidget {
     final gridAxisCount = sortFilterDisplay.displayOption.gridCrossAxisCount;
     final gridHeight = sortFilterDisplay.displayOption.gridHeight;
     final displaySubType = sortFilterDisplay.displayOption.displaySubType;
+    final isHoriz =
+        sortFilterDisplay.displayOption.displayType == DisplayType.list_horiz;
 
     if (displayType == DisplayType.list_vert) {
       pageItems = items.map((e) => PageItem([e])).toList();
     } else {
       pageItems = items.chunked(gridAxisCount).map((e) => PageItem(e)).toList();
     }
-    return SliverList.list(
-      children: pageItems
-          .mapIndexed(
-            (index, item) => buildBaseNodePageItem(
-              category,
-              item,
-              index,
-              displayType,
-              gridAxisCount: gridAxisCount,
-              gridHeight: gridHeight,
-              displaySubType: displaySubType,
-              homePageTileSize: _axisTileSizeMap[gridAxisCount],
-              updateCacheOnEdit: true,
-              showTime: showTime,
-            ),
-          )
-          .toList(),
+    Widget buildItem(int index, PageItem<BaseNode> item) {
+      return conditional(
+        on: isHoriz,
+        parent: (child) => SizedBox(
+          width: gridHeight * 2 / 3,
+          child: child,
+        ),
+        child: buildBaseNodePageItem(
+          category,
+          item,
+          index,
+          displayType,
+          gridAxisCount: gridAxisCount,
+          gridHeight: gridHeight,
+          displaySubType: displaySubType,
+          homePageTileSize: tileSize ?? _axisTileSizeMap[gridAxisCount],
+          updateCacheOnEdit: true,
+          showTime: showTime,
+        ),
+      );
+    }
+
+    if (isHoriz) {
+      return Container(
+        height: gridHeight,
+        child: ListView.builder(
+          padding: const EdgeInsets.symmetric(horizontal: 15),
+          scrollDirection: Axis.horizontal,
+          itemCount: pageItems.length,
+          itemBuilder: (context, index) => buildItem(index, pageItems[index]),
+        ),
+      );
+    }
+    return SliverList.builder(
+      itemBuilder: (context, index) => buildItem(index, pageItems[index]),
+      itemCount: pageItems.length,
     );
   }
 }
@@ -905,13 +947,13 @@ class _ContentAllWidgetState extends State<ContentAllWidget>
     final child = Container(
       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
       decoration: BoxDecoration(
-        color: Colors.red,
+        color: Colors.red[700],
         borderRadius: BorderRadius.circular(4),
       ),
       child: Text(
         '${NumberFormat.compact().format(epsDifference)}',
         style: GoogleFonts.roboto(
-          fontSize: 13,
+          fontSize: 10,
           color: Colors.white,
         ),
       ),
@@ -924,7 +966,7 @@ class _ContentAllWidgetState extends State<ContentAllWidget>
       );
     } else {
       return Positioned(
-        top: 7,
+        top: widget.showTime ? 22 : 7,
         right: 3,
         child: child,
       );

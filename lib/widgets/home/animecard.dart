@@ -117,26 +117,10 @@ class AnimeGridCard extends StatelessWidget {
             conditional(
               on: gridHeight != null,
               parent: (child) => Expanded(child: child),
-              child: _buildImage(context, nodeTitle),
+              child: _buildImage(context, nodeTitle, time),
             ),
             if (isEditable) _comfortableEdit(context),
             if (showText) _textWidget(nodeTitle),
-            if (time != null)
-              Container(
-                width: width,
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 5),
-                  child: Text(
-                    time,
-                    textAlign:
-                        user.pref.isRtl ? TextAlign.right : TextAlign.left,
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodySmall
-                        ?.copyWith(fontSize: 11),
-                  ),
-                ),
-              ),
             if (showGenres && (node is AnimeDetailed || node is MangaDetailed))
               genreWidget(context),
             if (gridHeight != null) SB.h5,
@@ -146,17 +130,17 @@ class AnimeGridCard extends StatelessWidget {
     );
   }
 
-  Widget _buildImage(BuildContext context, String nodeTitle) {
+  Widget _buildImage(BuildContext context, String nodeTitle, String? time) {
     if (aspectRatio != null)
       return AspectRatio(
         aspectRatio: aspectRatio!,
-        child: cardWidget(context, nodeTitle, borderRadius: borderRadius),
+        child: cardWidget(context, nodeTitle, borderRadius: borderRadius, time: time),
       );
     else
       return Container(
         height: gridHeight != null ? null : height,
         width: gridHeight != null ? null : width,
-        child: cardWidget(context, nodeTitle, borderRadius: borderRadius),
+        child: cardWidget(context, nodeTitle, borderRadius: borderRadius, time: time),
       );
   }
 
@@ -384,10 +368,10 @@ class AnimeGridCard extends StatelessWidget {
           if (_compact) ...[
             _blackBGforText(borderRadius),
             _editAndText(context, nodeTitle, borderRadius, myListStatus),
-            if (time != null) _timeCard(time),
             _episodeWatchProgressBar(myListStatus),
-            _memberCountMeanScore(),
+            _memberCountMeanScore(time),
           ],
+          if (time != null) _timeCard(time),
           if (numRecommendations != null) _recomWidget(context, borderRadius),
           if (addtionalWidget != null && !_coverOnly) addtionalWidget!,
         ],
@@ -417,14 +401,14 @@ class AnimeGridCard extends StatelessWidget {
     );
   }
 
-  Widget _memberCountMeanScore() {
+  Widget _memberCountMeanScore(String? time) {
     if (showMemberCount && (node is AnimeDetailed || node is MangaDetailed)) {
       final content = node as dynamic;
       final int? memberCount = content.numListUsers;
       final double? meanScore = content.mean;
       if (memberCount == null && meanScore == null) return SB.z;
       return Positioned(
-        top: 7,
+        top: time != null ? 22 : 7,
         left: 5,
         child: Container(
           decoration: BoxDecoration(
@@ -566,7 +550,7 @@ class AnimeGridCard extends StatelessWidget {
           child: AutoSizeText(
             time,
             textAlign: TextAlign.center,
-            maxFontSize: 12.0,
+            maxFontSize: 10.0,
             minFontSize: 7.0,
             style: TextStyle(color: Colors.white),
           ),

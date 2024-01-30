@@ -6,6 +6,7 @@ import 'package:dailyanimelist/main.dart';
 import 'package:dailyanimelist/screens/contentdetailedscreen.dart';
 import 'package:dailyanimelist/screens/generalsearchscreen.dart';
 import 'package:dailyanimelist/screens/plainscreen.dart';
+import 'package:dailyanimelist/user/hompagepref.dart';
 import 'package:dailyanimelist/widgets/custombutton.dart';
 import 'package:dailyanimelist/widgets/customfuture.dart';
 import 'package:dailyanimelist/widgets/home/animecard.dart';
@@ -264,11 +265,11 @@ class _WeeklyAnimeWidgetState extends State<WeeklyAnimeWidget> {
   Widget _handleHorizontalList(List<List<BaseNode>> schedule) {
     return CustomScrollView(
       slivers: [
+        SB.lh20,
         for (int weekIndex = 0; weekIndex < schedule.length; ++weekIndex) ...[
           if (nullOrEmpty(schedule[weekIndex]))
             SB.lz
           else ...[
-            SB.lh20,
             SliverWrapper(
               Padding(
                 padding:
@@ -278,31 +279,10 @@ class _WeeklyAnimeWidgetState extends State<WeeklyAnimeWidget> {
             ),
             SB.lh20,
             SliverToBoxAdapter(
-              child: Container(
-                height: 255,
-                child: ListView.builder(
-                  padding: EdgeInsets.symmetric(horizontal: 15),
-                  itemBuilder: (_, animeIndex) {
-                    var node = schedule[weekIndex][animeIndex];
-                    return AnimeGridCard(
-                      height: 170,
-                      width: 150,
-                      showEdit: true,
-                      showTime: true,
-                      showCardBar: true,
-                      node: node.content!,
-                      updateCache: true,
-                      onTap: () => navigateTo(
-                          context,
-                          ContentDetailedScreen(
-                            node: node.content!,
-                            id: node.content!.id,
-                          )),
-                    );
-                  },
-                  itemCount: schedule[weekIndex].length,
-                  scrollDirection: Axis.horizontal,
-                ),
+              child: horizontalList(
+                category: 'anime',
+                items: schedule[weekIndex],
+                showTime: true,
               ),
             ),
           ],
