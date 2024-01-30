@@ -2,12 +2,10 @@ import 'package:dailyanimelist/api/credmal.dart';
 import 'package:dailyanimelist/api/dalapi.dart';
 import 'package:dailyanimelist/constant.dart';
 import 'package:dailyanimelist/generated/l10n.dart';
-import 'package:dailyanimelist/main.dart';
 import 'package:dailyanimelist/screens/contentdetailedscreen.dart';
 import 'package:dailyanimelist/widgets/avatarwidget.dart';
 import 'package:dailyanimelist/widgets/custombutton.dart';
 import 'package:dailyanimelist/widgets/customfuture.dart';
-import 'package:dailyanimelist/widgets/home/animecard.dart';
 import 'package:dailyanimelist/widgets/slivers.dart';
 import 'package:dailyanimelist/widgets/translator.dart';
 import 'package:dailyanimelist/widgets/user/contentlistwidget.dart';
@@ -25,35 +23,6 @@ class RecommendedAnimeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Container(
-      height: 220,
-      child: ListView.builder(
-        itemCount: recommAnime.length,
-        scrollDirection: Axis.horizontal,
-        padding: EdgeInsets.symmetric(horizontal: horizPadding + 10),
-        itemBuilder: ((context, i) {
-          return Padding(
-            padding: const EdgeInsets.fromLTRB(3, 6, 3, 3),
-            child: AnimeGridCard(
-              node: recommAnime[i].recommNode!,
-              numRecommendations: recommAnime[i].numRecommendations,
-              updateCache: true,
-              height: 150,
-              width: 140,
-              smallHeight: 25,
-              showCardBar: true,
-              showEdit: true,
-              onTap: () => navigateTo(
-                  context,
-                  ContentDetailedScreen(
-                    node: recommAnime[i].recommNode,
-                    category: category,
-                  )),
-            ),
-          );
-        }),
-      ),
-    );
     return horizontalList(
       category: category,
       padding: EdgeInsets.symmetric(horizontal: horizPadding + 5.0),
