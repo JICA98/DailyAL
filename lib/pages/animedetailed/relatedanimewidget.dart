@@ -41,11 +41,12 @@ class _RelatedAnimeWidgetState extends State<RelatedAnimeWidget>
     isHoriz = widget.displayType == DisplayType.list_horiz;
     if (widget.relatedAnimeList != null) {
       widget.relatedAnimeList.forEach((relatedAnime) {
-        var widgetList = animeWidgets[relatedAnime.relationTypeFormatted] ?? [];
-        widgetList.add(BaseNode(
+        final baseNodes =
+            animeWidgets[relatedAnime.relationTypeFormatted] ?? [];
+        baseNodes.add(BaseNode(
             content: relatedAnime.relatedNode,
             myListStatus: relatedAnime.relatedNode?.myListStatus));
-        animeWidgets[relatedAnime.relationTypeFormatted!] = widgetList;
+        animeWidgets[relatedAnime.relationTypeFormatted!] = baseNodes;
       });
     }
   }
@@ -134,9 +135,9 @@ class _RelatedAnimeWidgetState extends State<RelatedAnimeWidget>
       children: [
         _relationTypeHeader,
         SB.h20,
-        SizedBox(
-          height: 210,
-          child: _contentListWidget(nodeList),
+        horizontalList(
+          category: widget.category,
+          items: nodeList ?? [],
         ),
       ],
     );

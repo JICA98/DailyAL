@@ -311,11 +311,13 @@ Widget horizontalList({
   required List<BaseNode> items,
   double? height,
   bool showTime = false,
+  EdgeInsetsGeometry? padding,
 }) {
   return ContentListWithDisplayType(
     category: category,
     items: items,
     showTime: showTime,
+    padding: padding,
     sortFilterDisplay: SortFilterDisplay(
       sort: SortOption(name: '_', value: '_'),
       displayOption: DisplayOption(
@@ -337,6 +339,7 @@ class ContentListWithDisplayType extends StatelessWidget {
   final SortFilterDisplay sortFilterDisplay;
   final bool showTime;
   final HomePageTileSize? tileSize;
+  final EdgeInsetsGeometry? padding;
   const ContentListWithDisplayType({
     super.key,
     required this.category,
@@ -344,6 +347,7 @@ class ContentListWithDisplayType extends StatelessWidget {
     required this.sortFilterDisplay,
     this.showTime = false,
     this.tileSize,
+    this.padding,
   });
 
   @override
@@ -387,7 +391,7 @@ class ContentListWithDisplayType extends StatelessWidget {
       return Container(
         height: gridHeight,
         child: ListView.builder(
-          padding: const EdgeInsets.symmetric(horizontal: 15),
+          padding: padding ?? const EdgeInsets.symmetric(horizontal: 15),
           scrollDirection: Axis.horizontal,
           itemCount: pageItems.length,
           itemBuilder: (context, index) => buildItem(index, pageItems[index]),
