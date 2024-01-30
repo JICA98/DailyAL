@@ -979,15 +979,19 @@ class _ContentAllWidgetState extends State<ContentAllWidget>
 
   Widget get genreWidget {
     final detailed = widget.dynContent?.content;
-    if ((detailed is AnimeDetailed || detailed is MangaDetailed) &&
-        !nullOrEmpty(detailed.genres)) {
+    if ((detailed is AnimeDetailed || detailed is MangaDetailed)) {
+      final genres = detailed.genres ?? <MalGenre>[];
       final genreMap =
           widget.category.equals("anime") ? Mal.animeGenres : Mal.mangaGenres;
-      final content = detailed.genres
+      final content = genres
           .map((e) => genreMap[e.id]?.replaceAll("_", " ") ?? e.name)
           .join(", ");
-      final int length = detailed.genres.length;
+      final int length = genres.length;
       final mediaText = mediaTypeText;
+      final String genreText = genres
+          .getRange(0, min(3, length))
+          .map((e) => genreMap[e.id]?.replaceAll("_", " ") ?? e.name)
+          .join(", ");
       return Container(
         // width: width,
         child: Padding(
@@ -996,12 +1000,7 @@ class _ContentAllWidgetState extends State<ContentAllWidget>
             message: content,
             padding: EdgeInsets.zero,
             child: title(
-                '${mediaText.isBlank ? '' : (mediaText + " · ")}' +
-                    detailed.genres
-                        .getRange(0, min(3, length))
-                        .map((e) =>
-                            genreMap[e.id]?.replaceAll("_", " ") ?? e.name)
-                        .join(", "),
+                '$mediaText${mediaText.isNotBlank && genreText.isNotBlank ? " · " : ''}$genreText',
                 textOverflow: TextOverflow.ellipsis,
                 align: user.pref.isRtl ? TextAlign.right : TextAlign.left,
                 fontSize: 11,

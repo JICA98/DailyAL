@@ -640,7 +640,11 @@ class HtmlParsers {
         String? category;
         for (var j = 0; j < items.length; j++) {
           var item = items.elementAt(j);
-          var node = AddtionalNode(title: 'Unknown');
+          dynamic id0, title0 = 'Unknown', mainPicture0, additional0;
+          int? numEpisodes0, numListUsers0;
+          String? mediaType0;
+          double? mean0;
+          dynamic node0;
           var picEleList = item.getElementsByClassName("picSurround") ?? [];
 
           if (picEleList.isNotEmpty) {
@@ -652,15 +656,13 @@ class HtmlParsers {
               if (href != null) {
                 category ??= getCategoryAllSearch(href.toString());
                 if (category!.equals("news")) {
-                  node.id =
-                      int.tryParse(href.substring(href.indexOf("news/") + 5));
+                  id0 = int.tryParse(href.substring(href.indexOf("news/") + 5));
                 } else if (["forum", "club"].contains(category)) {
-                  node.id =
-                      int.tryParse(href.substring(href.lastIndexOf("=") + 1));
+                  id0 = int.tryParse(href.substring(href.lastIndexOf("=") + 1));
                 } else {
                   href = href.substring(0, href.lastIndexOf("/"));
                   href = href.substring(href.lastIndexOf("/") + 1);
-                  node.id = int.tryParse(href);
+                  id0 = int.tryParse(href);
                 }
               }
               var imgList = picEle.getElementsByTagName("img") ?? [];
@@ -673,7 +675,7 @@ class HtmlParsers {
                     .attributes[imgPpty]
                     ?.replaceAll("r/100x140/", '')
                     .replaceAll("r/50x50/", '');
-                node.mainPicture = Picture(large: img, medium: img);
+                mainPicture0 = Picture(large: img, medium: img);
               }
             }
           }
@@ -685,15 +687,53 @@ class HtmlParsers {
 
             if (aEleList.isNotEmpty) {
               var anchor = aEleList.first;
-              node.title = anchor.text;
+              title0 = anchor.text;
             }
             var pt4List = info.getElementsByClassName("fn-grey4") ?? [];
             if (pt4List.isNotEmpty) {
-              node.additional = pt4List.first.text.trim();
+              var infoEle = pt4List.first;
+              if (['anime', 'manga'].contains(category)) {
+                final mediaType = infoEle.querySelector('a');
+                if (mediaType != null) {
+                  mediaType0 = mediaType.text.trim();
+                  mediaType.remove();
+                  final infoText = infoEle.text.trim();
+                  var split = infoText.split('\n');
+                  if (split.length == 3) {
+                    numEpisodes0 = int.tryParse(
+                        split[0].replaceAll(RegExp(r'\D'), '').trim());
+                    mean0 = double.tryParse(
+                        split[1].replaceAll('Scored', '').trim());
+                    numListUsers0 = int.tryParse(
+                        split[2].replaceAll(RegExp(r'\D'), '').trim());
+                  }
+                }
+              } else {
+                additional0 = infoEle.text.trim();
+              }
             }
           }
 
-          data.add(BaseNode(content: node));
+          if (['anime', 'manga'].contains(category)) {
+            node0 = AnimeDetailed(
+              id: id0,
+              mainPicture: mainPicture0,
+              title: title0,
+              mediaType: mediaType0,
+              numEpisodes: numEpisodes0,
+              numListUsers: numListUsers0,
+              mean: mean0,
+            );
+          } else {
+            node0 = AddtionalNode(
+              id: id0,
+              mainPicture: mainPicture0,
+              title: title0,
+              additional: additional0,
+            );
+          }
+
+          data.add(BaseNode(content: node0));
         }
         if (category != null &&
             allTypes.contains(category) &&
