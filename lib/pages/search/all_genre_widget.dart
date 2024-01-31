@@ -4,6 +4,7 @@ import 'package:dailyanimelist/api/dalapi.dart';
 import 'package:dailyanimelist/constant.dart';
 import 'package:dailyanimelist/enums.dart';
 import 'package:dailyanimelist/extensions.dart';
+import 'package:dailyanimelist/generated/maps.dart';
 import 'package:dailyanimelist/main.dart';
 import 'package:dailyanimelist/pages/search/allrankingwidget.dart';
 import 'package:dailyanimelist/widgets/custombutton.dart';
@@ -13,6 +14,7 @@ import 'package:dailyanimelist/widgets/home/animecard.dart';
 import 'package:dailyanimelist/widgets/loading/loadingcard.dart';
 import 'package:dailyanimelist/widgets/shimmecolor.dart';
 import 'package:dailyanimelist/widgets/slivers.dart';
+import 'package:dailyanimelist/widgets/translator.dart';
 import 'package:dal_commons/commons.dart';
 import 'package:flutter/material.dart';
 
@@ -152,6 +154,11 @@ class AllGenreWidget extends StatelessWidget {
   }
 
   Widget _buildGenreCard(BuildContext context, MalGenre g, String category) {
+    String name = convertGenre(g, category).replaceAll('_', ' ');
+    final map =
+        category.equals('anime') ? genreAnimeDescMap : genreMangaDescMap;
+    final id = '${g.id}';
+    final count = '${userCountFormat.format(g.count ?? 0)}';
     return imageTextCard(
         context: context,
         bottomPadding: EdgeInsets.zero,
@@ -165,7 +172,7 @@ class AllGenreWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             AutoSizeText(
-              convertGenre(g, category).replaceAll('_', ' '),
+              name,
               maxLines: 1,
               style: Theme.of(context)
                   .textTheme
@@ -177,15 +184,37 @@ class AllGenreWidget extends StatelessWidget {
             SizedBox(
               height: 25,
               child: ShadowButton(
-                onPressed: () {},
-                padding: EdgeInsets.zero,
-                child: Text(
-                  '${userCountFormat.format(g.count ?? 0)}',
-                  style: Theme.of(context)
-                      .textTheme
-                      .labelSmall
-                      ?.copyWith(fontSize: 9),
-                ),
+                onPressed: () {
+                  if (map.containsKey(id)) {
+                    showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        title: Text(name),
+                        content: SingleChildScrollView(
+                            child: TranslaterWidget(
+                              reversed: true,
+                          content: map[id] ?? '',
+                          done: (p0) => Text(p0 ?? ''),
+                        )),
+                        actions: [
+                          TextButton(
+                              onPressed: () => Navigator.pop(context),
+                              child: Text('Close'))
+                        ],
+                      ),
+                    );
+                  }
+                },
+                padding: EdgeInsets.symmetric(horizontal: 5.0),
+                child: !map.containsKey(id)
+                    ? Text(count)
+                    : iconAndText(
+                        Icons.info_outline,
+                        count,
+                        mainAxisSize: MainAxisSize.min,
+                        fontSize: 14,
+                        iconSize: 14,
+                      ),
               ),
             ),
           ],
