@@ -6,6 +6,8 @@ import 'package:dailyanimelist/constant.dart';
 import 'package:dailyanimelist/generated/l10n.dart';
 import 'package:dailyanimelist/main.dart';
 import 'package:dailyanimelist/pages/home/newswidget.dart';
+import 'package:dailyanimelist/pages/search/all_genre_widget.dart';
+import 'package:dailyanimelist/pages/search/allrankingwidget.dart';
 import 'package:dailyanimelist/screens/generalsearchscreen.dart';
 import 'package:dailyanimelist/user/hompagepref.dart';
 import 'package:dailyanimelist/user/user.dart';
@@ -38,7 +40,7 @@ class _HomePageState extends State<HomePage> {
   ScrollController scrollController = new ScrollController();
   ScrollController bodyHeaderController = new ScrollController();
   bool transition = false;
-  var topHeaders = <String, GeneralSearchScreen>{};
+  var topHeaders = <String, dynamic>{};
   late String refKey;
 
   @override
@@ -95,6 +97,11 @@ class _HomePageState extends State<HomePage> {
 
   initLangs() {
     topHeaders = {
+      S.of(context).Categories: AllRankingWidget(
+        category: 'anime',
+        fullScreen: true,
+      ),
+      S.of(context).Genres: _showGenresModal,
       S.of(context).top_anime: GeneralSearchScreen(
         searchQuery: "#all",
         autoFocus: false,
@@ -122,6 +129,34 @@ class _HomePageState extends State<HomePage> {
       )
     };
   }
+
+  _showGenresModal() => showBottomSheet(
+      context: context,
+      builder: (_) => Material(
+            child: SizedBox(
+              height: 260.0,
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(S.of(context).Genres),
+                        IconButton(
+                          icon: Icon(Icons.close),
+                          onPressed: () => Navigator.pop(context),
+                        )
+                      ],
+                    ),
+                  ),
+                  AllGenreWidget(
+                    category: 'anime',
+                  ),
+                ],
+              ),
+            ),
+          ));
 
   @override
   Widget build(BuildContext context) {
@@ -194,8 +229,14 @@ class _HomePageState extends State<HomePage> {
                           key,
                           style: Theme.of(context).textTheme.bodySmall,
                         ),
-                        onPressed: () => gotoPage(
-                            context: context, newPage: topHeaders[key]!),
+                        onPressed: () {
+                          var value = topHeaders[key]!;
+                          if (value is Widget) {
+                            gotoPage(context: context, newPage: value);
+                          } else if (value is Function) {
+                            value();
+                          }
+                        },
                         backgroundColor: Color(c.scrollOffset > 0
                                 ? Theme.of(context).cardColor.value
                                 : Theme.of(context).cardColor.value)

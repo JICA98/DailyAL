@@ -91,7 +91,7 @@ class AllGenreWidget extends StatelessWidget {
                   imageUrl:
                       '${CredMal.dalWeb}assets/genres/${e.value.replaceAll(' ', '_').toLowerCase()}_$category.webp',
                   text: e.value,
-                ),
+      ),
               ),
             )
             .toList(),
@@ -105,8 +105,9 @@ class AllGenreWidget extends StatelessWidget {
     List<MalGenre> genres,
     String category,
   ) {
-    showBottomSheet(
+    showModalBottomSheet(
       context: context,
+      isScrollControlled: true,
       builder: (context) => SizedBox(
         width: double.infinity,
         child: Material(
