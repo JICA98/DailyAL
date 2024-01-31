@@ -1,29 +1,39 @@
-import json
 from bs4 import BeautifulSoup
+import requests
 
-eng_arb = json.load(open("./lib/l10n/intl_en.arb"))
-genre_link = 'https://myanimelist.net/anime/genre/'
-soup = BeautifulSoup(open('./python/web-utils/genre.html').read(), 'html.parser')
-genre_map = {}
-eng_map_arb = {}
-ss_genre_map = ''
-for link in soup.find_all('a', {'class': 'genre-name-link'}):
-    if(link['href'].__contains__(genre_link)):
-        (id, genre) = link['href'].replace(genre_link, '').split('/')
-        genre_map[int(id)] = genre
+def get_id(link: str):
+    return link.split('/')[-2]
 
-# for anime_genre_map
-print(genre_map)
-for (id) in genre_map.keys():
-    genre = genre_map[id]
-    ss_genre_map = ss_genre_map + '{}: S.current.{}, '.format(id, genre)
-    if not eng_arb.__contains__(genre):
-        eng_map_arb[genre] = genre
-print('--------------------------')
-# for eng_map_arb
-print(json.dumps(eng_map_arb))
-print('--------------------------')
-# for eng_map_arb
-print(ss_genre_map)
+def save_image(image_url: str, image_name: str):
+    with open('./web_assets/' + image_name, 'wb') as handle:
+        response = requests.get(image_url, stream=True)
 
+        if not response.ok:
+            print(response)
 
+        for block in response.iter_content(1024):
+            if not block:
+                break
+
+            handle.write(block)
+
+def genre_page(category: str):
+    url = 'https://myanimelist.net/{}.php'.format(category)
+    soup = BeautifulSoup(requests.get(url).text, 'html.parser')
+    ele = soup.select('.genre-link')
+    i = 0
+    for e in ele:
+        a_tags = e.select('a')
+        for a in a_tags:
+            link = a.attrs['href']
+            if link != None:
+                link = 'https://myanimelist.net' + link
+                genre_soup = BeautifulSoup(requests.get(link).text, 'html.parser')
+                image_src = genre_soup.select('.image img')[0].attrs['data-src']
+                print('saving for id: {} and link: {}'.format(get_id(link), image_src))
+                save_image(image_src, 'genres/{}_{}.jpg'.format(get_id(link), category))
+        i+=1
+        if i == 3:
+            break
+    
+# genre_page('anime')
