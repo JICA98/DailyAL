@@ -397,7 +397,7 @@ class _ExplorePageState extends State<ExplorePage> {
   Widget get _randomPickerWidget {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
-      padding: const EdgeInsets.symmetric(horizontal: horizPadding),
+      padding: const EdgeInsets.symmetric(horizontal: horizPadding, vertical: 3.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -470,7 +470,7 @@ class _ExplorePageState extends State<ExplorePage> {
   ) {
     return ShadowButton(
       onPressed: onPressed,
-      elevation: 12.0,
+      elevation: 4.0,
       overlayColor: overlayColor,
       shape: RoundedRectangleBorder(borderRadius: borderRadius),
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),

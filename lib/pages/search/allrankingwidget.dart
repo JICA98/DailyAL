@@ -77,10 +77,11 @@ Widget imageTextCard({
   required String text,
   Widget? child,
   double width = 140.0,
+  EdgeInsetsGeometry? bottomPadding,
 }) {
   return Container(
     width: width,
-    padding: const EdgeInsets.only(bottom: 25),
+    padding: bottomPadding ?? const EdgeInsets.only(bottom: 25),
     child: Material(
       color: Theme.of(context).cardColor,
       borderRadius: borderRadius,

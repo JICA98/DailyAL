@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dailyanimelist/api/credmal.dart';
 import 'package:dailyanimelist/api/dalapi.dart';
 import 'package:dailyanimelist/constant.dart';
@@ -102,7 +103,7 @@ class AllGenreWidget extends StatelessWidget {
     List<MalGenre> genres,
     String category,
   ) {
-    showModalBottomSheet(
+    showBottomSheet(
       context: context,
       builder: (context) => SizedBox(
         width: double.infinity,
@@ -111,56 +112,36 @@ class AllGenreWidget extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             child: CustomScrollView(
               slivers: [
+                SB.lh30,
                 SliverAppBar(
                   title: Text(genreType),
                   pinned: true,
                   automaticallyImplyLeading: false,
                   elevation: 0,
+                  floating: true,
                   actions: [CloseButton()],
                 ),
                 SB.lh20,
-                ...genres
-                    .map((g) => SliverWrapper(
-                          SizedBox(
-                            height: 130.0,
-                            child: imageTextCard(
-                                context: context,
-                                borderRadius: BorderRadius.circular(12.0),
-                                onTap: () => onGenrePress(g, category, context),
-                                imageUrl:
-                                    'https://raw.githubusercontent.com/JICA98/DailyAL/2024.1.3%2B87/web_assets/genres/${g.id}_$category.jpg',
-                                text: '',
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      convertGenre(g, category)
-                                          .replaceAll('_', ' '),
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleLarge?.copyWith(fontSize: 18.0),
-                                    ),
-                                    SB.h5,
-                                    SizedBox(
-                                      height: 30,
-                                      child: ShadowButton(
-                                        onPressed: () {},
-                                        padding: EdgeInsets.zero,
-                                        child: Text(
-                                          '${userCountFormat.format(g.count ?? 0)}',
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .labelSmall
-                                              ?.copyWith(fontSize: 9),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                )),
-                          ),
-                        ))
-                    .toList(),
+                ...genres.chunked(2).map((gL) {
+                  final widgets = gL
+                      .map((g) => Expanded(
+                              child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: _buildGenreCard(context, g, category),
+                          )))
+                      .toList();
+                  if (widgets.length == 1) {
+                    widgets.add(Expanded(child: SB.z));
+                  }
+                  return SliverWrapper(
+                    SizedBox(
+                      height: 130.0,
+                      child: Row(
+                        children: widgets,
+                      ),
+                    ),
+                  );
+                }).toList(),
                 SB.lh40,
               ],
             ),
@@ -168,5 +149,46 @@ class AllGenreWidget extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Widget _buildGenreCard(BuildContext context, MalGenre g, String category) {
+    return imageTextCard(
+        context: context,
+        bottomPadding: EdgeInsets.zero,
+        borderRadius: BorderRadius.circular(12.0),
+        onTap: () => onGenrePress(g, category, context),
+        imageUrl:
+            'https://raw.githubusercontent.com/JICA98/DailyAL/2024.1.3%2B87/web_assets/genres/${g.id}_$category.jpg',
+        text: '',
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            AutoSizeText(
+              convertGenre(g, category).replaceAll('_', ' '),
+              maxLines: 1,
+              style: Theme.of(context)
+                  .textTheme
+                  .titleLarge
+                  ?.copyWith(fontSize: 18.0),
+              textAlign: TextAlign.center,
+            ),
+            SB.h5,
+            SizedBox(
+              height: 25,
+              child: ShadowButton(
+                onPressed: () {},
+                padding: EdgeInsets.zero,
+                child: Text(
+                  '${userCountFormat.format(g.count ?? 0)}',
+                  style: Theme.of(context)
+                      .textTheme
+                      .labelSmall
+                      ?.copyWith(fontSize: 9),
+                ),
+              ),
+            ),
+          ],
+        ));
   }
 }
