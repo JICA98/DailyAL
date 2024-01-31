@@ -648,6 +648,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Notification_settings_warning": MessageLookupByLibrary.simpleMessage(
             "まだあなたのためにスケジュールされている通知のために3日までの警告を受け取るかもしれません。これらの設定はログインしたときにのみ機能します。"),
         "OP_ED": MessageLookupByLibrary.simpleMessage("EDの"),
+        "Ok": MessageLookupByLibrary.simpleMessage("わかりました"),
         "Oldest": MessageLookupByLibrary.simpleMessage("オールド"),
         "On_Hold": MessageLookupByLibrary.simpleMessage("保留"),
         "One_Piece": MessageLookupByLibrary.simpleMessage("ワンピース"),

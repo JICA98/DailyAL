@@ -9200,6 +9200,16 @@ class S {
     );
   }
 
+  /// `ok`
+  String get Ok {
+    return Intl.message(
+      'ok',
+      name: 'Ok',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Published End Date`
   String get publishedEndDate {
     return Intl.message(

@@ -918,5 +918,6 @@
     "Allow_YT_Player_Desc": "Erlauben Sie dem YouTube-Player, Videos in der App abzuspielen",
     "Horizontal_List": "Horizontale Liste",
     "Mal_Under_Maintenance": "MyAnimeList wird gewartet",
-    "Mal_Under_Maintenance_Desc": "MyAnimeList wird gerade gewartet. Bitte versuchen Sie es sp\u00e4ter noch einmal"
+    "Mal_Under_Maintenance_Desc": "MyAnimeList wird gerade gewartet. Bitte versuchen Sie es sp\u00e4ter noch einmal",
+    "Ok": "OK"
 }

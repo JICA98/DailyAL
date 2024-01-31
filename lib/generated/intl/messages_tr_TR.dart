@@ -721,6 +721,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Notification_settings_warning": MessageLookupByLibrary.simpleMessage(
             "Halihazırda sizin için planlanmış olan bildirimler için 3 güne kadar uyarı alabilirsiniz. Lütfen bu ayarların yalnızca oturum açtığınızda çalışacağını unutmayın."),
         "OP_ED": MessageLookupByLibrary.simpleMessage("BİR D"),
+        "Ok": MessageLookupByLibrary.simpleMessage("Tamam"),
         "Oldest": MessageLookupByLibrary.simpleMessage("en yaşlı"),
         "On_Hold": MessageLookupByLibrary.simpleMessage("Beklemede"),
         "One_Piece": MessageLookupByLibrary.simpleMessage("Bir parça"),

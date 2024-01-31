@@ -917,5 +917,6 @@
     "Allow_YT_Player_Desc": "Autoriser le lecteur Youtube \u00e0 lire des vid\u00e9os dans l'application",
     "Horizontal_List": "Liste horizontale",
     "Mal_Under_Maintenance": "MyAnimeList est en maintenance",
-    "Mal_Under_Maintenance_Desc": "MyAnimeList est en maintenance, veuillez r\u00e9essayer plus tard"
+    "Mal_Under_Maintenance_Desc": "MyAnimeList est en maintenance, veuillez r\u00e9essayer plus tard",
+    "Ok": "d'accord"
 }

@@ -651,6 +651,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Notification_settings_warning": MessageLookupByLibrary.simpleMessage(
             "이미 예정된 알림을 위해 최대 3 일 동안 경고를받을 수 있습니다.이 설정은 로그인했을 때만 작동합니다."),
         "OP_ED": MessageLookupByLibrary.simpleMessage("에드에서"),
+        "Ok": MessageLookupByLibrary.simpleMessage("좋아요"),
         "Oldest": MessageLookupByLibrary.simpleMessage("가장 오래된"),
         "On_Hold": MessageLookupByLibrary.simpleMessage("보류에"),
         "One_Piece": MessageLookupByLibrary.simpleMessage("한 조각"),

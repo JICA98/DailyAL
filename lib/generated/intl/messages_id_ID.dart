@@ -729,6 +729,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Notification_settings_warning": MessageLookupByLibrary.simpleMessage(
             "Anda mungkin masih mendapat peringatan untuk hingga 3 hari untuk notifikasi yang sudah dijadwalkan untuk Anda.Harap dicatat bahwa pengaturan ini hanya akan berfungsi ketika Anda telah masuk."),
         "OP_ED": MessageLookupByLibrary.simpleMessage("Satu d"),
+        "Ok": MessageLookupByLibrary.simpleMessage("Oke"),
         "Oldest": MessageLookupByLibrary.simpleMessage("tertua"),
         "On_Hold": MessageLookupByLibrary.simpleMessage("Tertahan"),
         "One_Piece": MessageLookupByLibrary.simpleMessage("Satu potong"),

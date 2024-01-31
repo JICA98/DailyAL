@@ -918,5 +918,6 @@
     "Allow_YT_Player_Desc": "Permitir que o player do YouTube reproduza v\u00eddeos no aplicativo",
     "Horizontal_List": "Lista horizontal",
     "Mal_Under_Maintenance": "MyAnimeList est\u00e1 em manuten\u00e7\u00e3o",
-    "Mal_Under_Maintenance_Desc": "MyAnimeList est\u00e1 em manuten\u00e7\u00e3o, tente novamente mais tarde"
+    "Mal_Under_Maintenance_Desc": "MyAnimeList est\u00e1 em manuten\u00e7\u00e3o, tente novamente mais tarde",
+    "Ok": "OK"
 }

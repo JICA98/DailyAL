@@ -735,6 +735,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Notification_settings_warning": MessageLookupByLibrary.simpleMessage(
             "Вы по-прежнему можете получать оповещения в течение трех дней об уведомлениях, которые уже запланированы для вас. Обратите внимание, что эти настройки будут работать только после входа в систему."),
         "OP_ED": MessageLookupByLibrary.simpleMessage("ОДИН D"),
+        "Ok": MessageLookupByLibrary.simpleMessage("хорошо"),
         "Oldest": MessageLookupByLibrary.simpleMessage("самый старый"),
         "On_Hold": MessageLookupByLibrary.simpleMessage("На удерживании"),
         "One_Piece": MessageLookupByLibrary.simpleMessage("Один кусочек"),

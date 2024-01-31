@@ -72,7 +72,7 @@ class _HomePageState extends State<HomePage> {
                 content: Text(S.current.Mal_Under_Maintenance_Desc),
                 actions: [
                   CupertinoDialogAction(
-                    child: Text('OK'),
+                    child: Text(S.current.Ok),
                     onPressed: () {
                       Navigator.pop(context);
                     },

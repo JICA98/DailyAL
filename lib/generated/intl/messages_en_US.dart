@@ -713,6 +713,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Notification_settings_warning": MessageLookupByLibrary.simpleMessage(
             "You may still get alerts for upto 3 days for the notifications which have already been scheduled for you. Please note that these settings will only work when you have logged in."),
         "OP_ED": MessageLookupByLibrary.simpleMessage("OP ED"),
+        "Ok": MessageLookupByLibrary.simpleMessage("ok"),
         "Oldest": MessageLookupByLibrary.simpleMessage("oldest"),
         "On_Hold": MessageLookupByLibrary.simpleMessage("On Hold"),
         "One_Piece": MessageLookupByLibrary.simpleMessage("One Piece"),
