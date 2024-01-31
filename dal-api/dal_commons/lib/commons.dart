@@ -81,4 +81,5 @@ export './src/model/html/anime/animedetailedhtml.dart';
 export './src/model/html/anime/animelinks.dart';
 export './src/model/html/anime/animereviewhtml.dart';
 export './src/model/jikan/anime_review.dart';
+export './src/model/jikan/jikan_anime.dart';
 export './src/util/pathutils.dart';

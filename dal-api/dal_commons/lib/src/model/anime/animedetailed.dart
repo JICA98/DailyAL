@@ -1,4 +1,3 @@
-
 import 'package:dal_commons/src/model/global/alternatetitles.dart';
 import 'package:dal_commons/src/model/global/node.dart';
 import 'package:dal_commons/src/model/anime/broadcast.dart';
@@ -10,6 +9,7 @@ import 'package:dal_commons/src/model/anime/season.dart';
 import 'package:dal_commons/src/model/anime/animestudio.dart';
 
 import '../global/recommendation.dart';
+import '../jikan/jikan_anime.dart';
 import 'animestatistics.dart';
 import 'detailedmixin.dart';
 import 'themesong.dart';
@@ -60,7 +60,7 @@ class AnimeDetailed extends Node with AnimeDetailedMixin {
     this.openingSongs,
     this.endingSongs,
     int? id,
-    Picture ?mainPicture,
+    Picture? mainPicture,
     String? title,
     bool? fromCache,
     String? url,
@@ -209,5 +209,57 @@ class AnimeDetailed extends Node with AnimeDetailedMixin {
       "studios": studios ?? [],
       "statistics": statistics?.toJson(),
     };
+  }
+
+  static AnimeDetailed fromJikanJson(JikanAnime j) {
+    return AnimeDetailed(
+      id: j.malId,
+      mainPicture: Picture(
+        large: j.images?['jpg']?.largeJImageUrl,
+        medium: j.images?['jpg']?.imageUrl,
+      ),
+      broadcast: Broadcast(
+        dayOfTheWeek: j.broadcast?.day?.toLowerCase(),
+        startTime: j.broadcast?.time,
+      ),
+      averageEpisodeDuration:
+          int.tryParse(j.duration?.replaceAll(RegExp(r'\D'), '') ?? ''),
+      numEpisodes: j.episodes,
+      genres: [
+        ..._getGenres(j.genres),
+        ..._getGenres(j.themes),
+        ..._getGenres(j.explicitGenres),
+        ..._getGenres(j.demographics),
+      ],
+      numListUsers: j.members,
+      popularity: j.popularity,
+      rank: j.rank,
+      rating: j.rating,
+      mean: j.score,
+      numScoringUsers: j.scoredBy,
+      startSeason: Season(
+        year: j.year,
+        season: j.season,
+      ),
+      status: j.status,
+      studios: j.studios?.map((e) => AnimeStudio(id: e.malId, name: e.name)).toList(),
+      title: j.title,
+      alternateTitles: AlternateTitles(
+        en: j.titleEnglish,
+        ja: j.titleJapanese,
+        synonyms: j.titleSynonyms,
+      ),
+      mediaType: j.type,
+    );
+  }
+
+  static List<MalGenre> _getGenres(List<JDemographic>? demographics) {
+    return demographics
+            ?.map((e) => MalGenre(
+                  id: e.malId,
+                  name: e.name,
+                ))
+            .toList() ??
+        [];
   }
 }

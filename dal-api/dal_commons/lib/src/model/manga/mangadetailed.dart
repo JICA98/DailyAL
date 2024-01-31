@@ -169,4 +169,8 @@ class MangaDetailed extends Node {
       "recommendations": recommendations ?? [],
     };
   }
+
+  static Node fromJikanJson(Map<String, dynamic> e) {
+    return Node();
+  }
 }

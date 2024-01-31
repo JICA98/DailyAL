@@ -91,7 +91,7 @@ class AllGenreWidget extends StatelessWidget {
                   imageUrl:
                       '${CredMal.dalWeb}assets/genres/${e.value.replaceAll(' ', '_').toLowerCase()}_$category.webp',
                   text: e.value,
-      ),
+                ),
               ),
             )
             .toList(),
@@ -193,7 +193,7 @@ class AllGenreWidget extends StatelessWidget {
                         title: Text(name),
                         content: SingleChildScrollView(
                             child: TranslaterWidget(
-                              reversed: true,
+                          reversed: true,
                           content: map[id] ?? '',
                           done: (p0) => Text(p0 ?? ''),
                         )),
@@ -220,5 +220,18 @@ class AllGenreWidget extends StatelessWidget {
             ),
           ],
         ));
+  }
+}
+
+class GenreSearchScreen extends StatelessWidget {
+  final MalGenre genre;
+  const GenreSearchScreen({
+    super.key,
+    required this.genre,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
   }
 }

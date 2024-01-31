@@ -66,11 +66,13 @@ class AllRankingWidget extends StatelessWidget {
                           final type = rankingTypeMap[e];
                           return Expanded(
                             child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 5),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 5),
                               child: imageTextCard(
                                 context: context,
                                 borderRadius: borderRadius,
-                                bottomPadding: EdgeInsets.symmetric(vertical: 5.0),
+                                bottomPadding:
+                                    EdgeInsets.symmetric(vertical: 5.0),
                                 onTap: () => _onCategoryTap(type, context),
                                 imageUrl:
                                     '${CredMal.dalWeb}assets/${type}_$category.jpg',
