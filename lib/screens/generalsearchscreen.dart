@@ -12,6 +12,7 @@ import 'package:dailyanimelist/pages/animedetailed/intereststackwidget.dart';
 import 'package:dailyanimelist/pages/search/allrankingwidget.dart';
 import 'package:dailyanimelist/pages/search/seasonalwidget.dart';
 import 'package:dailyanimelist/screens/contentdetailedscreen.dart';
+import 'package:dailyanimelist/screens/plainscreen.dart';
 import 'package:dailyanimelist/user/user.dart';
 import 'package:dailyanimelist/util/streamutils.dart';
 import 'package:dailyanimelist/widgets/club/clublistwidget.dart';
@@ -74,7 +75,7 @@ class GeneralSearchScreen extends StatefulWidget {
     this.category = "all",
     this.showBackButton = false,
     this.filterOutputs,
-    this.exclusiveScreen = true,
+    this.exclusiveScreen = false,
     this.autoFocus = true,
   });
 
@@ -544,6 +545,21 @@ class _GeneralSearchScreenState extends State<GeneralSearchScreen>
       return Scaffold(
         appBar: AppBar(
           title: buildListHeader(),
+          actions: [
+            IconButton(
+              onPressed: () {
+                gotoPage(
+                  context: context,
+                  newPage: GeneralSearchScreen(
+                    filterOutputs: filterOutputs,
+                    category: category,
+                    autoFocus: false,
+                  ),
+                );
+              },
+              icon: Icon(Icons.search),
+            ),
+          ],
         ),
         body: _onSearchBuild(context, AsyncSnapshot.nothing()),
       );

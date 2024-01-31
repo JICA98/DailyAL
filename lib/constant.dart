@@ -193,6 +193,7 @@ void onGenrePress(MalGenre e, String category, BuildContext context) {
       newPage: GeneralSearchScreen(
         category: category,
         autoFocus: false,
+        exclusiveScreen: true,
         filterOutputs: {'genres': filter},
         // searchQuery:
         //     "#${getGenre(e, context, widget.category).standardizeLower()}@${widget.category}",
