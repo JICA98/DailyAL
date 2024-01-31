@@ -21,8 +21,8 @@ def genre_page(category: str):
     url = 'https://myanimelist.net/{}.php'.format(category)
     soup = BeautifulSoup(requests.get(url).text, 'html.parser')
     ele = soup.select('.genre-link')
-    i = 0
-    for e in ele:
+    for i in range(min(4, len(ele))):
+        e = ele[i]
         a_tags = e.select('a')
         for a in a_tags:
             link = a.attrs['href']
@@ -32,8 +32,5 @@ def genre_page(category: str):
                 image_src = genre_soup.select('.image img')[0].attrs['data-src']
                 print('saving for id: {} and link: {}'.format(get_id(link), image_src))
                 save_image(image_src, 'genres/{}_{}.jpg'.format(get_id(link), category))
-        i+=1
-        if i == 3:
-            break
     
-# genre_page('anime')
+# genre_page('manga')

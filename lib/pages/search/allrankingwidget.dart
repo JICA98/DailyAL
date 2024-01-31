@@ -75,9 +75,11 @@ Widget imageTextCard({
   required VoidCallback onTap,
   required String imageUrl,
   required String text,
+  Widget? child,
+  double width = 140.0,
 }) {
   return Container(
-    width: 140,
+    width: width,
     padding: const EdgeInsets.only(bottom: 25),
     child: Material(
       color: Theme.of(context).cardColor,
@@ -101,13 +103,14 @@ Widget imageTextCard({
               alignment: Alignment.center,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: title(
-                  text,
-                  opacity: .8,
-                  fontSize: 15.0,
-                  align: TextAlign.center,
-                  colorVal: Colors.white.value,
-                ),
+                child: child ??
+                    title(
+                      text,
+                      opacity: .8,
+                      fontSize: 15.0,
+                      align: TextAlign.center,
+                      colorVal: Colors.white.value,
+                    ),
               ),
             ),
           ],

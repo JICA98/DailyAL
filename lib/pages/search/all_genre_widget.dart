@@ -120,26 +120,46 @@ class AllGenreWidget extends StatelessWidget {
                 ),
                 SB.lh20,
                 ...genres
-                    .map((g) => SliverWrapper(PlainButton(
-                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                        alignment: Alignment.centerLeft,
-                        onPressed: () => onGenrePress(g, category, context),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                                convertGenre(g, category).replaceAll('_', ' ')),
-                            // SB.h,
-                            Text(
-                              '${userCountFormat.format(g.count ?? 0)}',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .labelSmall
-                                  ?.copyWith(fontSize: 9),
-                            ),
-                          ],
-                        ))))
+                    .map((g) => SliverWrapper(
+                          SizedBox(
+                            height: 130.0,
+                            child: imageTextCard(
+                                context: context,
+                                borderRadius: BorderRadius.circular(12.0),
+                                onTap: () => onGenrePress(g, category, context),
+                                imageUrl:
+                                    'https://raw.githubusercontent.com/JICA98/DailyAL/2024.1.3%2B87/web_assets/genres/${g.id}_$category.jpg',
+                                text: '',
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      convertGenre(g, category)
+                                          .replaceAll('_', ' '),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleLarge?.copyWith(fontSize: 18.0),
+                                    ),
+                                    SB.h5,
+                                    SizedBox(
+                                      height: 30,
+                                      child: ShadowButton(
+                                        onPressed: () {},
+                                        padding: EdgeInsets.zero,
+                                        child: Text(
+                                          '${userCountFormat.format(g.count ?? 0)}',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .labelSmall
+                                              ?.copyWith(fontSize: 9),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                )),
+                          ),
+                        ))
                     .toList(),
                 SB.lh40,
               ],
