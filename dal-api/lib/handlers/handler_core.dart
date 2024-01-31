@@ -38,6 +38,7 @@ class HandlerCore {
       PathMatcher('users/history', _handleUserHistory, ['data']),
       PathMatcher('clubs', _handleClubs, ['data']),
       PathMatcher('clubs/type', _handleClubViewAll, ['data']),
+      PathMatcher('genres', _handleGenres, ['data']),
       PathMatcher('favicon.ico', _handleFavicon, ['data']),
     ];
   }
@@ -470,6 +471,16 @@ class HandlerCore {
       'data': await HttpConnect.htmlPage(
         url,
         (p0) => HtmlParsers.parseClubPageViewAll(p0, type),
+      )
+    };
+  }
+
+  Future<Map<String, dynamic>> _handleGenres(PathMatcher p1, Request p2) async {
+    final String category = queryParams(p2, 'category', 'anime')!;
+    return {
+      'data': await HttpConnect.htmlPage(
+        '${Constants.htmlEnd}$category.php',
+        (p0) => HtmlParsers.parseGenres(p0, category),
       )
     };
   }

@@ -55,51 +55,64 @@ class AllRankingWidget extends StatelessWidget {
           final type = _rankingTypeMap[entry.key];
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 5),
-            child: Container(
-              width: 165,
-              padding: const EdgeInsets.only(bottom: 25),
-              child: Material(
-                color: Theme.of(context).cardColor,
-                borderRadius: borderRadius,
-                child: InkWell(
-                  onTap: () => _onCategoryTap(type, context),
-                  borderRadius: borderRadius,
-                  child: Stack(
-                    children: [
-                      Container(
-                        width: double.infinity,
-                        child: ClipRRect(
-                          borderRadius: borderRadius,
-                          child: Opacity(
-                            opacity: .3,
-                            child: CachedNetworkImage(
-                              fit: BoxFit.cover,
-                              imageUrl:
-                                  '${CredMal.dalWeb}assets/${type}_$category.jpg',
-                            ),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        alignment: Alignment.center,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: title(
-                            entry.value,
-                            opacity: 1,
-                            fontSize: 16,
-                            align: TextAlign.center,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+            child: imageTextCard(
+              context: context,
+              borderRadius: borderRadius,
+              onTap: () => _onCategoryTap(type, context),
+              imageUrl: '${CredMal.dalWeb}assets/${type}_$category.jpg',
+              text: entry.value,
             ),
           );
         },
       ),
     );
   }
+}
+
+Widget imageTextCard({
+  required BuildContext context,
+  required BorderRadius borderRadius,
+  required VoidCallback onTap,
+  required String imageUrl,
+  required String text,
+}) {
+  return Container(
+    width: 140,
+    padding: const EdgeInsets.only(bottom: 25),
+    child: Material(
+      color: Theme.of(context).cardColor,
+      borderRadius: borderRadius,
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: borderRadius,
+        child: Stack(
+          children: [
+            Container(
+              width: double.infinity,
+              child: ClipRRect(
+                borderRadius: borderRadius,
+                child: Opacity(
+                  opacity: .3,
+                  child: Image.network(imageUrl, fit: BoxFit.cover),
+                ),
+              ),
+            ),
+            Container(
+              alignment: Alignment.center,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: title(
+                  text,
+                  opacity: .8,
+                  fontSize: 15.0,
+                  align: TextAlign.center,
+                  colorVal: Colors.white.value,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
 }

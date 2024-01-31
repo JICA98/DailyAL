@@ -84,10 +84,7 @@ class _ExplorePageState extends State<ExplorePage> {
           ),
         ),
         _wrapSliver(
-          _leadingWidget(
-            VisibleSection(
-                S.current.Genres, AllGenreWidget(category: category)),
-          ),
+          AllGenreWidget(category: category),
         ),
         SliverList(
             delegate: SliverChildBuilderDelegate(
@@ -494,40 +491,43 @@ class _ExplorePageState extends State<ExplorePage> {
     );
   }
 
-  Widget _leadingWidget(VisibleSection section) {
+  Widget _leadingWidget(VisibleSection section, [double padding = 25.0]) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        _titleWidget(section),
         Padding(
-          padding: const EdgeInsets.only(
-            left: horizPadding + 10,
-            top: 0,
-            right: horizPadding + 10,
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(section.title,
-                  style: Theme.of(context).textTheme.titleLarge),
-              if (section.onViewAll != null) ...[
-                Expanded(child: SB.z),
-                Padding(
-                  padding: const EdgeInsets.only(right: horizPadding),
-                  child: IconButton(
-                    onPressed: section.onViewAll,
-                    icon: Icon(Icons.arrow_forward_outlined),
-                  ),
-                )
-              ]
-            ],
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 25),
+          padding: EdgeInsets.only(top: padding),
           child: section.child,
         ),
       ],
+    );
+  }
+
+  Padding _titleWidget(VisibleSection section) {
+    return Padding(
+      padding: const EdgeInsets.only(
+        left: horizPadding + 10,
+        top: 0,
+        right: horizPadding + 10,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(section.title, style: Theme.of(context).textTheme.titleLarge),
+          if (section.onViewAll != null) ...[
+            Expanded(child: SB.z),
+            Padding(
+              padding: const EdgeInsets.only(right: horizPadding),
+              child: IconButton(
+                onPressed: section.onViewAll,
+                icon: Icon(Icons.arrow_forward_outlined),
+              ),
+            )
+          ]
+        ],
+      ),
     );
   }
 

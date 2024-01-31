@@ -58,7 +58,7 @@ class _SeasonalWidgetState extends State<SeasonalWidget> {
             });
         },
       ),
-      SB.h30,
+      SB.h15,
       HeaderWidget(
         listPadding:
             const EdgeInsets.symmetric(horizontal: SeasonalWidget.horizPadding),
@@ -74,7 +74,7 @@ class _SeasonalWidgetState extends State<SeasonalWidget> {
             });
         },
       ),
-      SB.h20,
+      SB.h15,
       Padding(
         padding:
             const EdgeInsets.symmetric(horizontal: SeasonalWidget.horizPadding),

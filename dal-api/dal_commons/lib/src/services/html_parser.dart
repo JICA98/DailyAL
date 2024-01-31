@@ -1698,4 +1698,35 @@ class HtmlParsers {
       return history;
     }
   }
+
+  static parseGenres(Document document, String category) {
+    final types = ['Genres', 'Explicit Genres', 'Themes', 'Demographics'];
+    return document
+        .querySelectorAll('.genre-link')
+        .sublist(0, 4)
+        .asMap()
+        .entries
+        .map((e) {
+      return {
+        'type': types[e.key],
+        'genres': e.value.querySelectorAll('a').expand((e) {
+          final uri = Uri.tryParse(e.attributes['href'] ?? '');
+          final id = int.tryParse(uri?.pathSegments.tryAt(2) ?? '');
+          final linkText = e.text.trim();
+          // regex to get only alphabets
+
+          final name = linkText.getAlphabets();
+          final count = int.tryParse(linkText.replaceAll(RegExp(r'\D'), ''));
+          if (id == null || name.isBlank) return [];
+          return [
+            {
+              'id': id,
+              'name': name,
+              'count': count,
+            }
+          ];
+        }).toList(),
+      };
+    }).toList();
+  }
 }

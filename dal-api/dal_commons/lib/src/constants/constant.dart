@@ -175,6 +175,16 @@ extension StringExtension on String {
     return formattedTitle;
   }
 
+  String getAlphabets() {
+    String output = "";
+    for (int i = 0; i < length; ++i) {
+      if (this[i].isAlphaDigit()) {
+        output += this[i];
+      }
+    }
+    return output;
+  }
+
   int countAll(String string) {
     int count = 0;
     String current = this;

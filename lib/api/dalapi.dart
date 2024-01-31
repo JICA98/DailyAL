@@ -390,6 +390,13 @@ class DalApi {
     );
   }
 
+  Future<List<GenreType>> getGenreTypes(String category) async {
+    return _mapAsList<GenreType>(
+      await httpGet('genres?category=$category'),
+      GenreType.fromJson,
+    );
+  }
+
   List<T> _mapAsList<T>(data, T Function(Map<String, dynamic>) mapper) {
     if (data is Map) {
       final list = data['data'];
