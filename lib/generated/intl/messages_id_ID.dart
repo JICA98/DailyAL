@@ -589,6 +589,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Pergeseran_Seks_Ajaib"),
         "Mahou_Shoujo":
             MessageLookupByLibrary.simpleMessage("Setelah MA _s Setelah Jo"),
+        "Mal_Under_Maintenance": MessageLookupByLibrary.simpleMessage(
+            "MyAnimeList sedang dalam pemeliharaan"),
+        "Mal_Under_Maintenance_Desc": MessageLookupByLibrary.simpleMessage(
+            "MyAnimeList sedang dalam pemeliharaan, silakan coba lagi nanti"),
         "Male": MessageLookupByLibrary.simpleMessage("Pria"),
         "Manga_Awards": MessageLookupByLibrary.simpleMessage("Manga Awards."),
         "Manga_Caps": MessageLookupByLibrary.simpleMessage("Manga"),

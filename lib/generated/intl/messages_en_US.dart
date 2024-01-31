@@ -575,6 +575,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "Magical_Sex_Shift":
             MessageLookupByLibrary.simpleMessage("Magical_Sex_Shift"),
         "Mahou_Shoujo": MessageLookupByLibrary.simpleMessage("Mahou_Shoujo"),
+        "Mal_Under_Maintenance": MessageLookupByLibrary.simpleMessage(
+            "MyAnimeList is under maintenance"),
+        "Mal_Under_Maintenance_Desc": MessageLookupByLibrary.simpleMessage(
+            "MyAnimeList is under maintenance, please try again later"),
         "Male": MessageLookupByLibrary.simpleMessage("Male"),
         "Manga_Awards": MessageLookupByLibrary.simpleMessage("Manga Awards"),
         "Manga_Caps": MessageLookupByLibrary.simpleMessage("Manga"),

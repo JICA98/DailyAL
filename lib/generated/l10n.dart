@@ -9180,6 +9180,26 @@ class S {
     );
   }
 
+  /// `MyAnimeList is under maintenance`
+  String get Mal_Under_Maintenance {
+    return Intl.message(
+      'MyAnimeList is under maintenance',
+      name: 'Mal_Under_Maintenance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `MyAnimeList is under maintenance, please try again later`
+  String get Mal_Under_Maintenance_Desc {
+    return Intl.message(
+      'MyAnimeList is under maintenance, please try again later',
+      name: 'Mal_Under_Maintenance_Desc',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Published End Date`
   String get publishedEndDate {
     return Intl.message(

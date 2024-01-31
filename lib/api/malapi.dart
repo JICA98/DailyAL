@@ -2,6 +2,7 @@ import 'dart:collection';
 
 import 'package:dailyanimelist/api/credmal.dart';
 import 'package:dailyanimelist/api/malconnect.dart';
+import 'package:dailyanimelist/api/maluser.dart';
 import 'package:dailyanimelist/constant.dart';
 import 'package:dailyanimelist/enums.dart';
 import 'package:dailyanimelist/main.dart';
@@ -374,6 +375,28 @@ class MalApi {
           minutes: nowDate.timeZoneOffset.inMinutes,
         ))
     };
+  }
+
+  static Future<bool> isUnderMaintenance() async {
+    if (user.status == AuthStatus.AUTHENTICATED) {
+      try {
+        await MalUser.getUserInfo();
+        return false;
+      } catch (e) {
+        return true;
+      }
+    } else {
+      try {
+        final animeDetails =
+            await MalApi.getAnimeDetails(21, fields: ['title']);
+        if (animeDetails.title == null) {
+          return true;
+        }
+        return false;
+      } catch (e) {
+        return true;
+      }
+    }
   }
 }
 

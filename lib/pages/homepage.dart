@@ -1,32 +1,27 @@
 import 'dart:async';
 
 import 'package:dailyanimelist/api/auth/auth.dart';
-import 'package:dailyanimelist/api/dalapi.dart';
+import 'package:dailyanimelist/api/malapi.dart';
 import 'package:dailyanimelist/constant.dart';
 import 'package:dailyanimelist/generated/l10n.dart';
 import 'package:dailyanimelist/main.dart';
 import 'package:dailyanimelist/pages/home/newswidget.dart';
-import 'package:dailyanimelist/screens/contentdetailedscreen.dart';
 import 'package:dailyanimelist/screens/generalsearchscreen.dart';
 import 'package:dailyanimelist/user/hompagepref.dart';
 import 'package:dailyanimelist/user/user.dart';
 import 'package:dailyanimelist/util/homepageutils.dart';
-import 'package:dailyanimelist/widgets/customappbar.dart';
 import 'package:dailyanimelist/widgets/custombutton.dart';
 import 'package:dailyanimelist/widgets/forum/forumtopicwidget.dart';
-import 'package:dailyanimelist/widgets/home/animecard.dart';
 import 'package:dailyanimelist/widgets/homeappbar.dart';
-import 'package:dailyanimelist/widgets/listsortfilter.dart';
 import 'package:dailyanimelist/widgets/loading/loadingcard.dart';
 import 'package:dailyanimelist/widgets/shimmecolor.dart';
 import 'package:dailyanimelist/widgets/slivers.dart';
 import 'package:dailyanimelist/widgets/user/contentlistwidget.dart';
 import 'package:dal_commons/commons.dart';
 import 'package:dal_commons/dal_commons.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:shimmer/shimmer.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({
@@ -52,6 +47,8 @@ class _HomePageState extends State<HomePage> {
     setRefKey();
     hasOpened = false;
     startOpeningAnimation();
+    checkIfMalUnderMaintenance();
+
     Future.delayed(Duration.zero).then((value) {
       initLangs();
       user.addListener(() {
@@ -62,6 +59,27 @@ class _HomePageState extends State<HomePage> {
 
   void setRefKey() {
     refKey = MalAuth.codeChallenge(12);
+  }
+
+  void checkIfMalUnderMaintenance() async {
+    final isUnderMaintenance = await MalApi.isUnderMaintenance();
+    if (isUnderMaintenance) {
+      showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (context) => AlertDialog(
+                title: Text(S.current.Mal_Under_Maintenance),
+                content: Text(S.current.Mal_Under_Maintenance_Desc),
+                actions: [
+                  CupertinoDialogAction(
+                    child: Text('OK'),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  )
+                ],
+              ));
+    }
   }
 
   startOpeningAnimation() async {
