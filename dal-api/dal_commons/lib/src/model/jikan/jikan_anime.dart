@@ -104,7 +104,7 @@ class JikanAnime {
         aired: json["aired"] == null ? null : JAired.fromJson(json["aired"]),
         duration: json["duration"],
         rating: json["rating"],
-        score: json["score"],
+        score: double.tryParse(json["score"]?.toString() ?? ''),
         scoredBy: json["scored_by"],
         rank: json["rank"],
         popularity: json["popularity"],
