@@ -1,0 +1,25 @@
+[package]
+name = "dal-rust-api"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+argon2 = "0.5.2"
+async-recursion = "1.0.5"
+axum = "0.7.3"
+axum-extra = "0.9.1"
+chrono = "0.4.31"
+dotenv = "0.15.0"
+jsonwebtoken = "9.2.0"
+rand_core = "0.6.4"
+redis = { version = "0.24.0", features = ["tokio-comp", "json", "aio"] }
+reqwest = { version = "0.11.24", features = ["json"] }
+serde = { version = "1.0.193", features = ["derive"] }
+serde_json = "1.0.108"
+time = "0.3.31"
+futures = "0.3"
+tokio = { version = "1.35.1", features = ["full"] }
+tower-http = { version = "0.5.0", features = ["cors"] }
+uuid = { version = "1.6.1", features = ["serde", "v4"] }
