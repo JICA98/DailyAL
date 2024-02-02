@@ -455,6 +455,24 @@ class _ContentDetailedScreenState extends State<ContentDetailedScreen>
     };
   }
 
+  Map<int, MyListStatus> _statusMap() {
+    return Map.fromEntries(
+        (contentDetailed.relatedAnime as List<RelatedContent>?)
+                ?.map((e) {
+                  var id = e.relatedNode?.id;
+                  var myListStatus = e.relatedNode?.myListStatus;
+                  if (id != null && myListStatus != null) {
+                    return MapEntry(id, myListStatus);
+                  }
+                  return null;
+                })
+                .where((e) => e != null)
+                .map((e) => e!)
+                .toList() ??
+            [])
+      ..putIfAbsent(_id, () => contentDetailed.myListStatus);
+  }
+
   T? _nullIf<T>(bool condition, T Function() child) {
     if (condition) {
       return child();
@@ -716,6 +734,7 @@ class _ContentDetailedScreenState extends State<ContentDetailedScreen>
             horizPadding: horizPadding,
             id: _id,
             displayType: DisplayType.grid,
+            statusMap: _statusMap(),
           ),
           appbarTitle: S.current.Related,
           useAppbar: false,

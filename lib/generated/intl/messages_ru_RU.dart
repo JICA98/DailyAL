@@ -740,6 +740,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "On_Hold": MessageLookupByLibrary.simpleMessage("На удерживании"),
         "One_Piece": MessageLookupByLibrary.simpleMessage("Один кусочек"),
         "One_Punch_Man": MessageLookupByLibrary.simpleMessage("Ванпанчмен"),
+        "Open": MessageLookupByLibrary.simpleMessage("Открыть"),
         "Open_In_Browser":
             MessageLookupByLibrary.simpleMessage("Открыть в браузере"),
         "Opening_Songs":

@@ -139,13 +139,20 @@ Widget starField(
   String score, {
   double starHeight = 17.0,
   TextStyle? textStyle,
+  bool useIcon = false,
 }) {
   return Row(
     children: [
-      Container(
-        height: starHeight,
-        child: Image.asset("assets/images/star.png"),
-      ),
+      if (useIcon)
+        Icon(
+          Icons.star,
+          size: starHeight,
+        )
+      else
+        Container(
+          height: starHeight,
+          child: Image.asset("assets/images/star.png"),
+        ),
       const SizedBox(
         width: 5,
       ),

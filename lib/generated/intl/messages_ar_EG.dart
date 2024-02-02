@@ -723,6 +723,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "One_Piece": MessageLookupByLibrary.simpleMessage("قطعه"),
         "One_Punch_Man":
             MessageLookupByLibrary.simpleMessage("لكمة الرجل واحد"),
+        "Open": MessageLookupByLibrary.simpleMessage("يفتح"),
         "Open_In_Browser":
             MessageLookupByLibrary.simpleMessage("افتح في المتصفح"),
         "Opening_Songs": MessageLookupByLibrary.simpleMessage("فتح الأغاني"),

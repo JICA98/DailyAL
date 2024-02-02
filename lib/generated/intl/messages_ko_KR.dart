@@ -656,6 +656,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "On_Hold": MessageLookupByLibrary.simpleMessage("보류에"),
         "One_Piece": MessageLookupByLibrary.simpleMessage("한 조각"),
         "One_Punch_Man": MessageLookupByLibrary.simpleMessage("한 펀치 맨"),
+        "Open": MessageLookupByLibrary.simpleMessage("열려 있는"),
         "Open_In_Browser": MessageLookupByLibrary.simpleMessage("브라우저에서 열려"),
         "Opening_Songs": MessageLookupByLibrary.simpleMessage("노래를 여는 것"),
         "Order_by": MessageLookupByLibrary.simpleMessage("주문"),

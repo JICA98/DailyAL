@@ -21,12 +21,14 @@ class RelatedAnimeWidget extends StatefulWidget {
   final double horizPadding;
   final DisplayType displayType;
   final int id;
+  final Map<int, MyListStatus>? statusMap;
   const RelatedAnimeWidget({
     required this.relatedAnimeList,
     this.category = "anime",
     required this.horizPadding,
     required this.id,
     this.displayType = DisplayType.list_horiz,
+    this.statusMap,
   });
 
   @override
@@ -43,27 +45,24 @@ class _RelatedAnimeWidgetState extends State<RelatedAnimeWidget>
   void initState() {
     super.initState();
     isHoriz = widget.displayType == DisplayType.list_horiz;
-    if (widget.relatedAnimeList != null) {
-      widget.relatedAnimeList.forEach((relatedAnime) {
-        final baseNodes =
-            animeWidgets[relatedAnime.relationTypeFormatted] ?? [];
-        baseNodes.add(BaseNode(
-            content: relatedAnime.relatedNode,
-            myListStatus: relatedAnime.relatedNode?.myListStatus));
-        animeWidgets[relatedAnime.relationTypeFormatted!] = baseNodes;
-      });
-    }
+    widget.relatedAnimeList.forEach((relatedAnime) {
+      final baseNodes = animeWidgets[relatedAnime.relationTypeFormatted] ?? [];
+      final myListStatus = relatedAnime.relatedNode?.myListStatus;
+      final node = relatedAnime.relatedNode;
+      baseNodes.add(BaseNode(content: node, myListStatus: myListStatus));
+      animeWidgets[relatedAnime.relationTypeFormatted!] = baseNodes;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: animeWidgets.keys.length,
-      child: isHoriz ? _horizView : _gridView,
+      child: isHoriz ? _horizView : _animeGraph,
     );
   }
 
-  Widget _animeGraph() {
+  Widget get _animeGraph {
     return StateFullFutureWidget(
       done: (data) => _graphWidget(data.data),
       loadingChild: loadingCenterColored,
@@ -77,6 +76,7 @@ class _RelatedAnimeWidgetState extends State<RelatedAnimeWidget>
       child = AnimeGraphWidget(
         id: widget.id,
         graph: data,
+        statusMap: widget.statusMap ?? {},
       );
     }
     return TitlebarScreen(

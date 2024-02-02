@@ -653,6 +653,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "On_Hold": MessageLookupByLibrary.simpleMessage("保留"),
         "One_Piece": MessageLookupByLibrary.simpleMessage("ワンピース"),
         "One_Punch_Man": MessageLookupByLibrary.simpleMessage("1人のパンチマン"),
+        "Open": MessageLookupByLibrary.simpleMessage("開ける"),
         "Open_In_Browser": MessageLookupByLibrary.simpleMessage("ブラウザで開く"),
         "Opening_Songs": MessageLookupByLibrary.simpleMessage("曲を開く"),
         "Order_by": MessageLookupByLibrary.simpleMessage("順次"),

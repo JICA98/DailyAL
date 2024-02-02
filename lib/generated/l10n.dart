@@ -9210,6 +9210,16 @@ class S {
     );
   }
 
+  /// `Open`
+  String get Open {
+    return Intl.message(
+      'Open',
+      name: 'Open',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Published End Date`
   String get publishedEndDate {
     return Intl.message(
