@@ -64,6 +64,7 @@ export './src/model/anime/themesong.dart';
 export './src/model/anime/animestatistics.dart';
 export './src/model/anime/animestudio.dart';
 export './src/model/anime/animestatus.dart';
+export './src/model/anime/anime_graph.dart';
 export './src/model/anime/broadcast.dart';
 export './src/model/anime/myanimeliststatus.dart';
 export './src/model/featured/featuredresult.dart';

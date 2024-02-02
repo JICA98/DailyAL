@@ -85,6 +85,7 @@ dependencies:
   particle_field: ^1.0.0
   supabase_flutter: ^2.0.2
   webviewtube: ^2.0.0
+  graphview: ^1.2.0
 
 dev_dependencies:
   flutter_test:

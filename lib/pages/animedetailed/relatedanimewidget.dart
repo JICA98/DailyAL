@@ -1,15 +1,18 @@
+import 'package:dailyanimelist/api/dalapi.dart';
 import 'package:dailyanimelist/constant.dart';
-import 'package:dailyanimelist/main.dart';
 import 'package:dailyanimelist/screens/generalsearchscreen.dart';
+import 'package:dailyanimelist/screens/plainscreen.dart';
 import 'package:dailyanimelist/util/pathutils.dart';
+import 'package:dailyanimelist/widgets/anime_graph.dart';
 import 'package:dailyanimelist/widgets/common/share_builder.dart';
 import 'package:dailyanimelist/widgets/customappbar.dart';
+import 'package:dailyanimelist/widgets/customfuture.dart';
 import 'package:dailyanimelist/widgets/listsortfilter.dart';
 import 'package:dailyanimelist/widgets/slivers.dart';
 import 'package:dailyanimelist/widgets/user/contentlistwidget.dart';
 import 'package:dal_commons/dal_commons.dart';
+import 'package:dal_commons/src/model/anime/anime_graph.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:dailyanimelist/generated/l10n.dart';
 
 class RelatedAnimeWidget extends StatefulWidget {
@@ -57,6 +60,28 @@ class _RelatedAnimeWidgetState extends State<RelatedAnimeWidget>
     return DefaultTabController(
       length: animeWidgets.keys.length,
       child: isHoriz ? _horizView : _gridView,
+    );
+  }
+
+  Widget _animeGraph() {
+    return StateFullFutureWidget(
+      done: (data) => _graphWidget(data.data),
+      loadingChild: loadingCenterColored,
+      future: () => DalApi.i.getAnimeGraph(widget.id),
+    );
+  }
+
+  Widget _graphWidget(AnimeGraph? data) {
+    Widget child = SB.z;
+    if (data != null) {
+      child = AnimeGraphWidget(
+        id: widget.id,
+        graph: data,
+      );
+    }
+    return TitlebarScreen(
+      child,
+      appbarTitle: '${S.current.Related} ${widget.category}',
     );
   }
 

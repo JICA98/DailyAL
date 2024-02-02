@@ -397,6 +397,23 @@ class DalApi {
     );
   }
 
+  Future<dynamic> _apiGET(String endpoint) async {
+    return MalConnect.getContent('${CredMal.apiURL}/$endpoint',
+        retryOnFail: false,
+        withNoHeaders: true,
+        headers: {
+          'Authorization': 'Bearer ${CredMal.apiSecret}',
+        });
+  }
+
+  Future<AnimeGraph> getAnimeGraph(int id) async {
+    return AnimeGraph.fromJson(
+      await _apiGET(
+        'anime/$id/related',
+      ),
+    );
+  }
+
   List<T> _mapAsList<T>(data, T Function(Map<String, dynamic>) mapper) {
     if (data is Map) {
       final list = data['data'];
