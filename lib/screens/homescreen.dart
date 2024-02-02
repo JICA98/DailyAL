@@ -1,3 +1,4 @@
+import 'package:dailyanimelist/api/malapi.dart';
 import 'package:dailyanimelist/constant.dart';
 import 'package:dailyanimelist/notifservice.dart';
 import 'package:dailyanimelist/pages/explorepage.dart';

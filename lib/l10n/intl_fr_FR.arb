@@ -907,5 +907,16 @@
     "Grid_Height": "Hauteur de la grille",
     "My_List2": "Ma liste",
     "showAnimeMangaCard": "Afficher la fiche de contenu",
-    "showAnimeMangaCardDesc": "Afficher le cordon autour du contenu dans la liste (confortable) dans la mesure du possible"
+    "showAnimeMangaCardDesc": "Afficher le cordon autour du contenu dans la liste (confortable) dans la mesure du possible",
+    "moreLinks": "Plus de liens",
+    "Resources": "Ressources",
+    "Available_At": "Disponible \u00e0",
+    "Other_Lists": "Autres listes",
+    "AdditionalTitles": "Titres suppl\u00e9mentaires",
+    "Allow_YT_Player": "Autoriser le lecteur Youtube",
+    "Allow_YT_Player_Desc": "Autoriser le lecteur Youtube \u00e0 lire des vid\u00e9os dans l'application",
+    "Horizontal_List": "Liste horizontale",
+    "Mal_Under_Maintenance": "MyAnimeList est en maintenance",
+    "Mal_Under_Maintenance_Desc": "MyAnimeList est en maintenance, veuillez r\u00e9essayer plus tard",
+    "Ok": "d'accord"
 }

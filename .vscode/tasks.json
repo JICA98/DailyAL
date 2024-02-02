@@ -1,0 +1,45 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "flutter",
+            "command": "flutter",
+            "args": [
+                "build",
+                "apk"
+            ],
+            "group": "build",
+            "problemMatcher": [],
+            "label": "flutter: flutter build apk",
+            "detail": ""
+        },
+        {
+            "type": "dart",
+            "command": "dart",
+            "label": "intl generate",
+            "args": [
+                "run",
+                "intl_utils:generate"
+            ]
+        },
+        {
+            "type": "shell",
+            "command": "python3",
+            "label": "python translate",
+            "args": [
+                "python/init.py"
+            ]
+        },
+        {
+            "type": "dart",
+            "command": "dart",
+            "label": "build runner",
+            "args": [
+                "run",
+                "build_runner",
+                "build",
+                "--delete-conflicting-outputs",
+            ]
+        }
+    ]
+}

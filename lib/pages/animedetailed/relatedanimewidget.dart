@@ -1,14 +1,18 @@
+import 'package:dailyanimelist/api/dalapi.dart';
 import 'package:dailyanimelist/constant.dart';
-import 'package:dailyanimelist/main.dart';
 import 'package:dailyanimelist/screens/generalsearchscreen.dart';
+import 'package:dailyanimelist/screens/plainscreen.dart';
 import 'package:dailyanimelist/util/pathutils.dart';
+import 'package:dailyanimelist/widgets/anime_graph.dart';
 import 'package:dailyanimelist/widgets/common/share_builder.dart';
 import 'package:dailyanimelist/widgets/customappbar.dart';
+import 'package:dailyanimelist/widgets/customfuture.dart';
+import 'package:dailyanimelist/widgets/listsortfilter.dart';
 import 'package:dailyanimelist/widgets/slivers.dart';
 import 'package:dailyanimelist/widgets/user/contentlistwidget.dart';
 import 'package:dal_commons/dal_commons.dart';
+import 'package:dal_commons/src/model/anime/anime_graph.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:dailyanimelist/generated/l10n.dart';
 
 class RelatedAnimeWidget extends StatefulWidget {
@@ -41,11 +45,12 @@ class _RelatedAnimeWidgetState extends State<RelatedAnimeWidget>
     isHoriz = widget.displayType == DisplayType.list_horiz;
     if (widget.relatedAnimeList != null) {
       widget.relatedAnimeList.forEach((relatedAnime) {
-        var widgetList = animeWidgets[relatedAnime.relationTypeFormatted] ?? [];
-        widgetList.add(BaseNode(
+        final baseNodes =
+            animeWidgets[relatedAnime.relationTypeFormatted] ?? [];
+        baseNodes.add(BaseNode(
             content: relatedAnime.relatedNode,
             myListStatus: relatedAnime.relatedNode?.myListStatus));
-        animeWidgets[relatedAnime.relationTypeFormatted!] = widgetList;
+        animeWidgets[relatedAnime.relationTypeFormatted!] = baseNodes;
       });
     }
   }
@@ -55,6 +60,28 @@ class _RelatedAnimeWidgetState extends State<RelatedAnimeWidget>
     return DefaultTabController(
       length: animeWidgets.keys.length,
       child: isHoriz ? _horizView : _gridView,
+    );
+  }
+
+  Widget _animeGraph() {
+    return StateFullFutureWidget(
+      done: (data) => _graphWidget(data.data),
+      loadingChild: loadingCenterColored,
+      future: () => DalApi.i.getAnimeGraph(widget.id),
+    );
+  }
+
+  Widget _graphWidget(AnimeGraph? data) {
+    Widget child = SB.z;
+    if (data != null) {
+      child = AnimeGraphWidget(
+        id: widget.id,
+        graph: data,
+      );
+    }
+    return TitlebarScreen(
+      child,
+      appbarTitle: '${S.current.Related} ${widget.category}',
     );
   }
 
@@ -134,24 +161,24 @@ class _RelatedAnimeWidgetState extends State<RelatedAnimeWidget>
       children: [
         _relationTypeHeader,
         SB.h20,
-        SizedBox(
-          height: 210,
-          child: _contentListWidget(nodeList),
+        horizontalList(
+          category: widget.category,
+          items: nodeList ?? [],
         ),
       ],
     );
   }
 
-  ContentListWidget _contentListWidget(List<BaseNode>? nodeList) {
-    return ContentListWidget(
-      displayType: widget.displayType,
-      padding: EdgeInsets.symmetric(horizontal: widget.horizPadding + 5),
-      contentList: nodeList ?? [],
-      returnSlivers: !isHoriz,
-      cardHeight: isHoriz ? 150 : 180,
-      cardWidth: isHoriz ? 140 : 180,
-      updateCacheOnEdit: true,
+  Widget _contentListWidget(List<BaseNode>? nodeList) {
+    return ContentListWithDisplayType(
       category: widget.category,
+      items: nodeList ?? [],
+      sortFilterDisplay: SortFilterDisplay.withDisplayType(
+        DisplayOption(
+          displayType: DisplayType.grid,
+          displaySubType: DisplaySubType.compact,
+        ),
+      ),
     );
   }
 

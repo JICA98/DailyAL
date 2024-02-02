@@ -907,5 +907,16 @@
     "Grid_Height": "Tinggi Kotak",
     "My_List2": "Daftarku",
     "showAnimeMangaCard": "Tampilkan kartu konten",
-    "showAnimeMangaCardDesc": "Tunjukkan kabel di sekitar konten dalam tampilan daftar (nyaman) jika memungkinkan"
+    "showAnimeMangaCardDesc": "Tunjukkan kabel di sekitar konten dalam tampilan daftar (nyaman) jika memungkinkan",
+    "moreLinks": "Tautan Lainnya",
+    "Resources": "Sumber daya",
+    "Available_At": "Tersedia di",
+    "Other_Lists": "Daftar Lainnya",
+    "AdditionalTitles": "Judul Tambahan",
+    "Allow_YT_Player": "Izinkan Pemutar Youtube",
+    "Allow_YT_Player_Desc": "Izinkan pemutar Youtube memutar video di aplikasi",
+    "Horizontal_List": "Daftar Horisontal",
+    "Mal_Under_Maintenance": "MyAnimeList sedang dalam pemeliharaan",
+    "Mal_Under_Maintenance_Desc": "MyAnimeList sedang dalam pemeliharaan, silakan coba lagi nanti",
+    "Ok": "Oke"
 }

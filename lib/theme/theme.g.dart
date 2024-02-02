@@ -24,6 +24,7 @@ const _$UserThemeModeEnumMap = {
   UserThemeMode.Auto: 'Auto',
   UserThemeMode.Light: 'Light',
   UserThemeMode.Dark: 'Dark',
+  UserThemeMode.Black: 'Black',
 };
 
 const _$UserThemeBgEnumMap = {

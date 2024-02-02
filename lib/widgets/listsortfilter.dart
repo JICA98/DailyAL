@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:collection/collection.dart';
 import 'package:dailyanimelist/api/dalapi.dart';
+import 'package:dailyanimelist/cache/cachemanager.dart';
 import 'package:dailyanimelist/constant.dart';
 import 'package:dailyanimelist/enums.dart';
 import 'package:dailyanimelist/generated/l10n.dart';
@@ -33,12 +36,12 @@ List<FilterOption> getFilterOptions(String category) {
 }
 
 Future<List<BaseNode>> getSortedFilteredData(
-  SearchResult contentResult,
+  List<BaseNode>? nodes,
   bool _canBeFetchedFromAPI,
   SortFilterDisplay _sortFilterDisplay,
   String category,
 ) async {
-  var list = contentResult.data ?? [];
+  var list = nodes ?? [];
   if (!_canBeFetchedFromAPI) {
     if (_sortFilterDisplay.filterOutputs.isNotEmpty) {
       list =
@@ -82,6 +85,18 @@ List<BaseNode> _filterCustomList(
             nullOrEmpty(option.includedOptions) &&
             nullOrEmpty(option.excludedOptions)) return false;
         switch (name) {
+          case 'my_list_status':
+            if (modalValue is Map) {
+              String? status = modalValue[option.apiFieldName];
+              if (status == null) return false;
+              final convertValue = _convertValue(selectedValue!, option);
+              if (status.equals(convertValue)) {
+                continue forLoop;
+              } else {
+                return false;
+              }
+            }
+            break;
           case 'status':
             selectedValue = (isAnime
                 ? animeStatusInverseMap
@@ -95,14 +110,11 @@ List<BaseNode> _filterCustomList(
             if (modalValue is List<MalGenre>) {
               final genres =
                   modalValue.map((g) => convertGenre(g, category)).toSet();
-              final included = option.includedOptions?.toSet() ?? {};
-              final excluded = option.excludedOptions?.toSet() ?? {};
-              if (genres.isEmpty) return false;
-              if (included.isNotEmpty && !genres.containsAll(included))
+              if (_evaluateIncludedExcluded(genres, option)) {
+                continue forLoop;
+              } else {
                 return false;
-              if (excluded.isNotEmpty &&
-                  genres.intersection(excluded).isNotEmpty) return false;
-              continue forLoop;
+              }
             }
             return false;
           case 'mean':
@@ -146,6 +158,35 @@ List<BaseNode> _filterCustomList(
   }).toList();
 }
 
+bool _evaluateIncludedExcluded(
+  Set<String> options,
+  FilterOption option,
+) {
+  final included =
+      option.includedOptions?.map((e) => _convertValue(e, option)).toSet() ??
+          {};
+  final excluded =
+      option.excludedOptions?.map((e) => _convertValue(e, option)).toSet() ??
+          {};
+  if (options.isEmpty) return false;
+  if (included.isNotEmpty && !options.containsAll(included)) return false;
+  if (excluded.isNotEmpty && options.intersection(excluded).isNotEmpty)
+    return false;
+  return true;
+}
+
+String _convertValue(String value, FilterOption option) {
+  try {
+    if (!nullOrEmpty(option.apiValues)) {
+      final index = option.values!.indexOf(value);
+      if (index != -1) {
+        return option.apiValues!.elementAt(index).toString();
+      }
+    }
+  } catch (e) {}
+  return value;
+}
+
 List<BaseNode> _sortListCustom(
   List<BaseNode> list,
   SortFilterDisplay _sortFilterDisplay,
@@ -178,9 +219,9 @@ List<BaseNode> _sortListCustom(
       if (n1Value == null && n2Value == null) {
         compare = 0;
       } else if (n1Value == null) {
-        compare = 1;
-      } else if (n2Value == null) {
         compare = -1;
+      } else if (n2Value == null) {
+        compare = 1;
       } else {
         compare = n1Value.compareTo(n2Value);
       }
@@ -197,11 +238,12 @@ int? _getEpisodes(ScheduleData? node) {
   return null;
 }
 
-void showContentListModal({
+void showSortFilterDisplayModal({
   required BuildContext context,
   required SortFilterDisplay sortFilterDisplay,
   required String category,
   required ValueChanged<SortFilterDisplay> onSortFilterChange,
+  SortFilterOptions? sortFilterOptions,
 }) {
   showModalBottomSheet(
     context: context,
@@ -210,111 +252,99 @@ void showContentListModal({
         category: category,
         sortFilterDisplay: sortFilterDisplay,
         onSortFilterChange: onSortFilterChange,
+        sortFilterOptions: sortFilterOptions,
       );
     },
   );
 }
 
-class SortFilterPopup extends StatefulWidget {
-  const SortFilterPopup({
-    super.key,
-    required this.category,
-    required this.sortFilterDisplay,
-    required this.onSortFilterChange,
+class SelectDisplayOption {
+  final DisplayType? type;
+  final String name;
+  final DisplaySubType? subType;
+  final List<SelectDisplayOption>? subOptions;
+
+  SelectDisplayOption({
+    this.type,
+    required this.name,
+    this.subType,
+    this.subOptions,
   });
-
-  final String category;
-  final SortFilterDisplay sortFilterDisplay;
-  final ValueChanged<SortFilterDisplay> onSortFilterChange;
-
-  @override
-  State<SortFilterPopup> createState() => _SortFilterPopupState();
 }
 
-class _SortFilterPopupState extends State<SortFilterPopup> {
-  final tabs = [
-    Tab(
-      text: S.current.Sort,
-    ),
-    Tab(
-      text: S.current.Filter,
-    ),
-    Tab(
-      text: S.current.Display,
-    ),
-  ];
-  final _displayOptions = {
-    DisplayType.grid: {
-      'name': S.current.Grid,
-      'subType': [
-        {
-          'name': S.current.Comfortable,
-          'value': DisplaySubType.comfortable,
-        },
-        {
-          'name': S.current.Compact,
-          'value': DisplaySubType.compact,
-        },
-        {
-          'name': S.current.Cover_only,
-          'value': DisplaySubType.cover_only_grid,
-        },
-      ],
-    },
-    DisplayType.list_vert: {
-      'name': S.current.List,
-      'subType': [
-        {
-          'name': S.current.Comfortable,
-          'value': DisplaySubType.comfortable,
-        },
-        {
-          'name': S.current.Compact,
-          'value': DisplaySubType.compact,
-        },
-        {
-          'name': S.current.Spacious,
-          'value': DisplaySubType.spacious,
-        },
-      ],
-    },
-  };
-  late SortFilterDisplay _originalSortFilterDisplay;
-  late SortFilterDisplay _sortFilterDisplay;
-  late List<SortOption> _sortOptions;
-  late List<FilterOption> _filterOptions;
+class SortFilterOptions {
+  final List<SortOption> sortOptions;
+  final List<FilterOption> filterOptions;
+  final List<SelectDisplayOption> displayOptions;
 
-  @override
-  void initState() {
-    super.initState();
-    _originalSortFilterDisplay = widget.sortFilterDisplay.clone();
-    _sortFilterDisplay = widget.sortFilterDisplay.clone();
-    _sortOptions = _getSortOptions();
-    _filterOptions = getFilterOptions(widget.category);
+  SortFilterOptions({
+    required this.sortOptions,
+    required this.filterOptions,
+    required this.displayOptions,
+  });
+
+  static List<SelectDisplayOption> getDisplayOptions() {
+    return [
+      SelectDisplayOption(
+        name: S.current.Grid,
+        type: DisplayType.grid,
+        subOptions: [
+          SelectDisplayOption(
+            name: S.current.Comfortable,
+            subType: DisplaySubType.comfortable,
+          ),
+          SelectDisplayOption(
+            name: S.current.Compact,
+            subType: DisplaySubType.compact,
+          ),
+          SelectDisplayOption(
+            name: S.current.Cover_only,
+            subType: DisplaySubType.cover_only_grid,
+          ),
+        ],
+      ),
+      SelectDisplayOption(
+        name: S.current.List,
+        type: DisplayType.list_vert,
+        subOptions: [
+          SelectDisplayOption(
+            name: S.current.Comfortable,
+            subType: DisplaySubType.comfortable,
+          ),
+          SelectDisplayOption(
+            name: S.current.Compact,
+            subType: DisplaySubType.compact,
+          ),
+          SelectDisplayOption(
+            name: S.current.Spacious,
+            subType: DisplaySubType.spacious,
+          ),
+        ],
+      ),
+    ];
   }
 
-  bool get _isAnime => widget.category.equals('anime');
-
-  List<SortOption> _getSortOptions() {
-    var map = _isAnime ? animeListSortMap : mangaListSortMap;
+  static List<SortOption> getSortOptions(
+      bool isAnime, SortOption selectedOption) {
+    var map = isAnime ? animeListSortMap : mangaListSortMap;
     final defaultOptions = map.entries.map((e) {
       return SortOption(name: e.value, value: e.key);
     }).toList();
-    defaultOptions.addAll(_additionalOptions());
+    defaultOptions.addAll(_additionalOptions(isAnime));
     return defaultOptions.map((e) {
-      var isSelected = _sortFilterDisplay.sort.value.equals(e.value);
+      var isSelected = selectedOption.value.equals(e.value);
       return e.copyWith(
           order: isSelected
-              ? _sortFilterDisplay.sort.order
-              : (_isAnime
+              ? selectedOption.order
+              : (isAnime
                       ? animeListDefaultOrderMap
                       : mangaListDefaultOrderMap)[e.value] ??
                   SortOrder.Descending);
     }).toList();
   }
 
-  List<SortOption> _additionalOptions() {
-    if (_isAnime) {
+  static List<SortOption> _additionalOptions(bool isAnime) {
+    if (isAnime) {
       return [
         SortOption(
           name: S.current.Popularity,
@@ -374,16 +404,75 @@ class _SortFilterPopupState extends State<SortFilterPopup> {
       ];
     }
   }
+}
+
+class SortFilterPopup extends StatefulWidget {
+  const SortFilterPopup({
+    super.key,
+    required this.category,
+    required this.sortFilterDisplay,
+    required this.onSortFilterChange,
+    this.sortFilterOptions,
+  });
+
+  final String category;
+  final SortFilterDisplay sortFilterDisplay;
+  final ValueChanged<SortFilterDisplay> onSortFilterChange;
+  final SortFilterOptions? sortFilterOptions;
+
+  @override
+  State<SortFilterPopup> createState() => _SortFilterPopupState();
+}
+
+class _SortFilterPopupState extends State<SortFilterPopup> {
+  late List<Tab> _tabs;
+  late SortFilterDisplay _originalSortFilterDisplay;
+  late SortFilterDisplay _sortFilterDisplay;
+  late SortFilterOptions _sortFilterOptions;
+
+  @override
+  void initState() {
+    super.initState();
+    _originalSortFilterDisplay = widget.sortFilterDisplay.clone();
+    _sortFilterDisplay = widget.sortFilterDisplay.clone();
+    _sortFilterOptions =
+        widget.sortFilterOptions ?? _getDefaultSortFilterOption();
+    _tabs = [
+      if (_sortFilterOptions.sortOptions.isNotEmpty)
+        Tab(
+          text: S.current.Sort,
+        ),
+      if (_sortFilterOptions.filterOptions.isNotEmpty)
+        Tab(
+          text: S.current.Filter,
+        ),
+      if (_sortFilterOptions.displayOptions.isNotEmpty)
+        Tab(
+          text: S.current.Display,
+        ),
+    ];
+  }
+
+  bool get _isAnime => widget.category.equals('anime');
+
+  SortFilterOptions _getDefaultSortFilterOption() {
+    return SortFilterOptions(
+      sortOptions:
+          SortFilterOptions.getSortOptions(_isAnime, _sortFilterDisplay.sort),
+      filterOptions: getFilterOptions(widget.category),
+      displayOptions: SortFilterOptions.getDisplayOptions(),
+    );
+  }
 
   int _indexOfSortOption(SortOption sortOption) {
-    return _sortOptions
+    return _sortFilterOptions.sortOptions
         .indexWhere((element) => element.value.equals(sortOption.value));
   }
 
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: tabs.length,
+      length: _tabs.length,
       initialIndex: _sortFilterDisplay.selectedTab,
       child: Builder(builder: (tabContext) {
         return WillPopScope(
@@ -402,7 +491,7 @@ class _SortFilterPopupState extends State<SortFilterPopup> {
                   child: SizedBox.expand(),
                 ),
                 _tabBarView(),
-                _tabs(),
+                _buildTabs(),
                 Positioned(
                   bottom: 0,
                   left: 0,
@@ -417,13 +506,13 @@ class _SortFilterPopupState extends State<SortFilterPopup> {
     );
   }
 
-  Material _tabs() {
+  Material _buildTabs() {
     return Material(
       child: SizedBox(
         height: 50.0,
         child: TabBar(
           padding: EdgeInsets.zero,
-          tabs: tabs,
+          tabs: _tabs,
         ),
       ),
     );
@@ -433,18 +522,22 @@ class _SortFilterPopupState extends State<SortFilterPopup> {
     return Padding(
       padding: const EdgeInsets.only(top: 40.0),
       child: TabBarView(
-        children: [
-          _sortView(),
-          _filterView(),
-          _displayView(),
-        ],
+        children: _tabs
+            .map((e) => switchCase<String, Widget>(e.text, {
+                  [S.current.Sort]: (_) => _sortView(),
+                  [S.current.Filter]: (_) => _filterView(),
+                  [S.current.Display]: (_) => _displayView(),
+                }))
+            .map((e) => e!)
+            .toList(),
       ),
     );
   }
 
   Widget _displayView() {
-    var displayOption =
-        _displayOptions[_sortFilterDisplay.displayOption.displayType];
+    final displayOption = _sortFilterOptions.displayOptions.firstWhere((e) {
+      return e.type == _sortFilterDisplay.displayOption.displayType;
+    });
     return CustomScrollView(
       slivers: [
         SB.lh20,
@@ -454,11 +547,11 @@ class _SortFilterPopupState extends State<SortFilterPopup> {
           ),
         ),
         SliverList.list(
-            children: _displayOptions.entries.map((e) {
+            children: _sortFilterOptions.displayOptions.map((e) {
           return RadioListTile<DisplayType>(
-            value: e.key,
+            value: e.type!,
             groupValue: _sortFilterDisplay.displayOption.displayType,
-            title: Text(e.value['name'].toString()),
+            title: Text(e.name),
             onChanged: (value) {
               if (value == null) return;
               _sortFilterDisplay = _sortFilterDisplay.copyWith(
@@ -471,18 +564,18 @@ class _SortFilterPopupState extends State<SortFilterPopup> {
             },
           );
         }).toList()),
-        SliverToBoxAdapter(
-          child: ListTile(
-            title: Text(S.current.Display_Sub_Type),
+        if (displayOption.subOptions != null) ...[
+          SliverToBoxAdapter(
+            child: ListTile(
+              title: Text(S.current.Display_Sub_Type),
+            ),
           ),
-        ),
-        if (displayOption != null)
           SliverList.list(
-              children: (displayOption['subType'] as List<Map>).map((e) {
+              children: displayOption.subOptions!.map((e) {
             return RadioListTile<DisplaySubType>(
-              value: e['value'],
+              value: e.subType!,
               groupValue: _sortFilterDisplay.displayOption.displaySubType,
-              title: Text(e['name'].toString()),
+              title: Text(e.name),
               onChanged: (value) {
                 if (value == null) return;
                 _sortFilterDisplay = _sortFilterDisplay.copyWith(
@@ -494,6 +587,7 @@ class _SortFilterPopupState extends State<SortFilterPopup> {
               },
             );
           }).toList()),
+        ],
         if (_sortFilterDisplay.displayOption.displayType ==
             DisplayType.grid) ...[
           SliverToBoxAdapter(
@@ -515,7 +609,7 @@ class _SortFilterPopupState extends State<SortFilterPopup> {
       padding: const EdgeInsets.only(top: 20.0, bottom: 90.0),
       initialScrollIndex: initialIndex == -1 ? 0 : initialIndex,
       itemBuilder: (context, index) {
-        var sortOption = _sortOptions[index];
+        var sortOption = _sortFilterOptions.sortOptions[index];
         return ListTile(
           title: Text(sortOption.name),
           trailing: _sortTrailing(sortOption, index),
@@ -524,7 +618,7 @@ class _SortFilterPopupState extends State<SortFilterPopup> {
           },
         );
       },
-      itemCount: _sortOptions.length,
+      itemCount: _sortFilterOptions.sortOptions.length,
     );
   }
 
@@ -535,7 +629,7 @@ class _SortFilterPopupState extends State<SortFilterPopup> {
             : SortOrder.Ascending)
         : null;
     var _sortOption = sortOption.copyWith(order: order);
-    _sortOptions[index] = _sortOption;
+    _sortFilterOptions.sortOptions[index] = _sortOption;
     _sortFilterDisplay = _sortFilterDisplay.copyWith(
       sort: _sortOption,
     );
@@ -603,24 +697,23 @@ class _SortFilterPopupState extends State<SortFilterPopup> {
   }
 
   void _onReset(BuildContext controllerContext) {
-    switch (DefaultTabController.of(controllerContext).index) {
-      case 0:
+    switchCase(_tabs[DefaultTabController.of(controllerContext).index], {
+      [S.current.Sort]: (_) {
         _sortFilterDisplay = _sortFilterDisplay.copyWith(
           sort: _originalSortFilterDisplay.sort.clone(),
         );
-        break;
-      case 1:
+      },
+      [S.current.Filter]: (_) {
         _sortFilterDisplay = _sortFilterDisplay.copyWith(
           filterOutputs: {},
         );
-        break;
-      case 2:
+      },
+      [S.current.Display]: (_) {
         _sortFilterDisplay = _sortFilterDisplay.copyWith(
           display: _originalSortFilterDisplay.displayOption.clone(),
         );
-        break;
-      default:
-    }
+      },
+    });
     if (mounted) setState(() {});
   }
 
@@ -638,7 +731,7 @@ class _SortFilterPopupState extends State<SortFilterPopup> {
 
   Widget _filterView() {
     return FilterModal(
-      filterOptions: _filterOptions,
+      filterOptions: _sortFilterOptions.filterOptions,
       filterOutputs: _sortFilterDisplay.filterOutputs,
       showBottombar: false,
       onChange: (fo) {
@@ -774,6 +867,31 @@ class SortFilterDisplay {
   final DisplayOption displayOption;
   final int selectedTab;
 
+  String refKey(String prefix) {
+    return '''
+    $prefix-
+    ${sort.value}-
+    ${sort.order.name}-
+    ${filterOutputs.values.map((e) => e.value ?? ((e.includedOptions ?? []).join(',') + (e.excludedOptions ?? []).join(','))).join('.')}-
+    ''';
+  }
+
+  static Future<SortFilterDisplay> fromCache(
+    String serviceName,
+    String key,
+    SortFilterDisplay defaultObject,
+  ) async {
+    final map = jsonDecode(
+        await CacheManager.instance.getValueForService(serviceName, key) ??
+            '{}');
+    return SortFilterDisplay.fromJson(map, defaultObject);
+  }
+
+  Future<void> toCache(String serviceName, String key) async {
+    await CacheManager.instance
+        .setValueForService(serviceName, key, jsonEncode(this));
+  }
+
   SortFilterDisplay clone() {
     return SortFilterDisplay(
       sort: sort.clone(),
@@ -787,6 +905,14 @@ class SortFilterDisplay {
     return filterOutputs.map((key, value) {
       return MapEntry(key, value.clone());
     });
+  }
+
+  factory SortFilterDisplay.withDisplayType(DisplayOption option) {
+    return SortFilterDisplay(
+      sort: SortOption(name: '_', value: '_'),
+      displayOption: option,
+      filterOutputs: {},
+    );
   }
 
   SortFilterDisplay copyWith(
@@ -805,9 +931,10 @@ class SortFilterDisplay {
     );
   }
 
-  static SortFilterDisplay fromJson(Map<String, dynamic>? json) {
+  static SortFilterDisplay fromJson(
+      Map<String, dynamic>? json, SortFilterDisplay defaultObject) {
     if (json == null || json.isEmpty) {
-      return defaultObject();
+      return defaultObject;
     }
     return SortFilterDisplay(
       sort: SortOption(
@@ -833,17 +960,6 @@ class SortFilterDisplay {
       ),
       filterOutputs: {},
       selectedTab: json['selectedTab'],
-    );
-  }
-
-  static SortFilterDisplay defaultObject() {
-    return SortFilterDisplay(
-      sort: SortOption(name: 'Updated At', value: 'list_updated_at'),
-      displayOption: DisplayOption(
-        displayType: user.pref.defaultDisplayType,
-        displaySubType: DisplaySubType.comfortable,
-      ),
-      filterOutputs: {},
     );
   }
 

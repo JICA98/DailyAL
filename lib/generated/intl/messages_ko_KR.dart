@@ -35,6 +35,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Add_Friend": MessageLookupByLibrary.simpleMessage("친구 추가"),
         "Add_an_Item": MessageLookupByLibrary.simpleMessage("항목을 추가하십시오"),
         "Add_to_List": MessageLookupByLibrary.simpleMessage("목록에 추가하십시오"),
+        "AdditionalTitles": MessageLookupByLibrary.simpleMessage("추가 타이틀"),
         "Adult_Cast": MessageLookupByLibrary.simpleMessage("성인_캐스트"),
         "Adventure": MessageLookupByLibrary.simpleMessage("모험"),
         "Age_high": MessageLookupByLibrary.simpleMessage("하이 하이"),
@@ -44,6 +45,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "All": MessageLookupByLibrary.simpleMessage("모두"),
         "All_time_Favorites":
             MessageLookupByLibrary.simpleMessage("모든 시간 즐겨 찾기"),
+        "Allow_YT_Player": MessageLookupByLibrary.simpleMessage("유튜브 플레이어 허용"),
+        "Allow_YT_Player_Desc": MessageLookupByLibrary.simpleMessage(
+            "YouTube 플레이어가 앱에서 동영상을 재생하도록 허용"),
         "Analysis": MessageLookupByLibrary.simpleMessage("분석"),
         "Animals": MessageLookupByLibrary.simpleMessage("동물"),
         "Animation": MessageLookupByLibrary.simpleMessage("생기"),
@@ -103,6 +107,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "상태가 시청/완료로 전환되면 시작 날짜와 종료 날짜를 자동으로 추가합니다."),
         "Auto_Translate_Synopsis":
             MessageLookupByLibrary.simpleMessage("자동 번역 시놉시스"),
+        "Available_At": MessageLookupByLibrary.simpleMessage("사용 가능 시간"),
         "Avant_Garde": MessageLookupByLibrary.simpleMessage("아방가르드"),
         "Average": MessageLookupByLibrary.simpleMessage("평균"),
         "Award_Winning": MessageLookupByLibrary.simpleMessage("수상_우승"),
@@ -402,6 +407,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Home_Page_Setting": MessageLookupByLibrary.simpleMessage("홈 페이지 설정"),
         "Home_Page_items": MessageLookupByLibrary.simpleMessage("홈 페이지 항목"),
         "Honor": MessageLookupByLibrary.simpleMessage("명예"),
+        "Horizontal_List": MessageLookupByLibrary.simpleMessage("수평 목록"),
         "Horrible": MessageLookupByLibrary.simpleMessage("끔찍한"),
         "Horror": MessageLookupByLibrary.simpleMessage("공포"),
         "Hot": MessageLookupByLibrary.simpleMessage("더운"),
@@ -518,6 +524,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "Magical_Sex_Shift":
             MessageLookupByLibrary.simpleMessage("Magical_Sex_Shift"),
         "Mahou_Shoujo": MessageLookupByLibrary.simpleMessage("MA 후 _s 후 조"),
+        "Mal_Under_Maintenance":
+            MessageLookupByLibrary.simpleMessage("MyAnimeList가 유지보수 중입니다."),
+        "Mal_Under_Maintenance_Desc": MessageLookupByLibrary.simpleMessage(
+            "MyAnimeList가 점검 중입니다. 나중에 다시 시도해 주세요."),
         "Male": MessageLookupByLibrary.simpleMessage("남성"),
         "Manga_Awards": MessageLookupByLibrary.simpleMessage("만화 상"),
         "Manga_Caps": MessageLookupByLibrary.simpleMessage("만화"),
@@ -641,6 +651,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Notification_settings_warning": MessageLookupByLibrary.simpleMessage(
             "이미 예정된 알림을 위해 최대 3 일 동안 경고를받을 수 있습니다.이 설정은 로그인했을 때만 작동합니다."),
         "OP_ED": MessageLookupByLibrary.simpleMessage("에드에서"),
+        "Ok": MessageLookupByLibrary.simpleMessage("좋아요"),
         "Oldest": MessageLookupByLibrary.simpleMessage("가장 오래된"),
         "On_Hold": MessageLookupByLibrary.simpleMessage("보류에"),
         "One_Piece": MessageLookupByLibrary.simpleMessage("한 조각"),
@@ -653,6 +664,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Organized_Crime": MessageLookupByLibrary.simpleMessage("조직범죄"),
         "Otakon": MessageLookupByLibrary.simpleMessage("오타 콘"),
         "Otaku_Culture": MessageLookupByLibrary.simpleMessage("오타쿠 문화"),
+        "Other_Lists": MessageLookupByLibrary.simpleMessage("기타 목록"),
         "Others": MessageLookupByLibrary.simpleMessage("기타"),
         "PTW": MessageLookupByLibrary.simpleMessage("PTW."),
         "Parody": MessageLookupByLibrary.simpleMessage("풍자적 개작 시문"),
@@ -757,6 +769,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Reset_homepage": MessageLookupByLibrary.simpleMessage("홈페이지를 재설정하십시오"),
         "Reset_homepage_warning": MessageLookupByLibrary.simpleMessage(
             "이렇게하면 홈페이지 레이아웃이 원래 상태로 재설정되며 사용할 수 없습니다."),
+        "Resources": MessageLookupByLibrary.simpleMessage("자원"),
         "Restacks": MessageLookupByLibrary.simpleMessage("다시 쌓다"),
         "Restart_to_see_changes":
             MessageLookupByLibrary.simpleMessage("변경 사항을 보려면 다시 시작해야합니다. \'"),
@@ -1105,6 +1118,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "monday": MessageLookupByLibrary.simpleMessage("월요일"),
         "month_ago": MessageLookupByLibrary.simpleMessage("한 달 전"),
         "months_ago": MessageLookupByLibrary.simpleMessage("몇달 전"),
+        "moreLinks": MessageLookupByLibrary.simpleMessage("더 많은 링크"),
         "numChapters": MessageLookupByLibrary.simpleMessage("장 수"),
         "numEpisodes": MessageLookupByLibrary.simpleMessage("에피소드 수"),
         "numListUsers": MessageLookupByLibrary.simpleMessage("목록 사용자 수"),

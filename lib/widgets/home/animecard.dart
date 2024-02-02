@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dailyanimelist/api/malapi.dart';
 import 'package:dailyanimelist/constant.dart';
@@ -8,6 +9,7 @@ import 'package:dailyanimelist/generated/l10n.dart';
 import 'package:dailyanimelist/main.dart';
 import 'package:dailyanimelist/screens/contentdetailedscreen.dart';
 import 'package:dailyanimelist/screens/generalsearchscreen.dart';
+import 'package:dailyanimelist/theme/theme.dart';
 import 'package:dailyanimelist/user/hompagepref.dart';
 import 'package:dailyanimelist/widgets/common/image_preview.dart';
 import 'package:dailyanimelist/widgets/custombutton.dart';
@@ -15,6 +17,7 @@ import 'package:dailyanimelist/widgets/fadingeffect.dart';
 import 'package:dailyanimelist/widgets/home/nodebadge.dart';
 import 'package:dailyanimelist/widgets/user/contentlistwidget.dart';
 import 'package:dailyanimelist/widgets/user/stats_screen.dart';
+import 'package:dal_commons/commons.dart';
 import 'package:dal_commons/dal_commons.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -50,6 +53,7 @@ class AnimeGridCard extends StatelessWidget {
   final Widget? addtionalWidget;
   final HomePageTileSize? homePageTileSize;
   final DisplaySubType? displaySubType;
+  final ScheduleData? scheduleData;
   final double? gridHeight;
 
   AnimeGridCard({
@@ -80,6 +84,7 @@ class AnimeGridCard extends StatelessWidget {
     this.homePageTileSize,
     this.displaySubType,
     this.gridHeight,
+    this.scheduleData,
   });
   @override
   Widget build(BuildContext context) {
@@ -95,7 +100,8 @@ class AnimeGridCard extends StatelessWidget {
     if (_compact || _coverOnly) {
       return Padding(
         padding: const EdgeInsets.only(top: 4.0, left: 6.0, right: 6.0),
-        child: cardWidget(context, nodeTitle),
+        child: cardWidget(context, nodeTitle,
+            time: time, myListStatus: myListStatus),
       );
     }
 
@@ -111,26 +117,10 @@ class AnimeGridCard extends StatelessWidget {
             conditional(
               on: gridHeight != null,
               parent: (child) => Expanded(child: child),
-              child: _buildImage(context, nodeTitle),
+              child: _buildImage(context, nodeTitle, time),
             ),
             if (isEditable) _comfortableEdit(context),
             if (showText) _textWidget(nodeTitle),
-            if (time != null)
-              Container(
-                width: width,
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 5),
-                  child: Text(
-                    time,
-                    textAlign:
-                        user.pref.isRtl ? TextAlign.right : TextAlign.left,
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodySmall
-                        ?.copyWith(fontSize: 11),
-                  ),
-                ),
-              ),
             if (showGenres && (node is AnimeDetailed || node is MangaDetailed))
               genreWidget(context),
             if (gridHeight != null) SB.h5,
@@ -140,17 +130,17 @@ class AnimeGridCard extends StatelessWidget {
     );
   }
 
-  Widget _buildImage(BuildContext context, String nodeTitle) {
+  Widget _buildImage(BuildContext context, String nodeTitle, String? time) {
     if (aspectRatio != null)
       return AspectRatio(
         aspectRatio: aspectRatio!,
-        child: cardWidget(context, nodeTitle, borderRadius: borderRadius),
+        child: cardWidget(context, nodeTitle, borderRadius: borderRadius, time: time),
       );
     else
       return Container(
         height: gridHeight != null ? null : height,
         width: gridHeight != null ? null : width,
-        child: cardWidget(context, nodeTitle, borderRadius: borderRadius),
+        child: cardWidget(context, nodeTitle, borderRadius: borderRadius, time: time),
       );
   }
 
@@ -190,21 +180,24 @@ class AnimeGridCard extends StatelessWidget {
 
   bool get _coverOnly => _displaySubType == DisplaySubType.cover_only_grid;
 
-  Widget _editAndText(BuildContext context, String nodeTitle) {
+  Widget _editAndText(
+    BuildContext context,
+    String nodeTitle,
+    double borderRadius,
+    MyListStatus? myListStatus,
+  ) {
     final value = parentNsv ?? NodeStatusValue.fromStatus(node);
-    return Positioned(
-      bottom: 5,
-      left: 5,
-      right: 3,
+    return Align(
+      alignment: AlignmentDirectional.bottomCenter,
       child: Row(
         mainAxisSize: MainAxisSize.max,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Expanded(
             child: ConstrainedBox(
-              constraints: BoxConstraints(maxHeight: 80.0),
+              constraints: BoxConstraints(maxHeight: 40.0),
               child: Padding(
-                padding: const EdgeInsets.only(bottom: 10),
+                padding: const EdgeInsets.fromLTRB(5, 0, 5, 8),
                 child: Text(
                   nodeTitle,
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
@@ -217,7 +210,9 @@ class AnimeGridCard extends StatelessWidget {
             ),
           ),
           SB.w10,
-          if (isEditable) editIconButton(value, () => _onEdit(context)),
+          if (isEditable)
+            editIconButton(
+                value, () => _onEdit(context), borderRadius, myListStatus),
         ],
       ),
     );
@@ -353,8 +348,13 @@ class AnimeGridCard extends StatelessWidget {
               ));
   }
 
-  Widget cardWidget(BuildContext context, String nodeTitle,
-      {double borderRadius = 6.0}) {
+  Widget cardWidget(
+    BuildContext context,
+    String nodeTitle, {
+    double borderRadius = 6.0,
+    String? time,
+    MyListStatus? myListStatus,
+  }) {
     return Material(
       borderRadius: BorderRadius.circular(borderRadius),
       child: Stack(
@@ -365,8 +365,13 @@ class AnimeGridCard extends StatelessWidget {
                   child: animePicture(context, borderRadius),
                 )
               : animePicture(context, borderRadius),
-          if (_compact) _blackBGforText(borderRadius),
-          if (_compact) _editAndText(context, nodeTitle),
+          if (_compact) ...[
+            _blackBGforText(borderRadius),
+            _editAndText(context, nodeTitle, borderRadius, myListStatus),
+            _episodeWatchProgressBar(myListStatus),
+            _memberCountMeanScore(time),
+          ],
+          if (time != null) _timeCard(time),
           if (numRecommendations != null) _recomWidget(context, borderRadius),
           if (addtionalWidget != null && !_coverOnly) addtionalWidget!,
         ],
@@ -380,16 +385,97 @@ class AnimeGridCard extends StatelessWidget {
       left: 0,
       right: 0,
       child: SizedBox(
-        height: 70,
+        height: 30,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(borderRadius),
           child: CustomPaint(
               foregroundPainter: FadingEffect(
                 color: Colors.black,
                 start: 5,
-                end: 250,
+                end: 255,
+                extend: 5,
               ),
               child: SB.z),
+        ),
+      ),
+    );
+  }
+
+  Widget _memberCountMeanScore(String? time) {
+    if (showMemberCount && (node is AnimeDetailed || node is MangaDetailed)) {
+      final content = node as dynamic;
+      final int? memberCount = content.numListUsers;
+      final double? meanScore = content.mean;
+      if (memberCount == null && meanScore == null) return SB.z;
+      return Positioned(
+        top: time != null ? 22 : 7,
+        left: 5,
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.black.withOpacity(0.5),
+            borderRadius: BorderRadius.circular(borderRadius),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: Center(
+              child: Text(
+                "${meanScore == null ? '' : meanScore.toStringAsFixed(2) + ' | '}${memberCount == null ? '' : userCountFormat.format(memberCount)}",
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.white, fontSize: 9),
+              ),
+            ),
+          ),
+        ),
+      );
+    }
+
+    return SB.z;
+  }
+
+  Widget _episodeWatchProgressBar(MyListStatus? myListStatus) {
+    double? watchProgress;
+    double? releaseProgress;
+    final episodes = scheduleData?.episode;
+    if (node is AnimeDetailed) {
+      final listStatus = myListStatus as MyAnimeListStatus?;
+      final watched = listStatus?.numEpisodesWatched;
+      int? numEpisodes = node.numEpisodes;
+      if (episodes != null && episodes > 1) {
+        numEpisodes = (episodes + 5);
+        releaseProgress = (episodes - 1) / numEpisodes;
+      }
+      if (watched != null && numEpisodes != null && numEpisodes > 0) {
+        watchProgress = watched / numEpisodes;
+      }
+    }
+    if (watchProgress == null) return SB.z;
+
+    return Align(
+      alignment: AlignmentDirectional.topCenter,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 1.5),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(borderRadius * 2),
+          child: Container(
+            height: 2.5,
+            width: width,
+            color: Colors.grey[500],
+            child: Stack(
+              children: [
+                if (releaseProgress != null)
+                  LinearProgressIndicator(
+                    value: releaseProgress,
+                    backgroundColor: Colors.transparent,
+                    valueColor: AlwaysStoppedAnimation<Color>(Colors.amber),
+                  ),
+                LinearProgressIndicator(
+                  value: watchProgress,
+                  backgroundColor: Colors.transparent,
+                  valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );
@@ -445,24 +531,80 @@ class AnimeGridCard extends StatelessWidget {
       ],
     );
   }
+
+  Widget _timeCard(String time) {
+    return Positioned(
+      top: 0,
+      left: 0,
+      right: 0,
+      child: Container(
+        height: 20,
+        decoration: BoxDecoration(
+          color: Colors.black.withOpacity(0.5),
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(borderRadius),
+            topRight: Radius.circular(borderRadius),
+          ),
+        ),
+        child: Center(
+          child: AutoSizeText(
+            time,
+            textAlign: TextAlign.center,
+            maxFontSize: 10.0,
+            minFontSize: 7.0,
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
+      ),
+    );
+  }
 }
 
-Widget editIconButton(NodeStatusValue? value, VoidCallback onEdit) {
+Widget editIconButton(
+  NodeStatusValue? value,
+  VoidCallback onEdit,
+  double borderRadius, [
+  dynamic myListStatus,
+]) {
+  Widget child;
+  final score = myListStatus?.score as int?;
+  final hasScore = score != null && score > 0;
+  final bgColor = value?.color ?? Colors.black;
+  final textColor = getTextColor(bgColor);
+  if (hasScore) {
+    child = Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(Icons.star, size: 16, color: textColor),
+        Text(
+          score.toString(),
+          style: TextStyle(
+            color: textColor,
+            fontSize: 12,
+          ),
+        ),
+      ],
+    );
+  } else {
+    child = Icon(
+      Icons.edit,
+      size: 16,
+      color: textColor,
+    );
+  }
   return SizedBox(
-    width: 30,
+    width: hasScore ? 40 : 30,
     height: 30,
     child: ShadowButton(
-      backgroundColor: value?.color,
+      backgroundColor: bgColor,
       padding: EdgeInsets.zero,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(6),
-      ),
+          borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(borderRadius * 2),
+        bottomRight: Radius.circular(borderRadius),
+      )),
       onPressed: onEdit,
-      child: Icon(
-        Icons.edit,
-        size: 16,
-        color: Colors.white,
-      ),
+      child: child,
     ),
   );
 }

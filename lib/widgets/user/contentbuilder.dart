@@ -59,11 +59,6 @@ class _UserContentBuilderState extends State<UserContentBuilder>
   bool _enableSearch = false;
   TextEditingController _searchController = TextEditingController();
   final _searchNode = FocusNode();
-  final _axisTileSizeMap = {
-    2: HomePageTileSize.xl,
-    3: HomePageTileSize.m,
-    4: HomePageTileSize.xs,
-  };
 
   @override
   void initState() {
@@ -77,11 +72,20 @@ class _UserContentBuilderState extends State<UserContentBuilder>
   }
 
   void _setSortFilterDisplayFuture() async {
-    final map = jsonDecode(await CacheManager.instance
-            .getValueForService(UserContentBuilder.serviceName, key) ??
-        '{}');
-    _sortFilterDisplay = SortFilterDisplay.fromJson(map);
+    _sortFilterDisplay = await SortFilterDisplay.fromCache(
+        UserContentBuilder.serviceName, key, _defaultObject());
     if (mounted) setState(() {});
+  }
+
+  SortFilterDisplay _defaultObject() {
+    return SortFilterDisplay(
+      sort: SortOption(name: 'Updated At', value: 'list_updated_at'),
+      displayOption: DisplayOption(
+        displayType: user.pref.defaultDisplayType,
+        displaySubType: DisplaySubType.comfortable,
+      ),
+      filterOutputs: {},
+    );
   }
 
   Future<List<BaseNode>> getContentList({
@@ -138,7 +142,7 @@ class _UserContentBuilderState extends State<UserContentBuilder>
       }
       final contentResult = await future;
       return await getSortedFilteredData(
-        contentResult,
+        contentResult.data,
         _canBeFetchedFromAPI,
         sortFilterDisplay,
         widget.category,
@@ -186,7 +190,7 @@ class _UserContentBuilderState extends State<UserContentBuilder>
             padding: widget.listPadding ?? const EdgeInsets.only(top: 25.0),
             child: InfinitePagination(
               scrollController: widget.controller,
-              refKey: _refKey,
+              refKey: _sortFilterDisplay?.refKey(refKey),
               future: (offset) => getContentList(offset: offset),
               pageSize: pageSize,
               displayType: _sortFilterDisplay!.displayOption.displayType,
@@ -209,8 +213,6 @@ class _UserContentBuilderState extends State<UserContentBuilder>
                 index,
                 _sortFilterDisplay!.displayOption.displayType,
                 showEdit: widget.username.equals("@me"),
-                homePageTileSize: _axisTileSizeMap[
-                    _sortFilterDisplay!.displayOption.gridCrossAxisCount],
                 displaySubType:
                     _sortFilterDisplay!.displayOption.displaySubType,
                 gridAxisCount:
@@ -228,15 +230,6 @@ class _UserContentBuilderState extends State<UserContentBuilder>
         ],
       ),
     );
-  }
-
-  String get _refKey {
-    return '''
-    $refKey-
-    ${_sortFilterDisplay!.sort.value}-
-    ${_sortFilterDisplay!.sort.order.name}-
-    ${_sortFilterDisplay!.filterOutputs.values.map((e) => e.value ?? ((e.includedOptions ?? []).join(',') + (e.excludedOptions ?? []).join(','))).join('.')}-
-    ''';
   }
 
   Widget _listSubHeaderWidget() {
@@ -368,7 +361,7 @@ class _UserContentBuilderState extends State<UserContentBuilder>
     return InkWell(
       borderRadius: BorderRadius.circular(12),
       onTap: () {
-        showContentListModal(
+        showSortFilterDisplayModal(
           context: context,
           sortFilterDisplay: _sortFilterDisplay!.clone(),
           category: widget.category,
@@ -389,8 +382,7 @@ class _UserContentBuilderState extends State<UserContentBuilder>
   void _changeDropDownValue(SortFilterDisplay value) {
     _prevSortFilterDisplay = _sortFilterDisplay!.clone();
     _sortFilterDisplay = value.clone();
-    CacheManager.instance.setValueForService(
-        UserContentBuilder.serviceName, key, jsonEncode(value));
+    value.toCache(UserContentBuilder.serviceName, key);
     if (mounted) setState(() {});
   }
 

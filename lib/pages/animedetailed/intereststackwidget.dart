@@ -673,6 +673,7 @@ class SpaciousContentWidget extends StatelessWidget {
               );
             }
           },
+          6.0,
         ),
         SB.w10,
       ],

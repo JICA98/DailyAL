@@ -7,6 +7,7 @@ import 'package:dailyanimelist/main.dart';
 import 'package:dailyanimelist/cache/cachemanager.dart';
 import 'package:dailyanimelist/screens/generalsearchscreen.dart';
 import 'package:dailyanimelist/widgets/search/filtermodal.dart';
+import 'package:dal_commons/commons.dart';
 import 'package:dal_commons/dal_commons.dart';
 
 class JikanHelper {
@@ -129,7 +130,7 @@ class JikanHelper {
         Map<String, dynamic> result = jsonDecode(response.body) ?? {};
         return SearchResult(
             data: (result["data"] ?? <BaseNode>[])
-                .map<BaseNode>((e) => _fromMap(e))
+                .map<BaseNode>((e) => _fromMap(e, category))
                 .toList(),
             paging: pageNumber == null
                 ? Paging()
@@ -143,7 +144,7 @@ class JikanHelper {
     return searchResult;
   }
 
-  static BaseNode _fromMap(dynamic e) {
+  static BaseNode _fromMap(dynamic e, String category) {
     var images = e["images"];
     String? url;
     if (images != null) {
@@ -152,16 +153,23 @@ class JikanHelper {
         url = jpg["image_url"];
       }
     }
-    return BaseNode(
-      content: Node(
+    final Node node;
+
+    if (e is Map<String, dynamic>) {
+      final jikanAnime = JikanAnime.fromJson(e);
+      node = AnimeDetailed.fromJikanJson(jikanAnime);
+    } else {
+      node = Node(
         id: e["mal_id"],
         title: e["title"] ?? e['name'],
         mainPicture: Picture(
           large: url,
           medium: url,
         ),
-      ),
-    );
+      );
+    }
+
+    return BaseNode(content: node);
   }
 
   static String? filterUrlBuilder(Map<String, FilterOption>? filters,

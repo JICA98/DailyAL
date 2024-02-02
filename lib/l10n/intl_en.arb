@@ -905,5 +905,16 @@
     "My_List2": "My List",
     "showAnimeMangaCard": "Show content card",
     "showAnimeMangaCardDesc": "Show card around the content in list view (comfirtable) wherever possible",
+    "moreLinks": "More Links",
+    "Resources": "Resources",
+    "Available_At": "Available At",
+    "Other_Lists": "Other Lists",
+    "AdditionalTitles": "Additional Titles",
+    "Allow_YT_Player": "Allow Youtube Player",
+    "Allow_YT_Player_Desc": "Allow Youtube player to play videos in the app",
+    "Horizontal_List": "Horizontal List",
+    "Mal_Under_Maintenance": "MyAnimeList is under maintenance",
+    "Mal_Under_Maintenance_Desc": "MyAnimeList is under maintenance, please try again later",
+    "Ok": "ok",
     "publishedEndDate": "Published End Date"
 }

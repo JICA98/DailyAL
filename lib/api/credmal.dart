@@ -89,4 +89,12 @@ class CredMal {
   static String get supabaseKey {
     return '${environment['SUPABASE_KEY']}';
   }
+
+  static String get apiURL {
+    return '${environment['API_URL']}';
+  }
+
+    static String get apiSecret {
+    return '${environment['API_SECRET']}';
+  }
 }

@@ -244,7 +244,7 @@ class _BookMarksWidgetState extends State<BookMarksWidget> {
         alignment: Alignment.topCenter,
         child: Padding(
           padding: const EdgeInsets.only(top: 35.0),
-          child: title('${S.current.Nothing_bookmarked_in} ${type}'),
+          child: title('${S.current.Nothing_bookmarked_in} $type'),
         ),
       );
     } else {
@@ -274,7 +274,7 @@ class _BookMarksWidgetState extends State<BookMarksWidget> {
         returnSlivers: true,
         cardHeight: 170,
         cardWidth: 160,
-        showImage: contentTypes.contains(type.name),
+        showImage: true,
         showEdit: contentTypes.contains(type.name),
         padding: const EdgeInsets.symmetric(horizontal: 15.0),
         contentList: adaptToBaseNodes(nodes),
@@ -357,7 +357,7 @@ class _BookMarksWidgetState extends State<BookMarksWidget> {
       } else if (e is ForumHtml) {
         return e;
       } else if (e is UserProf) {
-        return BaseNode(content: MUser(e.name!, '', ''));
+        return BaseNode(content: MUser(e.name!, e.picture ?? '', ''));
       } else {
         throw Error();
       }

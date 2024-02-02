@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:dal_commons/dal_commons.dart';
 import 'package:dal_commons/src/model/global/node.dart' as dal;
+import 'package:dal_commons/src/model/html/anime/additional_title.dart';
+import 'package:dal_commons/src/model/html/anime/animelinks.dart';
 import 'package:dal_commons/src/model/html/anime/intereststack.dart';
 import 'package:dal_commons/src/model/html/anime/mangacharahtml.dart';
 import 'package:html/dom.dart';
@@ -638,7 +640,11 @@ class HtmlParsers {
         String? category;
         for (var j = 0; j < items.length; j++) {
           var item = items.elementAt(j);
-          var node = AddtionalNode(title: 'Unknown');
+          dynamic id0, title0 = 'Unknown', mainPicture0, additional0;
+          int? numEpisodes0, numListUsers0;
+          String? mediaType0;
+          double? mean0;
+          dynamic node0;
           var picEleList = item.getElementsByClassName("picSurround") ?? [];
 
           if (picEleList.isNotEmpty) {
@@ -650,15 +656,13 @@ class HtmlParsers {
               if (href != null) {
                 category ??= getCategoryAllSearch(href.toString());
                 if (category!.equals("news")) {
-                  node.id =
-                      int.tryParse(href.substring(href.indexOf("news/") + 5));
+                  id0 = int.tryParse(href.substring(href.indexOf("news/") + 5));
                 } else if (["forum", "club"].contains(category)) {
-                  node.id =
-                      int.tryParse(href.substring(href.lastIndexOf("=") + 1));
+                  id0 = int.tryParse(href.substring(href.lastIndexOf("=") + 1));
                 } else {
                   href = href.substring(0, href.lastIndexOf("/"));
                   href = href.substring(href.lastIndexOf("/") + 1);
-                  node.id = int.tryParse(href);
+                  id0 = int.tryParse(href);
                 }
               }
               var imgList = picEle.getElementsByTagName("img") ?? [];
@@ -671,7 +675,7 @@ class HtmlParsers {
                     .attributes[imgPpty]
                     ?.replaceAll("r/100x140/", '')
                     .replaceAll("r/50x50/", '');
-                node.mainPicture = Picture(large: img, medium: img);
+                mainPicture0 = Picture(large: img, medium: img);
               }
             }
           }
@@ -683,15 +687,53 @@ class HtmlParsers {
 
             if (aEleList.isNotEmpty) {
               var anchor = aEleList.first;
-              node.title = anchor.text;
+              title0 = anchor.text;
             }
             var pt4List = info.getElementsByClassName("fn-grey4") ?? [];
             if (pt4List.isNotEmpty) {
-              node.additional = pt4List.first.text.trim();
+              var infoEle = pt4List.first;
+              if (['anime', 'manga'].contains(category)) {
+                final mediaType = infoEle.querySelector('a');
+                if (mediaType != null) {
+                  mediaType0 = mediaType.text.trim();
+                  mediaType.remove();
+                  final infoText = infoEle.text.trim();
+                  var split = infoText.split('\n');
+                  if (split.length == 3) {
+                    numEpisodes0 = int.tryParse(
+                        split[0].replaceAll(RegExp(r'\D'), '').trim());
+                    mean0 = double.tryParse(
+                        split[1].replaceAll('Scored', '').trim());
+                    numListUsers0 = int.tryParse(
+                        split[2].replaceAll(RegExp(r'\D'), '').trim());
+                  }
+                }
+              } else {
+                additional0 = infoEle.text.trim();
+              }
             }
           }
 
-          data.add(BaseNode(content: node));
+          if (['anime', 'manga'].contains(category)) {
+            node0 = AnimeDetailed(
+              id: id0,
+              mainPicture: mainPicture0,
+              title: title0,
+              mediaType: mediaType0,
+              numEpisodes: numEpisodes0,
+              numListUsers: numListUsers0,
+              mean: mean0,
+            );
+          } else {
+            node0 = AddtionalNode(
+              id: id0,
+              mainPicture: mainPicture0,
+              title: title0,
+              additional: additional0,
+            );
+          }
+
+          data.add(BaseNode(content: node0));
         }
         if (category != null &&
             allTypes.contains(category) &&
@@ -854,16 +896,10 @@ class HtmlParsers {
       featured: featuredFromHtml(animeDetailed, null),
       news: featuredFromHtml(animeDetailed, null, category: 'news'),
       forumTopicsHtml: forumTopicsHtmlFromHtml(animeDetailed),
-      broadcasts: animeDetailed
-              .querySelectorAll('.broadcasts .broadcast a')
-              .map((e) => Streaming(
-                    link: e.attributes['href'],
-                    title: e.attributes['title'],
-                  ))
-              .toList() ??
-          [],
+      links: _getAnimeLinks(animeDetailed),
       animeReviewList: [],
       adaptedNodes: _getAdaptedNodes(animeDetailed),
+      additionalTitles: _getAddtionaTitles(animeDetailed),
       mangaCharaList: type == ContentType.anime
           ? []
           : animeDetailed
@@ -896,6 +932,67 @@ class HtmlParsers {
       interestStacks: interestStackListFromHtml(
           animeDetailed.querySelectorAll('.detail-stack-block .column-item')),
     );
+  }
+
+  static List<AdditionalTitle> _getAddtionaTitles(Document document) {
+    return document
+        .querySelectorAll('.js-alternative-titles .spaceit_pad')
+        .expand((e) {
+          final langElement = e.querySelector('.dark_text');
+          final language = langElement?.text.trim() ?? '';
+          if (!language.equalsIgnoreCase('English:')) {
+            langElement?.remove();
+            final title = e.text.trim();
+            if (title.isNotBlank && language.isNotBlank) {
+              return [AdditionalTitle(title: title, language: language)];
+            }
+          }
+          return [null];
+        })
+        .where(_nonNull)
+        .map((e) => e!)
+        .toList();
+  }
+
+  static List<AnimeLink> _getAnimeLinks(Document document) {
+    final streamLinks =
+        document.querySelectorAll('.broadcasts .broadcast a').map((e) {
+      var title = e.attributes['title'] ?? e.text.trim();
+      return AnimeLink(
+        url: e.attributes['href'] ?? '',
+        name: title,
+        linkType: LinkType.streaming,
+        imageUrl: getDomainAsset(title),
+      );
+    }).toList();
+    final externalLinks =
+        document.querySelectorAll('.external_links').expand((element) {
+      LinkType linkType = LinkType.resources;
+      var previousElementSibling = element.previousElementSibling;
+      if (previousElementSibling != null) {
+        if (previousElementSibling.text
+            .trim()
+            .toLowerCase()
+            .contains('available')) {
+          linkType = LinkType.availableAt;
+        } else {
+          linkType = LinkType.resources;
+        }
+      }
+      return element.querySelectorAll('a.link').map((e) {
+        return AnimeLink(
+          url: e.attributes['href'] ?? '',
+          name: e.text.trim(),
+          linkType: linkType,
+          imageUrl: e.querySelector('img')?.attributes['src'],
+        );
+      });
+    }).toList();
+
+    return [
+      ...streamLinks,
+      ...externalLinks,
+    ];
   }
 
   static List<dal.Node> _getAdaptedNodes(Document document) {
@@ -1600,5 +1697,36 @@ class HtmlParsers {
           .toList();
       return history;
     }
+  }
+
+  static parseGenres(Document document, String category) {
+    final types = ['Genres', 'Explicit Genres', 'Themes', 'Demographics'];
+    return document
+        .querySelectorAll('.genre-link')
+        .sublist(0, 4)
+        .asMap()
+        .entries
+        .map((e) {
+      return {
+        'type': types[e.key],
+        'genres': e.value.querySelectorAll('a').expand((e) {
+          final uri = Uri.tryParse(e.attributes['href'] ?? '');
+          final id = int.tryParse(uri?.pathSegments.tryAt(2) ?? '');
+          final linkText = e.text.trim();
+          // regex to get only alphabets
+
+          final name = linkText.getAlphabets();
+          final count = int.tryParse(linkText.replaceAll(RegExp(r'\D'), ''));
+          if (id == null || name.isBlank) return [];
+          return [
+            {
+              'id': id,
+              'name': name,
+              'count': count,
+            }
+          ];
+        }).toList(),
+      };
+    }).toList();
   }
 }

@@ -35,6 +35,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Add_Friend": MessageLookupByLibrary.simpleMessage("友人を追加する"),
         "Add_an_Item": MessageLookupByLibrary.simpleMessage("アイテムを追加してください"),
         "Add_to_List": MessageLookupByLibrary.simpleMessage("リストに追加する"),
+        "AdditionalTitles": MessageLookupByLibrary.simpleMessage("追加タイトル"),
         "Adult_Cast": MessageLookupByLibrary.simpleMessage("Adult_Cast"),
         "Adventure": MessageLookupByLibrary.simpleMessage("冒険"),
         "Age_high": MessageLookupByLibrary.simpleMessage("age high"),
@@ -44,6 +45,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "All": MessageLookupByLibrary.simpleMessage("全て"),
         "All_time_Favorites":
             MessageLookupByLibrary.simpleMessage("すべての時間お気に入り"),
+        "Allow_YT_Player":
+            MessageLookupByLibrary.simpleMessage("Youtube プレーヤーを許可する"),
+        "Allow_YT_Player_Desc": MessageLookupByLibrary.simpleMessage(
+            "Youtube プレーヤーがアプリ内でビデオを再生できるようにする"),
         "Analysis": MessageLookupByLibrary.simpleMessage("分析"),
         "Animals": MessageLookupByLibrary.simpleMessage("動物"),
         "Animation": MessageLookupByLibrary.simpleMessage("アニメーション"),
@@ -102,6 +107,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Auto_Add_Start_End_Date_Desc": MessageLookupByLibrary.simpleMessage(
             "ステータスが監視/完了に移行すると、開始日と終了日が自動的に追加されます。"),
         "Auto_Translate_Synopsis": MessageLookupByLibrary.simpleMessage("翻訳概要"),
+        "Available_At": MessageLookupByLibrary.simpleMessage("利用可能場所"),
         "Avant_Garde": MessageLookupByLibrary.simpleMessage("アバンギャルド"),
         "Average": MessageLookupByLibrary.simpleMessage("平均"),
         "Award_Winning": MessageLookupByLibrary.simpleMessage("Award_Winning"),
@@ -400,6 +406,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Home_Page_Setting": MessageLookupByLibrary.simpleMessage("ホームページ設定"),
         "Home_Page_items": MessageLookupByLibrary.simpleMessage("ホームページアイテム"),
         "Honor": MessageLookupByLibrary.simpleMessage("名誉"),
+        "Horizontal_List": MessageLookupByLibrary.simpleMessage("水平リスト"),
         "Horrible": MessageLookupByLibrary.simpleMessage("最悪"),
         "Horror": MessageLookupByLibrary.simpleMessage("ホラー"),
         "Hot": MessageLookupByLibrary.simpleMessage("ホット"),
@@ -516,6 +523,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "Magical_Sex_Shift":
             MessageLookupByLibrary.simpleMessage("Magical_Sex_Shift"),
         "Mahou_Shoujo": MessageLookupByLibrary.simpleMessage("まほう＿しょうじょ"),
+        "Mal_Under_Maintenance":
+            MessageLookupByLibrary.simpleMessage("MyAnimeListはメンテナンス中です"),
+        "Mal_Under_Maintenance_Desc": MessageLookupByLibrary.simpleMessage(
+            "MyAnimeList はメンテナンス中です。後でもう一度お試しください。"),
         "Male": MessageLookupByLibrary.simpleMessage("男"),
         "Manga_Awards": MessageLookupByLibrary.simpleMessage("マンガ賞"),
         "Manga_Caps": MessageLookupByLibrary.simpleMessage("マンガ"),
@@ -637,6 +648,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Notification_settings_warning": MessageLookupByLibrary.simpleMessage(
             "まだあなたのためにスケジュールされている通知のために3日までの警告を受け取るかもしれません。これらの設定はログインしたときにのみ機能します。"),
         "OP_ED": MessageLookupByLibrary.simpleMessage("EDの"),
+        "Ok": MessageLookupByLibrary.simpleMessage("わかりました"),
         "Oldest": MessageLookupByLibrary.simpleMessage("オールド"),
         "On_Hold": MessageLookupByLibrary.simpleMessage("保留"),
         "One_Piece": MessageLookupByLibrary.simpleMessage("ワンピース"),
@@ -649,6 +661,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Organized_Crime": MessageLookupByLibrary.simpleMessage("組織犯罪"),
         "Otakon": MessageLookupByLibrary.simpleMessage("オタコン"),
         "Otaku_Culture": MessageLookupByLibrary.simpleMessage("オタク文化"),
+        "Other_Lists": MessageLookupByLibrary.simpleMessage("その他のリスト"),
         "Others": MessageLookupByLibrary.simpleMessage("他人"),
         "PTW": MessageLookupByLibrary.simpleMessage("PTW."),
         "Parody": MessageLookupByLibrary.simpleMessage("パロディー"),
@@ -752,6 +765,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("ホームページをリセットします"),
         "Reset_homepage_warning": MessageLookupByLibrary.simpleMessage(
             "これにより、ホームページのレイアウトが元の状態にリセットされ、実行不能です。"),
+        "Resources": MessageLookupByLibrary.simpleMessage("リソース"),
         "Restacks": MessageLookupByLibrary.simpleMessage("再スタック"),
         "Restart_to_see_changes":
             MessageLookupByLibrary.simpleMessage("変更を確認するために再起動する必要があります"),
@@ -1100,6 +1114,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "monday": MessageLookupByLibrary.simpleMessage("月曜"),
         "month_ago": MessageLookupByLibrary.simpleMessage("一ヶ月前"),
         "months_ago": MessageLookupByLibrary.simpleMessage("数か月前"),
+        "moreLinks": MessageLookupByLibrary.simpleMessage("その他のリンク"),
         "numChapters": MessageLookupByLibrary.simpleMessage("章の数"),
         "numEpisodes": MessageLookupByLibrary.simpleMessage("話数"),
         "numListUsers": MessageLookupByLibrary.simpleMessage("リストユーザー数"),

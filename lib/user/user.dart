@@ -98,6 +98,10 @@ class User with ChangeNotifier {
     }
   }
 
+  Future<void> setMetadata() {
+    return setIntance(shouldNotify: false, updateAuth: false);
+  }
+
   Future<void> refreshAuthStatus() async {
     final authResponse = await _getAuthResponse();
     this.authResponse = authResponse;

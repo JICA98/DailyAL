@@ -9100,6 +9100,116 @@ class S {
     );
   }
 
+  /// `More Links`
+  String get moreLinks {
+    return Intl.message(
+      'More Links',
+      name: 'moreLinks',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Resources`
+  String get Resources {
+    return Intl.message(
+      'Resources',
+      name: 'Resources',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Available At`
+  String get Available_At {
+    return Intl.message(
+      'Available At',
+      name: 'Available_At',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Other Lists`
+  String get Other_Lists {
+    return Intl.message(
+      'Other Lists',
+      name: 'Other_Lists',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Additional Titles`
+  String get AdditionalTitles {
+    return Intl.message(
+      'Additional Titles',
+      name: 'AdditionalTitles',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Allow Youtube Player`
+  String get Allow_YT_Player {
+    return Intl.message(
+      'Allow Youtube Player',
+      name: 'Allow_YT_Player',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Allow Youtube player to play videos in the app`
+  String get Allow_YT_Player_Desc {
+    return Intl.message(
+      'Allow Youtube player to play videos in the app',
+      name: 'Allow_YT_Player_Desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Horizontal List`
+  String get Horizontal_List {
+    return Intl.message(
+      'Horizontal List',
+      name: 'Horizontal_List',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `MyAnimeList is under maintenance`
+  String get Mal_Under_Maintenance {
+    return Intl.message(
+      'MyAnimeList is under maintenance',
+      name: 'Mal_Under_Maintenance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `MyAnimeList is under maintenance, please try again later`
+  String get Mal_Under_Maintenance_Desc {
+    return Intl.message(
+      'MyAnimeList is under maintenance, please try again later',
+      name: 'Mal_Under_Maintenance_Desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ok`
+  String get Ok {
+    return Intl.message(
+      'ok',
+      name: 'Ok',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Published End Date`
   String get publishedEndDate {
     return Intl.message(

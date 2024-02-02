@@ -94,6 +94,11 @@ extension StringExtension on String {
     return result.substring(0, result.length - 1);
   }
 
+  String titleCase() {
+    if (isEmpty) return this;
+    return "${this[0].toUpperCase()}${substring(1).toLowerCase()}";
+  }
+
   bool equals(String? other) {
     if (other == null) return false;
     return compareTo(other) == 0;
@@ -168,6 +173,16 @@ extension StringExtension on String {
       }
     }
     return formattedTitle;
+  }
+
+  String getAlphabets() {
+    String output = "";
+    for (int i = 0; i < length; ++i) {
+      if (this[i].isAlphaDigit()) {
+        output += this[i];
+      }
+    }
+    return output;
   }
 
   int countAll(String string) {
@@ -291,3 +306,6 @@ K? switchCase<T, K>(
   }
   return defaultValue;
 }
+
+String getDomainAsset(String e, [String domain = 'streaming']) =>
+    'https://dailyanimelist.web.app/assets/$domain/${e.trim()}.png';

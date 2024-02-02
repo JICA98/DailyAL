@@ -37,6 +37,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "Add_an_Item": MessageLookupByLibrary.simpleMessage("Добавить элемент"),
         "Add_to_List":
             MessageLookupByLibrary.simpleMessage("Добавить в список"),
+        "AdditionalTitles":
+            MessageLookupByLibrary.simpleMessage("Дополнительные названия"),
         "Adult_Cast": MessageLookupByLibrary.simpleMessage("Adult_Cast"),
         "Adventure": MessageLookupByLibrary.simpleMessage("Приключение"),
         "Age_high": MessageLookupByLibrary.simpleMessage("Возраст высокий"),
@@ -46,6 +48,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "All": MessageLookupByLibrary.simpleMessage("Все"),
         "All_time_Favorites":
             MessageLookupByLibrary.simpleMessage("Избранное за все время"),
+        "Allow_YT_Player": MessageLookupByLibrary.simpleMessage(
+            "Разрешить проигрыватель YouTube"),
+        "Allow_YT_Player_Desc": MessageLookupByLibrary.simpleMessage(
+            "Разрешить проигрывателю Youtube воспроизводить видео в приложении"),
         "Analysis": MessageLookupByLibrary.simpleMessage("Анализ"),
         "Animals": MessageLookupByLibrary.simpleMessage("Животные"),
         "Animation": MessageLookupByLibrary.simpleMessage("Анимация"),
@@ -114,6 +120,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Автоматически добавляет дату начала и окончания, когда статус меняется на просмотр/завершено."),
         "Auto_Translate_Synopsis":
             MessageLookupByLibrary.simpleMessage("Это резюме перевода"),
+        "Available_At": MessageLookupByLibrary.simpleMessage("Доступны на"),
         "Avant_Garde": MessageLookupByLibrary.simpleMessage("Авангард"),
         "Average": MessageLookupByLibrary.simpleMessage("Средний"),
         "Award_Winning": MessageLookupByLibrary.simpleMessage("Награда_Победа"),
@@ -450,6 +457,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "Home_Page_items":
             MessageLookupByLibrary.simpleMessage("Элементы главной страницы"),
         "Honor": MessageLookupByLibrary.simpleMessage("Честь"),
+        "Horizontal_List":
+            MessageLookupByLibrary.simpleMessage("Горизонтальный список"),
         "Horrible": MessageLookupByLibrary.simpleMessage("Ужасный"),
         "Horror": MessageLookupByLibrary.simpleMessage("Ужастик"),
         "Hot": MessageLookupByLibrary.simpleMessage("Горячий"),
@@ -583,6 +592,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Magical_Sex_Shift"),
         "Mahou_Shoujo":
             MessageLookupByLibrary.simpleMessage("Волшебная девочка"),
+        "Mal_Under_Maintenance": MessageLookupByLibrary.simpleMessage(
+            "MyAnimeList находится на техническом обслуживании."),
+        "Mal_Under_Maintenance_Desc": MessageLookupByLibrary.simpleMessage(
+            "MyAnimeList находится на техническом обслуживании. Повторите попытку позже."),
         "Male": MessageLookupByLibrary.simpleMessage("Мужской"),
         "Manga_Awards": MessageLookupByLibrary.simpleMessage("Награды манги"),
         "Manga_Caps": MessageLookupByLibrary.simpleMessage("Манга"),
@@ -722,6 +735,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Notification_settings_warning": MessageLookupByLibrary.simpleMessage(
             "Вы по-прежнему можете получать оповещения в течение трех дней об уведомлениях, которые уже запланированы для вас. Обратите внимание, что эти настройки будут работать только после входа в систему."),
         "OP_ED": MessageLookupByLibrary.simpleMessage("ОДИН D"),
+        "Ok": MessageLookupByLibrary.simpleMessage("хорошо"),
         "Oldest": MessageLookupByLibrary.simpleMessage("самый старый"),
         "On_Hold": MessageLookupByLibrary.simpleMessage("На удерживании"),
         "One_Piece": MessageLookupByLibrary.simpleMessage("Один кусочек"),
@@ -737,6 +751,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Организованная преступность"),
         "Otakon": MessageLookupByLibrary.simpleMessage("Отакон"),
         "Otaku_Culture": MessageLookupByLibrary.simpleMessage("Культура Отаку"),
+        "Other_Lists": MessageLookupByLibrary.simpleMessage("Другие списки"),
         "Others": MessageLookupByLibrary.simpleMessage("Другие"),
         "PTW": MessageLookupByLibrary.simpleMessage("ПТВ"),
         "Parody": MessageLookupByLibrary.simpleMessage("Пародия"),
@@ -857,6 +872,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Сбросить домашнюю страницу"),
         "Reset_homepage_warning": MessageLookupByLibrary.simpleMessage(
             "Это вернет макет домашней страницы в исходное состояние, и это невозможно."),
+        "Resources": MessageLookupByLibrary.simpleMessage("Ресурсы"),
         "Restacks": MessageLookupByLibrary.simpleMessage("перекладывает"),
         "Restart_to_see_changes": MessageLookupByLibrary.simpleMessage(
             "Вам придется перезагрузить компьютер, чтобы увидеть изменения»"),
@@ -1260,6 +1276,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "month_ago": MessageLookupByLibrary.simpleMessage("месяц назад"),
         "months_ago":
             MessageLookupByLibrary.simpleMessage("несколько месяцев назад"),
+        "moreLinks":
+            MessageLookupByLibrary.simpleMessage("Дополнительные ссылки"),
         "numChapters": MessageLookupByLibrary.simpleMessage("Количество глав"),
         "numEpisodes": MessageLookupByLibrary.simpleMessage("Количество серий"),
         "numListUsers": MessageLookupByLibrary.simpleMessage(

@@ -18,6 +18,7 @@ class Node with AnimeDetailedMixin {
   bool? fromCache;
   String? url;
   final String? nodeCategory;
+  int? numRecommendations;
 
   Node({
     this.id,
@@ -30,6 +31,7 @@ class Node with AnimeDetailedMixin {
     this.numEpisodes,
     this.myListStatus,
     this.nodeCategory,
+    this.numRecommendations,
   });
 
   factory Node.fromJson(Map<String, dynamic>? json) {

@@ -11,6 +11,7 @@ import 'package:dailyanimelist/widgets/fadingeffect.dart';
 import 'package:dailyanimelist/widgets/translator.dart';
 import 'package:dal_commons/commons.dart';
 import 'package:dal_commons/dal_commons.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
@@ -250,7 +251,7 @@ class _SysonpsisWidgetState extends State<SysonpsisWidget>
       future: transFuture!,
       autoTranslate: user.pref.autoTranslateSynopsis,
       content: widget.synopsis!,
-      done: (s) => synposisText(s ?? ''),
+      done: (s) => _buildRichTextWithAnchors(s ?? ''),
       loading: loadingText(context),
       preButtonText: S.current.Translate_Synopsis,
       postButtonText: S.current.Show_Original,
@@ -263,11 +264,44 @@ class _SysonpsisWidgetState extends State<SysonpsisWidget>
     );
   }
 
-  Widget synposisText(String text) {
-    return Text(
-      text,
+  Widget _buildRichTextWithAnchors(String inputString) {
+    List<TextSpan> textSpans = [];
+
+    RegExp urlRegex = RegExp(
+        r'(?:(?:http|https):\/\/)?(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)');
+
+    Iterable<Match> matches = urlRegex.allMatches(inputString);
+    int start = 0;
+
+    for (Match match in matches) {
+      if (match.start > start) {
+        textSpans
+            .add(TextSpan(text: inputString.substring(start, match.start)));
+      }
+
+      String url = match.group(0)!;
+      textSpans.add(
+        TextSpan(
+          text: url,
+          style: TextStyle(color: Colors.blue),
+          recognizer: TapGestureRecognizer()
+            ..onTap = () => launchURLWithConfirmation(url, context: context),
+        ),
+      );
+
+      start = match.end;
+    }
+
+    if (start < inputString.length) {
+      textSpans.add(TextSpan(text: inputString.substring(start)));
+    }
+
+    return RichText(
       textAlign: TextAlign.justify,
-      style: TextStyle(fontSize: 14),
+      text: TextSpan(
+        style: Theme.of(context).textTheme.bodySmall,
+        children: textSpans,
+      ),
     );
   }
 

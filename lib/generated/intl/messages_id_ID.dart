@@ -36,6 +36,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "Add_an_Item": MessageLookupByLibrary.simpleMessage("Tambahkan item"),
         "Add_to_List":
             MessageLookupByLibrary.simpleMessage("Tambahkan ke Daftar"),
+        "AdditionalTitles":
+            MessageLookupByLibrary.simpleMessage("Judul Tambahan"),
         "Adult_Cast": MessageLookupByLibrary.simpleMessage("Pemeran_dewasa"),
         "Adventure": MessageLookupByLibrary.simpleMessage("Petualangan"),
         "Age_high": MessageLookupByLibrary.simpleMessage("Usia tinggi"),
@@ -45,6 +47,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "All": MessageLookupByLibrary.simpleMessage("Semua"),
         "All_time_Favorites":
             MessageLookupByLibrary.simpleMessage("Favorit waktu"),
+        "Allow_YT_Player":
+            MessageLookupByLibrary.simpleMessage("Izinkan Pemutar Youtube"),
+        "Allow_YT_Player_Desc": MessageLookupByLibrary.simpleMessage(
+            "Izinkan pemutar Youtube memutar video di aplikasi"),
         "Analysis": MessageLookupByLibrary.simpleMessage("Analisis"),
         "Animals": MessageLookupByLibrary.simpleMessage("Hewan"),
         "Animation": MessageLookupByLibrary.simpleMessage("Animasi"),
@@ -113,6 +119,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Secara otomatis menambahkan tanggal mulai dan berakhir saat status dipindahkan ke menonton/selesai."),
         "Auto_Translate_Synopsis":
             MessageLookupByLibrary.simpleMessage("Auto Terjemahkan Sinopsis."),
+        "Available_At": MessageLookupByLibrary.simpleMessage("Tersedia di"),
         "Avant_Garde": MessageLookupByLibrary.simpleMessage("Avant-garde"),
         "Average": MessageLookupByLibrary.simpleMessage("Rata-rata"),
         "Award_Winning":
@@ -450,6 +457,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "Home_Page_items":
             MessageLookupByLibrary.simpleMessage("Halaman Utama item"),
         "Honor": MessageLookupByLibrary.simpleMessage("Menghormati"),
+        "Horizontal_List":
+            MessageLookupByLibrary.simpleMessage("Daftar Horisontal"),
         "Horrible": MessageLookupByLibrary.simpleMessage("Mengerikan"),
         "Horror": MessageLookupByLibrary.simpleMessage("Kengerian"),
         "Hot": MessageLookupByLibrary.simpleMessage("Panas"),
@@ -580,6 +589,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Pergeseran_Seks_Ajaib"),
         "Mahou_Shoujo":
             MessageLookupByLibrary.simpleMessage("Setelah MA _s Setelah Jo"),
+        "Mal_Under_Maintenance": MessageLookupByLibrary.simpleMessage(
+            "MyAnimeList sedang dalam pemeliharaan"),
+        "Mal_Under_Maintenance_Desc": MessageLookupByLibrary.simpleMessage(
+            "MyAnimeList sedang dalam pemeliharaan, silakan coba lagi nanti"),
         "Male": MessageLookupByLibrary.simpleMessage("Pria"),
         "Manga_Awards": MessageLookupByLibrary.simpleMessage("Manga Awards."),
         "Manga_Caps": MessageLookupByLibrary.simpleMessage("Manga"),
@@ -716,6 +729,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Notification_settings_warning": MessageLookupByLibrary.simpleMessage(
             "Anda mungkin masih mendapat peringatan untuk hingga 3 hari untuk notifikasi yang sudah dijadwalkan untuk Anda.Harap dicatat bahwa pengaturan ini hanya akan berfungsi ketika Anda telah masuk."),
         "OP_ED": MessageLookupByLibrary.simpleMessage("Satu d"),
+        "Ok": MessageLookupByLibrary.simpleMessage("Oke"),
         "Oldest": MessageLookupByLibrary.simpleMessage("tertua"),
         "On_Hold": MessageLookupByLibrary.simpleMessage("Tertahan"),
         "One_Piece": MessageLookupByLibrary.simpleMessage("Satu potong"),
@@ -731,6 +745,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Kejahatan Terorganisir"),
         "Otakon": MessageLookupByLibrary.simpleMessage("Otakon."),
         "Otaku_Culture": MessageLookupByLibrary.simpleMessage("Budaya Otaku"),
+        "Other_Lists": MessageLookupByLibrary.simpleMessage("Daftar Lainnya"),
         "Others": MessageLookupByLibrary.simpleMessage("Yang lain"),
         "PTW": MessageLookupByLibrary.simpleMessage("Ptw."),
         "Parody": MessageLookupByLibrary.simpleMessage("Parodi"),
@@ -847,6 +862,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Atur Ulang Homepage"),
         "Reset_homepage_warning": MessageLookupByLibrary.simpleMessage(
             "Ini akan mengatur ulang tata letak beranda ke keadaan semula dan tidak bisa dilakukan."),
+        "Resources": MessageLookupByLibrary.simpleMessage("Sumber daya"),
         "Restacks": MessageLookupByLibrary.simpleMessage("repack"),
         "Restart_to_see_changes": MessageLookupByLibrary.simpleMessage(
             "Anda harus memulai kembali untuk melihat perubahan \'"),
@@ -1271,6 +1287,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "monday": MessageLookupByLibrary.simpleMessage("Senin"),
         "month_ago": MessageLookupByLibrary.simpleMessage("sebulan yang lalu"),
         "months_ago": MessageLookupByLibrary.simpleMessage("bulan lalu"),
+        "moreLinks": MessageLookupByLibrary.simpleMessage("Tautan Lainnya"),
         "numChapters": MessageLookupByLibrary.simpleMessage("Jumlah Bab"),
         "numEpisodes": MessageLookupByLibrary.simpleMessage("Jumlah Episode"),
         "numListUsers":

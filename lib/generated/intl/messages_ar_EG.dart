@@ -35,6 +35,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "Add_Friend": MessageLookupByLibrary.simpleMessage("إضافة صديق"),
         "Add_an_Item": MessageLookupByLibrary.simpleMessage("إضافة عنصر"),
         "Add_to_List": MessageLookupByLibrary.simpleMessage("أضف إلى القائمة"),
+        "AdditionalTitles":
+            MessageLookupByLibrary.simpleMessage("عناوين إضافية"),
         "Adult_Cast": MessageLookupByLibrary.simpleMessage("Adult_Cast"),
         "Adventure": MessageLookupByLibrary.simpleMessage("مفامرة"),
         "Age_high": MessageLookupByLibrary.simpleMessage("العمر عالية"),
@@ -44,6 +46,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "All": MessageLookupByLibrary.simpleMessage("الجميع"),
         "All_time_Favorites":
             MessageLookupByLibrary.simpleMessage("كل الأوقات المفضلة"),
+        "Allow_YT_Player":
+            MessageLookupByLibrary.simpleMessage("السماح لمشغل يوتيوب"),
+        "Allow_YT_Player_Desc": MessageLookupByLibrary.simpleMessage(
+            "السماح لمشغل Youtube بتشغيل مقاطع الفيديو في التطبيق"),
         "Analysis": MessageLookupByLibrary.simpleMessage("التحليلات"),
         "Animals": MessageLookupByLibrary.simpleMessage("الحيوانات"),
         "Animation": MessageLookupByLibrary.simpleMessage("حيوية"),
@@ -111,6 +117,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "يضيف تاريخ البدء والانتهاء تلقائيًا عند نقل الحالة إلى المشاهدة / الاكتمال."),
         "Auto_Translate_Synopsis":
             MessageLookupByLibrary.simpleMessage("ترجمة السيارات ملخص"),
+        "Available_At": MessageLookupByLibrary.simpleMessage("متواجد في"),
         "Avant_Garde": MessageLookupByLibrary.simpleMessage("الطليعية"),
         "Average": MessageLookupByLibrary.simpleMessage("متوسط"),
         "Award_Winning": MessageLookupByLibrary.simpleMessage("جائزة_الفوز"),
@@ -440,6 +447,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "Home_Page_items":
             MessageLookupByLibrary.simpleMessage("عناصر الصفحة الرئيسية"),
         "Honor": MessageLookupByLibrary.simpleMessage("شرف"),
+        "Horizontal_List":
+            MessageLookupByLibrary.simpleMessage("القائمة الأفقية"),
         "Horrible": MessageLookupByLibrary.simpleMessage("فظيع"),
         "Horror": MessageLookupByLibrary.simpleMessage("رعب"),
         "Hot": MessageLookupByLibrary.simpleMessage("حار"),
@@ -569,6 +578,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Magical_Sex_Shift"),
         "Mahou_Shoujo":
             MessageLookupByLibrary.simpleMessage("بعد MA _s بعد Jo"),
+        "Mal_Under_Maintenance":
+            MessageLookupByLibrary.simpleMessage("MyAnimeList قيد الصيانة"),
+        "Mal_Under_Maintenance_Desc": MessageLookupByLibrary.simpleMessage(
+            "MyAnimeList قيد الصيانة، يرجى المحاولة مرة أخرى لاحقًا"),
         "Male": MessageLookupByLibrary.simpleMessage("ذكر"),
         "Manga_Awards": MessageLookupByLibrary.simpleMessage("جوائز مانجا"),
         "Manga_Caps": MessageLookupByLibrary.simpleMessage("مانغا"),
@@ -704,6 +717,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Notification_settings_warning": MessageLookupByLibrary.simpleMessage(
             "لا يزال بإمكانك الحصول على تنبيهات لمدة تصل إلى 3 أيام للإخطارات التي تم جدولة بالفعل لك.يرجى ملاحظة أن هذه الإعدادات ستعمل فقط عند تسجيل الدخول."),
         "OP_ED": MessageLookupByLibrary.simpleMessage("واحد د"),
+        "Ok": MessageLookupByLibrary.simpleMessage("نعم"),
         "Oldest": MessageLookupByLibrary.simpleMessage("أقدم"),
         "On_Hold": MessageLookupByLibrary.simpleMessage("في الانتظار"),
         "One_Piece": MessageLookupByLibrary.simpleMessage("قطعه"),
@@ -718,6 +732,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Organized_Crime": MessageLookupByLibrary.simpleMessage("جريمة منظمة"),
         "Otakon": MessageLookupByLibrary.simpleMessage("otakon."),
         "Otaku_Culture": MessageLookupByLibrary.simpleMessage("ثقافة أوتاكو"),
+        "Other_Lists": MessageLookupByLibrary.simpleMessage("قوائم أخرى"),
         "Others": MessageLookupByLibrary.simpleMessage("آحرون"),
         "PTW": MessageLookupByLibrary.simpleMessage("بات"),
         "Parody": MessageLookupByLibrary.simpleMessage("محاكاة ساخرة"),
@@ -834,6 +849,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("إعادة تعيين الصفحة الرئيسية"),
         "Reset_homepage_warning": MessageLookupByLibrary.simpleMessage(
             "سيؤدي ذلك إلى إعادة تعيين تخطيط الصفحة الرئيسية إلى حالته الأصلية وهو غير قابل للقيام به."),
+        "Resources": MessageLookupByLibrary.simpleMessage("موارد"),
         "Restacks": MessageLookupByLibrary.simpleMessage("يستعيد"),
         "Restart_to_see_changes": MessageLookupByLibrary.simpleMessage(
             "يجب عليك إعادة التشغيل لرؤية التغييرات"),
@@ -1217,6 +1233,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "monday": MessageLookupByLibrary.simpleMessage("الاثنين"),
         "month_ago": MessageLookupByLibrary.simpleMessage("قبل شهر"),
         "months_ago": MessageLookupByLibrary.simpleMessage("منذ اشهر"),
+        "moreLinks": MessageLookupByLibrary.simpleMessage("المزيد من الروابط"),
         "numChapters": MessageLookupByLibrary.simpleMessage("عدد الفصول"),
         "numEpisodes": MessageLookupByLibrary.simpleMessage("عدد الحلقات"),
         "numListUsers":

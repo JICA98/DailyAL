@@ -22,7 +22,6 @@ import 'package:dailyanimelist/widgets/slivers.dart';
 import 'package:dailyanimelist/widgets/user/signinpage.dart';
 import 'package:dailyanimelist/widgets/user/stats_screen.dart';
 import 'package:dailyanimelist/widgets/user/user_header.dart';
-import 'package:dailyanimelist/widgets/user/weeklyanime.dart';
 import 'package:dal_commons/dal_commons.dart';
 import 'package:flutter/material.dart';
 
@@ -39,8 +38,6 @@ final profileHeaders = [
       (name, _) => UserHeader().favoritesWidget(name)),
   UserProfileType(S.current.History, Icons.history,
       (name, _) => UserHistoryWidget(username: name)),
-  UserProfileType(
-      S.current.WeeklyAnime, Icons.weekend, (name, _) => WeeklyAnimeWidget()),
 ];
 
 PreferredSize profileHeaderWidget({
@@ -237,7 +234,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
       child,
       autoIncludeSearch: false,
       appbarTitle: widget.username,
-      floatingActionButton: _floatingActionBtn(),
+      floatingActionButton: _floatingActionBtn(prof),
       actions: [
         SB.w20,
         if (id != null)
@@ -298,11 +295,14 @@ class _UserProfilePageState extends State<UserProfilePage> {
     _expandUserProfile.update(!_expandUserProfile.currentValue!);
   }
 
-  Widget _floatingActionBtn() {
+  Widget _floatingActionBtn(UserProf? prof) {
     return BookMarkFloatingButton(
       type: BookmarkType.malUser,
       id: widget.username,
-      data: UserProf(name: widget.username),
+      data: UserProf(
+        name: widget.username,
+        picture: prof?.picture,
+      ),
     );
   }
 

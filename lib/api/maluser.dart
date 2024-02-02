@@ -23,8 +23,12 @@ class MalUser {
       url += "?fields=" +
           fields.reduce((value, element) => (value + "," + element));
     }
-    return UserProf.fromJson(await MalConnect.getContent(url,
-        fromCache: fromCache, includeNsfw: false, retryOnFail: false));
+    var json = await MalConnect.getContent(url,
+        fromCache: fromCache,
+        includeNsfw: false,
+        retryOnFail: false) as Map<String, dynamic>?;
+    if (json == null) throw Error();
+    return UserProf.fromJson(json);
   }
 
   static Future<UserProf?> _adaptFromJikan(

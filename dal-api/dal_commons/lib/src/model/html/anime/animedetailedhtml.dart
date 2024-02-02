@@ -1,10 +1,11 @@
 import 'package:dal_commons/src/model/featured/featured.dart';
 import 'package:dal_commons/src/model/forum/html/forumtopicshtml.dart';
+import 'package:dal_commons/src/model/html/anime/additional_title.dart';
 import 'package:dal_commons/src/model/html/anime/animecharacterhtml.dart';
+import 'package:dal_commons/src/model/html/anime/animelinks.dart';
 import 'package:dal_commons/src/model/html/anime/animereviewhtml.dart';
 import 'package:dal_commons/src/model/html/anime/intereststack.dart';
 import 'package:dal_commons/src/model/html/anime/mangacharahtml.dart';
-import 'package:dal_commons/src/model/html/anime/streaming.dart';
 
 import '../../global/node.dart';
 
@@ -14,8 +15,9 @@ class AnimeDetailedHtml {
   final List<MangaCharacterHtml>? mangaCharaList;
   final List<AnimeReviewHtml>? animeReviewList;
   final ForumTopicsHtml? forumTopicsHtml;
-  final String ?videoUrl;
-  final List<Streaming>?broadcasts;
+  final String? videoUrl;
+  final List<AnimeLink>? links;
+  final List<AdditionalTitle>? additionalTitles;
   final Featured? news;
   final Featured? featured;
   final List<Node>? adaptedNodes;
@@ -29,7 +31,6 @@ class AnimeDetailedHtml {
     this.characterHtmlList,
     this.fromCache,
     this.videoUrl,
-    this.broadcasts,
     this.lastUpdated,
     this.forumTopicsHtml,
     this.featured,
@@ -37,6 +38,8 @@ class AnimeDetailedHtml {
     this.interestStacks,
     this.news,
     this.adaptedNodes,
+    this.links,
+    this.additionalTitles,
   });
 
   factory AnimeDetailedHtml.fromJson(Map<String, dynamic>? json) {
@@ -49,10 +52,15 @@ class AnimeDetailedHtml {
                 DateTime.tryParse(json["lastUpdated"]?.toString() ?? "") ??
                     DateTime.now(),
             fromCache: true,
-            broadcasts: ((json['broadcasts'] ?? []) as List)
-                .map((e) => Streaming.fromMap(e))
+            links: ((json['links'] ?? []) as List)
+                .map((e) => AnimeLink.fromJson(e))
+                .where((e) => e != null)
+                .map((e) => e!)
                 .toList(),
             videoUrl: json["videoUrl"],
+            additionalTitles: List.from(json["additionalTitles"] ?? [])
+                .map((e) => AdditionalTitle.fromJson(e))
+                .toList(),
             animeReviewList: List.from(json["animeReviewList"] ?? [])
                 .map((e) => AnimeReviewHtml.fromJson(e))
                 .toList(),
@@ -81,12 +89,13 @@ class AnimeDetailedHtml {
       "characterHtml": characterHtmlList,
       "forumTopicsHtml": forumTopicsHtml,
       'animeReviewList': animeReviewList,
-      'broadcasts': broadcasts,
       'featured': featured,
       'news': news,
       'mangaCharacterList': mangaCharaList,
       'interestStacks': interestStacks,
       'adaptedNodes': adaptedNodes,
+      'links': links,
+      'additionalTitles': additionalTitles,
     };
   }
 }

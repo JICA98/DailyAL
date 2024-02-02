@@ -37,6 +37,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Añadir un artículo"),
         "Add_to_List":
             MessageLookupByLibrary.simpleMessage("Agregar a la lista"),
+        "AdditionalTitles":
+            MessageLookupByLibrary.simpleMessage("Títulos adicionales"),
         "Adult_Cast": MessageLookupByLibrary.simpleMessage("Adulto_Elenco"),
         "Adventure": MessageLookupByLibrary.simpleMessage("Aventuras"),
         "Age_high": MessageLookupByLibrary.simpleMessage("Mayor"),
@@ -46,6 +48,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "All": MessageLookupByLibrary.simpleMessage("Todos"),
         "All_time_Favorites":
             MessageLookupByLibrary.simpleMessage("Todos los tiempos favoritos"),
+        "Allow_YT_Player": MessageLookupByLibrary.simpleMessage(
+            "Permitir reproductor de Youtube"),
+        "Allow_YT_Player_Desc": MessageLookupByLibrary.simpleMessage(
+            "Permitir que el reproductor de Youtube reproduzca vídeos en la aplicación"),
         "Analysis": MessageLookupByLibrary.simpleMessage("Análisis"),
         "Animals": MessageLookupByLibrary.simpleMessage("Animales"),
         "Animation": MessageLookupByLibrary.simpleMessage("Animación"),
@@ -117,6 +123,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Agrega automáticamente la fecha de inicio y finalización cuando el estado se mueve a viendo/completado."),
         "Auto_Translate_Synopsis":
             MessageLookupByLibrary.simpleMessage("Auto traducir sinopsis"),
+        "Available_At": MessageLookupByLibrary.simpleMessage("Disponible en"),
         "Avant_Garde": MessageLookupByLibrary.simpleMessage("Primer plano"),
         "Average": MessageLookupByLibrary.simpleMessage("Promedio"),
         "Award_Winning":
@@ -463,6 +470,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "Home_Page_items": MessageLookupByLibrary.simpleMessage(
             "Artículos de la página de inicio"),
         "Honor": MessageLookupByLibrary.simpleMessage("Honor"),
+        "Horizontal_List":
+            MessageLookupByLibrary.simpleMessage("Lista horizontal"),
         "Horrible": MessageLookupByLibrary.simpleMessage("Horrible"),
         "Horror": MessageLookupByLibrary.simpleMessage("Horror"),
         "Hot": MessageLookupByLibrary.simpleMessage("Caliente"),
@@ -597,6 +606,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Cambio_de_sexo_mágico"),
         "Mahou_Shoujo": MessageLookupByLibrary.simpleMessage(
             "Después de MA _s Después de Jo"),
+        "Mal_Under_Maintenance": MessageLookupByLibrary.simpleMessage(
+            "MyAnimeList está bajo mantenimiento."),
+        "Mal_Under_Maintenance_Desc": MessageLookupByLibrary.simpleMessage(
+            "MyAnimeList está en mantenimiento, inténtalo de nuevo más tarde."),
         "Male": MessageLookupByLibrary.simpleMessage("Male"),
         "Manga_Awards": MessageLookupByLibrary.simpleMessage("Manga premios"),
         "Manga_Caps": MessageLookupByLibrary.simpleMessage("Manga"),
@@ -736,6 +749,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Notification_settings_warning": MessageLookupByLibrary.simpleMessage(
             "Todavía puede obtener alertas por hasta 3 días para las notificaciones que ya se han programado para usted.Tenga en cuenta que estas configuraciones solo funcionarán cuando haya iniciado sesión."),
         "OP_ED": MessageLookupByLibrary.simpleMessage("Una d"),
+        "Ok": MessageLookupByLibrary.simpleMessage("OK"),
         "Oldest": MessageLookupByLibrary.simpleMessage("más antiguo"),
         "On_Hold": MessageLookupByLibrary.simpleMessage("En espera"),
         "One_Piece": MessageLookupByLibrary.simpleMessage("Una pieza"),
@@ -752,6 +766,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Crimen organizado"),
         "Otakon": MessageLookupByLibrary.simpleMessage("Otakon"),
         "Otaku_Culture": MessageLookupByLibrary.simpleMessage("Cultura Otaku"),
+        "Other_Lists": MessageLookupByLibrary.simpleMessage("Otras listas"),
         "Others": MessageLookupByLibrary.simpleMessage("Others"),
         "PTW": MessageLookupByLibrary.simpleMessage("Ptw"),
         "Parody": MessageLookupByLibrary.simpleMessage("Parodia"),
@@ -874,6 +889,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Restablecer la página de inicio"),
         "Reset_homepage_warning": MessageLookupByLibrary.simpleMessage(
             "Esto restablecerá el diseño de la página de inicio a su estado original y no es factible."),
+        "Resources": MessageLookupByLibrary.simpleMessage("Recursos"),
         "Restacks": MessageLookupByLibrary.simpleMessage("vuelve a apilar"),
         "Restart_to_see_changes": MessageLookupByLibrary.simpleMessage(
             "Tendrás que reiniciar para ver los cambios \'"),
@@ -1283,6 +1299,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "monday": MessageLookupByLibrary.simpleMessage("lunes"),
         "month_ago": MessageLookupByLibrary.simpleMessage("hace un mes"),
         "months_ago": MessageLookupByLibrary.simpleMessage("Hace meses"),
+        "moreLinks": MessageLookupByLibrary.simpleMessage("Más enlaces"),
         "numChapters": MessageLookupByLibrary.simpleMessage("No. de Capítulos"),
         "numEpisodes": MessageLookupByLibrary.simpleMessage("No. de episodios"),
         "numListUsers":

@@ -12,6 +12,7 @@ import 'package:dailyanimelist/pages/animedetailed/intereststackwidget.dart';
 import 'package:dailyanimelist/pages/search/allrankingwidget.dart';
 import 'package:dailyanimelist/pages/search/seasonalwidget.dart';
 import 'package:dailyanimelist/screens/contentdetailedscreen.dart';
+import 'package:dailyanimelist/screens/plainscreen.dart';
 import 'package:dailyanimelist/user/user.dart';
 import 'package:dailyanimelist/util/streamutils.dart';
 import 'package:dailyanimelist/widgets/club/clublistwidget.dart';
@@ -67,12 +68,14 @@ class GeneralSearchScreen extends StatefulWidget {
   final bool showBackButton;
   final String? category;
   final Map<String, FilterOption>? filterOutputs;
+  final bool exclusiveScreen;
 
   const GeneralSearchScreen({
     this.searchQuery,
     this.category = "all",
     this.showBackButton = false,
     this.filterOutputs,
+    this.exclusiveScreen = false,
     this.autoFocus = true,
   });
 
@@ -538,6 +541,29 @@ class _GeneralSearchScreenState extends State<GeneralSearchScreen>
 
   @override
   Widget build(BuildContext context) {
+    if (widget.exclusiveScreen) {
+      return Scaffold(
+        appBar: AppBar(
+          title: buildListHeader(),
+          actions: [
+            IconButton(
+              onPressed: () {
+                gotoPage(
+                  context: context,
+                  newPage: GeneralSearchScreen(
+                    filterOutputs: filterOutputs,
+                    category: category,
+                    autoFocus: false,
+                  ),
+                );
+              },
+              icon: Icon(Icons.search),
+            ),
+          ],
+        ),
+        body: _onSearchBuild(context, AsyncSnapshot.nothing()),
+      );
+    }
     return WillPopScope(
       child: Scaffold(
         body: Stack(
@@ -556,7 +582,7 @@ class _GeneralSearchScreenState extends State<GeneralSearchScreen>
     );
   }
 
-  Widget _onSearchBuild(_, AsyncSnapshot<HistoryData?> sp) {
+  Widget _onSearchBuild(BuildContext _, AsyncSnapshot<HistoryData?> sp) {
     final topPadding = EdgeInsets.only(
         top: (stage == SearchStage.loaded ||
                 stage == SearchStage.notstarted ||
@@ -624,7 +650,7 @@ class _GeneralSearchScreenState extends State<GeneralSearchScreen>
   Widget _showNoResultsFound() {
     return Column(
       children: [
-        if (hasAdditionalWidget) ...[
+        if (hasAdditionalWidget && !widget.exclusiveScreen) ...[
           const SizedBox(height: 90.0),
           additionalOptionsWidget(),
         ],
@@ -633,11 +659,13 @@ class _GeneralSearchScreenState extends State<GeneralSearchScreen>
             ((searchResult as UserResult).isUser ?? false))
           _showUserFound()
         else
-          Text(
-            S.current.No_results_found,
-            overflow: TextOverflow.ellipsis,
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 13),
+          Center(
+            child: Text(
+              S.current.No_results_found,
+              overflow: TextOverflow.ellipsis,
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 13),
+            ),
           ),
       ],
     );
@@ -661,12 +689,15 @@ class _GeneralSearchScreenState extends State<GeneralSearchScreen>
       );
     } else {
       _build = ListView(
-        padding: EdgeInsets.only(top: 90.0, bottom: 0),
+        padding: EdgeInsets.only(
+            top: widget.exclusiveScreen ? 0.0 : 90.0, bottom: 0),
         children: [
-          if (hasAdditionalWidget) additionalOptionsWidget(),
-          if (showFilter) _searchDivider(),
-          const SizedBox(height: 20),
-          buildListHeader(),
+          if (!widget.exclusiveScreen) ...[
+            if (hasAdditionalWidget) additionalOptionsWidget(),
+            if (showFilter) _searchDivider(),
+            const SizedBox(height: 20),
+            buildListHeader(),
+          ],
           const SizedBox(height: 20),
           displayType == DisplayType.list_vert
               ? showListLayout()
@@ -734,7 +765,7 @@ class _GeneralSearchScreenState extends State<GeneralSearchScreen>
           (filterOutputs['genres']?.includedOptions ?? []).length == 1 &&
           (filterOutputs['genres']?.excludedOptions ?? []).length == 0)
         return listHeading(
-            '${filterOutputs['genres']!.includedOptions![0]} $category');
+            '${filterOutputs['genres']!.includedOptions![0].replaceAll('_', ' ')} $category');
       else if (filterOutputs.length == 1 &&
           filterOutputs['producer']?.value != null)
         return listHeading(
@@ -1070,7 +1101,9 @@ class _GeneralSearchScreenState extends State<GeneralSearchScreen>
   }
 
   Widget listHeading(String _title) {
-    return Center(
+    return conditional(
+      on: !widget.exclusiveScreen,
+      parent: (child) => Center(child: child),
       child: title(_title, opacity: 1, fontSize: 22),
     );
   }

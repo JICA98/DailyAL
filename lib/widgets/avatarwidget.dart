@@ -198,7 +198,7 @@ Widget userImage(BorderRadius? radius, String? url,
             url ??
                 (useUserImageOnError
                     ? "assets/images/user-unknown.jpg"
-                    : "assets/images/error-image.png"),
+                    : "assets/images/error_image.png"),
           ),
         ),
       ),

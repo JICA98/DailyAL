@@ -2,14 +2,13 @@ import 'package:dailyanimelist/api/credmal.dart';
 import 'package:dailyanimelist/api/dalapi.dart';
 import 'package:dailyanimelist/constant.dart';
 import 'package:dailyanimelist/generated/l10n.dart';
-import 'package:dailyanimelist/main.dart';
 import 'package:dailyanimelist/screens/contentdetailedscreen.dart';
 import 'package:dailyanimelist/widgets/avatarwidget.dart';
 import 'package:dailyanimelist/widgets/custombutton.dart';
 import 'package:dailyanimelist/widgets/customfuture.dart';
-import 'package:dailyanimelist/widgets/home/animecard.dart';
 import 'package:dailyanimelist/widgets/slivers.dart';
 import 'package:dailyanimelist/widgets/translator.dart';
+import 'package:dailyanimelist/widgets/user/contentlistwidget.dart';
 import 'package:dal_commons/dal_commons.dart';
 import 'package:flutter/material.dart';
 
@@ -18,38 +17,23 @@ class RecommendedAnimeWidget extends StatelessWidget {
   final String category;
   final double horizPadding;
   const RecommendedAnimeWidget(
-      {required this.recommAnime, this.category = "anime", required this.horizPadding});
+      {required this.recommAnime,
+      this.category = "anime",
+      required this.horizPadding});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 220,
-      child: ListView.builder(
-        itemCount: recommAnime.length,
-        scrollDirection: Axis.horizontal,
-        padding: EdgeInsets.symmetric(horizontal: horizPadding + 10),
-        itemBuilder: ((context, i) {
-          return Padding(
-            padding: const EdgeInsets.fromLTRB(3, 6, 3, 3),
-            child: AnimeGridCard(
-              node: recommAnime[i].recommNode!,
-              numRecommendations: recommAnime[i].numRecommendations,
-              updateCache: true,
-              height: 150,
-              width: 140,
-              smallHeight: 25,
-              showCardBar: true,
-              showEdit: true,
-              onTap: () => navigateTo(
-                  context,
-                  ContentDetailedScreen(
-                    node: recommAnime[i].recommNode,
-                    category: category,
-                  )),
+    return horizontalList(
+      category: category,
+      padding: EdgeInsets.symmetric(horizontal: horizPadding + 5.0),
+      items: recommAnime
+          .map(
+            (e) => BaseNode(
+              content: e.recommNode!..numRecommendations = e.numRecommendations,
+              myListStatus: e.recommNode?.myListStatus,
             ),
-          );
-        }),
-      ),
+          )
+          .toList(),
     );
   }
 }
@@ -57,7 +41,8 @@ class RecommendedAnimeWidget extends StatelessWidget {
 class ContentFullRecommendation extends StatefulWidget {
   final int id;
   final String category;
-  const ContentFullRecommendation({Key? key, required this.id, required this.category})
+  const ContentFullRecommendation(
+      {Key? key, required this.id, required this.category})
       : super(key: key);
 
   @override
@@ -199,7 +184,10 @@ class SelectorNodesWidget extends StatefulWidget {
   final String category;
   final TabController controller;
   const SelectorNodesWidget(
-      {Key? key, required this.data, required this.category, required this.controller})
+      {Key? key,
+      required this.data,
+      required this.category,
+      required this.controller})
       : super(key: key);
 
   @override
@@ -259,9 +247,8 @@ class _SelectorNodesWidgetState extends State<SelectorNodesWidget> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 AvatarWidget(
-                  url: node.mainPicture?.large ??
-                      node.mainPicture?.medium ??
-                      '',
+                  url:
+                      node.mainPicture?.large ?? node.mainPicture?.medium ?? '',
                   height: 50,
                   width: 50,
                   onTap: () => gotoPage(

@@ -36,6 +36,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "Add_Friend": MessageLookupByLibrary.simpleMessage("Arkadaş Ekle"),
         "Add_an_Item": MessageLookupByLibrary.simpleMessage("Bir Öğe Ekle"),
         "Add_to_List": MessageLookupByLibrary.simpleMessage("Listeye ekle"),
+        "AdditionalTitles":
+            MessageLookupByLibrary.simpleMessage("Ek Başlıklar"),
         "Adult_Cast": MessageLookupByLibrary.simpleMessage("Yetişkin_Oyuncu"),
         "Adventure": MessageLookupByLibrary.simpleMessage("Macera"),
         "Age_high": MessageLookupByLibrary.simpleMessage("Yaş yüksek"),
@@ -45,6 +47,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "All": MessageLookupByLibrary.simpleMessage("Tüm"),
         "All_time_Favorites":
             MessageLookupByLibrary.simpleMessage("Tüm zamanların Favorileri"),
+        "Allow_YT_Player":
+            MessageLookupByLibrary.simpleMessage("Youtube Player\'a izin ver"),
+        "Allow_YT_Player_Desc": MessageLookupByLibrary.simpleMessage(
+            "Youtube oynatıcısının uygulamada video oynatmasına izin ver"),
         "Analysis": MessageLookupByLibrary.simpleMessage("Analiz"),
         "Animals": MessageLookupByLibrary.simpleMessage("Hayvanlar"),
         "Animation": MessageLookupByLibrary.simpleMessage("Animasyon"),
@@ -114,6 +120,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Durum izleniyor/tamamlandı durumuna geçtiğinde otomatik olarak başlangıç ​​ve bitiş tarihini ekler."),
         "Auto_Translate_Synopsis":
             MessageLookupByLibrary.simpleMessage("Bu Çeviri Özeti"),
+        "Available_At": MessageLookupByLibrary.simpleMessage("Mevcut"),
         "Avant_Garde": MessageLookupByLibrary.simpleMessage("Avangard"),
         "Average": MessageLookupByLibrary.simpleMessage("Ortalama"),
         "Award_Winning": MessageLookupByLibrary.simpleMessage("Ödüllü_Kazanan"),
@@ -446,6 +453,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Home_Page_items":
             MessageLookupByLibrary.simpleMessage("Ana Sayfa öğeleri"),
         "Honor": MessageLookupByLibrary.simpleMessage("Onur"),
+        "Horizontal_List": MessageLookupByLibrary.simpleMessage("Yatay Liste"),
         "Horrible": MessageLookupByLibrary.simpleMessage("Berbat"),
         "Horror": MessageLookupByLibrary.simpleMessage("Korku"),
         "Hot": MessageLookupByLibrary.simpleMessage("Sıcak"),
@@ -574,6 +582,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "Magical_Sex_Shift":
             MessageLookupByLibrary.simpleMessage("Magical_Sex_Shift"),
         "Mahou_Shoujo": MessageLookupByLibrary.simpleMessage("Büyülü Kız"),
+        "Mal_Under_Maintenance":
+            MessageLookupByLibrary.simpleMessage("MyAnimeList bakımda"),
+        "Mal_Under_Maintenance_Desc": MessageLookupByLibrary.simpleMessage(
+            "MyAnimeList bakımdadır, lütfen daha sonra tekrar deneyin"),
         "Male": MessageLookupByLibrary.simpleMessage("Erkek"),
         "Manga_Awards": MessageLookupByLibrary.simpleMessage("Manga Ödülleri"),
         "Manga_Caps": MessageLookupByLibrary.simpleMessage("manga"),
@@ -709,6 +721,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Notification_settings_warning": MessageLookupByLibrary.simpleMessage(
             "Halihazırda sizin için planlanmış olan bildirimler için 3 güne kadar uyarı alabilirsiniz. Lütfen bu ayarların yalnızca oturum açtığınızda çalışacağını unutmayın."),
         "OP_ED": MessageLookupByLibrary.simpleMessage("BİR D"),
+        "Ok": MessageLookupByLibrary.simpleMessage("Tamam"),
         "Oldest": MessageLookupByLibrary.simpleMessage("en yaşlı"),
         "On_Hold": MessageLookupByLibrary.simpleMessage("Beklemede"),
         "One_Piece": MessageLookupByLibrary.simpleMessage("Bir parça"),
@@ -724,6 +737,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Organized_Crime": MessageLookupByLibrary.simpleMessage("Organize suç"),
         "Otakon": MessageLookupByLibrary.simpleMessage("Otakon"),
         "Otaku_Culture": MessageLookupByLibrary.simpleMessage("Otaku Kültürü"),
+        "Other_Lists": MessageLookupByLibrary.simpleMessage("Diğer Listeler"),
         "Others": MessageLookupByLibrary.simpleMessage("Diğerleri"),
         "PTW": MessageLookupByLibrary.simpleMessage("PTW"),
         "Parody": MessageLookupByLibrary.simpleMessage("Parodi"),
@@ -842,6 +856,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Ana sayfayı sıfırla"),
         "Reset_homepage_warning": MessageLookupByLibrary.simpleMessage(
             "Bu, ana sayfa düzenini orijinal durumuna sıfırlayacaktır ve bu yapılamaz."),
+        "Resources": MessageLookupByLibrary.simpleMessage("Kaynaklar"),
         "Restacks": MessageLookupByLibrary.simpleMessage("yeniden istifler"),
         "Restart_to_see_changes": MessageLookupByLibrary.simpleMessage(
             "Değişiklikleri görmek için yeniden başlatmanız gerekecek\'"),
@@ -1239,6 +1254,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "monday": MessageLookupByLibrary.simpleMessage("Pazartesi"),
         "month_ago": MessageLookupByLibrary.simpleMessage("bir ay önce"),
         "months_ago": MessageLookupByLibrary.simpleMessage("aylar önce"),
+        "moreLinks":
+            MessageLookupByLibrary.simpleMessage("Daha Fazla Bağlantı"),
         "numChapters": MessageLookupByLibrary.simpleMessage("Bölüm Sayısı"),
         "numEpisodes": MessageLookupByLibrary.simpleMessage("Bölüm Sayısı"),
         "numListUsers": MessageLookupByLibrary.simpleMessage(

@@ -1,28 +1,29 @@
 import 'dart:async';
 
 import 'package:dailyanimelist/api/auth/auth.dart';
+import 'package:dailyanimelist/api/malapi.dart';
 import 'package:dailyanimelist/constant.dart';
 import 'package:dailyanimelist/generated/l10n.dart';
 import 'package:dailyanimelist/main.dart';
 import 'package:dailyanimelist/pages/home/newswidget.dart';
-import 'package:dailyanimelist/screens/contentdetailedscreen.dart';
+import 'package:dailyanimelist/pages/search/all_genre_widget.dart';
+import 'package:dailyanimelist/pages/search/allrankingwidget.dart';
 import 'package:dailyanimelist/screens/generalsearchscreen.dart';
 import 'package:dailyanimelist/user/hompagepref.dart';
 import 'package:dailyanimelist/user/user.dart';
 import 'package:dailyanimelist/util/homepageutils.dart';
-import 'package:dailyanimelist/widgets/customappbar.dart';
 import 'package:dailyanimelist/widgets/custombutton.dart';
 import 'package:dailyanimelist/widgets/forum/forumtopicwidget.dart';
-import 'package:dailyanimelist/widgets/home/animecard.dart';
 import 'package:dailyanimelist/widgets/homeappbar.dart';
 import 'package:dailyanimelist/widgets/loading/loadingcard.dart';
 import 'package:dailyanimelist/widgets/shimmecolor.dart';
 import 'package:dailyanimelist/widgets/slivers.dart';
+import 'package:dailyanimelist/widgets/user/contentlistwidget.dart';
+import 'package:dal_commons/commons.dart';
 import 'package:dal_commons/dal_commons.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:shimmer/shimmer.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({
@@ -39,7 +40,7 @@ class _HomePageState extends State<HomePage> {
   ScrollController scrollController = new ScrollController();
   ScrollController bodyHeaderController = new ScrollController();
   bool transition = false;
-  var topHeaders = <String, GeneralSearchScreen>{};
+  var topHeaders = <String, dynamic>{};
   late String refKey;
 
   @override
@@ -48,6 +49,8 @@ class _HomePageState extends State<HomePage> {
     setRefKey();
     hasOpened = false;
     startOpeningAnimation();
+    checkIfMalUnderMaintenance();
+
     Future.delayed(Duration.zero).then((value) {
       initLangs();
       user.addListener(() {
@@ -58,6 +61,27 @@ class _HomePageState extends State<HomePage> {
 
   void setRefKey() {
     refKey = MalAuth.codeChallenge(12);
+  }
+
+  void checkIfMalUnderMaintenance() async {
+    final isUnderMaintenance = await MalApi.isUnderMaintenance();
+    if (isUnderMaintenance) {
+      showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (context) => AlertDialog(
+                title: Text(S.current.Mal_Under_Maintenance),
+                content: Text(S.current.Mal_Under_Maintenance_Desc),
+                actions: [
+                  CupertinoDialogAction(
+                    child: Text(S.current.Ok),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  )
+                ],
+              ));
+    }
   }
 
   startOpeningAnimation() async {
@@ -73,6 +97,11 @@ class _HomePageState extends State<HomePage> {
 
   initLangs() {
     topHeaders = {
+      S.of(context).Categories: AllRankingWidget(
+        category: 'anime',
+        fullScreen: true,
+      ),
+      S.of(context).Genres: _showGenresModal,
       S.of(context).top_anime: GeneralSearchScreen(
         searchQuery: "#all",
         autoFocus: false,
@@ -100,6 +129,34 @@ class _HomePageState extends State<HomePage> {
       )
     };
   }
+
+  _showGenresModal() => showBottomSheet(
+      context: context,
+      builder: (_) => Material(
+            child: SizedBox(
+              height: 260.0,
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(S.of(context).Genres),
+                        IconButton(
+                          icon: Icon(Icons.close),
+                          onPressed: () => Navigator.pop(context),
+                        )
+                      ],
+                    ),
+                  ),
+                  AllGenreWidget(
+                    category: 'anime',
+                  ),
+                ],
+              ),
+            ),
+          ));
 
   @override
   Widget build(BuildContext context) {
@@ -172,8 +229,14 @@ class _HomePageState extends State<HomePage> {
                           key,
                           style: Theme.of(context).textTheme.bodySmall,
                         ),
-                        onPressed: () => gotoPage(
-                            context: context, newPage: topHeaders[key]!),
+                        onPressed: () {
+                          var value = topHeaders[key]!;
+                          if (value is Widget) {
+                            gotoPage(context: context, newPage: value);
+                          } else if (value is Function) {
+                            value();
+                          }
+                        },
                         backgroundColor: Color(c.scrollOffset > 0
                                 ? Theme.of(context).cardColor.value
                                 : Theme.of(context).cardColor.value)
@@ -306,55 +369,29 @@ class _ContentHomeWidgetState extends State<ContentHomeWidget>
     if (apiPref.value.userCategory != null) {
       category = apiPref.value.userCategory!;
     }
-    final tile = tileMap.tryAt(user.pref.homePageTileSize);
+    final tile = tileMap.tryAt(user.pref.homePageTileSize)!;
+    var height = tile.containerHeight;
+    var width = height * (2 / 3);
+
     return Column(children: [
       SB.h15,
       HomePageTitleWidget(content, apiPref),
       SB.h15,
       (content?.data != null && content.data.isNotEmpty)
-          ? Container(
-              height: tile!.containerHeight,
-              child: ListView.builder(
-                  padding: const EdgeInsets.only(left: 15, right: 15),
-                  itemCount: content.data.length,
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) {
-                    var heroTag = MalAuth.codeChallenge(10);
-                    return Hero(
-                      tag: heroTag,
-                      child: AnimeGridCard(
-                        node: content.data[index].content,
-                        category: category,
-                        showEdit: true,
-                        showCardBar: true,
-                        updateCache: true,
-                        showGenres: true,
-                        height: tile.contentHeight,
-                        width: tile.contentWidth,
-                        homePageTileSize: user.pref.homePageTileSize,
-                        parentNsv: apiPref.contentType == HomePageType.user_list
-                            ? NodeStatusValue.fromStatus(content.data[index])
-                            : null,
-                        onTap: () => navigateTo(
-                            context,
-                            ContentDetailedScreen(
-                              node: content.data[index].content,
-                              category: category,
-                            )),
-                      ),
-                    );
-                  }),
+          ? horizontalList(
+              category: category,
+              items: content.data,
             )
           : ShimmerColor(
               Container(
-                height: tile!.loadingContainerHeight,
+                height: height,
                 child: ListView.builder(
                   padding: EdgeInsets.only(left: 15, right: 15),
                   itemCount: 10,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) => LoadingCard(
-                    height: tile.contentHeight,
-                    width: tile.contentWidth,
+                    height: height,
+                    width: width,
                   ),
                 ),
               ),

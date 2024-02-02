@@ -5,13 +5,10 @@ import 'package:dailyanimelist/enums.dart';
 import 'package:dailyanimelist/generated/l10n.dart';
 import 'package:dailyanimelist/screens/generalsearchscreen.dart';
 import 'package:dailyanimelist/screens/seasonal_screen.dart';
-import 'package:dailyanimelist/user/anime_manga_pref.dart';
 import 'package:dailyanimelist/widgets/custombutton.dart';
-import 'package:flutter/gestures.dart';
+import 'package:dal_commons/commons.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:dal_commons/dal_commons.dart';
-import '../main.dart';
 
 void onStudioTap(AnimeStudio e, BuildContext context) {
   final animeStudio = Mal.animeStudios[e.id];
@@ -39,7 +36,7 @@ void onMediaTypeTap(
     gotoPage(
         context: context,
         newPage: GeneralSearchScreen(
-          searchQuery: "#${mediaType}",
+          searchQuery: "#$mediaType",
           autoFocus: false,
           category: category,
           showBackButton: true,
@@ -52,11 +49,13 @@ class MoreInfoAnime extends StatelessWidget {
   final String category;
   final double horizPadding;
   final bool isModal;
+  final List<AdditionalTitle>? additionalTitles;
   MoreInfoAnime({
     this.contentDetailed,
     this.category = "anime",
     this.horizPadding = 15.0,
     this.isModal = false,
+    this.additionalTitles,
   });
   @override
   Widget build(BuildContext context) {
@@ -91,13 +90,18 @@ class MoreInfoAnime extends StatelessWidget {
           onTap: onTap,
           borderRadius: BorderRadius.circular(12),
           child: Padding(
-            padding: const EdgeInsets.all(12.0),
+            padding: const EdgeInsets.all(10.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   label,
-                  style: Theme.of(context).textTheme.bodySmall,
+                  style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                      color: Theme.of(context)
+                          .textTheme
+                          .labelSmall
+                          ?.color
+                          ?.withOpacity(.8)),
                 ),
                 SB.h10,
                 child,
@@ -126,20 +130,35 @@ class MoreInfoAnime extends StatelessWidget {
       void Function(T item) onItemTap,
       String Function(T item) itemName,
     ) {
-      return _fieldChild(
-        label,
-        Wrap(
-          alignment: WrapAlignment.spaceBetween,
-          crossAxisAlignment: WrapCrossAlignment.center,
-          children: list
-              .map((e) => PlainButton(
-                  padding: EdgeInsets.zero,
-                  onPressed: () => onItemTap(e),
-                  child: Text(
-                    itemName(e),
-                    style: Theme.of(context).textTheme.bodySmall,
-                  )))
-              .toList(),
+      final child = Wrap(
+        alignment: WrapAlignment.spaceBetween,
+        crossAxisAlignment: WrapCrossAlignment.center,
+        children: list
+            .map((e) => Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 3.0),
+                  child: ShadowButton(
+                      padding: EdgeInsets.symmetric(horizontal: 5),
+                      onPressed: () => onItemTap(e),
+                      child: Text(
+                        itemName(e),
+                        style: Theme.of(context).textTheme.bodySmall,
+                      )),
+                ))
+            .toList(),
+      );
+
+      return Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              label,
+              style: Theme.of(context).textTheme.bodySmall,
+            ),
+            SB.h10,
+            child,
+          ],
         ),
       );
     }
@@ -214,14 +233,12 @@ class MoreInfoAnime extends StatelessWidget {
             category.equals("anime")
                 ? "${S.current.Aired} "
                 : "${S.current.Published} ",
-            (contentDetailed?.startDate?.toString()?.toDate() ?? "?") +
-                " to " +
-                (contentDetailed?.endDate?.toString()?.toDate() ?? '?'),
+            _getAiredText(),
           ),
           if (category.equals('anime')) ...[
             _field(
               S.current.Source,
-              (contentDetailed?.source?.toString()?.standardize() ?? "?"),
+              (contentDetailed?.source?.toString().standardize() ?? "?"),
             ),
             if (broadcastTime != null)
               _field(
@@ -230,18 +247,13 @@ class MoreInfoAnime extends StatelessWidget {
               ),
             _field(
               S.current.Duration,
-              (contentDetailed?.averageEpisodeDuration != null
-                  ? (contentDetailed.averageEpisodeDuration / 60)
-                          .round()
-                          .toString() +
-                      " min"
-                  : "?"),
+              _getContentDuration(),
             ),
             _field(
               S.current.Rating,
               (contentDetailed?.rating
                       ?.toString()
-                      ?.standardize()
+                      .standardize()
                       ?.capitalize() ??
                   "?"),
             ),
@@ -289,6 +301,13 @@ class MoreInfoAnime extends StatelessWidget {
                   " ) ",
             ),
           if (!nullOrEmpty(contentDetailed.genres)) ..._genreWidgets(),
+          if (_hasValidAlternateTitles())
+            _field(
+              S.current.AdditionalTitles,
+              additionalTitles!
+                  .map((e) => '${e.language} ${e.title}')
+                  .join(', '),
+            ),
         ],
       ),
     ));
@@ -300,5 +319,27 @@ class MoreInfoAnime extends StatelessWidget {
       );
     else
       return scrollView;
+  }
+
+  bool _hasValidAlternateTitles() {
+    return additionalTitles != null &&
+        additionalTitles!.where((e) => e.title.notEquals('N/A')).isNotEmpty;
+  }
+
+  String _getAiredText() {
+    final startDate = contentDetailed?.startDate?.toString().toDate() ?? "?";
+    final endDate = contentDetailed?.endDate?.toString().toDate() ?? '?';
+    if (startDate.equals(endDate)) return startDate;
+    return startDate + " to " + endDate;
+  }
+
+  String _getContentDuration() {
+    final durationInSeconds = contentDetailed?.averageEpisodeDuration;
+    if (durationInSeconds != null && durationInSeconds > 0) {
+      Duration duration = Duration(seconds: durationInSeconds);
+      final minDiff = duration.inMinutes.remainder(60);
+      return '${duration.inHours > 0 ? duration.inHours.toString() + '${duration.inHours == 1 ? 'hr' : 'hrs'} ' : ''}${minDiff.toString().padLeft(2, '0')}${minDiff == 1 ? 'min' : 'mins'}';
+    }
+    return "?";
   }
 }
