@@ -8,12 +8,7 @@ pub struct CacheService {
 
 impl CacheService {
     async fn get_connection(&self) -> redis::aio::Connection {
-        let redis_conn_url = format!(
-            "{}://:{}@{}",
-            "redis", self.config.secrets.redis_password, self.config.secrets.redis_host_name
-        );
-
-        let client = redis::Client::open(redis_conn_url).unwrap();
+        let client = redis::Client::open(self.config.secrets.rediscloud_url.to_string()).unwrap();
         return client.get_async_connection().await.unwrap();
     }
 
