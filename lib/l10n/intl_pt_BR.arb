@@ -920,5 +920,10 @@
     "Mal_Under_Maintenance": "MyAnimeList est\u00e1 em manuten\u00e7\u00e3o",
     "Mal_Under_Maintenance_Desc": "MyAnimeList est\u00e1 em manuten\u00e7\u00e3o, tente novamente mais tarde",
     "Ok": "OK",
-    "Open": "Abrir"
+    "Open": "Abrir",
+    "Couldnt_generate_graph": "N\u00e3o foi poss\u00edvel gerar o gr\u00e1fico",
+    "Graph_loaded": "Gr\u00e1fico carregado",
+    "Sequel": "Sequela",
+    "Prequel": "Prequela",
+    "Graph_Edge_Info": "Informa\u00e7\u00f5es de borda"
 }

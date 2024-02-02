@@ -223,6 +223,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Не удалось обновить!"),
         "Couldnt_connect_network": MessageLookupByLibrary.simpleMessage(
             "Не удалось подключиться к сети"),
+        "Couldnt_generate_graph":
+            MessageLookupByLibrary.simpleMessage("Не удалось создать график"),
         "Couldnt_get_promos": MessageLookupByLibrary.simpleMessage(
             "Не удалось получить промоакции"),
         "Couldnt_open_Club":
@@ -430,6 +432,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "Good": MessageLookupByLibrary.simpleMessage("Хороший"),
         "Gore": MessageLookupByLibrary.simpleMessage("Гор"),
         "Gourmet": MessageLookupByLibrary.simpleMessage("гурман"),
+        "Graph_Edge_Info":
+            MessageLookupByLibrary.simpleMessage("Информация о краю"),
+        "Graph_loaded": MessageLookupByLibrary.simpleMessage("График загружен"),
         "Great": MessageLookupByLibrary.simpleMessage("Большой"),
         "Grid": MessageLookupByLibrary.simpleMessage("Сетка"),
         "Grid_Axis_Size":
@@ -794,6 +799,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "PreferredTitle_Desc": MessageLookupByLibrary.simpleMessage(
             "Выбирайте между английскими, японскими и латинизированными названиями для вашего аниме/манги."),
         "Premiered": MessageLookupByLibrary.simpleMessage("Премьера"),
+        "Prequel": MessageLookupByLibrary.simpleMessage("Приквел"),
         "Preview":
             MessageLookupByLibrary.simpleMessage("Предварительный просмотр"),
         "Previous": MessageLookupByLibrary.simpleMessage("Предыдущий"),
@@ -963,6 +969,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Select_the_no_of_items":
             MessageLookupByLibrary.simpleMessage("Выберите номер. предметов"),
         "Selected": MessageLookupByLibrary.simpleMessage("Выбрано"),
+        "Sequel": MessageLookupByLibrary.simpleMessage("Продолжение"),
         "Serialization": MessageLookupByLibrary.simpleMessage("Сериализация"),
         "Series_Discussion":
             MessageLookupByLibrary.simpleMessage("Обсуждение серии"),

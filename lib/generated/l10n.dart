@@ -9220,6 +9220,56 @@ class S {
     );
   }
 
+  /// `Couldn't generate graph`
+  String get Couldnt_generate_graph {
+    return Intl.message(
+      'Couldn\'t generate graph',
+      name: 'Couldnt_generate_graph',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Graph loaded`
+  String get Graph_loaded {
+    return Intl.message(
+      'Graph loaded',
+      name: 'Graph_loaded',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sequel`
+  String get Sequel {
+    return Intl.message(
+      'Sequel',
+      name: 'Sequel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Prequel`
+  String get Prequel {
+    return Intl.message(
+      'Prequel',
+      name: 'Prequel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edge info`
+  String get Graph_Edge_Info {
+    return Intl.message(
+      'Edge info',
+      name: 'Graph_Edge_Info',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Published End Date`
   String get publishedEndDate {
     return Intl.message(

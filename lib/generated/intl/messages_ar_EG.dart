@@ -217,6 +217,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("لا يمكن التحديث!"),
         "Couldnt_connect_network":
             MessageLookupByLibrary.simpleMessage("لا يمكن الاتصال بالشبكة"),
+        "Couldnt_generate_graph":
+            MessageLookupByLibrary.simpleMessage("تعذر إنشاء الرسم البياني"),
         "Couldnt_get_promos":
             MessageLookupByLibrary.simpleMessage("لا يمكن الحصول على البروموس"),
         "Couldnt_open_Club":
@@ -421,6 +423,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "Good": MessageLookupByLibrary.simpleMessage("جيد"),
         "Gore": MessageLookupByLibrary.simpleMessage("جور"),
         "Gourmet": MessageLookupByLibrary.simpleMessage("جورميه"),
+        "Graph_Edge_Info":
+            MessageLookupByLibrary.simpleMessage("معلومات الحافة"),
+        "Graph_loaded":
+            MessageLookupByLibrary.simpleMessage("تم تحميل الرسم البياني"),
         "Great": MessageLookupByLibrary.simpleMessage("عظيم"),
         "Grid": MessageLookupByLibrary.simpleMessage("جريد"),
         "Grid_Axis_Size":
@@ -774,6 +780,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "PreferredTitle_Desc": MessageLookupByLibrary.simpleMessage(
             "اختر بين العناوين الإنجليزية واليابانية والحروف اللاتينية للأنمي/المانجا الخاص بك"),
         "Premiered": MessageLookupByLibrary.simpleMessage("prestered."),
+        "Prequel": MessageLookupByLibrary.simpleMessage("بادئة"),
         "Preview": MessageLookupByLibrary.simpleMessage("معاينة"),
         "Previous": MessageLookupByLibrary.simpleMessage("سابق"),
         "Primary_background_color":
@@ -932,6 +939,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Select_the_no_of_items":
             MessageLookupByLibrary.simpleMessage("حدد لا.من العناصر"),
         "Selected": MessageLookupByLibrary.simpleMessage("المحدد"),
+        "Sequel": MessageLookupByLibrary.simpleMessage("تتمة"),
         "Serialization": MessageLookupByLibrary.simpleMessage("تسلسل"),
         "Series_Discussion":
             MessageLookupByLibrary.simpleMessage("مناقشة السلسلة"),

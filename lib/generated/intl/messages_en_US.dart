@@ -220,6 +220,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Couldn\'t Update!"),
         "Couldnt_connect_network": MessageLookupByLibrary.simpleMessage(
             "Couldn\'t connect to the network"),
+        "Couldnt_generate_graph":
+            MessageLookupByLibrary.simpleMessage("Couldn\'t generate graph"),
         "Couldnt_get_promos":
             MessageLookupByLibrary.simpleMessage("Couldn\'t get promos"),
         "Couldnt_open_Club":
@@ -422,6 +424,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "Good": MessageLookupByLibrary.simpleMessage("Good"),
         "Gore": MessageLookupByLibrary.simpleMessage("Gore"),
         "Gourmet": MessageLookupByLibrary.simpleMessage("Gourmet"),
+        "Graph_Edge_Info": MessageLookupByLibrary.simpleMessage("Edge info"),
+        "Graph_loaded": MessageLookupByLibrary.simpleMessage("Graph loaded"),
         "Great": MessageLookupByLibrary.simpleMessage("Great"),
         "Grid": MessageLookupByLibrary.simpleMessage("Grid"),
         "Grid_Axis_Size":
@@ -769,6 +773,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "PreferredTitle_Desc": MessageLookupByLibrary.simpleMessage(
             "Select between english, japanese and romanized titles for your anime/manga"),
         "Premiered": MessageLookupByLibrary.simpleMessage("Premiered"),
+        "Prequel": MessageLookupByLibrary.simpleMessage("Prequel"),
         "Preview": MessageLookupByLibrary.simpleMessage("Preview"),
         "Previous": MessageLookupByLibrary.simpleMessage("Previous"),
         "Primary_background_color":
@@ -935,6 +940,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Select_the_no_of_items":
             MessageLookupByLibrary.simpleMessage("Select the no. of items"),
         "Selected": MessageLookupByLibrary.simpleMessage("Selected"),
+        "Sequel": MessageLookupByLibrary.simpleMessage("Sequel"),
         "Serialization": MessageLookupByLibrary.simpleMessage("Serialization"),
         "Series_Discussion":
             MessageLookupByLibrary.simpleMessage("Series Discussion"),

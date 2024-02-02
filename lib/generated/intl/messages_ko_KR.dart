@@ -196,6 +196,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("업데이트 할 수 없었습니다!"),
         "Couldnt_connect_network":
             MessageLookupByLibrary.simpleMessage("네트워크에 연결할 수 없습니다"),
+        "Couldnt_generate_graph":
+            MessageLookupByLibrary.simpleMessage("그래프를 생성할 수 없습니다."),
         "Couldnt_get_promos":
             MessageLookupByLibrary.simpleMessage("프로모션을 얻을 수 없었습니다"),
         "Couldnt_open_Club":
@@ -385,6 +387,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "Good": MessageLookupByLibrary.simpleMessage("좋은"),
         "Gore": MessageLookupByLibrary.simpleMessage("핏덩어리"),
         "Gourmet": MessageLookupByLibrary.simpleMessage("식도락가"),
+        "Graph_Edge_Info": MessageLookupByLibrary.simpleMessage("엣지 정보"),
+        "Graph_loaded": MessageLookupByLibrary.simpleMessage("그래프가 로드됨"),
         "Great": MessageLookupByLibrary.simpleMessage("엄청난"),
         "Grid": MessageLookupByLibrary.simpleMessage("그리드"),
         "Grid_Axis_Size": MessageLookupByLibrary.simpleMessage("그리드 축 크기"),
@@ -701,6 +705,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "PreferredTitle_Desc": MessageLookupByLibrary.simpleMessage(
             "애니메이션/만화 제목을 영어, 일본어, 로마자 표기 중에서 선택하세요."),
         "Premiered": MessageLookupByLibrary.simpleMessage("프리미리어"),
+        "Prequel": MessageLookupByLibrary.simpleMessage("전편"),
         "Preview": MessageLookupByLibrary.simpleMessage("시사"),
         "Previous": MessageLookupByLibrary.simpleMessage("이전의"),
         "Primary_background_color":
@@ -849,6 +854,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Select_the_no_of_items":
             MessageLookupByLibrary.simpleMessage("아니오를 선택하십시오.항목의 항목"),
         "Selected": MessageLookupByLibrary.simpleMessage("선택된"),
+        "Sequel": MessageLookupByLibrary.simpleMessage("계속"),
         "Serialization": MessageLookupByLibrary.simpleMessage("직렬화"),
         "Series_Discussion": MessageLookupByLibrary.simpleMessage("시리즈 토론"),
         "Series_End": MessageLookupByLibrary.simpleMessage("시리즈 끝"),

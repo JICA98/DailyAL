@@ -15,6 +15,11 @@ import 'package:dal_commons/src/model/anime/anime_graph.dart';
 import 'package:flutter/material.dart';
 import 'package:dailyanimelist/generated/l10n.dart';
 
+enum _SelectedView {
+  list,
+  graph,
+}
+
 class RelatedAnimeWidget extends StatefulWidget {
   final List<RelatedContent> relatedAnimeList;
   final String category;
@@ -40,6 +45,8 @@ class _RelatedAnimeWidgetState extends State<RelatedAnimeWidget>
   Map<String, List<BaseNode>> animeWidgets = {};
   int pageIndex = 0;
   bool isHoriz = true;
+  dynamic _graph;
+  _SelectedView _selectedView = _SelectedView.list;
 
   @override
   void initState() {
@@ -52,6 +59,20 @@ class _RelatedAnimeWidgetState extends State<RelatedAnimeWidget>
       baseNodes.add(BaseNode(content: node, myListStatus: myListStatus));
       animeWidgets[relatedAnime.relationTypeFormatted!] = baseNodes;
     });
+    if (!isHoriz) {
+      _setAnimeGraph();
+    }
+  }
+
+  void _setAnimeGraph() async {
+    try {
+      _graph = await DalApi.i.getAnimeGraph(widget.id);
+      showToast(S.current.Graph_loaded);
+    } catch (e) {
+      _graph = e;
+      showToast(S.current.Couldnt_generate_graph);
+    }
+    if (mounted) setState(() {});
   }
 
   @override
@@ -63,25 +84,27 @@ class _RelatedAnimeWidgetState extends State<RelatedAnimeWidget>
   }
 
   Widget get _animeGraph {
-    return StateFullFutureWidget(
-      done: (data) => _graphWidget(data.data),
-      loadingChild: loadingCenterColored,
-      future: () => DalApi.i.getAnimeGraph(widget.id),
-    );
+    if (_selectedView == _SelectedView.list) {
+      return _gridView;
+    } else {
+      if (_graph is AnimeGraph) {
+        return _graphWidget(_graph);
+      } else {
+        return showNoContent();
+      }
+    }
   }
 
-  Widget _graphWidget(AnimeGraph? data) {
-    Widget child = SB.z;
-    if (data != null) {
-      child = AnimeGraphWidget(
+  Widget _graphWidget(AnimeGraph data) {
+    return TitlebarScreen(
+      AnimeGraphWidget(
         id: widget.id,
         graph: data,
         statusMap: widget.statusMap ?? {},
-      );
-    }
-    return TitlebarScreen(
-      child,
+      ),
       appbarTitle: '${S.current.Related} ${widget.category}',
+      autoIncludeSearch: false,
+      actions: _getActions(true),
     );
   }
 
@@ -92,54 +115,7 @@ class _RelatedAnimeWidgetState extends State<RelatedAnimeWidget>
           bottom: _tabBar,
           expandedHeight: 93,
           title: Text('${S.current.Related} ${widget.category}'),
-          actions: [
-            PopupMenuBuilder(
-              menuItems: [
-                shareMenuItem()
-                  ..onTap = () {
-                    openShareBuilder(
-                      context,
-                      animeWidgets.entries
-                          .map((e) => ShareInput(
-                                title: e.key,
-                                content: e.value
-                                    .map((f) => buildShareOutput(
-                                          buildShareInputs(
-                                            f.content,
-                                            DalPathUtils.browserUrl(DalNode(
-                                              category: widget.category,
-                                              id: f.content!.id!,
-                                            )),
-                                            category: widget.category,
-                                          ),
-                                          props: ShareOutputProps(prefix: '\t'),
-                                        ))
-                                    .reduce((e1, e2) => '$e1 \n$e2'),
-                              ))
-                          .toList(),
-                      S.current.Related,
-                      props:
-                          ShareOutputProps(termSpace: '\n', forceReducer: true),
-                    );
-                  },
-                AppbarMenuItem(
-                  S.current.Edit,
-                  createIcon(Icons.edit),
-                  onTap: () => DalPathUtils.launchNodeInBrowser(
-                    DalNode(
-                        id: widget.id,
-                        category: widget.category,
-                        dalSubType: DalSubType.relations,
-                        queryParams: {
-                          '${widget.category.equals('anime') ? "aid" : "mid"}':
-                              widget.id,
-                        }),
-                    context,
-                  ),
-                ),
-              ],
-            ),
-          ],
+          actions: _getActions(innerBoxIsScrolled),
         )
       ],
       body: TabBarView(
@@ -152,6 +128,79 @@ class _RelatedAnimeWidgetState extends State<RelatedAnimeWidget>
             .toList(),
       ),
     );
+  }
+
+  List<Widget> _getActions(bool innerBoxIsScrolled) {
+    return [
+      if (_graph is AnimeGraph)
+        IconButton(
+          onPressed: () {
+            setState(() {
+              _selectedView = _selectedView == _SelectedView.list
+                  ? _SelectedView.graph
+                  : _SelectedView.list;
+            });
+          },
+          icon: Icon(
+            _selectedView == _SelectedView.list
+                ? Icons.graphic_eq
+                : Icons.list_alt,
+          ),
+        ),
+      if (_graph == null && !innerBoxIsScrolled)
+        SizedBox(
+          width: 25,
+          height: 25,
+          child: CircularProgressIndicator(
+            strokeWidth: 1.5,
+          ),
+        ),
+      PopupMenuBuilder(
+        menuItems: [
+          shareMenuItem()
+            ..onTap = () {
+              openShareBuilder(
+                context,
+                animeWidgets.entries
+                    .map((e) => ShareInput(
+                          title: e.key,
+                          content: e.value
+                              .map((f) => buildShareOutput(
+                                    buildShareInputs(
+                                      f.content,
+                                      DalPathUtils.browserUrl(DalNode(
+                                        category: widget.category,
+                                        id: f.content!.id!,
+                                      )),
+                                      category: widget.category,
+                                    ),
+                                    props: ShareOutputProps(prefix: '\t'),
+                                  ))
+                              .reduce((e1, e2) => '$e1 \n$e2'),
+                        ))
+                    .toList(),
+                S.current.Related,
+                props: ShareOutputProps(termSpace: '\n', forceReducer: true),
+              );
+            },
+          AppbarMenuItem(
+            S.current.Edit,
+            createIcon(Icons.edit),
+            onTap: () => DalPathUtils.launchNodeInBrowser(
+              DalNode(
+                  id: widget.id,
+                  category: widget.category,
+                  dalSubType: DalSubType.relations,
+                  queryParams: {
+                    '${widget.category.equals('anime') ? "aid" : "mid"}':
+                        widget.id,
+                  }),
+              context,
+            ),
+          ),
+        ],
+      ),
+    ];
   }
 
   Column get _horizView {

@@ -919,5 +919,10 @@
     "Mal_Under_Maintenance": "MyAnimeList sedang dalam pemeliharaan",
     "Mal_Under_Maintenance_Desc": "MyAnimeList sedang dalam pemeliharaan, silakan coba lagi nanti",
     "Ok": "Oke",
-    "Open": "Membuka"
+    "Open": "Membuka",
+    "Couldnt_generate_graph": "Tidak dapat membuat grafik",
+    "Graph_loaded": "Grafik dimuat",
+    "Sequel": "Sekuel",
+    "Prequel": "Prekuel",
+    "Graph_Edge_Info": "Informasi tepi"
 }

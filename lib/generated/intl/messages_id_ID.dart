@@ -225,6 +225,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Tidak dapat memperbarui!"),
         "Couldnt_connect_network": MessageLookupByLibrary.simpleMessage(
             "Tidak dapat terhubung ke jaringan"),
+        "Couldnt_generate_graph":
+            MessageLookupByLibrary.simpleMessage("Tidak dapat membuat grafik"),
         "Couldnt_get_promos": MessageLookupByLibrary.simpleMessage(
             "Tidak bisa mendapatkan promo"),
         "Couldnt_open_Club":
@@ -431,6 +433,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "Good": MessageLookupByLibrary.simpleMessage("Bagus"),
         "Gore": MessageLookupByLibrary.simpleMessage("Menanduk"),
         "Gourmet": MessageLookupByLibrary.simpleMessage("makanan lezat"),
+        "Graph_Edge_Info":
+            MessageLookupByLibrary.simpleMessage("Informasi tepi"),
+        "Graph_loaded": MessageLookupByLibrary.simpleMessage("Grafik dimuat"),
         "Great": MessageLookupByLibrary.simpleMessage("Besar"),
         "Grid": MessageLookupByLibrary.simpleMessage("kisi-kisi"),
         "Grid_Axis_Size":
@@ -789,6 +794,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "PreferredTitle_Desc": MessageLookupByLibrary.simpleMessage(
             "Pilih antara judul bahasa Inggris, Jepang, dan romanisasi untuk anime/manga Anda"),
         "Premiered": MessageLookupByLibrary.simpleMessage("Perdana menteri"),
+        "Prequel": MessageLookupByLibrary.simpleMessage("Prekuel"),
         "Preview": MessageLookupByLibrary.simpleMessage("Pratinjau"),
         "Previous": MessageLookupByLibrary.simpleMessage("Sebelumnya"),
         "Primary_background_color": MessageLookupByLibrary.simpleMessage(
@@ -952,6 +958,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Select_the_no_of_items":
             MessageLookupByLibrary.simpleMessage("Pilih no.item."),
         "Selected": MessageLookupByLibrary.simpleMessage("Terpilih"),
+        "Sequel": MessageLookupByLibrary.simpleMessage("Sekuel"),
         "Serialization": MessageLookupByLibrary.simpleMessage("Serialisasi."),
         "Series_Discussion":
             MessageLookupByLibrary.simpleMessage("Diskusi seri"),

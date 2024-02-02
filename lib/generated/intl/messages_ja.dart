@@ -197,6 +197,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "Couldnt_Update": MessageLookupByLibrary.simpleMessage("更新できませんでした！"),
         "Couldnt_connect_network":
             MessageLookupByLibrary.simpleMessage("ネットワークに接続できませんでした"),
+        "Couldnt_generate_graph":
+            MessageLookupByLibrary.simpleMessage("グラフを生成できませんでした"),
         "Couldnt_get_promos":
             MessageLookupByLibrary.simpleMessage("プロモーションを得ることができませんでした"),
         "Couldnt_open_Club":
@@ -384,6 +386,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "Good": MessageLookupByLibrary.simpleMessage("良い"),
         "Gore": MessageLookupByLibrary.simpleMessage("ゴア"),
         "Gourmet": MessageLookupByLibrary.simpleMessage("グルメ"),
+        "Graph_Edge_Info": MessageLookupByLibrary.simpleMessage("エッジ情報"),
+        "Graph_loaded": MessageLookupByLibrary.simpleMessage("グラフが読み込まれました"),
         "Great": MessageLookupByLibrary.simpleMessage("素晴らしい"),
         "Grid": MessageLookupByLibrary.simpleMessage("グリッド"),
         "Grid_Axis_Size": MessageLookupByLibrary.simpleMessage("グリッド軸のサイズ"),
@@ -697,6 +701,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "PreferredTitle_Desc": MessageLookupByLibrary.simpleMessage(
             "アニメ/マンガの英語、日本語、ローマ字タイトルから選択してください"),
         "Premiered": MessageLookupByLibrary.simpleMessage("premed"),
+        "Prequel": MessageLookupByLibrary.simpleMessage("前編"),
         "Preview": MessageLookupByLibrary.simpleMessage("プレビュー"),
         "Previous": MessageLookupByLibrary.simpleMessage("前"),
         "Primary_background_color":
@@ -845,6 +850,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Select_the_no_of_items":
             MessageLookupByLibrary.simpleMessage("いいえを選択してください。アイテムの"),
         "Selected": MessageLookupByLibrary.simpleMessage("選択済み"),
+        "Sequel": MessageLookupByLibrary.simpleMessage("続編"),
         "Serialization": MessageLookupByLibrary.simpleMessage("シリアライゼーション"),
         "Series_Discussion":
             MessageLookupByLibrary.simpleMessage("シリーズディスカッション"),

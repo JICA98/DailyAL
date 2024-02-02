@@ -917,5 +917,10 @@
     "Mal_Under_Maintenance_Desc": "MyAnimeList is under maintenance, please try again later",
     "Ok": "ok",
     "Open": "Open",
+    "Couldnt_generate_graph": "Couldn't generate graph",
+    "Graph_loaded": "Graph loaded",
+    "Sequel": "Sequel",
+    "Prequel": "Prequel",
+    "Graph_Edge_Info": "Edge info",
     "publishedEndDate": "Published End Date"
 }

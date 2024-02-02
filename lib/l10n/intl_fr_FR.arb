@@ -919,5 +919,10 @@
     "Mal_Under_Maintenance": "MyAnimeList est en maintenance",
     "Mal_Under_Maintenance_Desc": "MyAnimeList est en maintenance, veuillez r\u00e9essayer plus tard",
     "Ok": "d'accord",
-    "Open": "Ouvrir"
+    "Open": "Ouvrir",
+    "Couldnt_generate_graph": "Impossible de g\u00e9n\u00e9rer le graphique",
+    "Graph_loaded": "Graphique charg\u00e9",
+    "Sequel": "Suite",
+    "Prequel": "Pr\u00e9quelle",
+    "Graph_Edge_Info": "Informations sur le bord"
 }

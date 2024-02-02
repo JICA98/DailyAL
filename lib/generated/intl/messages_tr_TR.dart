@@ -221,6 +221,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Güncellenemedi!"),
         "Couldnt_connect_network":
             MessageLookupByLibrary.simpleMessage("Ağa bağlanılamadı"),
+        "Couldnt_generate_graph":
+            MessageLookupByLibrary.simpleMessage("Grafik oluşturulamadı"),
         "Couldnt_get_promos":
             MessageLookupByLibrary.simpleMessage("Promosyonlar alınamadı"),
         "Couldnt_open_Club":
@@ -426,6 +428,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "Good": MessageLookupByLibrary.simpleMessage("İyi"),
         "Gore": MessageLookupByLibrary.simpleMessage("Kan"),
         "Gourmet": MessageLookupByLibrary.simpleMessage("Gurme"),
+        "Graph_Edge_Info":
+            MessageLookupByLibrary.simpleMessage("Kenar bilgisi"),
+        "Graph_loaded": MessageLookupByLibrary.simpleMessage("Grafik yüklendi"),
         "Great": MessageLookupByLibrary.simpleMessage("Harika"),
         "Grid": MessageLookupByLibrary.simpleMessage("Kafes"),
         "Grid_Axis_Size":
@@ -780,6 +785,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "PreferredTitle_Desc": MessageLookupByLibrary.simpleMessage(
             "Animeniz/manganız için İngilizce, Japonca ve Romanlaştırılmış başlıklar arasından seçim yapın"),
         "Premiered": MessageLookupByLibrary.simpleMessage("Prömiyeri yapıldı"),
+        "Prequel": MessageLookupByLibrary.simpleMessage("Öncesi niteliğinde"),
         "Preview": MessageLookupByLibrary.simpleMessage("Ön izleme"),
         "Previous": MessageLookupByLibrary.simpleMessage("Öncesi"),
         "Primary_background_color":
@@ -948,6 +954,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Select_the_no_of_items":
             MessageLookupByLibrary.simpleMessage("Hayır\'ı seçin. öğelerin"),
         "Selected": MessageLookupByLibrary.simpleMessage("Seçildi"),
+        "Sequel": MessageLookupByLibrary.simpleMessage("Devam filmi"),
         "Serialization": MessageLookupByLibrary.simpleMessage("Serileştirme"),
         "Series_Discussion":
             MessageLookupByLibrary.simpleMessage("Dizi Tartışması"),

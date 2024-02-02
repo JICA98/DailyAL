@@ -917,5 +917,10 @@
     "Mal_Under_Maintenance": "MyAnimeList bak\u0131mda",
     "Mal_Under_Maintenance_Desc": "MyAnimeList bak\u0131mdad\u0131r, l\u00fctfen daha sonra tekrar deneyin",
     "Ok": "Tamam",
-    "Open": "A\u00e7\u0131k"
+    "Open": "A\u00e7\u0131k",
+    "Couldnt_generate_graph": "Grafik olu\u015fturulamad\u0131",
+    "Graph_loaded": "Grafik y\u00fcklendi",
+    "Sequel": "Devam filmi",
+    "Prequel": "\u00d6ncesi niteli\u011finde",
+    "Graph_Edge_Info": "Kenar bilgisi"
 }

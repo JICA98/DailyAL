@@ -226,6 +226,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Não foi possível atualizar!"),
         "Couldnt_connect_network": MessageLookupByLibrary.simpleMessage(
             "Não foi possível conectar-se à rede"),
+        "Couldnt_generate_graph": MessageLookupByLibrary.simpleMessage(
+            "Não foi possível gerar o gráfico"),
         "Couldnt_get_promos":
             MessageLookupByLibrary.simpleMessage("Não conseguiu promos"),
         "Couldnt_open_Club": MessageLookupByLibrary.simpleMessage(
@@ -437,6 +439,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "Good": MessageLookupByLibrary.simpleMessage("Bom"),
         "Gore": MessageLookupByLibrary.simpleMessage("Gore"),
         "Gourmet": MessageLookupByLibrary.simpleMessage("Gourmet"),
+        "Graph_Edge_Info":
+            MessageLookupByLibrary.simpleMessage("Informações de borda"),
+        "Graph_loaded":
+            MessageLookupByLibrary.simpleMessage("Gráfico carregado"),
         "Great": MessageLookupByLibrary.simpleMessage("Ótimo"),
         "Grid": MessageLookupByLibrary.simpleMessage("Rede"),
         "Grid_Axis_Size":
@@ -799,6 +805,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "PreferredTitle_Desc": MessageLookupByLibrary.simpleMessage(
             "Selecione entre títulos em inglês, japonês e romanizado para seu anime/mangá"),
         "Premiered": MessageLookupByLibrary.simpleMessage("Premiered"),
+        "Prequel": MessageLookupByLibrary.simpleMessage("Prequela"),
         "Preview": MessageLookupByLibrary.simpleMessage("Pré-visualização"),
         "Previous": MessageLookupByLibrary.simpleMessage("Anterior"),
         "Primary_background_color":
@@ -969,6 +976,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Select_the_no_of_items":
             MessageLookupByLibrary.simpleMessage("Selecione o não.de itens"),
         "Selected": MessageLookupByLibrary.simpleMessage("Selecionado"),
+        "Sequel": MessageLookupByLibrary.simpleMessage("Sequela"),
         "Serialization": MessageLookupByLibrary.simpleMessage("Serialização"),
         "Series_Discussion":
             MessageLookupByLibrary.simpleMessage("Discussão da série."),

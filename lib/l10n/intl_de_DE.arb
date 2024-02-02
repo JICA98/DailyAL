@@ -920,5 +920,10 @@
     "Mal_Under_Maintenance": "MyAnimeList wird gewartet",
     "Mal_Under_Maintenance_Desc": "MyAnimeList wird gerade gewartet. Bitte versuchen Sie es sp\u00e4ter noch einmal",
     "Ok": "OK",
-    "Open": "Offen"
+    "Open": "Offen",
+    "Couldnt_generate_graph": "Das Diagramm konnte nicht erstellt werden",
+    "Graph_loaded": "Diagramm geladen",
+    "Sequel": "Folge",
+    "Prequel": "Prequel",
+    "Graph_Edge_Info": "Kanteninfo"
 }
