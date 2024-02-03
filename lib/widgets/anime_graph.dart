@@ -80,7 +80,6 @@ class _AnimeGraphWidgetState extends State<AnimeGraphWidget> {
             source: edge.target,
             target: edge.source,
             relationType: dal.GRelationType.sequel,
-            relationTypeFormatted: S.current.Sequel,
           ));
           return;
         }

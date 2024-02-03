@@ -404,7 +404,7 @@ class MalApi {
   }
 
   static Future<bool> _checkIfDeviceIsConnected() async {
-    return await plus.InternetConnectionCheckerPlus.createInstance().hasConnection;
+    return await plus.InternetConnection().hasInternetAccess;
   }
 }
 
