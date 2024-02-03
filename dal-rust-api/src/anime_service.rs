@@ -7,6 +7,7 @@ use crate::model::{Anime, Edge, RelatedAnime, RelationType};
 use crate::config::Config;
 use crate::model_dto::{ContentGraphDTO, ContentNodeDTO};
 use async_recursion::async_recursion;
+use chrono::{DateTime, Utc};
 use futures::{stream, StreamExt};
 
 #[derive(Debug, Clone)]
@@ -94,7 +95,6 @@ impl AnimeService {
                         source: id,
                         target: related_anime.node.id,
                         relation_type: related_anime.relation_type.clone(),
-                        relation_type_formatted: related_anime.relation_type_formatted.clone(),
                     })
                     .collect::<Vec<Edge>>(),
             );
@@ -131,14 +131,8 @@ impl AnimeService {
         }
     }
 
-    pub async fn get_anime_by_id(
-        &self,
-        id: i64,
-        from_cache: bool,
-    ) -> Result<Anime, Box<dyn Error>> {
-        // current time in millis
+    async fn get_anime_by_id(&self, id: i64, from_cache: bool) -> Result<Anime, Box<dyn Error>> {
         let now = chrono::Utc::now();
-        // Try to get the anime from the cache
         let result = match from_cache {
             true => self.cache_service.get_anime_by_id(id).await,
             false => None,
@@ -156,23 +150,30 @@ impl AnimeService {
             // Store the anime in the cache for future use
             self.cache_service.set_anime_by_id(id, &anime).await;
             let then = chrono::Utc::now();
-            println!(
-                "{}: Cache set anime: {} and {} in {}ms",
-                then.format("%d/%m/%Y %H:%M:%S"),
-                anime.id,
-                anime.title,
-                then.timestamp_millis() - now.timestamp_millis()
-            );
+            self.log_anime(&anime, "Saved".to_string(), then, now);
             Ok(anime)
         } else {
             let anime = result.unwrap();
-            println!(
-                "Cache hit anime: {} and {} in {}ms",
-                anime.id,
-                anime.title,
-                chrono::Utc::now().timestamp_millis() - now.timestamp_millis()
-            );
+            let then = chrono::Utc::now();
+            self.log_anime(&anime, "Cache hit".to_string(), then, now);
             Ok(anime)
         }
+    }
+
+    fn log_anime(
+        &self,
+        anime: &Anime,
+        hit_or_miss: String,
+        then: DateTime<Utc>,
+        now: DateTime<Utc>,
+    ) {
+        println!(
+            "{}: {} anime: {} and {} in {}ms",
+            then.format("%d/%m/%Y %H:%M:%S"),
+            hit_or_miss,
+            anime.id,
+            anime.title,
+            then.timestamp_millis() - now.timestamp_millis()
+        );
     }
 }

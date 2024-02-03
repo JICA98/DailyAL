@@ -57,7 +57,6 @@ pub struct EdgeDTO {
     pub source: i64,
     pub target: i64,
     pub relation_type: RelationTypeDTO,
-    pub relation_type_formatted: String,
 }
 
 impl From<crate::model::Edge> for EdgeDTO {
@@ -66,7 +65,6 @@ impl From<crate::model::Edge> for EdgeDTO {
             source: edge.source,
             target: edge.target,
             relation_type: edge.relation_type.into(),
-            relation_type_formatted: edge.relation_type_formatted,
         }
     }
 }
