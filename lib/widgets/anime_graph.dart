@@ -1,24 +1,34 @@
 import 'dart:collection';
 
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:dailyanimelist/cache/cachemanager.dart';
 import 'package:dailyanimelist/constant.dart';
 import 'package:dailyanimelist/generated/l10n.dart';
 import 'package:dailyanimelist/screens/contentdetailedscreen.dart';
+import 'package:dailyanimelist/screens/plainscreen.dart';
 import 'package:dailyanimelist/widgets/common/image_preview.dart';
 import 'package:dailyanimelist/widgets/home/animecard.dart';
+import 'package:dailyanimelist/widgets/selectbottom.dart';
 import 'package:dal_commons/commons.dart' as dal;
 import 'package:flutter/material.dart';
 import 'package:graphview/GraphView.dart';
+
+enum _GraphOrderType {
+  by_sequel,
+  from_selected,
+}
 
 class AnimeGraphWidget extends StatefulWidget {
   final dal.AnimeGraph graph;
   final int id;
   final Map<int, dal.MyListStatus> statusMap;
+  final List<Widget> actions;
   const AnimeGraphWidget({
     super.key,
     required this.graph,
     required this.id,
     required this.statusMap,
+    required this.actions,
   });
 
   @override
@@ -26,7 +36,7 @@ class AnimeGraphWidget extends StatefulWidget {
 }
 
 class _AnimeGraphWidgetState extends State<AnimeGraphWidget> {
-  final Graph _graph = Graph()..isTree = true;
+  Graph _graph = Graph()..isTree = false;
   late SugiyamaAlgorithm _algorithm;
   final Map<int, dal.GraphNode> _nodeMap = HashMap();
   final List<int> _expandedIds = [];
@@ -39,24 +49,17 @@ class _AnimeGraphWidgetState extends State<AnimeGraphWidget> {
     dal.GRelationType.sequel: 3.0,
     dal.GRelationType.prequel: 3.0,
   };
+  final _graphTypeMap = {
+    _GraphOrderType.by_sequel: S.current.Graph_Order_By_Sequel,
+    _GraphOrderType.from_selected: S.current.Graph_Order_From_Selected,
+  };
+  _GraphOrderType _graphOrderType = _GraphOrderType.by_sequel;
 
   @override
   void initState() {
     super.initState();
     widget.graph.nodes?.forEach((node) => _nodeMap[node.id!] = node);
-    final Map<int, Node> idMap = Map.fromEntries(widget.graph.nodes
-            ?.map((node) => MapEntry(node.id!, Node.Id(node.id!)))
-            .toList() ??
-        []);
-    widget.graph.edges?.forEach((edge) {
-      final fromNodeId = idMap[edge.source]!;
-      final toNodeId = idMap[edge.target]!;
-      _graph.addEdge(fromNodeId, toNodeId)
-        ..paint = (Paint()
-          ..color = _getColorByRelationType(edge.relationType)
-          ..strokeWidth = _edgeStrokeWidthMap[edge.relationType] ?? 1.0
-          ..style = PaintingStyle.stroke);
-    });
+    _setGraph();
 
     _algorithm = SugiyamaAlgorithm(SugiyamaConfiguration()
       ..bendPointShape = CurvedBendPointShape(curveLength: 120.0)
@@ -66,6 +69,34 @@ class _AnimeGraphWidgetState extends State<AnimeGraphWidget> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _setInitialPosition();
     });
+  }
+
+  void _setGraph() {
+    _graph = Graph()..isTree = false;
+    widget.graph.edges?.forEach((edge) {
+      if (_graphOrderType == _GraphOrderType.by_sequel) {
+        if (edge.relationType == dal.GRelationType.prequel) {
+          _addEdge(dal.GraphEdge(
+            source: edge.target,
+            target: edge.source,
+            relationType: dal.GRelationType.sequel,
+            relationTypeFormatted: S.current.Sequel,
+          ));
+          return;
+        }
+      }
+      _addEdge(edge);
+    });
+  }
+
+  void _addEdge(dal.GraphEdge edge) {
+    final fromNodeId = Node.Id(edge.source);
+    final toNodeId = Node.Id(edge.target);
+    _graph.addEdge(fromNodeId, toNodeId)
+      ..paint = (Paint()
+        ..color = _getColorByRelationType(edge.relationType)
+        ..strokeWidth = _edgeStrokeWidthMap[edge.relationType] ?? 1.0
+        ..style = PaintingStyle.stroke);
   }
 
   void _setInitialPosition([Size? size]) {
@@ -87,25 +118,48 @@ class _AnimeGraphWidgetState extends State<AnimeGraphWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        InteractiveViewer(
-          constrained: false,
-          boundaryMargin: EdgeInsets.all(double.infinity),
-          minScale: 0.01,
-          maxScale: 5.6,
-          transformationController: _controller,
-          child: GraphView(
-            graph: _graph,
-            algorithm: _algorithm,
-            animated: false,
-            builder: (Node node) {
-              var a = node.key?.value as int?;
-              return rectangleWidget(_nodeMap[a]!);
-            },
+    return TitlebarScreen(
+      Stack(
+        children: [
+          InteractiveViewer(
+            constrained: false,
+            boundaryMargin: EdgeInsets.all(double.infinity),
+            minScale: 0.01,
+            maxScale: 5.6,
+            transformationController: _controller,
+            child: GraphView(
+              graph: _graph,
+              algorithm: _algorithm,
+              animated: false,
+              builder: (Node node) {
+                var a = node.key?.value as int?;
+                return rectangleWidget(_nodeMap[a]!);
+              },
+            ),
           ),
+          _bottomBar(),
+        ],
+      ),
+      appbarTitle: '${S.current.Related} anime',
+      autoIncludeSearch: false,
+      actions: [
+        SelectButton(
+          popupText: S.current.Order_by,
+          selectedOption: _graphTypeMap[_graphOrderType],
+          child: Icon(Icons.swap_horiz),
+          options: _graphTypeMap.values.toList(),
+          onChanged: (p0) {
+            _graphOrderType = _graphTypeMap.entries
+                .firstWhere((element) => element.value == p0)
+                .key;
+            _setGraph();
+            if (mounted) setState(() {});
+            Future.delayed(Duration(milliseconds: 100), () {
+              _setInitialPosition();
+            });
+          },
         ),
-        _bottomBar(),
+        ...widget.actions,
       ],
     );
   }
@@ -148,11 +202,12 @@ class _AnimeGraphWidgetState extends State<AnimeGraphWidget> {
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
                 child: Row(
                   children: [
-                    Text(
-                      S.current.Graph_Edge_Info,
-                      style: Theme.of(context).textTheme.titleLarge,
+                    Expanded(
+                      child: Text(
+                        S.current.Graph_Edge_Info,
+                        style: Theme.of(context).textTheme.titleLarge,
+                      ),
                     ),
-                    Spacer(),
                     IconButton(
                       onPressed: () => Navigator.pop(context),
                       icon: Icon(Icons.close),

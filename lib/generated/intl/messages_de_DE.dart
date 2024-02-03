@@ -438,6 +438,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "Gore": MessageLookupByLibrary.simpleMessage("Blut"),
         "Gourmet": MessageLookupByLibrary.simpleMessage("Gourmet"),
         "Graph_Edge_Info": MessageLookupByLibrary.simpleMessage("Kanteninfo"),
+        "Graph_Order_By_Sequel": MessageLookupByLibrary.simpleMessage(
+            "Reihenfolge nach Fortsetzung"),
+        "Graph_Order_From_Selected": MessageLookupByLibrary.simpleMessage(
+            "Bestellen Sie bei Auserwählten"),
         "Graph_loaded":
             MessageLookupByLibrary.simpleMessage("Diagramm geladen"),
         "Great": MessageLookupByLibrary.simpleMessage("Großartig"),
@@ -1097,6 +1101,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Support": MessageLookupByLibrary.simpleMessage("Unterstützung"),
         "Survival": MessageLookupByLibrary.simpleMessage("Überleben"),
         "Suspense": MessageLookupByLibrary.simpleMessage("Spannung"),
+        "Switch": MessageLookupByLibrary.simpleMessage("Schalten"),
         "Synonyms": MessageLookupByLibrary.simpleMessage("Synonyme"),
         "Synopsis": MessageLookupByLibrary.simpleMessage("Zusammenfassung"),
         "Tags": MessageLookupByLibrary.simpleMessage("Stichworte"),
@@ -1168,8 +1173,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Übersetzen Sie den obigen Text"),
         "Translate_Below_Text": MessageLookupByLibrary.simpleMessage(
             "Übersetzen Sie den folgenden Text"),
-        "Translate_Synopsis": MessageLookupByLibrary.simpleMessage(
-            "Übersetzen Sie die obige Synopsis"),
+        "Translate_Synopsis2": MessageLookupByLibrary.simpleMessage(
+            "Übersetzen Sie die Zusammenfassung"),
         "Trivia": MessageLookupByLibrary.simpleMessage("Trivia"),
         "Turkish": MessageLookupByLibrary.simpleMessage("Türkisch"),
         "Two_Months_ago":

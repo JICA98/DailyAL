@@ -253,7 +253,7 @@ class _SysonpsisWidgetState extends State<SysonpsisWidget>
       content: widget.synopsis!,
       done: (s) => _buildRichTextWithAnchors(s ?? ''),
       loading: loadingText(context),
-      preButtonText: S.current.Translate_Synopsis,
+      preButtonText: S.current.Translate_Synopsis2,
       postButtonText: S.current.Show_Original,
       buttonPadding: EdgeInsets.zero,
       reversed: true,

@@ -425,6 +425,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "Gourmet": MessageLookupByLibrary.simpleMessage("جورميه"),
         "Graph_Edge_Info":
             MessageLookupByLibrary.simpleMessage("معلومات الحافة"),
+        "Graph_Order_By_Sequel":
+            MessageLookupByLibrary.simpleMessage("الترتيب حسب التكملة"),
+        "Graph_Order_From_Selected":
+            MessageLookupByLibrary.simpleMessage("الطلب من المحدد"),
         "Graph_loaded":
             MessageLookupByLibrary.simpleMessage("تم تحميل الرسم البياني"),
         "Great": MessageLookupByLibrary.simpleMessage("عظيم"),
@@ -1060,6 +1064,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Support": MessageLookupByLibrary.simpleMessage("الدعم"),
         "Survival": MessageLookupByLibrary.simpleMessage("نجاة"),
         "Suspense": MessageLookupByLibrary.simpleMessage("تشويق"),
+        "Switch": MessageLookupByLibrary.simpleMessage("يُحوّل"),
         "Synonyms": MessageLookupByLibrary.simpleMessage("المرادفات"),
         "Synopsis": MessageLookupByLibrary.simpleMessage("ملخص"),
         "Tags": MessageLookupByLibrary.simpleMessage("كذا"),
@@ -1133,8 +1138,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("ترجمة النص أعلاه"),
         "Translate_Below_Text":
             MessageLookupByLibrary.simpleMessage("ترجمة النص أدناه"),
-        "Translate_Synopsis":
-            MessageLookupByLibrary.simpleMessage("ترجمة ملخص أعلاه"),
+        "Translate_Synopsis2":
+            MessageLookupByLibrary.simpleMessage("ترجمة الملخص"),
         "Trivia": MessageLookupByLibrary.simpleMessage("أمور تافهة"),
         "Turkish": MessageLookupByLibrary.simpleMessage("اللغة التركية"),
         "Two_Months_ago": MessageLookupByLibrary.simpleMessage("قبل شهرين"),

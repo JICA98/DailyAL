@@ -447,6 +447,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "Gourmet": MessageLookupByLibrary.simpleMessage("Gastrónomo"),
         "Graph_Edge_Info":
             MessageLookupByLibrary.simpleMessage("Información del borde"),
+        "Graph_Order_By_Sequel":
+            MessageLookupByLibrary.simpleMessage("Ordenar por secuela"),
+        "Graph_Order_From_Selected":
+            MessageLookupByLibrary.simpleMessage("Orden de seleccionado"),
         "Graph_loaded": MessageLookupByLibrary.simpleMessage("Gráfico cargado"),
         "Great": MessageLookupByLibrary.simpleMessage("Excelente"),
         "Grid": MessageLookupByLibrary.simpleMessage("Cuadrícula"),
@@ -1121,6 +1125,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Support": MessageLookupByLibrary.simpleMessage("Apoyo"),
         "Survival": MessageLookupByLibrary.simpleMessage("Supervivencia"),
         "Suspense": MessageLookupByLibrary.simpleMessage("Suspenso"),
+        "Switch": MessageLookupByLibrary.simpleMessage("Cambiar"),
         "Synonyms": MessageLookupByLibrary.simpleMessage("Synonyms"),
         "Synopsis": MessageLookupByLibrary.simpleMessage("Sinopsis"),
         "Tags": MessageLookupByLibrary.simpleMessage("Etiquetas"),
@@ -1195,8 +1200,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Traducir el texto anterior"),
         "Translate_Below_Text":
             MessageLookupByLibrary.simpleMessage("Traducir debajo del texto"),
-        "Translate_Synopsis": MessageLookupByLibrary.simpleMessage(
-            "Traducir la sinopsis anterior"),
+        "Translate_Synopsis2":
+            MessageLookupByLibrary.simpleMessage("Traducir la sinopsis"),
         "Trivia": MessageLookupByLibrary.simpleMessage("Trivialidades"),
         "Turkish": MessageLookupByLibrary.simpleMessage("turco"),
         "Two_Months_ago":

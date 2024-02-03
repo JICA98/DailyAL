@@ -924,5 +924,9 @@
     "Graph_loaded": "Graphique charg\u00e9",
     "Sequel": "Suite",
     "Prequel": "Pr\u00e9quelle",
-    "Graph_Edge_Info": "Informations sur le bord"
+    "Graph_Edge_Info": "Informations sur le bord",
+    "Translate_Synopsis2": "Traduire le r\u00e9sum\u00e9",
+    "Graph_Order_By_Sequel": "Trier par suite",
+    "Graph_Order_From_Selected": "Commande parmi les s\u00e9lectionn\u00e9s",
+    "Switch": "Changer"
 }

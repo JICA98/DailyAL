@@ -434,6 +434,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "Gourmet": MessageLookupByLibrary.simpleMessage("гурман"),
         "Graph_Edge_Info":
             MessageLookupByLibrary.simpleMessage("Информация о краю"),
+        "Graph_Order_By_Sequel":
+            MessageLookupByLibrary.simpleMessage("Заказ по продолжению"),
+        "Graph_Order_From_Selected":
+            MessageLookupByLibrary.simpleMessage("Заказать из выбранных"),
         "Graph_loaded": MessageLookupByLibrary.simpleMessage("График загружен"),
         "Great": MessageLookupByLibrary.simpleMessage("Большой"),
         "Grid": MessageLookupByLibrary.simpleMessage("Сетка"),
@@ -1092,6 +1096,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Support": MessageLookupByLibrary.simpleMessage("Поддерживать"),
         "Survival": MessageLookupByLibrary.simpleMessage("Выживание"),
         "Suspense": MessageLookupByLibrary.simpleMessage("Саспенс"),
+        "Switch": MessageLookupByLibrary.simpleMessage("Выключатель"),
         "Synonyms": MessageLookupByLibrary.simpleMessage("Синонимы"),
         "Synopsis": MessageLookupByLibrary.simpleMessage("Краткое содержание"),
         "Tags": MessageLookupByLibrary.simpleMessage("Теги"),
@@ -1165,8 +1170,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Перевести текст выше"),
         "Translate_Below_Text":
             MessageLookupByLibrary.simpleMessage("Перевести текст ниже"),
-        "Translate_Synopsis": MessageLookupByLibrary.simpleMessage(
-            "Переведите приведенный выше синопсис"),
+        "Translate_Synopsis2":
+            MessageLookupByLibrary.simpleMessage("Перевести синопсис"),
         "Trivia": MessageLookupByLibrary.simpleMessage("Пустяки"),
         "Turkish": MessageLookupByLibrary.simpleMessage("турецкий"),
         "Two_Months_ago":

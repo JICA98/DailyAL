@@ -430,6 +430,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "Gourmet": MessageLookupByLibrary.simpleMessage("Gurme"),
         "Graph_Edge_Info":
             MessageLookupByLibrary.simpleMessage("Kenar bilgisi"),
+        "Graph_Order_By_Sequel":
+            MessageLookupByLibrary.simpleMessage("Devamına göre sırala"),
+        "Graph_Order_From_Selected":
+            MessageLookupByLibrary.simpleMessage("Seçilenlerden sipariş ver"),
         "Graph_loaded": MessageLookupByLibrary.simpleMessage("Grafik yüklendi"),
         "Great": MessageLookupByLibrary.simpleMessage("Harika"),
         "Grid": MessageLookupByLibrary.simpleMessage("Kafes"),
@@ -1080,6 +1084,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Support": MessageLookupByLibrary.simpleMessage("Destek"),
         "Survival": MessageLookupByLibrary.simpleMessage("Hayatta kalma"),
         "Suspense": MessageLookupByLibrary.simpleMessage("Gerilim"),
+        "Switch": MessageLookupByLibrary.simpleMessage("Anahtar"),
         "Synonyms": MessageLookupByLibrary.simpleMessage("Eş anlamlı"),
         "Synopsis": MessageLookupByLibrary.simpleMessage("özet"),
         "Tags": MessageLookupByLibrary.simpleMessage("Etiketler"),
@@ -1153,8 +1158,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Yukarıdaki metni çevir"),
         "Translate_Below_Text":
             MessageLookupByLibrary.simpleMessage("Aşağıdaki metni çevir"),
-        "Translate_Synopsis":
-            MessageLookupByLibrary.simpleMessage("Yukarıdaki özeti çevirin"),
+        "Translate_Synopsis2":
+            MessageLookupByLibrary.simpleMessage("Özeti tercüme et"),
         "Trivia": MessageLookupByLibrary.simpleMessage("Diğer bilgiler"),
         "Turkish": MessageLookupByLibrary.simpleMessage("Türkçe"),
         "Two_Months_ago": MessageLookupByLibrary.simpleMessage("İki ay önce"),

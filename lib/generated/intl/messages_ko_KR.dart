@@ -388,6 +388,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "Gore": MessageLookupByLibrary.simpleMessage("핏덩어리"),
         "Gourmet": MessageLookupByLibrary.simpleMessage("식도락가"),
         "Graph_Edge_Info": MessageLookupByLibrary.simpleMessage("엣지 정보"),
+        "Graph_Order_By_Sequel":
+            MessageLookupByLibrary.simpleMessage("속편순으로 주문"),
+        "Graph_Order_From_Selected":
+            MessageLookupByLibrary.simpleMessage("선택 항목에서 주문"),
         "Graph_loaded": MessageLookupByLibrary.simpleMessage("그래프가 로드됨"),
         "Great": MessageLookupByLibrary.simpleMessage("엄청난"),
         "Grid": MessageLookupByLibrary.simpleMessage("그리드"),
@@ -967,6 +971,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Support": MessageLookupByLibrary.simpleMessage("지원하다"),
         "Survival": MessageLookupByLibrary.simpleMessage("활착"),
         "Suspense": MessageLookupByLibrary.simpleMessage("미결"),
+        "Switch": MessageLookupByLibrary.simpleMessage("스위치"),
         "Synonyms": MessageLookupByLibrary.simpleMessage("동의어"),
         "Synopsis": MessageLookupByLibrary.simpleMessage("개요"),
         "Tags": MessageLookupByLibrary.simpleMessage("태그"),
@@ -1029,8 +1034,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("위 텍스트 번역"),
         "Translate_Below_Text":
             MessageLookupByLibrary.simpleMessage("아래 텍스트 번역"),
-        "Translate_Synopsis":
-            MessageLookupByLibrary.simpleMessage("위의 시놉시스를 번역하십시오"),
+        "Translate_Synopsis2": MessageLookupByLibrary.simpleMessage("시놉시스 번역"),
         "Trivia": MessageLookupByLibrary.simpleMessage("하찮은 일"),
         "Turkish": MessageLookupByLibrary.simpleMessage("터키어"),
         "Two_Months_ago": MessageLookupByLibrary.simpleMessage("2개월 전"),

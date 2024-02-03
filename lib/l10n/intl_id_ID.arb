@@ -924,5 +924,9 @@
     "Graph_loaded": "Grafik dimuat",
     "Sequel": "Sekuel",
     "Prequel": "Prekuel",
-    "Graph_Edge_Info": "Informasi tepi"
+    "Graph_Edge_Info": "Informasi tepi",
+    "Translate_Synopsis2": "Terjemahkan sinopsisnya",
+    "Graph_Order_By_Sequel": "Diurutkan berdasarkan sekuel",
+    "Graph_Order_From_Selected": "Pesan dari yang dipilih",
+    "Switch": "Mengalihkan"
 }

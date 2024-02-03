@@ -344,11 +344,11 @@ Widget loadingText(BuildContext context) {
   );
 }
 
-void showSnackBar(Widget content) async {
+void showSnackBar(Widget content, [Duration? duration]) async {
   messenger.currentState!.showSnackBar(
     SnackBar(
       content: content,
-      duration: const Duration(seconds: 4),
+      duration: duration ?? const Duration(seconds: 4),
     ),
   );
 }

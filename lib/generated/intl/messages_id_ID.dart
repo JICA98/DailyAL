@@ -435,6 +435,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "Gourmet": MessageLookupByLibrary.simpleMessage("makanan lezat"),
         "Graph_Edge_Info":
             MessageLookupByLibrary.simpleMessage("Informasi tepi"),
+        "Graph_Order_By_Sequel": MessageLookupByLibrary.simpleMessage(
+            "Diurutkan berdasarkan sekuel"),
+        "Graph_Order_From_Selected":
+            MessageLookupByLibrary.simpleMessage("Pesan dari yang dipilih"),
         "Graph_loaded": MessageLookupByLibrary.simpleMessage("Grafik dimuat"),
         "Great": MessageLookupByLibrary.simpleMessage("Besar"),
         "Grid": MessageLookupByLibrary.simpleMessage("kisi-kisi"),
@@ -1094,6 +1098,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Support": MessageLookupByLibrary.simpleMessage("Mendukung"),
         "Survival": MessageLookupByLibrary.simpleMessage("Bertahan hidup"),
         "Suspense": MessageLookupByLibrary.simpleMessage("Ketegangan"),
+        "Switch": MessageLookupByLibrary.simpleMessage("Mengalihkan"),
         "Synonyms": MessageLookupByLibrary.simpleMessage("Sinonim."),
         "Synopsis": MessageLookupByLibrary.simpleMessage("Ringkasan"),
         "Tags": MessageLookupByLibrary.simpleMessage("Tag"),
@@ -1165,8 +1170,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Terjemahkan teks di atas"),
         "Translate_Below_Text": MessageLookupByLibrary.simpleMessage(
             "Terjemahkan teks di bawah ini"),
-        "Translate_Synopsis": MessageLookupByLibrary.simpleMessage(
-            "Terjemahkan sinopsis di atas"),
+        "Translate_Synopsis2":
+            MessageLookupByLibrary.simpleMessage("Terjemahkan sinopsisnya"),
         "Trivia": MessageLookupByLibrary.simpleMessage("Trivia"),
         "Turkish": MessageLookupByLibrary.simpleMessage("Turki"),
         "Two_Months_ago":

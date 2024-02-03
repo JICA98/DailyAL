@@ -922,5 +922,9 @@
     "Graph_loaded": "Grafik y\u00fcklendi",
     "Sequel": "Devam filmi",
     "Prequel": "\u00d6ncesi niteli\u011finde",
-    "Graph_Edge_Info": "Kenar bilgisi"
+    "Graph_Edge_Info": "Kenar bilgisi",
+    "Translate_Synopsis2": "\u00d6zeti terc\u00fcme et",
+    "Graph_Order_By_Sequel": "Devam\u0131na g\u00f6re s\u0131rala",
+    "Graph_Order_From_Selected": "Se\u00e7ilenlerden sipari\u015f ver",
+    "Switch": "Anahtar"
 }

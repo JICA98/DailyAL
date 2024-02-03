@@ -6,6 +6,7 @@ import 'package:dailyanimelist/util/pathutils.dart';
 import 'package:dailyanimelist/widgets/anime_graph.dart';
 import 'package:dailyanimelist/widgets/common/share_builder.dart';
 import 'package:dailyanimelist/widgets/customappbar.dart';
+import 'package:dailyanimelist/widgets/custombutton.dart';
 import 'package:dailyanimelist/widgets/customfuture.dart';
 import 'package:dailyanimelist/widgets/listsortfilter.dart';
 import 'package:dailyanimelist/widgets/slivers.dart';
@@ -66,11 +67,15 @@ class _RelatedAnimeWidgetState extends State<RelatedAnimeWidget>
 
   void _setAnimeGraph() async {
     try {
+      final now = DateTime.now().millisecondsSinceEpoch / 1000;
       _graph = await DalApi.i.getAnimeGraph(widget.id);
-      showToast(S.current.Graph_loaded);
+      final then = DateTime.now().millisecondsSinceEpoch / 1000;
+      if ((then - now) > 1) {
+        showSnackBar(_graphSnackBar(), Duration(seconds: 3));
+      }
     } catch (e) {
       _graph = e;
-      showToast(S.current.Couldnt_generate_graph);
+      showSnackBar(_graphSnackBar());
     }
     if (mounted) setState(() {});
   }
@@ -90,20 +95,25 @@ class _RelatedAnimeWidgetState extends State<RelatedAnimeWidget>
       if (_graph is AnimeGraph) {
         return _graphWidget(_graph);
       } else {
-        return showNoContent();
+        return _noContentView();
       }
     }
   }
 
-  Widget _graphWidget(AnimeGraph data) {
+  Widget _noContentView() {
     return TitlebarScreen(
-      AnimeGraphWidget(
-        id: widget.id,
-        graph: data,
-        statusMap: widget.statusMap ?? {},
-      ),
-      appbarTitle: '${S.current.Related} ${widget.category}',
+      Center(child: showNoContent()),
+      appbarTitle: _appBarTitle,
+      actions: _getActions(false),
       autoIncludeSearch: false,
+    );
+  }
+
+  Widget _graphWidget(AnimeGraph data) {
+    return AnimeGraphWidget(
+      id: widget.id,
+      graph: data,
+      statusMap: widget.statusMap ?? {},
       actions: _getActions(true),
     );
   }
@@ -114,7 +124,7 @@ class _RelatedAnimeWidgetState extends State<RelatedAnimeWidget>
         SliverAppBarWrapper(
           bottom: _tabBar,
           expandedHeight: 93,
-          title: Text('${S.current.Related} ${widget.category}'),
+          title: Text(_appBarTitle),
           actions: _getActions(innerBoxIsScrolled),
         )
       ],
@@ -130,17 +140,33 @@ class _RelatedAnimeWidgetState extends State<RelatedAnimeWidget>
     );
   }
 
+  String get _appBarTitle => '${S.current.Related} ${widget.category}';
+
+  Widget _graphSnackBar() {
+    return Row(
+      children: [
+        Expanded(
+          child: Text(
+            _graph is AnimeGraph
+                ? S.current.Graph_loaded
+                : S.current.Couldnt_generate_graph,
+          ),
+        ),
+        SB.w10,
+        if (_graph is AnimeGraph)
+          ShadowButton(
+            onPressed: () => _switchView(),
+            child: Text(S.current.Switch),
+          )
+      ],
+    );
+  }
+
   List<Widget> _getActions(bool innerBoxIsScrolled) {
     return [
       if (_graph is AnimeGraph)
         IconButton(
-          onPressed: () {
-            setState(() {
-              _selectedView = _selectedView == _SelectedView.list
-                  ? _SelectedView.graph
-                  : _SelectedView.list;
-            });
-          },
+          onPressed: () => _switchView(),
           icon: Icon(
             _selectedView == _SelectedView.list
                 ? Icons.graphic_eq
@@ -201,6 +227,14 @@ class _RelatedAnimeWidgetState extends State<RelatedAnimeWidget>
         ],
       ),
     ];
+  }
+
+  void _switchView() {
+    setState(() {
+      _selectedView = _selectedView == _SelectedView.list
+          ? _SelectedView.graph
+          : _SelectedView.list;
+    });
   }
 
   Column get _horizView {

@@ -5890,11 +5890,11 @@ class S {
     );
   }
 
-  /// `Translate the above synopsis`
-  String get Translate_Synopsis {
+  /// `Translate the synopsis`
+  String get Translate_Synopsis2 {
     return Intl.message(
-      'Translate the above synopsis',
-      name: 'Translate_Synopsis',
+      'Translate the synopsis',
+      name: 'Translate_Synopsis2',
       desc: '',
       args: [],
     );
@@ -9265,6 +9265,36 @@ class S {
     return Intl.message(
       'Edge info',
       name: 'Graph_Edge_Info',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Order by sequel`
+  String get Graph_Order_By_Sequel {
+    return Intl.message(
+      'Order by sequel',
+      name: 'Graph_Order_By_Sequel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Order from selected`
+  String get Graph_Order_From_Selected {
+    return Intl.message(
+      'Order from selected',
+      name: 'Graph_Order_From_Selected',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Switch`
+  String get Switch {
+    return Intl.message(
+      'Switch',
+      name: 'Switch',
       desc: '',
       args: [],
     );

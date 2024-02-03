@@ -387,6 +387,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "Gore": MessageLookupByLibrary.simpleMessage("ゴア"),
         "Gourmet": MessageLookupByLibrary.simpleMessage("グルメ"),
         "Graph_Edge_Info": MessageLookupByLibrary.simpleMessage("エッジ情報"),
+        "Graph_Order_By_Sequel":
+            MessageLookupByLibrary.simpleMessage("続編順に並べる"),
+        "Graph_Order_From_Selected":
+            MessageLookupByLibrary.simpleMessage("選択したものから注文する"),
         "Graph_loaded": MessageLookupByLibrary.simpleMessage("グラフが読み込まれました"),
         "Great": MessageLookupByLibrary.simpleMessage("素晴らしい"),
         "Grid": MessageLookupByLibrary.simpleMessage("グリッド"),
@@ -963,6 +967,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Support": MessageLookupByLibrary.simpleMessage("サポート"),
         "Survival": MessageLookupByLibrary.simpleMessage("サバイバル"),
         "Suspense": MessageLookupByLibrary.simpleMessage("サスペンス"),
+        "Switch": MessageLookupByLibrary.simpleMessage("スイッチ"),
         "Synonyms": MessageLookupByLibrary.simpleMessage("同義語"),
         "Synopsis": MessageLookupByLibrary.simpleMessage("概要"),
         "Tags": MessageLookupByLibrary.simpleMessage("タグ"),
@@ -1024,8 +1029,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("上のテキストを翻訳"),
         "Translate_Below_Text":
             MessageLookupByLibrary.simpleMessage("下のテキストを翻訳"),
-        "Translate_Synopsis":
-            MessageLookupByLibrary.simpleMessage("上記の概要を翻訳してください"),
+        "Translate_Synopsis2": MessageLookupByLibrary.simpleMessage("概要を翻訳する"),
         "Trivia": MessageLookupByLibrary.simpleMessage("トリビア"),
         "Turkish": MessageLookupByLibrary.simpleMessage("トルコ語"),
         "Two_Months_ago": MessageLookupByLibrary.simpleMessage("2ヶ月前"),

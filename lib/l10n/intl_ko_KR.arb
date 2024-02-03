@@ -924,5 +924,9 @@
     "Graph_loaded": "\uadf8\ub798\ud504\uac00 \ub85c\ub4dc\ub428",
     "Sequel": "\uacc4\uc18d",
     "Prequel": "\uc804\ud3b8",
-    "Graph_Edge_Info": "\uc5e3\uc9c0 \uc815\ubcf4"
+    "Graph_Edge_Info": "\uc5e3\uc9c0 \uc815\ubcf4",
+    "Translate_Synopsis2": "\uc2dc\ub189\uc2dc\uc2a4 \ubc88\uc5ed",
+    "Graph_Order_By_Sequel": "\uc18d\ud3b8\uc21c\uc73c\ub85c \uc8fc\ubb38",
+    "Graph_Order_From_Selected": "\uc120\ud0dd \ud56d\ubaa9\uc5d0\uc11c \uc8fc\ubb38",
+    "Switch": "\uc2a4\uc704\uce58"
 }
