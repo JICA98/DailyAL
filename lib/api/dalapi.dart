@@ -398,7 +398,8 @@ class DalApi {
   }
 
   Future<dynamic> _apiGET(String endpoint) async {
-    return MalConnect.getContent('${CredMal.apiURL}/$endpoint',
+    final apiURL = (await _dalConfigFuture)?.dalAPIUrl;
+    return MalConnect.getContent('${apiURL ?? CredMal.apiURL}/$endpoint',
         retryOnFail: false,
         withNoHeaders: true,
         headers: {

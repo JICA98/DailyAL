@@ -6,6 +6,7 @@ class Servers {
   bool? errorLogging;
   bool? includeSilent;
   List<PreferredServers>? preferredServers;
+  String? dalAPIUrl;
 
   Servers({
     this.bmacLink,
@@ -13,6 +14,7 @@ class Servers {
     this.preferredServers,
     this.discordLink,
     this.includeSilent,
+    this.dalAPIUrl,
   });
 
   Servers.fromJson(Map<String, dynamic>? json) {
@@ -23,6 +25,7 @@ class Servers {
     discordLink = json['discordLink'];
     errorLogging = json['errorLogging'];
     includeSilent = json['includeSilent'];
+    dalAPIUrl = json['dalAPIUrl'];
     if (json['preferredServers'] != null) {
       preferredServers = [];
       json['preferredServers'].forEach((v) {
@@ -41,6 +44,7 @@ class Servers {
         preferredServers?.map((v) => v.toJson()).toList();
     data['errorLogging'] = errorLogging;
     data['includeSilent'] = includeSilent;
+    data['dalAPIUrl'] = dalAPIUrl;
     return data;
   }
 }

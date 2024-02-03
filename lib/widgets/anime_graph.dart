@@ -107,7 +107,7 @@ class _AnimeGraphWidgetState extends State<AnimeGraphWidget> {
     _controller.value = Matrix4.identity()
       ..scale(0.6, 0.6)
       ..translate(
-        -(position.dx - (contextSize.width / 2)),
+        -(position.dx - (contextSize.width / 2) - 50.0),
         -(position.dy - (contextSize.height / 2)),
       );
   }
@@ -329,7 +329,7 @@ class _AnimeGraphWidgetState extends State<AnimeGraphWidget> {
             children: [
               SB.w10,
               Badge(
-                label: Text(a.mediaType?.toUpperCase() ?? "?"),
+                label: Text(a.mediaType?.standardize() ?? "?"),
               ),
               SB.w10,
               Badge(
@@ -373,6 +373,7 @@ class _AnimeGraphWidgetState extends State<AnimeGraphWidget> {
     );
     final myListStatus = widget.statusMap[a.id];
     final value = NodeStatusValue.fromListStatus(myListStatus);
+    final contains = _expandedIds.contains(a.id);
     final statusOutline = Container(
       height: 140.0,
       width: 140.0,
@@ -380,7 +381,7 @@ class _AnimeGraphWidgetState extends State<AnimeGraphWidget> {
           shape: BoxShape.circle,
           color: Theme.of(context).cardColor,
           boxShadow: [
-            if (_expandedIds.contains(a.id))
+            if (contains)
               BoxShadow(
                 color: value.color?.withOpacity(0.1) ??
                     Colors.white.withOpacity(0.1),
@@ -415,7 +416,7 @@ class _AnimeGraphWidgetState extends State<AnimeGraphWidget> {
       child: Stack(
         children: [
           if (widget.id == a.id) centerBorder,
-          statusOutline,
+          if (value.color != null || contains) statusOutline,
           Positioned(
             top: 10,
             left: 10,

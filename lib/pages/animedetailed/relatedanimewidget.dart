@@ -66,16 +66,22 @@ class _RelatedAnimeWidgetState extends State<RelatedAnimeWidget>
   }
 
   void _setAnimeGraph() async {
+    final now = DateTime.now().millisecondsSinceEpoch / 1000;
     try {
-      final now = DateTime.now().millisecondsSinceEpoch / 1000;
       _graph = await DalApi.i.getAnimeGraph(widget.id);
       final then = DateTime.now().millisecondsSinceEpoch / 1000;
+      if (_graph is AnimeGraph && nullOrEmpty(_graph.edges)) {
+        throw Error();
+      }
       if ((then - now) > 1) {
         showSnackBar(_graphSnackBar(), Duration(seconds: 3));
       }
     } catch (e) {
+      final then = DateTime.now().millisecondsSinceEpoch / 1000;
       _graph = e;
-      showSnackBar(_graphSnackBar());
+      if ((then - now) > 1) {
+        showSnackBar(_graphSnackBar());
+      }
     }
     if (mounted) setState(() {});
   }

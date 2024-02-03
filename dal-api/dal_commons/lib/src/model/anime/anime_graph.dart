@@ -17,10 +17,12 @@ class AnimeGraph {
         this.edges,
     });
 
-    factory AnimeGraph.fromJson(Map<String, dynamic> json) => AnimeGraph(
+    factory AnimeGraph.fromJson(Map<String, dynamic> json) {
+      return AnimeGraph(
         nodes: json["nodes"] == null ? [] : List<GraphNode>.from(json["nodes"]!.map((x) => GraphNode.fromJson(x))),
         edges: json["edges"] == null ? [] : List<GraphEdge>.from(json["edges"]!.map((x) => GraphEdge.fromJson(x))),
     );
+    }
 
     Map<String, dynamic> toJson() => {
         "nodes": nodes == null ? [] : List<dynamic>.from(nodes!.map((x) => x.toJson())),
