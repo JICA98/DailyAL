@@ -313,6 +313,7 @@ class _BookMarksWidgetState extends State<BookMarksWidget> {
       floating: true,
       pinned: true,
       bottom: TabBar(
+        tabAlignment: TabAlignment.start,
         isScrollable: true,
         tabs: tabs.map((e) => Tab(text: e.displayTxt)).toList(),
       ),

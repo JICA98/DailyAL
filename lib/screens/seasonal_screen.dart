@@ -198,6 +198,7 @@ class _SeasonalScreenState extends State<SeasonalScreen>
   TabBar _buildTabBar() {
     return TabBar(
       isScrollable: true,
+      tabAlignment: TabAlignment.start,
       onTap: _onTabChange,
       indicatorSize: TabBarIndicatorSize.label,
       tabs: yearList.map((e) => Tab(text: e.display)).toList(),

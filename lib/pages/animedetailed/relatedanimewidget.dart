@@ -282,6 +282,7 @@ class _RelatedAnimeWidgetState extends State<RelatedAnimeWidget>
     return TabBar(
       isScrollable: true,
       onTap: (index) => _onTabTapped(index),
+      tabAlignment: TabAlignment.start,
       padding: EdgeInsets.symmetric(horizontal: widget.horizPadding),
       tabs: animeWidgets.keys
           .map((e) => Padding(
