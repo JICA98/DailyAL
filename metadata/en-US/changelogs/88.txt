@@ -1,0 +1,5 @@
+- Add related anime graph with order by option
+- Fix Mal Under Maintenance
+- Fix filter issue for user list page
+- Add about section
+- Add check for updates at application launch

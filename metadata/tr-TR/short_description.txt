@@ -1,0 +1,1 @@
+Flutter ile yapılmış tam özellikli MyAnimeList istemcisi
