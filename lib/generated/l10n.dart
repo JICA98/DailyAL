@@ -9300,6 +9300,116 @@ class S {
     );
   }
 
+  /// `Version`
+  String get Version {
+    return Intl.message(
+      'Version',
+      name: 'Version',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Check for updates`
+  String get Check_for_updates {
+    return Intl.message(
+      'Check for updates',
+      name: 'Check_for_updates',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Checking for updates`
+  String get Checking_for_updates {
+    return Intl.message(
+      'Checking for updates',
+      name: 'Checking_for_updates',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Update available`
+  String get Update_available {
+    return Intl.message(
+      'Update available',
+      name: 'Update_available',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ChangeLog`
+  String get ChangeLog {
+    return Intl.message(
+      'ChangeLog',
+      name: 'ChangeLog',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Update`
+  String get Update {
+    return Intl.message(
+      'Update',
+      name: 'Update',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No new updates`
+  String get No_new_updates {
+    return Intl.message(
+      'No new updates',
+      name: 'No_new_updates',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Couldn't find release`
+  String get Couldnt_find_release {
+    return Intl.message(
+      'Couldn\'t find release',
+      name: 'Couldnt_find_release',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `MAL Agreement`
+  String get MAL_API_Licence {
+    return Intl.message(
+      'MAL Agreement',
+      name: 'MAL_API_Licence',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `What's new`
+  String get Whats_new {
+    return Intl.message(
+      'What\'s new',
+      name: 'Whats_new',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `MyAnimeList API Licence and Developer Agreement`
+  String get MAL_API_Licence_Desc {
+    return Intl.message(
+      'MyAnimeList API Licence and Developer Agreement',
+      name: 'MAL_API_Licence_Desc',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Published End Date`
   String get publishedEndDate {
     return Intl.message(

@@ -6,7 +6,7 @@ import 'package:dailyanimelist/constant.dart';
 import 'package:dailyanimelist/enums.dart';
 import 'package:dailyanimelist/generated/l10n.dart';
 import 'package:dailyanimelist/main.dart';
-import 'package:dailyanimelist/pages/settingspage.dart';
+import 'package:dailyanimelist/pages/side_bar.dart';
 import 'package:dailyanimelist/screens/generalsearchscreen.dart';
 import 'package:dailyanimelist/user/user.dart';
 import 'package:dailyanimelist/widgets/avatarwidget.dart';
@@ -103,7 +103,7 @@ void _onAvatarTap({
     useRootNavigator: true,
     isDismissible: true,
     context: context,
-    builder: (context) => SettingsPage(
+    builder: (context) => AppSideBar(
       onUiChange: () => onUiChange != null ? onUiChange() : null,
     ),
   );

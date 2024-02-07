@@ -151,6 +151,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Casual_Discussion": MessageLookupByLibrary.simpleMessage("캐주얼 토론"),
         "Categories": MessageLookupByLibrary.simpleMessage("카테고리"),
         "Category": MessageLookupByLibrary.simpleMessage("범주"),
+        "ChangeLog": MessageLookupByLibrary.simpleMessage("변경 로그"),
         "Chapters": MessageLookupByLibrary.simpleMessage("챕터"),
         "Character": MessageLookupByLibrary.simpleMessage("성격"),
         "Character_Analysis": MessageLookupByLibrary.simpleMessage("문자 분석"),
@@ -160,6 +161,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "Characters_and_staff":
             MessageLookupByLibrary.simpleMessage("캐릭터와 스태프"),
         "Chart_color": MessageLookupByLibrary.simpleMessage("차트 색상"),
+        "Check_for_updates": MessageLookupByLibrary.simpleMessage("업데이트 확인"),
+        "Checking_for_updates":
+            MessageLookupByLibrary.simpleMessage("업데이트 확인 중"),
         "Childcare": MessageLookupByLibrary.simpleMessage("육아"),
         "Choose_a_Language": MessageLookupByLibrary.simpleMessage("언어를 선택하십시오"),
         "Clear": MessageLookupByLibrary.simpleMessage("분명한"),
@@ -196,6 +200,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("업데이트 할 수 없었습니다!"),
         "Couldnt_connect_network":
             MessageLookupByLibrary.simpleMessage("네트워크에 연결할 수 없습니다"),
+        "Couldnt_find_release":
+            MessageLookupByLibrary.simpleMessage("릴리스를 찾을 수 없습니다."),
         "Couldnt_generate_graph":
             MessageLookupByLibrary.simpleMessage("그래프를 생성할 수 없습니다."),
         "Couldnt_get_promos":
@@ -521,6 +527,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "Love_Polygon": MessageLookupByLibrary.simpleMessage("사랑_다각형"),
         "Love_it": MessageLookupByLibrary.simpleMessage("사랑해"),
         "Low": MessageLookupByLibrary.simpleMessage("낮은"),
+        "MAL_API_Licence": MessageLookupByLibrary.simpleMessage("MAL 계약"),
+        "MAL_API_Licence_Desc": MessageLookupByLibrary.simpleMessage(
+            "MyAnimeList API 라이센스 및 개발자 계약"),
         "MAL_Contests": MessageLookupByLibrary.simpleMessage("말 콘테스트"),
         "MAL_Guidelines_FAQ":
             MessageLookupByLibrary.simpleMessage("Mal Guidelines & FAQ."),
@@ -636,6 +645,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "No_friends_found": MessageLookupByLibrary.simpleMessage("친구 없음 .."),
         "No_history_found":
             MessageLookupByLibrary.simpleMessage("기록을 찾을 수 없습니다"),
+        "No_new_updates": MessageLookupByLibrary.simpleMessage("새로운 업데이트 없음"),
         "No_of_Posts": MessageLookupByLibrary.simpleMessage("게시물 수"),
         "No_of_items_desc": MessageLookupByLibrary.simpleMessage(
             "EX의 경우, 기본적으로 계절별 애니메이션은 14 가지 항목이 있습니다."),
@@ -1044,6 +1054,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "UTC": MessageLookupByLibrary.simpleMessage("UTC"),
         "Un_Ranked_Shows": MessageLookupByLibrary.simpleMessage("비순위 프로그램"),
         "Unseen": MessageLookupByLibrary.simpleMessage("보이지 않는 것"),
+        "Update": MessageLookupByLibrary.simpleMessage("업데이트"),
+        "Update_available": MessageLookupByLibrary.simpleMessage("업데이트 가능"),
         "Updates_Announcements":
             MessageLookupByLibrary.simpleMessage("업데이트 및 알림장"),
         "Updating": MessageLookupByLibrary.simpleMessage("업데이트"),
@@ -1064,6 +1076,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Users": MessageLookupByLibrary.simpleMessage("사용자"),
         "Value": MessageLookupByLibrary.simpleMessage("값"),
         "Vampire": MessageLookupByLibrary.simpleMessage("흡혈귀"),
+        "Version": MessageLookupByLibrary.simpleMessage("버전"),
         "Very_Bad": MessageLookupByLibrary.simpleMessage("아주 나쁜"),
         "Very_Good": MessageLookupByLibrary.simpleMessage("매우 좋은"),
         "Very_High": MessageLookupByLibrary.simpleMessage("매우 높은"),
@@ -1084,6 +1097,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Weapons": MessageLookupByLibrary.simpleMessage("무기"),
         "WeeklyAnime": MessageLookupByLibrary.simpleMessage("주간 애니메이션"),
         "Well_written": MessageLookupByLibrary.simpleMessage("잘 쓰여졌다"),
+        "Whats_new": MessageLookupByLibrary.simpleMessage("새로운 소식"),
         "Winter_2008": MessageLookupByLibrary.simpleMessage("겨울 2008."),
         "Winter_2009": MessageLookupByLibrary.simpleMessage("겨울 2009."),
         "Winter_2010": MessageLookupByLibrary.simpleMessage("겨울 2010."),

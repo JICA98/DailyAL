@@ -925,5 +925,16 @@
     "Graph_Order_By_Sequel": "Order by sequel",
     "Graph_Order_From_Selected": "Order from selected",
     "Switch": "Switch",
+    "Version": "Version",
+    "Check_for_updates": "Check for updates",
+    "Checking_for_updates": "Checking for updates",
+    "Update_available": "Update available",
+    "ChangeLog": "ChangeLog",
+    "Update": "Update",
+    "No_new_updates": "No new updates",
+    "Couldnt_find_release": "Couldn't find release",
+    "MAL_API_Licence": "MAL Agreement",
+    "Whats_new": "What's new",
+    "MAL_API_Licence_Desc": "MyAnimeList API Licence and Developer Agreement",
     "publishedEndDate": "Published End Date"
 }

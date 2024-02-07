@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import '../api/maluser.dart';
 import '../constant.dart';
 import '../main.dart';
-import '../pages/settingspage.dart';
+import '../pages/side_bar.dart';
 import '../screens/generalsearchscreen.dart';
 import 'avatarwidget.dart';
 

@@ -928,5 +928,16 @@
     "Translate_Synopsis2": "Traduire le r\u00e9sum\u00e9",
     "Graph_Order_By_Sequel": "Trier par suite",
     "Graph_Order_From_Selected": "Commande parmi les s\u00e9lectionn\u00e9s",
-    "Switch": "Changer"
+    "Switch": "Changer",
+    "Version": "Version",
+    "Check_for_updates": "V\u00e9rifier les mises \u00e0 jour",
+    "Checking_for_updates": "V\u00e9rification des mises \u00e0 jour",
+    "Update_available": "Mise \u00e0 jour disponible",
+    "ChangeLog": "Journal des modifications",
+    "Update": "Mise \u00e0 jour",
+    "No_new_updates": "Aucune nouvelle mise \u00e0 jour",
+    "Couldnt_find_release": "Impossible de trouver la version",
+    "MAL_API_Licence": "MAL Agreement",
+    "Whats_new": "Quoi de neuf",
+    "MAL_API_Licence_Desc": "Licence API MyAnimeList et accord de d\u00e9veloppeur"
 }

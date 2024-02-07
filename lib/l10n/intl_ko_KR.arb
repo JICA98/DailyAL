@@ -928,5 +928,16 @@
     "Translate_Synopsis2": "\uc2dc\ub189\uc2dc\uc2a4 \ubc88\uc5ed",
     "Graph_Order_By_Sequel": "\uc18d\ud3b8\uc21c\uc73c\ub85c \uc8fc\ubb38",
     "Graph_Order_From_Selected": "\uc120\ud0dd \ud56d\ubaa9\uc5d0\uc11c \uc8fc\ubb38",
-    "Switch": "\uc2a4\uc704\uce58"
+    "Switch": "\uc2a4\uc704\uce58",
+    "Version": "\ubc84\uc804",
+    "Check_for_updates": "\uc5c5\ub370\uc774\ud2b8 \ud655\uc778",
+    "Checking_for_updates": "\uc5c5\ub370\uc774\ud2b8 \ud655\uc778 \uc911",
+    "Update_available": "\uc5c5\ub370\uc774\ud2b8 \uac00\ub2a5",
+    "ChangeLog": "\ubcc0\uacbd \ub85c\uadf8",
+    "Update": "\uc5c5\ub370\uc774\ud2b8",
+    "No_new_updates": "\uc0c8\ub85c\uc6b4 \uc5c5\ub370\uc774\ud2b8 \uc5c6\uc74c",
+    "Couldnt_find_release": "\ub9b4\ub9ac\uc2a4\ub97c \ucc3e\uc744 \uc218 \uc5c6\uc2b5\ub2c8\ub2e4.",
+    "MAL_API_Licence": "MAL \uacc4\uc57d",
+    "Whats_new": "\uc0c8\ub85c\uc6b4 \uc18c\uc2dd",
+    "MAL_API_Licence_Desc": "MyAnimeList API \ub77c\uc774\uc13c\uc2a4 \ubc0f \uac1c\ubc1c\uc790 \uacc4\uc57d"
 }

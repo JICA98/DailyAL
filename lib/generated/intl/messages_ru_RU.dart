@@ -172,6 +172,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Случайное обсуждение"),
         "Categories": MessageLookupByLibrary.simpleMessage("Категории"),
         "Category": MessageLookupByLibrary.simpleMessage("Категория"),
+        "ChangeLog": MessageLookupByLibrary.simpleMessage("Журнал изменений"),
         "Chapters": MessageLookupByLibrary.simpleMessage("Главы"),
         "Character": MessageLookupByLibrary.simpleMessage("Характер"),
         "Character_Analysis":
@@ -182,6 +183,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "Characters_and_staff":
             MessageLookupByLibrary.simpleMessage("Персонажи и персонал"),
         "Chart_color": MessageLookupByLibrary.simpleMessage("Цвет диаграммы"),
+        "Check_for_updates": MessageLookupByLibrary.simpleMessage(
+            "Проверьте наличие обновлений"),
+        "Checking_for_updates":
+            MessageLookupByLibrary.simpleMessage("Проверка обновлений"),
         "Childcare": MessageLookupByLibrary.simpleMessage("Уход за детьми"),
         "Choose_a_Language":
             MessageLookupByLibrary.simpleMessage("Выберите язык"),
@@ -223,6 +228,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Не удалось обновить!"),
         "Couldnt_connect_network": MessageLookupByLibrary.simpleMessage(
             "Не удалось подключиться к сети"),
+        "Couldnt_find_release":
+            MessageLookupByLibrary.simpleMessage("Не удалось найти выпуск"),
         "Couldnt_generate_graph":
             MessageLookupByLibrary.simpleMessage("Не удалось создать график"),
         "Couldnt_get_promos": MessageLookupByLibrary.simpleMessage(
@@ -589,6 +596,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Любовь_Многоугольник"),
         "Love_it": MessageLookupByLibrary.simpleMessage("Любить это"),
         "Low": MessageLookupByLibrary.simpleMessage("Низкий"),
+        "MAL_API_Licence":
+            MessageLookupByLibrary.simpleMessage("Соглашение ТЗА"),
+        "MAL_API_Licence_Desc": MessageLookupByLibrary.simpleMessage(
+            "Лицензия API MyAnimeList и соглашение с разработчиком"),
         "MAL_Contests": MessageLookupByLibrary.simpleMessage("МАЛ-конкурсы"),
         "MAL_Guidelines_FAQ": MessageLookupByLibrary.simpleMessage(
             "Рекомендации MAL и часто задаваемые вопросы"),
@@ -718,6 +729,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Друзей не найдено.."),
         "No_history_found":
             MessageLookupByLibrary.simpleMessage("История не найдена"),
+        "No_new_updates":
+            MessageLookupByLibrary.simpleMessage("Нет новых обновлений"),
         "No_of_Posts":
             MessageLookupByLibrary.simpleMessage("Количество сообщений"),
         "No_of_items_desc": MessageLookupByLibrary.simpleMessage(
@@ -1185,6 +1198,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "Un_Ranked_Shows":
             MessageLookupByLibrary.simpleMessage("Шоу без рейтинга"),
         "Unseen": MessageLookupByLibrary.simpleMessage("Невидимый"),
+        "Update": MessageLookupByLibrary.simpleMessage("Обновлять"),
+        "Update_available":
+            MessageLookupByLibrary.simpleMessage("Доступно обновление"),
         "Updates_Announcements":
             MessageLookupByLibrary.simpleMessage("Обновления и объявления"),
         "Updating": MessageLookupByLibrary.simpleMessage("Обновление"),
@@ -1210,6 +1226,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Users": MessageLookupByLibrary.simpleMessage("пользователи"),
         "Value": MessageLookupByLibrary.simpleMessage("Ценить"),
         "Vampire": MessageLookupByLibrary.simpleMessage("Вампир"),
+        "Version": MessageLookupByLibrary.simpleMessage("Версия"),
         "Very_Bad": MessageLookupByLibrary.simpleMessage("Очень плохо"),
         "Very_Good": MessageLookupByLibrary.simpleMessage("Очень хороший"),
         "Very_High": MessageLookupByLibrary.simpleMessage("Очень высоко"),
@@ -1235,6 +1252,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "WeeklyAnime":
             MessageLookupByLibrary.simpleMessage("Еженедельное аниме"),
         "Well_written": MessageLookupByLibrary.simpleMessage("Хорошо написан"),
+        "Whats_new": MessageLookupByLibrary.simpleMessage("Что нового"),
         "Winter_2008": MessageLookupByLibrary.simpleMessage("Зима 2008 г."),
         "Winter_2009": MessageLookupByLibrary.simpleMessage("Зима 2009 г."),
         "Winter_2010": MessageLookupByLibrary.simpleMessage("Зима 2010 г."),

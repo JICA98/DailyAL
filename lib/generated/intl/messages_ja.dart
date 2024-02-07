@@ -152,6 +152,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Casual_Discussion": MessageLookupByLibrary.simpleMessage("カジュアルな議論"),
         "Categories": MessageLookupByLibrary.simpleMessage("カテゴリー"),
         "Category": MessageLookupByLibrary.simpleMessage("カテゴリー"),
+        "ChangeLog": MessageLookupByLibrary.simpleMessage("変更ログ"),
         "Chapters": MessageLookupByLibrary.simpleMessage("章臣"),
         "Character": MessageLookupByLibrary.simpleMessage("キャラクター"),
         "Character_Analysis": MessageLookupByLibrary.simpleMessage("文字分析"),
@@ -161,6 +162,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "Characters_and_staff":
             MessageLookupByLibrary.simpleMessage("キャラクターとスタッフ"),
         "Chart_color": MessageLookupByLibrary.simpleMessage("チャートの色"),
+        "Check_for_updates": MessageLookupByLibrary.simpleMessage("アップデートを確認"),
+        "Checking_for_updates":
+            MessageLookupByLibrary.simpleMessage("アップデートの確認"),
         "Childcare": MessageLookupByLibrary.simpleMessage("育児"),
         "Choose_a_Language":
             MessageLookupByLibrary.simpleMessage("言語を選択してください"),
@@ -197,6 +201,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "Couldnt_Update": MessageLookupByLibrary.simpleMessage("更新できませんでした！"),
         "Couldnt_connect_network":
             MessageLookupByLibrary.simpleMessage("ネットワークに接続できませんでした"),
+        "Couldnt_find_release":
+            MessageLookupByLibrary.simpleMessage("リリースが見つかりませんでした"),
         "Couldnt_generate_graph":
             MessageLookupByLibrary.simpleMessage("グラフを生成できませんでした"),
         "Couldnt_get_promos":
@@ -520,6 +526,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "Love_Polygon": MessageLookupByLibrary.simpleMessage("Love_Polygon"),
         "Love_it": MessageLookupByLibrary.simpleMessage("大好きです"),
         "Low": MessageLookupByLibrary.simpleMessage("低い"),
+        "MAL_API_Licence": MessageLookupByLibrary.simpleMessage("MAL協定"),
+        "MAL_API_Licence_Desc": MessageLookupByLibrary.simpleMessage(
+            "MyAnimeList API ライセンスおよび開発者契約"),
         "MAL_Contests": MessageLookupByLibrary.simpleMessage("マルコンテスト"),
         "MAL_Guidelines_FAQ":
             MessageLookupByLibrary.simpleMessage("マルのガイドライン＆よくある質問"),
@@ -633,6 +642,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "No_friends_found":
             MessageLookupByLibrary.simpleMessage("友達が見つかりません.."),
         "No_history_found": MessageLookupByLibrary.simpleMessage("履歴が見つかりません"),
+        "No_new_updates": MessageLookupByLibrary.simpleMessage("新しい更新はありません"),
         "No_of_Posts": MessageLookupByLibrary.simpleMessage("投稿番号"),
         "No_of_items_desc": MessageLookupByLibrary.simpleMessage(
             "EXの場合、デフォルトで季節のアニメに14の項目があります"),
@@ -1040,6 +1050,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "Un_Ranked_Shows":
             MessageLookupByLibrary.simpleMessage("ランク付けされていない番組"),
         "Unseen": MessageLookupByLibrary.simpleMessage("見えない"),
+        "Update": MessageLookupByLibrary.simpleMessage("アップデート"),
+        "Update_available": MessageLookupByLibrary.simpleMessage("利用可能なアップデート"),
         "Updates_Announcements":
             MessageLookupByLibrary.simpleMessage("アップデートとお知らせ"),
         "Updating": MessageLookupByLibrary.simpleMessage("更新"),
@@ -1060,6 +1072,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Users": MessageLookupByLibrary.simpleMessage("ユーザー"),
         "Value": MessageLookupByLibrary.simpleMessage("価値"),
         "Vampire": MessageLookupByLibrary.simpleMessage("吸血鬼"),
+        "Version": MessageLookupByLibrary.simpleMessage("バージョン"),
         "Very_Bad": MessageLookupByLibrary.simpleMessage("ひどい"),
         "Very_Good": MessageLookupByLibrary.simpleMessage("とても良い"),
         "Very_High": MessageLookupByLibrary.simpleMessage("すごく高い"),
@@ -1080,6 +1093,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Weapons": MessageLookupByLibrary.simpleMessage("兵器"),
         "WeeklyAnime": MessageLookupByLibrary.simpleMessage("毎週のアニメ"),
         "Well_written": MessageLookupByLibrary.simpleMessage("よく書かれました"),
+        "Whats_new": MessageLookupByLibrary.simpleMessage("新着情報"),
         "Winter_2008": MessageLookupByLibrary.simpleMessage("冬2008年"),
         "Winter_2009": MessageLookupByLibrary.simpleMessage("冬2009"),
         "Winter_2010": MessageLookupByLibrary.simpleMessage("冬2010年"),

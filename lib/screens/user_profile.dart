@@ -5,7 +5,7 @@ import 'package:dailyanimelist/api/maluser.dart';
 import 'package:dailyanimelist/constant.dart';
 import 'package:dailyanimelist/generated/l10n.dart';
 import 'package:dailyanimelist/main.dart';
-import 'package:dailyanimelist/pages/settingspage.dart';
+import 'package:dailyanimelist/pages/side_bar.dart';
 import 'package:dailyanimelist/pages/userpage.dart';
 import 'package:dailyanimelist/screens/plainscreen.dart';
 import 'package:dailyanimelist/user/user.dart';

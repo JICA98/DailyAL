@@ -167,6 +167,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("مناقشة غير رسمية"),
         "Categories": MessageLookupByLibrary.simpleMessage("فئات"),
         "Category": MessageLookupByLibrary.simpleMessage("فئة"),
+        "ChangeLog": MessageLookupByLibrary.simpleMessage("سجل التغيير"),
         "Chapters": MessageLookupByLibrary.simpleMessage("فصول"),
         "Character": MessageLookupByLibrary.simpleMessage("اختلاف الشخصيات"),
         "Character_Analysis":
@@ -178,6 +179,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("الشخصيات والموظفين"),
         "Chart_color":
             MessageLookupByLibrary.simpleMessage("لون الرسم البياني"),
+        "Check_for_updates":
+            MessageLookupByLibrary.simpleMessage("تحقق من وجود تحديثات"),
+        "Checking_for_updates":
+            MessageLookupByLibrary.simpleMessage("البحث عن تحديثات"),
         "Childcare": MessageLookupByLibrary.simpleMessage("رعاية الأطفال"),
         "Choose_a_Language": MessageLookupByLibrary.simpleMessage("اختر لغة"),
         "Clear": MessageLookupByLibrary.simpleMessage("واضح"),
@@ -217,6 +222,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("لا يمكن التحديث!"),
         "Couldnt_connect_network":
             MessageLookupByLibrary.simpleMessage("لا يمكن الاتصال بالشبكة"),
+        "Couldnt_find_release":
+            MessageLookupByLibrary.simpleMessage("تعذر العثور على الإصدار"),
         "Couldnt_generate_graph":
             MessageLookupByLibrary.simpleMessage("تعذر إنشاء الرسم البياني"),
         "Couldnt_get_promos":
@@ -576,6 +583,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "Love_Polygon": MessageLookupByLibrary.simpleMessage("الحب_المضلع"),
         "Love_it": MessageLookupByLibrary.simpleMessage("أحبها"),
         "Low": MessageLookupByLibrary.simpleMessage("قليل"),
+        "MAL_API_Licence":
+            MessageLookupByLibrary.simpleMessage("اتفاقية القانون النموذجي"),
+        "MAL_API_Licence_Desc": MessageLookupByLibrary.simpleMessage(
+            "ترخيص MyAnimeList API واتفاقية المطور"),
         "MAL_Contests": MessageLookupByLibrary.simpleMessage("مسابقات مال"),
         "MAL_Guidelines_FAQ":
             MessageLookupByLibrary.simpleMessage("إرشادات وأسئلة وأجوبة"),
@@ -701,6 +712,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("لم يتم العثور على أصدقاء .."),
         "No_history_found":
             MessageLookupByLibrary.simpleMessage("لم يتم العثور على التاريخ"),
+        "No_new_updates":
+            MessageLookupByLibrary.simpleMessage("لا توجد تحديثات جديدة"),
         "No_of_Posts": MessageLookupByLibrary.simpleMessage("عدد المشاركات"),
         "No_of_items_desc": MessageLookupByLibrary.simpleMessage(
             "بالنسبة إلى السابقين، بشكل افتراضي أنيمي الموسم لديه 14 عنصر"),
@@ -1150,6 +1163,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "Un_Ranked_Shows":
             MessageLookupByLibrary.simpleMessage("العروض غير المصنفة"),
         "Unseen": MessageLookupByLibrary.simpleMessage("غير مرئي"),
+        "Update": MessageLookupByLibrary.simpleMessage("تحديث"),
+        "Update_available":
+            MessageLookupByLibrary.simpleMessage("التحديث متاح"),
         "Updates_Announcements":
             MessageLookupByLibrary.simpleMessage("التحديثات والإعلانات"),
         "Updating": MessageLookupByLibrary.simpleMessage("تحديث"),
@@ -1174,6 +1190,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Users": MessageLookupByLibrary.simpleMessage("المستخدمين"),
         "Value": MessageLookupByLibrary.simpleMessage("قيمة"),
         "Vampire": MessageLookupByLibrary.simpleMessage("مصاص دماء"),
+        "Version": MessageLookupByLibrary.simpleMessage("إصدار"),
         "Very_Bad": MessageLookupByLibrary.simpleMessage("سيئ جدا"),
         "Very_Good": MessageLookupByLibrary.simpleMessage("جيد جدًا"),
         "Very_High": MessageLookupByLibrary.simpleMessage("عالي جدا"),
@@ -1197,6 +1214,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Weapons": MessageLookupByLibrary.simpleMessage("الأسلحة"),
         "WeeklyAnime": MessageLookupByLibrary.simpleMessage("أنيمي الأسبوعي"),
         "Well_written": MessageLookupByLibrary.simpleMessage("مكتوب جيدا"),
+        "Whats_new": MessageLookupByLibrary.simpleMessage("ما هو الجديد"),
         "Winter_2008": MessageLookupByLibrary.simpleMessage("شتاء 2008."),
         "Winter_2009": MessageLookupByLibrary.simpleMessage("شتاء 2009."),
         "Winter_2010": MessageLookupByLibrary.simpleMessage("الشتاء 2010."),

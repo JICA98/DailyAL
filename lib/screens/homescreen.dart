@@ -4,7 +4,7 @@ import 'package:dailyanimelist/notifservice.dart';
 import 'package:dailyanimelist/pages/explorepage.dart';
 import 'package:dailyanimelist/pages/forumpage.dart';
 import 'package:dailyanimelist/pages/homepage.dart';
-import 'package:dailyanimelist/pages/settingspage.dart';
+import 'package:dailyanimelist/pages/side_bar.dart';
 import 'package:dailyanimelist/pages/userpage.dart';
 import 'package:dailyanimelist/screens/contentdetailedscreen.dart';
 import 'package:dailyanimelist/screens/user_profile.dart';
@@ -133,7 +133,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       endDrawer: Drawer(
-        child: SettingsPage(),
+        child: AppSideBar(),
       ),
       bottomNavigationBar: BottomNavBar(
         startIndex: pageIndex,

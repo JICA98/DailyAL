@@ -929,5 +929,16 @@
     "Translate_Synopsis2": "Traducir la sinopsis",
     "Graph_Order_By_Sequel": "Ordenar por secuela",
     "Graph_Order_From_Selected": "Orden de seleccionado",
-    "Switch": "Cambiar"
+    "Switch": "Cambiar",
+    "Version": "Versi\u00f3n",
+    "Check_for_updates": "Buscar actualizaciones",
+    "Checking_for_updates": "Comprobando actualizaciones",
+    "Update_available": "Actualizaci\u00f3n disponible",
+    "ChangeLog": "Registro de cambios",
+    "Update": "Actualizar",
+    "No_new_updates": "No hay nuevas actualizaciones",
+    "Couldnt_find_release": "No se pudo encontrar la versi\u00f3n",
+    "MAL_API_Licence": "MAL Agreement",
+    "Whats_new": "Qu\u00e9 hay de nuevo",
+    "MAL_API_Licence_Desc": "Licencia de API MyAnimeList y acuerdo de desarrollador"
 }

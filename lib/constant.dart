@@ -1373,12 +1373,13 @@ bool nullOrEmpty(dynamic list) {
   return false;
 }
 
-openFutureAndNavigate<T>({
+Future<void> openFutureAndNavigate<T>({
   required String text,
   required Future<T> future,
   required Widget? Function(T) onData,
   required BuildContext context,
   String? customError,
+  bool isPopup = false,
 }) async {
   showModalBottomSheet(
     context: context,
@@ -1390,7 +1391,13 @@ openFutureAndNavigate<T>({
     if (result == null) throw Error();
     final newPage = onData(result);
     Navigator.pop(context);
-    if (newPage != null) gotoPage(context: context, newPage: newPage);
+    if (newPage != null) {
+      if (isPopup) {
+        showDialog(context: context, builder: (_) => newPage);
+      } else {
+        gotoPage(context: context, newPage: newPage);
+      }
+    }
   } catch (e) {
     logDal(e);
     Navigator.pop(context);

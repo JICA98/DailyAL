@@ -174,6 +174,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Diskusi kasual"),
         "Categories": MessageLookupByLibrary.simpleMessage("Kategori"),
         "Category": MessageLookupByLibrary.simpleMessage("Kategori"),
+        "ChangeLog": MessageLookupByLibrary.simpleMessage("UbahLog"),
         "Chapters": MessageLookupByLibrary.simpleMessage("Bab."),
         "Character": MessageLookupByLibrary.simpleMessage("Karakter"),
         "Character_Analysis":
@@ -184,6 +185,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "Characters_and_staff":
             MessageLookupByLibrary.simpleMessage("Karakter dan Staf"),
         "Chart_color": MessageLookupByLibrary.simpleMessage("Warna grafik."),
+        "Check_for_updates":
+            MessageLookupByLibrary.simpleMessage("Periksa pembaruan"),
+        "Checking_for_updates":
+            MessageLookupByLibrary.simpleMessage("Memeriksa pembaruan"),
         "Childcare": MessageLookupByLibrary.simpleMessage("Penitipan anak"),
         "Choose_a_Language":
             MessageLookupByLibrary.simpleMessage("Pilih bahasa"),
@@ -225,6 +230,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Tidak dapat memperbarui!"),
         "Couldnt_connect_network": MessageLookupByLibrary.simpleMessage(
             "Tidak dapat terhubung ke jaringan"),
+        "Couldnt_find_release":
+            MessageLookupByLibrary.simpleMessage("Tidak dapat menemukan rilis"),
         "Couldnt_generate_graph":
             MessageLookupByLibrary.simpleMessage("Tidak dapat membuat grafik"),
         "Couldnt_get_promos": MessageLookupByLibrary.simpleMessage(
@@ -585,6 +592,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "Love_Polygon": MessageLookupByLibrary.simpleMessage("Cinta_Poligon"),
         "Love_it": MessageLookupByLibrary.simpleMessage("Suka sekali"),
         "Low": MessageLookupByLibrary.simpleMessage("Rendah"),
+        "MAL_API_Licence":
+            MessageLookupByLibrary.simpleMessage("Perjanjian MAL"),
+        "MAL_API_Licence_Desc": MessageLookupByLibrary.simpleMessage(
+            "Lisensi API MyAnimeList dan Perjanjian Pengembang"),
         "MAL_Contests": MessageLookupByLibrary.simpleMessage("Kontes Mal."),
         "MAL_Guidelines_FAQ":
             MessageLookupByLibrary.simpleMessage("Mal Guidelines & FAQ"),
@@ -713,6 +724,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Tidak ada teman yang ditemukan .."),
         "No_history_found": MessageLookupByLibrary.simpleMessage(
             "Tidak ada riwayat yang ditemukan"),
+        "No_new_updates":
+            MessageLookupByLibrary.simpleMessage("Tidak ada pembaruan baru"),
         "No_of_Posts": MessageLookupByLibrary.simpleMessage("Jumlah Posting"),
         "No_of_items_desc": MessageLookupByLibrary.simpleMessage(
             "Untuk ex, secara default anime musiman memiliki 14 item"),
@@ -1184,6 +1197,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "Un_Ranked_Shows":
             MessageLookupByLibrary.simpleMessage("Pertunjukan Tanpa Peringkat"),
         "Unseen": MessageLookupByLibrary.simpleMessage("Tak terlihat"),
+        "Update": MessageLookupByLibrary.simpleMessage("Memperbarui"),
+        "Update_available":
+            MessageLookupByLibrary.simpleMessage("Pembaruan tersedia"),
         "Updates_Announcements":
             MessageLookupByLibrary.simpleMessage("Pembaruan & Pengumuman"),
         "Updating": MessageLookupByLibrary.simpleMessage("Memperbarui"),
@@ -1208,6 +1224,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Users": MessageLookupByLibrary.simpleMessage("pengguna."),
         "Value": MessageLookupByLibrary.simpleMessage("Nilai"),
         "Vampire": MessageLookupByLibrary.simpleMessage("Vampir."),
+        "Version": MessageLookupByLibrary.simpleMessage("Versi: kapan"),
         "Very_Bad": MessageLookupByLibrary.simpleMessage("Sangat buruk"),
         "Very_Good": MessageLookupByLibrary.simpleMessage("Sangat bagus"),
         "Very_High": MessageLookupByLibrary.simpleMessage("Sangat tinggi"),
@@ -1231,6 +1248,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "WeeklyAnime": MessageLookupByLibrary.simpleMessage("Anime mingguan."),
         "Well_written":
             MessageLookupByLibrary.simpleMessage("Ditulis dengan baik"),
+        "Whats_new": MessageLookupByLibrary.simpleMessage("Apa yang baru"),
         "Winter_2008":
             MessageLookupByLibrary.simpleMessage("Musim dingin 2008."),
         "Winter_2009":
