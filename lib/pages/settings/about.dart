@@ -15,6 +15,11 @@ String _githubApiLink = 'https://api.github.com/repos/JICA98/DailyAL/releases';
 String _githubHtmlLink = 'https://github.com/JICA98/DailyAL/releases';
 String _malAgreement = 'https://myanimelist.net/static/apiagreement.html';
 
+Future<String> getCurrentTag() async {
+  final packageInfo = await PackageInfo.fromPlatform();
+  return '${packageInfo.version}+${packageInfo.buildNumber}';
+}
+
 Future<_GithubResponse> getLatestRelease() async {
   final response = await Dio().get('$_githubApiLink/latest');
   final git = _GithubResponse.fromJson(response.data ?? {});
@@ -22,6 +27,59 @@ Future<_GithubResponse> getLatestRelease() async {
     throw Exception('Couldnt find release');
   }
   return git;
+}
+
+bool isUpdateAvailable(String currentTag, String latestTag) {
+  try {
+    return int.parse(latestTag.split("+")[1]) >
+        int.parse(currentTag.split("+")[1]);
+  } catch (e) {}
+  return false;
+}
+
+Widget showUpdateAvailablePopup(
+  _GithubResponse git,
+  BuildContext context,
+  String tag,
+) {
+  final hasUpdate = isUpdateAvailable(tag, git.tagName ?? '');
+  final changeLog = git.changeLog;
+  return AlertDialog(
+    title: Text(hasUpdate
+        ? S.current.Update_available
+        : S.current.No_new_updates),
+    content: SingleChildScrollView(
+      child: Text(hasUpdate
+          ? ('${S.current.Whats_new}\n\n${changeLog ?? ''}')
+          : ''),
+    ),
+    actions: [
+      _closeButton(context),
+      if (hasUpdate) ...[
+        TextButton(
+          onPressed: () => launchURLWithConfirmation(
+              '$_githubHtmlLink/tag/${git.tagName}',
+              context: context),
+          child: Text(S.current.Open),
+        ),
+        ShadowButton(
+          onPressed: () => launchURLWithConfirmation(
+              '$_githubHtmlLink/download/${git.tagName}/app-release.apk',
+              context: context),
+          child: Text(S.current.Update),
+        ),
+      ],
+    ],
+  );
+}
+
+TextButton _closeButton(BuildContext context) {
+  return TextButton(
+    onPressed: () {
+      Navigator.pop(context);
+    },
+    child: Text(S.current.Close),
+  );
 }
 
 class AboutPage extends StatefulWidget {
@@ -32,7 +90,7 @@ class AboutPage extends StatefulWidget {
 }
 
 class _AboutPageState extends State<AboutPage> {
-  PackageInfo? _packageInfo;
+  String? _tag;
 
   @override
   void initState() {
@@ -42,13 +100,11 @@ class _AboutPageState extends State<AboutPage> {
     });
   }
 
-  void _postFirstFrame() {
-    PackageInfo.fromPlatform().then((value) {
-      _packageInfo = value;
-      if (mounted) {
-        setState(() {});
-      }
-    });
+  void _postFirstFrame() async {
+    _tag = await getCurrentTag();
+    if (mounted) {
+      setState(() {});
+    }
   }
 
   @override
@@ -57,10 +113,6 @@ class _AboutPageState extends State<AboutPage> {
       titleString: S.current.About,
       children: _aboutTiles(context),
     );
-  }
-
-  String get _tag {
-    return '${_packageInfo?.version}+${_packageInfo?.buildNumber}';
   }
 
   List<Widget> _aboutTiles(BuildContext context) {
@@ -182,48 +234,13 @@ class _AboutPageState extends State<AboutPage> {
     );
   }
 
-  TextButton _closeButton(BuildContext context) {
-    return TextButton(
-      onPressed: () {
-        Navigator.pop(context);
-      },
-      child: Text(S.current.Close),
-    );
-  }
-
   void _checkForUpdates(BuildContext context) {
     openFutureAndNavigate(
       text: S.current.Checking_for_updates,
       future: getLatestRelease(),
       isPopup: true,
       onData: (git) {
-        final alreadyLatest = _tag.equals(git.tagName);
-        final changeLog = git.changeLog;
-        return AlertDialog(
-          title: Text(alreadyLatest
-              ? S.current.No_new_updates
-              : S.current.Update_available),
-          content: SingleChildScrollView(
-            child: Text(alreadyLatest
-                ? ''
-                : ('${S.current.Whats_new}\n\n${changeLog ?? ''}')),
-          ),
-          actions: [
-            _closeButton(context),
-            TextButton(
-              onPressed: () => launchURLWithConfirmation(
-                  '$_githubHtmlLink/tag/${git.tagName}',
-                  context: context),
-              child: Text(S.current.Open),
-            ),
-            ShadowButton(
-              onPressed: () => launchURLWithConfirmation(
-                  '$_githubHtmlLink/download/${git.tagName}/app-release.apk',
-                  context: context),
-              child: Text(S.current.Update),
-            ),
-          ],
-        );
+        return showUpdateAvailablePopup(git, context, _tag ?? '');
       },
       context: context,
       customError: S.current.Couldnt_find_release,

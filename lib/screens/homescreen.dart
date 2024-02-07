@@ -1,19 +1,17 @@
-import 'package:dailyanimelist/api/malapi.dart';
 import 'package:dailyanimelist/constant.dart';
 import 'package:dailyanimelist/notifservice.dart';
 import 'package:dailyanimelist/pages/explorepage.dart';
 import 'package:dailyanimelist/pages/forumpage.dart';
 import 'package:dailyanimelist/pages/homepage.dart';
+import 'package:dailyanimelist/pages/settings/about.dart';
 import 'package:dailyanimelist/pages/side_bar.dart';
 import 'package:dailyanimelist/pages/userpage.dart';
 import 'package:dailyanimelist/screens/contentdetailedscreen.dart';
 import 'package:dailyanimelist/screens/user_profile.dart';
 import 'package:dailyanimelist/user/user.dart';
-import 'package:dailyanimelist/util/streamutils.dart';
 import 'package:dailyanimelist/widgets/background.dart';
 import 'package:dailyanimelist/widgets/bottomnavbar.dart';
 import 'package:dailyanimelist/widgets/home/feature_first.dart';
-import 'package:dailyanimelist/widgets/homeappbar.dart';
 import 'package:dal_commons/dal_commons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -88,6 +86,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await setupScheduledNotifications();
+      _checkForUpdates();
       if (widget.uri != null) {
         Navigator.pushNamed(context, widget.uri!.path);
       } else if (widget.notifNode != null) {
@@ -122,6 +121,20 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       await NotificationService().askForPermission();
       NotificationService().scheduledNotifcation();
     }
+  }
+
+  Future<void> _checkForUpdates() async {
+    try {
+      final tag = await getCurrentTag();
+      final git = await getLatestRelease();
+      final available = isUpdateAvailable(tag, git.tagName ?? '');
+      if (available) {
+        await showDialog(
+          context: context,
+          builder: (context) => showUpdateAvailablePopup(git, context, tag),
+        );
+      }
+    } catch (e) {}
   }
 
   @override
