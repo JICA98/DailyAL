@@ -739,6 +739,7 @@ class _UserPageState extends State<UserPage> with TickerProviderStateMixin {
               controller: controller,
               isScrollable: true,
               indicatorSize: TabBarIndicatorSize.label,
+              tabAlignment: TabAlignment.start,
               tabs: _displayValues
                   .map((e) => Tab(
                         text: '${e.capitalizeAll()}',
