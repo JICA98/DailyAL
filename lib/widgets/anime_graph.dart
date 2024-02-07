@@ -1,8 +1,10 @@
 import 'dart:collection';
 
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:dailyanimelist/api/malapi.dart';
 import 'package:dailyanimelist/cache/cachemanager.dart';
 import 'package:dailyanimelist/constant.dart';
+import 'package:dailyanimelist/enums.dart';
 import 'package:dailyanimelist/generated/l10n.dart';
 import 'package:dailyanimelist/screens/contentdetailedscreen.dart';
 import 'package:dailyanimelist/screens/plainscreen.dart';
@@ -73,19 +75,69 @@ class _AnimeGraphWidgetState extends State<AnimeGraphWidget> {
 
   void _setGraph() {
     _graph = Graph()..isTree = false;
-    widget.graph.edges?.forEach((edge) {
-      if (_graphOrderType == _GraphOrderType.by_sequel) {
-        if (edge.relationType == dal.GRelationType.prequel) {
-          _addEdge(dal.GraphEdge(
-            source: edge.target,
-            target: edge.source,
-            relationType: dal.GRelationType.sequel,
-          ));
-          return;
-        }
+    final edges = widget.graph.edges?.map(_mapEdges).toList() ?? [];
+    edges.forEach(_addEdge);
+  }
+
+  dal.GraphEdge _mapEdges(edge) {
+    if (_graphOrderType == _GraphOrderType.by_sequel) {
+      if (edge.relationType == dal.GRelationType.prequel) {
+        return dal.GraphEdge(
+          source: edge.target,
+          target: edge.source,
+          relationType: dal.GRelationType.sequel,
+        );
+      } else if (edge.relationType != dal.GRelationType.sequel) {
+        final getEdge = _getEdge(edge);
+        if (getEdge != null) return getEdge;
       }
-      _addEdge(edge);
-    });
+    }
+    return edge;
+  }
+
+  dal.GraphEdge? _getEdge(dal.GraphEdge edge) {
+    int? source, target;
+    final seasonOne = _nodeMap[edge.source!]?.startSeason;
+    final seasonTwo = _nodeMap[edge.target!]?.startSeason;
+    if (seasonOne?.year == null && seasonTwo?.year != null) {
+      source = edge.target;
+      target = edge.source;
+    } else if (seasonOne?.year != null && seasonTwo?.year == null) {
+      source = edge.source;
+      target = edge.target;
+    } else if (seasonOne?.year == null ||
+        seasonTwo?.year == null ||
+        seasonOne?.season == null ||
+        seasonTwo?.season == null) {
+      source = edge.source;
+      target = edge.target;
+    } else {
+      try {
+        var oneTime = _getTimeUsingGSeason(seasonOne);
+        var twoTime = _getTimeUsingGSeason(seasonTwo);
+        if (oneTime.isBefore(twoTime)) {
+          source = edge.source;
+          target = edge.target;
+        } else {
+          source = edge.target;
+          target = edge.source;
+        }
+      } catch (e) {}
+    }
+    if (source != null && target != null) {
+      return dal.GraphEdge(
+        source: source,
+        target: target,
+        relationType: edge.relationType,
+      );
+    }
+    return null;
+  }
+
+  DateTime _getTimeUsingGSeason(dal.GStartSeason? seasonOne) {
+    return MalApi.getDateTimeForSeason(
+        seasonMapInverse[dal.seasonValues.reverse[seasonOne!.season]]!,
+        seasonOne.year!);
   }
 
   void _addEdge(dal.GraphEdge edge) {

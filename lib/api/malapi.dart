@@ -191,6 +191,19 @@ class MalApi {
     return seasonType;
   }
 
+  static DateTime getDateTimeForSeason(SeasonType seasonType, int year) {
+    switch (seasonType) {
+      case SeasonType.WINTER:
+        return DateTime(year, 12, 28);
+      case SeasonType.SPRING:
+        return DateTime(year, 3, 28);
+      case SeasonType.SUMMER:
+        return DateTime(year, 6, 28);
+      case SeasonType.FALL:
+        return DateTime(year, 9, 28);
+    }
+  }
+
   static int getCurrentSeasonYear() {
     final date = DateTime.now();
     final month = date.month;
