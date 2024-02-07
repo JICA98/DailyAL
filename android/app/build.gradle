@@ -56,7 +56,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.teen.dailyanimelist"
+        applicationId "io.github.jica98.dailyanimelist"
         minSdkVersion 21
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
