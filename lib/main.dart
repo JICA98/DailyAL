@@ -39,7 +39,7 @@ void main() async {
   try {
     // Universal Log Config for DailyAL
     dalLogConfig.debugMode = kDebugMode;
-    await dotenv.load();
+    await dotenv.load(fileName: 'configFile');
     Environment.i.malClientId = CredMal.clientId;
     WidgetsFlutterBinding.ensureInitialized();
     ErrorReporting.init();

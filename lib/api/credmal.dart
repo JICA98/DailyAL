@@ -70,6 +70,10 @@ class CredMal {
     return '${environment['APP_CONFIG_URL']}';
   }
 
+  static String get errorReportingUrl {
+    return '${environment['ERROR_REPORT_URL']}';
+  }
+
   static String get defaultConfig {
     return '''
         {
@@ -94,7 +98,7 @@ class CredMal {
     return '${environment['API_URL']}';
   }
 
-    static String get apiSecret {
+  static String get apiSecret {
     return '${environment['API_SECRET']}';
   }
 }
