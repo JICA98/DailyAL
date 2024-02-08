@@ -1,0 +1,16 @@
+{
+    "bmacLink": false,
+    "dalAPIUrl": "https://dal-rust-api.onrender.com",
+    "discordLink": "https://discord.gg/ap4Wghv5e8",
+    "errorLogging": false,
+    "maxLoad": 100,
+    "preferredServers": [
+      {
+        "load": 1,
+        "url": "http://0.0.0.0:8080/"
+      }
+    ],
+    "storeUrl": "storeUrl",
+    "strategy": "load",
+    "telegramLink": "https://t.me/dailyalofficial"
+  }
