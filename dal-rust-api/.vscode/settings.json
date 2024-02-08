@@ -3,5 +3,6 @@
         "./Cargo.toml",
         "./Cargo.toml",
         "./Cargo.toml"
-    ]
+    ],
+    "cargo.automaticCheck": false,
 }

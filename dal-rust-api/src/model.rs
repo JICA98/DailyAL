@@ -10,6 +10,13 @@ pub struct Anime {
     pub status: Option<String>,
     pub start_season: Option<Season>,
     pub related_anime: Option<Vec<RelatedAnime>>,
+    pub alternative_titles: Option<AlternateTitles>
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct AlternateTitles {
+    pub en: Option<String>,
+    pub ja: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]

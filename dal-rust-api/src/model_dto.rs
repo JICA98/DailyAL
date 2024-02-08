@@ -22,6 +22,7 @@ pub struct ContentNodeDTO {
     pub media_type: Option<String>,
     pub status: Option<String>,
     pub start_season: Option<SeasonDTO>,
+    pub alternative_titles: Option<AlternateTitlesDTO>,
 }
 
 impl Eq for ContentNodeDTO {}
@@ -48,6 +49,23 @@ impl From<Anime> for ContentNodeDTO {
             media_type: anime.media_type,
             status: anime.status,
             start_season: anime.start_season.map(|season| season.into()),
+            alternative_titles: anime.alternative_titles.map(|alternate_titles| alternate_titles.into()),
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct AlternateTitlesDTO {
+    pub en: Option<String>,
+    pub ja: Option<String>,
+}
+
+impl From<crate::model::AlternateTitles> for AlternateTitlesDTO {
+    fn from(alternate_titles: crate::model::AlternateTitles) -> Self {
+        AlternateTitlesDTO {
+            en: alternate_titles.en,
+            ja: alternate_titles.ja,
         }
     }
 }
