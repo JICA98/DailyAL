@@ -214,6 +214,7 @@ class _VideosWidgetState extends State<VideosWidget> {
               pageIndex = index;
             });
         },
+        tabAlignment: TabAlignment.start,
         padding: EdgeInsets.symmetric(horizontal: widget.horizPadding),
         tabs: tabs
             .map((e) => Padding(

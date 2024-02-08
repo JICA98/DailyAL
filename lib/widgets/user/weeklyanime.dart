@@ -224,6 +224,7 @@ class _WeeklyAnimeWidgetState extends State<WeeklyAnimeWidget> {
           child: TabBar(
             controller: widget.tabController,
             isScrollable: true,
+            tabAlignment: TabAlignment.start,
             tabs: [
               for (int i = 0; i < weekdays.length; ++i)
                 Tab(

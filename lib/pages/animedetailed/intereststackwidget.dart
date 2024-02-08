@@ -306,6 +306,7 @@ class InterestStackDetailedWidget extends StatelessWidget {
   Widget _tabBar(InterestStackDetailed detailed) => SliverWrapper(
         TabBar(
           isScrollable: true,
+          tabAlignment: TabAlignment.start,
           padding: padding,
           tabs: _tabs(detailed)
               .map((e) => Padding(

@@ -5,7 +5,9 @@ import 'package:dailyanimelist/api/auth/auth.dart';
 import 'package:dailyanimelist/api/dalapi.dart';
 import 'package:dailyanimelist/api/maluser.dart';
 import 'package:dailyanimelist/cache/cachemanager.dart';
+import 'package:dailyanimelist/extensions.dart';
 import 'package:dailyanimelist/generated/l10n.dart';
+import 'package:dailyanimelist/pages/settings/about.dart';
 import 'package:dailyanimelist/pages/settings/anime_manga_settings.dart';
 import 'package:dailyanimelist/pages/settings/backup_restore.dart';
 import 'package:dailyanimelist/pages/settings/cachesettings.dart';
@@ -16,6 +18,7 @@ import 'package:dailyanimelist/pages/settings/notifsettings.dart';
 import 'package:dailyanimelist/pages/settings/optiontile.dart';
 import 'package:dailyanimelist/pages/settings/themesettings.dart';
 import 'package:dailyanimelist/pages/settings/userprefsetting.dart';
+import 'package:dailyanimelist/pages/settings_page.dart';
 import 'package:dailyanimelist/screens/homescreen.dart';
 import 'package:dailyanimelist/screens/plainscreen.dart';
 import 'package:dailyanimelist/user/user.dart';
@@ -67,7 +70,7 @@ class UserProfService {
       final expiresIn = 3600 * 24 * 30;
       final cachedUrl = await CacheManager.instance
           .getValueForServiceAutoExpire(
-              SettingsPage.serviceName, path, expiresIn);
+              AppSideBar.serviceName, path, expiresIn);
       if (cachedUrl != null) return cachedUrl;
       supa.SupabaseClient client = supa.Supabase.instance.client;
 
@@ -85,7 +88,7 @@ class UserProfService {
 
   static Future<void> setCacheUrl(String path, String? url) async {
     await CacheManager.instance
-        .setValueForServiceAutoExpireIn(SettingsPage.serviceName, path, url);
+        .setValueForServiceAutoExpireIn(AppSideBar.serviceName, path, url);
   }
 
   static UserProfService i = UserProfService._();
@@ -105,22 +108,21 @@ class _UserAction {
   });
 }
 
-class SettingsPage extends StatefulWidget {
+class AppSideBar extends StatefulWidget {
   final Function(int)? onIndexChange;
   final VoidCallback? onUiChange;
   static const serviceName = 'SettingsPage';
-  const SettingsPage({
+  const AppSideBar({
     Key? key,
     this.onIndexChange,
     this.onUiChange,
   }) : super(key: key);
 
   @override
-  _SettingsPageState createState() => _SettingsPageState();
+  _AppSideBarState createState() => _AppSideBarState();
 }
 
-class _SettingsPageState extends State<SettingsPage>
-    with TickerProviderStateMixin {
+class _AppSideBarState extends State<AppSideBar> with TickerProviderStateMixin {
   double maxHeight = 300.0;
   bool hasExpanded = false;
   bool expandComplete = false;
@@ -175,12 +177,20 @@ class _SettingsPageState extends State<SettingsPage>
               if (userProf != null) ...header else ..._buildHeaderShimmer(),
               if (user.status == AuthStatus.AUTHENTICATED)
                 SliverWrapper(_userActionsWidget(userProf)),
-              _accordionWrapper(S.current.Settings, settingOptions),
-              SliverListWrapper(_bottom),
+              SliverListWrapper(_tiles),
               SB.lh40,
             ]),
           );
         });
+  }
+
+  Widget get _aboutTile {
+    return OptionTile(
+      text: S.current.About,
+      iconData: Icons.info,
+      smallTiles: true,
+      onPressed: () => gotoPage(context: context, newPage: AboutPage()),
+    );
   }
 
   Widget _userActionsWidget(UserProf? userProf) {
@@ -202,44 +212,49 @@ class _SettingsPageState extends State<SettingsPage>
       atStartExpanded: true,
       titlePadding: EdgeInsets.all(12.0),
       title: S.current.My_Profile,
-      child: Wrap(
-        alignment: WrapAlignment.start,
-        crossAxisAlignment: WrapCrossAlignment.center,
-        children: _userActions
-            .map((e) => PlainButton(
+      child: Builder(builder: (context) {
+        final chunked = _userActions.chunked(4);
+        return Column(
+          children: [
+            for (var chunk in chunked)
+              SizedBox(
+                height: 50.0,
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
                   padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                  onPressed: () {
-                    if (userProf.name != null) {
-                      gotoPage(
-                        context: context,
-                        newPage: TitlebarScreen(
-                          e.widget(userProf!.name!),
-                          appbarTitle: e.title,
-                          useAppbar: e.useAppbar,
-                        ),
-                      );
-                    }
-                  },
-                  child: iconAndText(e.icon, e.title,
-                      mainAxisSize: MainAxisSize.min),
-                ))
-            .toList(),
-      ),
+                  child: Row(
+                    children: chunk
+                        .map((e) => PlainButton(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 15.0),
+                              onPressed: () {
+                                _onUserProfileActionsTap(userProf, context, e);
+                              },
+                              child: iconAndText(e.icon, e.title,
+                                  mainAxisSize: MainAxisSize.min),
+                            ))
+                        .toList(),
+                  ),
+                ),
+              )
+          ],
+        );
+      }),
     );
   }
 
-  Widget _accordionWrapper(String title, List<Widget> children) {
-    return SliverWrapper(
-      Accordion(
-        isOpen: true,
-        atStartExpanded: true,
-        titlePadding: EdgeInsets.all(12.0),
-        title: title,
-        child: Column(
-          children: children,
+  void _onUserProfileActionsTap(
+      UserProf userProf, BuildContext context, _UserAction e) {
+    if (userProf.name != null) {
+      gotoPage(
+        context: context,
+        newPage: TitlebarScreen(
+          e.widget(userProf!.name!),
+          appbarTitle: e.title,
+          useAppbar: e.useAppbar,
         ),
-      ),
-    );
+      );
+    }
   }
 
   List<Widget> _buildHeader(UserProf? userProf, BuildContext context) {
@@ -478,123 +493,20 @@ class _SettingsPageState extends State<SettingsPage>
     return [];
   }
 
-  List<Widget> get settingOptions {
-    return [
-      OptionTile(
-          text: S.current.Theme_Settings,
-          iconData: Icons.color_lens,
-          // desc: S.current.Theme_setting_desc_v2,
-          smallTiles: true,
-          onPressed: () {
-            gotoPage(context: context, newPage: ThemeSettings());
-          }),
-      if (kDebugMode)
+  List<Widget> get _tiles => [
         OptionTile(
-            text: "Cache Settings",
-            iconData: Icons.cached,
-            smallTiles: true,
-            // desc: "Customize your cache settings.",
-            onPressed: () {
-              gotoPage(context: context, newPage: CacheSettingsPage());
-            }),
-      OptionTile(
-          text: S.current.Notification_Settings,
-          iconData: Icons.notifications,
-          // desc: S.current.Notification_setting_desc,
+          text: S.current.Settings,
+          iconData: Icons.settings,
           smallTiles: true,
-          onPressed: () {
-            gotoPage(context: context, newPage: NotificationSettingsPage());
-          }),
-      OptionTile(
-          text: S.current.Home_Page_Setting,
-          iconData: Icons.home_work,
-          smallTiles: true,
-          // desc: S.current.HomePageSettings_desc,
-          onPressed: () {
-            gotoPage(
-                context: context,
-                newPage: HomePageSettings(
-                  onUiChange: () {
-                    if (widget.onUiChange != null) widget.onUiChange!();
-                  },
-                ));
-          }),
-      OptionTile(
-          text: S.current.Anime_Manga_settings,
-          iconData: LineIcons.cryingFace,
-          // desc: S.current.Anime_Manga_settings_desc,
-          smallTiles: true,
-          onPressed: () {
-            gotoPage(context: context, newPage: AnimeMangaSettings());
-          }),
-      OptionTile(
-          text: S.current.Backup_And_Restore,
-          iconData: Icons.settings_backup_restore,
-          // desc: S.current.Backup_And_Restore_desc,
-          smallTiles: true,
-          onPressed: () {
-            gotoPage(context: context, newPage: BackUpAndRestorePage());
-          }),
-      OptionTile(
-          text: S.current.User_Preferences,
-          iconData: Icons.room_preferences,
-          smallTiles: true,
-          // desc: S.current.User_Preferences_desc,
-          onPressed: () {
-            gotoPage(
-                context: context,
-                newPage: SettingSliverScreen(
-                  titleString: S.current.User_Preferences,
-                  child: UserPrefSettings(
-                    onUiChange: () {
-                      if (widget.onUiChange != null) widget.onUiChange!();
-                    },
-                  ),
-                ));
-          }),
-      OptionTile(
-          text: S.current.Language_settings,
-          smallTiles: true,
-          iconData: Icons.language,
-          // desc: S.current.Language_settings_desc_v2,
-          onPressed: () {
-            gotoPage(
+          onPressed: () => gotoPage(
               context: context,
-              newPage: LanguageSettings(
-                update: () {
-                  if (mounted) setState(() {});
+              newPage: SettingsPage(
+                onUiChange: () {
+                  if (widget.onUiChange != null) widget.onUiChange!();
                 },
-              ),
-            );
-          }),
-    ];
-  }
-
-  List<Widget> get _bottom => [
-        OptionTile(
-          text: S.current.Rate_Review,
-          iconData: Icons.rate_review,
-          smallTiles: true,
-          // desc: S.current.Rate_Review_desc,
-          onPressed: () => launchURL(
-              "https://play.google.com/store/apps/details?id=com.teen.dailyanimelist"),
+              )),
         ),
-        CFutureBuilder<Servers?>(
-          future: DalApi.i.dalConfigFuture,
-          done: (snapshot) {
-            if (hasText(snapshot.data?.discordLink))
-              return OptionTile(
-                text: S.current.DiscordInvite,
-                smallTiles: true,
-                // desc: S.current.DiscordInviteDesc,
-                iconData: Icons.discord,
-                onPressed: () => launchURL(snapshot.data!.discordLink!),
-              );
-            else
-              return SB.z;
-          },
-          loadingChild: SB.z,
-        ),
+        _aboutTile,
         CFutureBuilder<Servers?>(
           future: DalApi.i.dalConfigFuture,
           done: (snapshot) {

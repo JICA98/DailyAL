@@ -11,6 +11,7 @@ import 'package:dailyanimelist/user/user.dart';
 import 'package:dal_commons/dal_commons.dart';
 import 'package:dal_commons/dal_commons.dart' as commons;
 import 'package:intl/intl.dart';
+import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart' as plus;
 
 class MalApi {
   static const weekdaysOrderMap = {
@@ -188,6 +189,19 @@ class MalApi {
       seasonType = SeasonType.FALL;
     }
     return seasonType;
+  }
+
+  static DateTime getDateTimeForSeason(SeasonType seasonType, int year) {
+    switch (seasonType) {
+      case SeasonType.WINTER:
+        return DateTime(year, 12, 28);
+      case SeasonType.SPRING:
+        return DateTime(year, 3, 28);
+      case SeasonType.SUMMER:
+        return DateTime(year, 6, 28);
+      case SeasonType.FALL:
+        return DateTime(year, 9, 28);
+    }
   }
 
   static int getCurrentSeasonYear() {
@@ -378,6 +392,9 @@ class MalApi {
   }
 
   static Future<bool> isUnderMaintenance() async {
+    if (!await _checkIfDeviceIsConnected()) {
+      return false;
+    }
     if (user.status == AuthStatus.AUTHENTICATED) {
       try {
         await MalUser.getUserInfo();
@@ -397,6 +414,10 @@ class MalApi {
         return true;
       }
     }
+  }
+
+  static Future<bool> _checkIfDeviceIsConnected() async {
+    return await plus.InternetConnection().hasInternetAccess;
   }
 }
 

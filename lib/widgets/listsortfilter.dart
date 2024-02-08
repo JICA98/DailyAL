@@ -162,12 +162,8 @@ bool _evaluateIncludedExcluded(
   Set<String> options,
   FilterOption option,
 ) {
-  final included =
-      option.includedOptions?.map((e) => _convertValue(e, option)).toSet() ??
-          {};
-  final excluded =
-      option.excludedOptions?.map((e) => _convertValue(e, option)).toSet() ??
-          {};
+  final included = option.includedOptions?.toSet() ?? {};
+  final excluded = option.excludedOptions?.toSet() ?? {};
   if (options.isEmpty) return false;
   if (included.isNotEmpty && !options.containsAll(included)) return false;
   if (excluded.isNotEmpty && options.intersection(excluded).isNotEmpty)
@@ -697,7 +693,7 @@ class _SortFilterPopupState extends State<SortFilterPopup> {
   }
 
   void _onReset(BuildContext controllerContext) {
-    switchCase(_tabs[DefaultTabController.of(controllerContext).index], {
+    switchCase(_tabs[DefaultTabController.of(controllerContext).index].text, {
       [S.current.Sort]: (_) {
         _sortFilterDisplay = _sortFilterDisplay.copyWith(
           sort: _originalSortFilterDisplay.sort.clone(),
@@ -714,6 +710,7 @@ class _SortFilterPopupState extends State<SortFilterPopup> {
         );
       },
     });
+
     if (mounted) setState(() {});
   }
 

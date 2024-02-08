@@ -1,0 +1,1 @@
+Full featured MyAnimeList client made with flutter

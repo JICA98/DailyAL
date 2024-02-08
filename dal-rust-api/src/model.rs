@@ -43,7 +43,6 @@ pub struct Edge {
     pub source: i64,
     pub target: i64,
     pub relation_type: RelationType,
-    pub relation_type_formatted: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]

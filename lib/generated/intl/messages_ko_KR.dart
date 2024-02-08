@@ -151,6 +151,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Casual_Discussion": MessageLookupByLibrary.simpleMessage("캐주얼 토론"),
         "Categories": MessageLookupByLibrary.simpleMessage("카테고리"),
         "Category": MessageLookupByLibrary.simpleMessage("범주"),
+        "ChangeLog": MessageLookupByLibrary.simpleMessage("변경 로그"),
         "Chapters": MessageLookupByLibrary.simpleMessage("챕터"),
         "Character": MessageLookupByLibrary.simpleMessage("성격"),
         "Character_Analysis": MessageLookupByLibrary.simpleMessage("문자 분석"),
@@ -160,6 +161,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "Characters_and_staff":
             MessageLookupByLibrary.simpleMessage("캐릭터와 스태프"),
         "Chart_color": MessageLookupByLibrary.simpleMessage("차트 색상"),
+        "Check_for_updates": MessageLookupByLibrary.simpleMessage("업데이트 확인"),
+        "Checking_for_updates":
+            MessageLookupByLibrary.simpleMessage("업데이트 확인 중"),
         "Childcare": MessageLookupByLibrary.simpleMessage("육아"),
         "Choose_a_Language": MessageLookupByLibrary.simpleMessage("언어를 선택하십시오"),
         "Clear": MessageLookupByLibrary.simpleMessage("분명한"),
@@ -196,6 +200,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("업데이트 할 수 없었습니다!"),
         "Couldnt_connect_network":
             MessageLookupByLibrary.simpleMessage("네트워크에 연결할 수 없습니다"),
+        "Couldnt_find_release":
+            MessageLookupByLibrary.simpleMessage("릴리스를 찾을 수 없습니다."),
+        "Couldnt_generate_graph":
+            MessageLookupByLibrary.simpleMessage("그래프를 생성할 수 없습니다."),
         "Couldnt_get_promos":
             MessageLookupByLibrary.simpleMessage("프로모션을 얻을 수 없었습니다"),
         "Couldnt_open_Club":
@@ -385,6 +393,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "Good": MessageLookupByLibrary.simpleMessage("좋은"),
         "Gore": MessageLookupByLibrary.simpleMessage("핏덩어리"),
         "Gourmet": MessageLookupByLibrary.simpleMessage("식도락가"),
+        "Graph_Edge_Info": MessageLookupByLibrary.simpleMessage("엣지 정보"),
+        "Graph_Order_By_Sequel":
+            MessageLookupByLibrary.simpleMessage("속편순으로 주문"),
+        "Graph_Order_From_Selected":
+            MessageLookupByLibrary.simpleMessage("선택 항목에서 주문"),
+        "Graph_loaded": MessageLookupByLibrary.simpleMessage("그래프가 로드됨"),
         "Great": MessageLookupByLibrary.simpleMessage("엄청난"),
         "Grid": MessageLookupByLibrary.simpleMessage("그리드"),
         "Grid_Axis_Size": MessageLookupByLibrary.simpleMessage("그리드 축 크기"),
@@ -513,6 +527,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "Love_Polygon": MessageLookupByLibrary.simpleMessage("사랑_다각형"),
         "Love_it": MessageLookupByLibrary.simpleMessage("사랑해"),
         "Low": MessageLookupByLibrary.simpleMessage("낮은"),
+        "MAL_API_Licence": MessageLookupByLibrary.simpleMessage("MAL 계약"),
+        "MAL_API_Licence_Desc": MessageLookupByLibrary.simpleMessage(
+            "MyAnimeList API 라이센스 및 개발자 계약"),
         "MAL_Contests": MessageLookupByLibrary.simpleMessage("말 콘테스트"),
         "MAL_Guidelines_FAQ":
             MessageLookupByLibrary.simpleMessage("Mal Guidelines & FAQ."),
@@ -628,6 +645,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "No_friends_found": MessageLookupByLibrary.simpleMessage("친구 없음 .."),
         "No_history_found":
             MessageLookupByLibrary.simpleMessage("기록을 찾을 수 없습니다"),
+        "No_new_updates": MessageLookupByLibrary.simpleMessage("새로운 업데이트 없음"),
         "No_of_Posts": MessageLookupByLibrary.simpleMessage("게시물 수"),
         "No_of_items_desc": MessageLookupByLibrary.simpleMessage(
             "EX의 경우, 기본적으로 계절별 애니메이션은 14 가지 항목이 있습니다."),
@@ -656,6 +674,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "On_Hold": MessageLookupByLibrary.simpleMessage("보류에"),
         "One_Piece": MessageLookupByLibrary.simpleMessage("한 조각"),
         "One_Punch_Man": MessageLookupByLibrary.simpleMessage("한 펀치 맨"),
+        "Open": MessageLookupByLibrary.simpleMessage("열려 있는"),
         "Open_In_Browser": MessageLookupByLibrary.simpleMessage("브라우저에서 열려"),
         "Opening_Songs": MessageLookupByLibrary.simpleMessage("노래를 여는 것"),
         "Order_by": MessageLookupByLibrary.simpleMessage("주문"),
@@ -700,6 +719,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "PreferredTitle_Desc": MessageLookupByLibrary.simpleMessage(
             "애니메이션/만화 제목을 영어, 일본어, 로마자 표기 중에서 선택하세요."),
         "Premiered": MessageLookupByLibrary.simpleMessage("프리미리어"),
+        "Prequel": MessageLookupByLibrary.simpleMessage("전편"),
         "Preview": MessageLookupByLibrary.simpleMessage("시사"),
         "Previous": MessageLookupByLibrary.simpleMessage("이전의"),
         "Primary_background_color":
@@ -848,6 +868,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Select_the_no_of_items":
             MessageLookupByLibrary.simpleMessage("아니오를 선택하십시오.항목의 항목"),
         "Selected": MessageLookupByLibrary.simpleMessage("선택된"),
+        "Sequel": MessageLookupByLibrary.simpleMessage("계속"),
         "Serialization": MessageLookupByLibrary.simpleMessage("직렬화"),
         "Series_Discussion": MessageLookupByLibrary.simpleMessage("시리즈 토론"),
         "Series_End": MessageLookupByLibrary.simpleMessage("시리즈 끝"),
@@ -960,6 +981,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Support": MessageLookupByLibrary.simpleMessage("지원하다"),
         "Survival": MessageLookupByLibrary.simpleMessage("활착"),
         "Suspense": MessageLookupByLibrary.simpleMessage("미결"),
+        "Switch": MessageLookupByLibrary.simpleMessage("스위치"),
         "Synonyms": MessageLookupByLibrary.simpleMessage("동의어"),
         "Synopsis": MessageLookupByLibrary.simpleMessage("개요"),
         "Tags": MessageLookupByLibrary.simpleMessage("태그"),
@@ -1022,8 +1044,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("위 텍스트 번역"),
         "Translate_Below_Text":
             MessageLookupByLibrary.simpleMessage("아래 텍스트 번역"),
-        "Translate_Synopsis":
-            MessageLookupByLibrary.simpleMessage("위의 시놉시스를 번역하십시오"),
+        "Translate_Synopsis2": MessageLookupByLibrary.simpleMessage("시놉시스 번역"),
         "Trivia": MessageLookupByLibrary.simpleMessage("하찮은 일"),
         "Turkish": MessageLookupByLibrary.simpleMessage("터키어"),
         "Two_Months_ago": MessageLookupByLibrary.simpleMessage("2개월 전"),
@@ -1033,6 +1054,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "UTC": MessageLookupByLibrary.simpleMessage("UTC"),
         "Un_Ranked_Shows": MessageLookupByLibrary.simpleMessage("비순위 프로그램"),
         "Unseen": MessageLookupByLibrary.simpleMessage("보이지 않는 것"),
+        "Update": MessageLookupByLibrary.simpleMessage("업데이트"),
+        "Update_available": MessageLookupByLibrary.simpleMessage("업데이트 가능"),
         "Updates_Announcements":
             MessageLookupByLibrary.simpleMessage("업데이트 및 알림장"),
         "Updating": MessageLookupByLibrary.simpleMessage("업데이트"),
@@ -1053,6 +1076,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Users": MessageLookupByLibrary.simpleMessage("사용자"),
         "Value": MessageLookupByLibrary.simpleMessage("값"),
         "Vampire": MessageLookupByLibrary.simpleMessage("흡혈귀"),
+        "Version": MessageLookupByLibrary.simpleMessage("버전"),
         "Very_Bad": MessageLookupByLibrary.simpleMessage("아주 나쁜"),
         "Very_Good": MessageLookupByLibrary.simpleMessage("매우 좋은"),
         "Very_High": MessageLookupByLibrary.simpleMessage("매우 높은"),
@@ -1073,6 +1097,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Weapons": MessageLookupByLibrary.simpleMessage("무기"),
         "WeeklyAnime": MessageLookupByLibrary.simpleMessage("주간 애니메이션"),
         "Well_written": MessageLookupByLibrary.simpleMessage("잘 쓰여졌다"),
+        "Whats_new": MessageLookupByLibrary.simpleMessage("새로운 소식"),
         "Winter_2008": MessageLookupByLibrary.simpleMessage("겨울 2008."),
         "Winter_2009": MessageLookupByLibrary.simpleMessage("겨울 2009."),
         "Winter_2010": MessageLookupByLibrary.simpleMessage("겨울 2010."),

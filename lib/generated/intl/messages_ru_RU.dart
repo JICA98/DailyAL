@@ -172,6 +172,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Случайное обсуждение"),
         "Categories": MessageLookupByLibrary.simpleMessage("Категории"),
         "Category": MessageLookupByLibrary.simpleMessage("Категория"),
+        "ChangeLog": MessageLookupByLibrary.simpleMessage("Журнал изменений"),
         "Chapters": MessageLookupByLibrary.simpleMessage("Главы"),
         "Character": MessageLookupByLibrary.simpleMessage("Характер"),
         "Character_Analysis":
@@ -182,6 +183,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "Characters_and_staff":
             MessageLookupByLibrary.simpleMessage("Персонажи и персонал"),
         "Chart_color": MessageLookupByLibrary.simpleMessage("Цвет диаграммы"),
+        "Check_for_updates": MessageLookupByLibrary.simpleMessage(
+            "Проверьте наличие обновлений"),
+        "Checking_for_updates":
+            MessageLookupByLibrary.simpleMessage("Проверка обновлений"),
         "Childcare": MessageLookupByLibrary.simpleMessage("Уход за детьми"),
         "Choose_a_Language":
             MessageLookupByLibrary.simpleMessage("Выберите язык"),
@@ -223,6 +228,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Не удалось обновить!"),
         "Couldnt_connect_network": MessageLookupByLibrary.simpleMessage(
             "Не удалось подключиться к сети"),
+        "Couldnt_find_release":
+            MessageLookupByLibrary.simpleMessage("Не удалось найти выпуск"),
+        "Couldnt_generate_graph":
+            MessageLookupByLibrary.simpleMessage("Не удалось создать график"),
         "Couldnt_get_promos": MessageLookupByLibrary.simpleMessage(
             "Не удалось получить промоакции"),
         "Couldnt_open_Club":
@@ -430,6 +439,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "Good": MessageLookupByLibrary.simpleMessage("Хороший"),
         "Gore": MessageLookupByLibrary.simpleMessage("Гор"),
         "Gourmet": MessageLookupByLibrary.simpleMessage("гурман"),
+        "Graph_Edge_Info":
+            MessageLookupByLibrary.simpleMessage("Информация о краю"),
+        "Graph_Order_By_Sequel":
+            MessageLookupByLibrary.simpleMessage("Заказ по продолжению"),
+        "Graph_Order_From_Selected":
+            MessageLookupByLibrary.simpleMessage("Заказать из выбранных"),
+        "Graph_loaded": MessageLookupByLibrary.simpleMessage("График загружен"),
         "Great": MessageLookupByLibrary.simpleMessage("Большой"),
         "Grid": MessageLookupByLibrary.simpleMessage("Сетка"),
         "Grid_Axis_Size":
@@ -580,6 +596,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Любовь_Многоугольник"),
         "Love_it": MessageLookupByLibrary.simpleMessage("Любить это"),
         "Low": MessageLookupByLibrary.simpleMessage("Низкий"),
+        "MAL_API_Licence":
+            MessageLookupByLibrary.simpleMessage("Соглашение ТЗА"),
+        "MAL_API_Licence_Desc": MessageLookupByLibrary.simpleMessage(
+            "Лицензия API MyAnimeList и соглашение с разработчиком"),
         "MAL_Contests": MessageLookupByLibrary.simpleMessage("МАЛ-конкурсы"),
         "MAL_Guidelines_FAQ": MessageLookupByLibrary.simpleMessage(
             "Рекомендации MAL и часто задаваемые вопросы"),
@@ -709,6 +729,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Друзей не найдено.."),
         "No_history_found":
             MessageLookupByLibrary.simpleMessage("История не найдена"),
+        "No_new_updates":
+            MessageLookupByLibrary.simpleMessage("Нет новых обновлений"),
         "No_of_Posts":
             MessageLookupByLibrary.simpleMessage("Количество сообщений"),
         "No_of_items_desc": MessageLookupByLibrary.simpleMessage(
@@ -740,6 +762,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "On_Hold": MessageLookupByLibrary.simpleMessage("На удерживании"),
         "One_Piece": MessageLookupByLibrary.simpleMessage("Один кусочек"),
         "One_Punch_Man": MessageLookupByLibrary.simpleMessage("Ванпанчмен"),
+        "Open": MessageLookupByLibrary.simpleMessage("Открыть"),
         "Open_In_Browser":
             MessageLookupByLibrary.simpleMessage("Открыть в браузере"),
         "Opening_Songs":
@@ -793,6 +816,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "PreferredTitle_Desc": MessageLookupByLibrary.simpleMessage(
             "Выбирайте между английскими, японскими и латинизированными названиями для вашего аниме/манги."),
         "Premiered": MessageLookupByLibrary.simpleMessage("Премьера"),
+        "Prequel": MessageLookupByLibrary.simpleMessage("Приквел"),
         "Preview":
             MessageLookupByLibrary.simpleMessage("Предварительный просмотр"),
         "Previous": MessageLookupByLibrary.simpleMessage("Предыдущий"),
@@ -962,6 +986,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Select_the_no_of_items":
             MessageLookupByLibrary.simpleMessage("Выберите номер. предметов"),
         "Selected": MessageLookupByLibrary.simpleMessage("Выбрано"),
+        "Sequel": MessageLookupByLibrary.simpleMessage("Продолжение"),
         "Serialization": MessageLookupByLibrary.simpleMessage("Сериализация"),
         "Series_Discussion":
             MessageLookupByLibrary.simpleMessage("Обсуждение серии"),
@@ -1084,6 +1109,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Support": MessageLookupByLibrary.simpleMessage("Поддерживать"),
         "Survival": MessageLookupByLibrary.simpleMessage("Выживание"),
         "Suspense": MessageLookupByLibrary.simpleMessage("Саспенс"),
+        "Switch": MessageLookupByLibrary.simpleMessage("Выключатель"),
         "Synonyms": MessageLookupByLibrary.simpleMessage("Синонимы"),
         "Synopsis": MessageLookupByLibrary.simpleMessage("Краткое содержание"),
         "Tags": MessageLookupByLibrary.simpleMessage("Теги"),
@@ -1157,8 +1183,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Перевести текст выше"),
         "Translate_Below_Text":
             MessageLookupByLibrary.simpleMessage("Перевести текст ниже"),
-        "Translate_Synopsis": MessageLookupByLibrary.simpleMessage(
-            "Переведите приведенный выше синопсис"),
+        "Translate_Synopsis2":
+            MessageLookupByLibrary.simpleMessage("Перевести синопсис"),
         "Trivia": MessageLookupByLibrary.simpleMessage("Пустяки"),
         "Turkish": MessageLookupByLibrary.simpleMessage("турецкий"),
         "Two_Months_ago":
@@ -1172,6 +1198,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "Un_Ranked_Shows":
             MessageLookupByLibrary.simpleMessage("Шоу без рейтинга"),
         "Unseen": MessageLookupByLibrary.simpleMessage("Невидимый"),
+        "Update": MessageLookupByLibrary.simpleMessage("Обновлять"),
+        "Update_available":
+            MessageLookupByLibrary.simpleMessage("Доступно обновление"),
         "Updates_Announcements":
             MessageLookupByLibrary.simpleMessage("Обновления и объявления"),
         "Updating": MessageLookupByLibrary.simpleMessage("Обновление"),
@@ -1197,6 +1226,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Users": MessageLookupByLibrary.simpleMessage("пользователи"),
         "Value": MessageLookupByLibrary.simpleMessage("Ценить"),
         "Vampire": MessageLookupByLibrary.simpleMessage("Вампир"),
+        "Version": MessageLookupByLibrary.simpleMessage("Версия"),
         "Very_Bad": MessageLookupByLibrary.simpleMessage("Очень плохо"),
         "Very_Good": MessageLookupByLibrary.simpleMessage("Очень хороший"),
         "Very_High": MessageLookupByLibrary.simpleMessage("Очень высоко"),
@@ -1222,6 +1252,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "WeeklyAnime":
             MessageLookupByLibrary.simpleMessage("Еженедельное аниме"),
         "Well_written": MessageLookupByLibrary.simpleMessage("Хорошо написан"),
+        "Whats_new": MessageLookupByLibrary.simpleMessage("Что нового"),
         "Winter_2008": MessageLookupByLibrary.simpleMessage("Зима 2008 г."),
         "Winter_2009": MessageLookupByLibrary.simpleMessage("Зима 2009 г."),
         "Winter_2010": MessageLookupByLibrary.simpleMessage("Зима 2010 г."),

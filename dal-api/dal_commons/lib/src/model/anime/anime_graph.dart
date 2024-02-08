@@ -17,10 +17,12 @@ class AnimeGraph {
         this.edges,
     });
 
-    factory AnimeGraph.fromJson(Map<String, dynamic> json) => AnimeGraph(
+    factory AnimeGraph.fromJson(Map<String, dynamic> json) {
+      return AnimeGraph(
         nodes: json["nodes"] == null ? [] : List<GraphNode>.from(json["nodes"]!.map((x) => GraphNode.fromJson(x))),
         edges: json["edges"] == null ? [] : List<GraphEdge>.from(json["edges"]!.map((x) => GraphEdge.fromJson(x))),
     );
+    }
 
     Map<String, dynamic> toJson() => {
         "nodes": nodes == null ? [] : List<dynamic>.from(nodes!.map((x) => x.toJson())),
@@ -32,27 +34,23 @@ class GraphEdge {
     final int? source;
     final int? target;
     final GRelationType? relationType;
-    final String? relationTypeFormatted;
 
     GraphEdge({
         this.source,
         this.target,
         this.relationType,
-        this.relationTypeFormatted,
     });
 
     factory GraphEdge.fromJson(Map<String, dynamic> json) => GraphEdge(
         source: json["source"],
         target: json["target"],
         relationType: relationTypeValues.map[json["relation_type"]]!,
-        relationTypeFormatted: json["relation_type_formatted"],
     );
 
     Map<String, dynamic> toJson() => {
         "source": source,
         "target": target,
         "relation_type": relationTypeValues.reverse[relationType],
-        "relation_type_formatted": relationTypeFormatted,
     };
 }
 

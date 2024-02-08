@@ -186,6 +186,7 @@ class _ClubScreenState extends State<ClubScreen> {
           : TabBar(
               tabs: visibleSections.map((e) => Tab(text: e.title)).toList(),
               isScrollable: true,
+              tabAlignment: TabAlignment.start,
               onTap: (index) {
                 setState(() {
                   pageIndex = index;

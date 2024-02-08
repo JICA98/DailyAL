@@ -152,6 +152,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Casual_Discussion": MessageLookupByLibrary.simpleMessage("カジュアルな議論"),
         "Categories": MessageLookupByLibrary.simpleMessage("カテゴリー"),
         "Category": MessageLookupByLibrary.simpleMessage("カテゴリー"),
+        "ChangeLog": MessageLookupByLibrary.simpleMessage("変更ログ"),
         "Chapters": MessageLookupByLibrary.simpleMessage("章臣"),
         "Character": MessageLookupByLibrary.simpleMessage("キャラクター"),
         "Character_Analysis": MessageLookupByLibrary.simpleMessage("文字分析"),
@@ -161,6 +162,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "Characters_and_staff":
             MessageLookupByLibrary.simpleMessage("キャラクターとスタッフ"),
         "Chart_color": MessageLookupByLibrary.simpleMessage("チャートの色"),
+        "Check_for_updates": MessageLookupByLibrary.simpleMessage("アップデートを確認"),
+        "Checking_for_updates":
+            MessageLookupByLibrary.simpleMessage("アップデートの確認"),
         "Childcare": MessageLookupByLibrary.simpleMessage("育児"),
         "Choose_a_Language":
             MessageLookupByLibrary.simpleMessage("言語を選択してください"),
@@ -197,6 +201,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "Couldnt_Update": MessageLookupByLibrary.simpleMessage("更新できませんでした！"),
         "Couldnt_connect_network":
             MessageLookupByLibrary.simpleMessage("ネットワークに接続できませんでした"),
+        "Couldnt_find_release":
+            MessageLookupByLibrary.simpleMessage("リリースが見つかりませんでした"),
+        "Couldnt_generate_graph":
+            MessageLookupByLibrary.simpleMessage("グラフを生成できませんでした"),
         "Couldnt_get_promos":
             MessageLookupByLibrary.simpleMessage("プロモーションを得ることができませんでした"),
         "Couldnt_open_Club":
@@ -384,6 +392,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "Good": MessageLookupByLibrary.simpleMessage("良い"),
         "Gore": MessageLookupByLibrary.simpleMessage("ゴア"),
         "Gourmet": MessageLookupByLibrary.simpleMessage("グルメ"),
+        "Graph_Edge_Info": MessageLookupByLibrary.simpleMessage("エッジ情報"),
+        "Graph_Order_By_Sequel":
+            MessageLookupByLibrary.simpleMessage("続編順に並べる"),
+        "Graph_Order_From_Selected":
+            MessageLookupByLibrary.simpleMessage("選択したものから注文する"),
+        "Graph_loaded": MessageLookupByLibrary.simpleMessage("グラフが読み込まれました"),
         "Great": MessageLookupByLibrary.simpleMessage("素晴らしい"),
         "Grid": MessageLookupByLibrary.simpleMessage("グリッド"),
         "Grid_Axis_Size": MessageLookupByLibrary.simpleMessage("グリッド軸のサイズ"),
@@ -512,6 +526,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "Love_Polygon": MessageLookupByLibrary.simpleMessage("Love_Polygon"),
         "Love_it": MessageLookupByLibrary.simpleMessage("大好きです"),
         "Low": MessageLookupByLibrary.simpleMessage("低い"),
+        "MAL_API_Licence": MessageLookupByLibrary.simpleMessage("MAL協定"),
+        "MAL_API_Licence_Desc": MessageLookupByLibrary.simpleMessage(
+            "MyAnimeList API ライセンスおよび開発者契約"),
         "MAL_Contests": MessageLookupByLibrary.simpleMessage("マルコンテスト"),
         "MAL_Guidelines_FAQ":
             MessageLookupByLibrary.simpleMessage("マルのガイドライン＆よくある質問"),
@@ -625,6 +642,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "No_friends_found":
             MessageLookupByLibrary.simpleMessage("友達が見つかりません.."),
         "No_history_found": MessageLookupByLibrary.simpleMessage("履歴が見つかりません"),
+        "No_new_updates": MessageLookupByLibrary.simpleMessage("新しい更新はありません"),
         "No_of_Posts": MessageLookupByLibrary.simpleMessage("投稿番号"),
         "No_of_items_desc": MessageLookupByLibrary.simpleMessage(
             "EXの場合、デフォルトで季節のアニメに14の項目があります"),
@@ -653,6 +671,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "On_Hold": MessageLookupByLibrary.simpleMessage("保留"),
         "One_Piece": MessageLookupByLibrary.simpleMessage("ワンピース"),
         "One_Punch_Man": MessageLookupByLibrary.simpleMessage("1人のパンチマン"),
+        "Open": MessageLookupByLibrary.simpleMessage("開ける"),
         "Open_In_Browser": MessageLookupByLibrary.simpleMessage("ブラウザで開く"),
         "Opening_Songs": MessageLookupByLibrary.simpleMessage("曲を開く"),
         "Order_by": MessageLookupByLibrary.simpleMessage("順次"),
@@ -696,6 +715,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "PreferredTitle_Desc": MessageLookupByLibrary.simpleMessage(
             "アニメ/マンガの英語、日本語、ローマ字タイトルから選択してください"),
         "Premiered": MessageLookupByLibrary.simpleMessage("premed"),
+        "Prequel": MessageLookupByLibrary.simpleMessage("前編"),
         "Preview": MessageLookupByLibrary.simpleMessage("プレビュー"),
         "Previous": MessageLookupByLibrary.simpleMessage("前"),
         "Primary_background_color":
@@ -844,6 +864,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Select_the_no_of_items":
             MessageLookupByLibrary.simpleMessage("いいえを選択してください。アイテムの"),
         "Selected": MessageLookupByLibrary.simpleMessage("選択済み"),
+        "Sequel": MessageLookupByLibrary.simpleMessage("続編"),
         "Serialization": MessageLookupByLibrary.simpleMessage("シリアライゼーション"),
         "Series_Discussion":
             MessageLookupByLibrary.simpleMessage("シリーズディスカッション"),
@@ -956,6 +977,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Support": MessageLookupByLibrary.simpleMessage("サポート"),
         "Survival": MessageLookupByLibrary.simpleMessage("サバイバル"),
         "Suspense": MessageLookupByLibrary.simpleMessage("サスペンス"),
+        "Switch": MessageLookupByLibrary.simpleMessage("スイッチ"),
         "Synonyms": MessageLookupByLibrary.simpleMessage("同義語"),
         "Synopsis": MessageLookupByLibrary.simpleMessage("概要"),
         "Tags": MessageLookupByLibrary.simpleMessage("タグ"),
@@ -1017,8 +1039,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("上のテキストを翻訳"),
         "Translate_Below_Text":
             MessageLookupByLibrary.simpleMessage("下のテキストを翻訳"),
-        "Translate_Synopsis":
-            MessageLookupByLibrary.simpleMessage("上記の概要を翻訳してください"),
+        "Translate_Synopsis2": MessageLookupByLibrary.simpleMessage("概要を翻訳する"),
         "Trivia": MessageLookupByLibrary.simpleMessage("トリビア"),
         "Turkish": MessageLookupByLibrary.simpleMessage("トルコ語"),
         "Two_Months_ago": MessageLookupByLibrary.simpleMessage("2ヶ月前"),
@@ -1029,6 +1050,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "Un_Ranked_Shows":
             MessageLookupByLibrary.simpleMessage("ランク付けされていない番組"),
         "Unseen": MessageLookupByLibrary.simpleMessage("見えない"),
+        "Update": MessageLookupByLibrary.simpleMessage("アップデート"),
+        "Update_available": MessageLookupByLibrary.simpleMessage("利用可能なアップデート"),
         "Updates_Announcements":
             MessageLookupByLibrary.simpleMessage("アップデートとお知らせ"),
         "Updating": MessageLookupByLibrary.simpleMessage("更新"),
@@ -1049,6 +1072,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Users": MessageLookupByLibrary.simpleMessage("ユーザー"),
         "Value": MessageLookupByLibrary.simpleMessage("価値"),
         "Vampire": MessageLookupByLibrary.simpleMessage("吸血鬼"),
+        "Version": MessageLookupByLibrary.simpleMessage("バージョン"),
         "Very_Bad": MessageLookupByLibrary.simpleMessage("ひどい"),
         "Very_Good": MessageLookupByLibrary.simpleMessage("とても良い"),
         "Very_High": MessageLookupByLibrary.simpleMessage("すごく高い"),
@@ -1069,6 +1093,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Weapons": MessageLookupByLibrary.simpleMessage("兵器"),
         "WeeklyAnime": MessageLookupByLibrary.simpleMessage("毎週のアニメ"),
         "Well_written": MessageLookupByLibrary.simpleMessage("よく書かれました"),
+        "Whats_new": MessageLookupByLibrary.simpleMessage("新着情報"),
         "Winter_2008": MessageLookupByLibrary.simpleMessage("冬2008年"),
         "Winter_2009": MessageLookupByLibrary.simpleMessage("冬2009"),
         "Winter_2010": MessageLookupByLibrary.simpleMessage("冬2010年"),

@@ -169,6 +169,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Casual Discussion"),
         "Categories": MessageLookupByLibrary.simpleMessage("Categories"),
         "Category": MessageLookupByLibrary.simpleMessage("Category"),
+        "ChangeLog": MessageLookupByLibrary.simpleMessage("ChangeLog"),
         "Chapters": MessageLookupByLibrary.simpleMessage("Chapters"),
         "Character": MessageLookupByLibrary.simpleMessage("Character"),
         "Character_Analysis":
@@ -179,6 +180,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "Characters_and_staff":
             MessageLookupByLibrary.simpleMessage("Characters and Staffs"),
         "Chart_color": MessageLookupByLibrary.simpleMessage("Chart color"),
+        "Check_for_updates":
+            MessageLookupByLibrary.simpleMessage("Check for updates"),
+        "Checking_for_updates":
+            MessageLookupByLibrary.simpleMessage("Checking for updates"),
         "Childcare": MessageLookupByLibrary.simpleMessage("Childcare"),
         "Choose_a_Language":
             MessageLookupByLibrary.simpleMessage("Choose a language"),
@@ -220,6 +225,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Couldn\'t Update!"),
         "Couldnt_connect_network": MessageLookupByLibrary.simpleMessage(
             "Couldn\'t connect to the network"),
+        "Couldnt_find_release":
+            MessageLookupByLibrary.simpleMessage("Couldn\'t find release"),
+        "Couldnt_generate_graph":
+            MessageLookupByLibrary.simpleMessage("Couldn\'t generate graph"),
         "Couldnt_get_promos":
             MessageLookupByLibrary.simpleMessage("Couldn\'t get promos"),
         "Couldnt_open_Club":
@@ -422,6 +431,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "Good": MessageLookupByLibrary.simpleMessage("Good"),
         "Gore": MessageLookupByLibrary.simpleMessage("Gore"),
         "Gourmet": MessageLookupByLibrary.simpleMessage("Gourmet"),
+        "Graph_Edge_Info": MessageLookupByLibrary.simpleMessage("Edge info"),
+        "Graph_Order_By_Sequel":
+            MessageLookupByLibrary.simpleMessage("Order by sequel"),
+        "Graph_Order_From_Selected":
+            MessageLookupByLibrary.simpleMessage("Order from selected"),
+        "Graph_loaded": MessageLookupByLibrary.simpleMessage("Graph loaded"),
         "Great": MessageLookupByLibrary.simpleMessage("Great"),
         "Grid": MessageLookupByLibrary.simpleMessage("Grid"),
         "Grid_Axis_Size":
@@ -564,6 +579,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "Love_Polygon": MessageLookupByLibrary.simpleMessage("Love_Polygon"),
         "Love_it": MessageLookupByLibrary.simpleMessage("Love it"),
         "Low": MessageLookupByLibrary.simpleMessage("Low"),
+        "MAL_API_Licence":
+            MessageLookupByLibrary.simpleMessage("MAL Agreement"),
+        "MAL_API_Licence_Desc": MessageLookupByLibrary.simpleMessage(
+            "MyAnimeList API Licence and Developer Agreement"),
         "MAL_Contests": MessageLookupByLibrary.simpleMessage("MAL Contests"),
         "MAL_Guidelines_FAQ":
             MessageLookupByLibrary.simpleMessage("MAL Guidelines & FAQ"),
@@ -688,6 +707,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("No friends found.."),
         "No_history_found":
             MessageLookupByLibrary.simpleMessage("No history found"),
+        "No_new_updates":
+            MessageLookupByLibrary.simpleMessage("No new updates"),
         "No_of_Posts": MessageLookupByLibrary.simpleMessage("No. of Posts"),
         "No_of_items_desc": MessageLookupByLibrary.simpleMessage(
             "For Ex, by default seasonal anime has 14 items"),
@@ -718,6 +739,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "On_Hold": MessageLookupByLibrary.simpleMessage("On Hold"),
         "One_Piece": MessageLookupByLibrary.simpleMessage("One Piece"),
         "One_Punch_Man": MessageLookupByLibrary.simpleMessage("One Punch Man"),
+        "Open": MessageLookupByLibrary.simpleMessage("Open"),
         "Open_In_Browser":
             MessageLookupByLibrary.simpleMessage("Open in Browser"),
         "Opening_Songs": MessageLookupByLibrary.simpleMessage("Opening Songs"),
@@ -768,6 +790,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "PreferredTitle_Desc": MessageLookupByLibrary.simpleMessage(
             "Select between english, japanese and romanized titles for your anime/manga"),
         "Premiered": MessageLookupByLibrary.simpleMessage("Premiered"),
+        "Prequel": MessageLookupByLibrary.simpleMessage("Prequel"),
         "Preview": MessageLookupByLibrary.simpleMessage("Preview"),
         "Previous": MessageLookupByLibrary.simpleMessage("Previous"),
         "Primary_background_color":
@@ -934,6 +957,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Select_the_no_of_items":
             MessageLookupByLibrary.simpleMessage("Select the no. of items"),
         "Selected": MessageLookupByLibrary.simpleMessage("Selected"),
+        "Sequel": MessageLookupByLibrary.simpleMessage("Sequel"),
         "Serialization": MessageLookupByLibrary.simpleMessage("Serialization"),
         "Series_Discussion":
             MessageLookupByLibrary.simpleMessage("Series Discussion"),
@@ -1052,6 +1076,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Support": MessageLookupByLibrary.simpleMessage("Support"),
         "Survival": MessageLookupByLibrary.simpleMessage("Survival"),
         "Suspense": MessageLookupByLibrary.simpleMessage("Suspense"),
+        "Switch": MessageLookupByLibrary.simpleMessage("Switch"),
         "Synonyms": MessageLookupByLibrary.simpleMessage("Synonyms"),
         "Synopsis": MessageLookupByLibrary.simpleMessage("Synopsis"),
         "Tags": MessageLookupByLibrary.simpleMessage("Tags"),
@@ -1121,8 +1146,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Translate above text"),
         "Translate_Below_Text":
             MessageLookupByLibrary.simpleMessage("Translate below text"),
-        "Translate_Synopsis": MessageLookupByLibrary.simpleMessage(
-            "Translate the above synopsis"),
+        "Translate_Synopsis2":
+            MessageLookupByLibrary.simpleMessage("Translate the synopsis"),
         "Trivia": MessageLookupByLibrary.simpleMessage("Trivia"),
         "Turkish": MessageLookupByLibrary.simpleMessage("Turkish"),
         "Two_Months_ago":
@@ -1134,6 +1159,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "Un_Ranked_Shows":
             MessageLookupByLibrary.simpleMessage("Unranked Shows"),
         "Unseen": MessageLookupByLibrary.simpleMessage("Unseen"),
+        "Update": MessageLookupByLibrary.simpleMessage("Update"),
+        "Update_available":
+            MessageLookupByLibrary.simpleMessage("Update available"),
         "Updates_Announcements":
             MessageLookupByLibrary.simpleMessage("Updates & Announcements"),
         "Updating": MessageLookupByLibrary.simpleMessage("Updating"),
@@ -1156,6 +1184,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Users": MessageLookupByLibrary.simpleMessage("users"),
         "Value": MessageLookupByLibrary.simpleMessage("Value"),
         "Vampire": MessageLookupByLibrary.simpleMessage("Vampire"),
+        "Version": MessageLookupByLibrary.simpleMessage("Version"),
         "Very_Bad": MessageLookupByLibrary.simpleMessage("Very Bad"),
         "Very_Good": MessageLookupByLibrary.simpleMessage("Very Good"),
         "Very_High": MessageLookupByLibrary.simpleMessage("Very High"),
@@ -1178,6 +1207,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Weapons": MessageLookupByLibrary.simpleMessage("Weapons"),
         "WeeklyAnime": MessageLookupByLibrary.simpleMessage("Weekly Anime"),
         "Well_written": MessageLookupByLibrary.simpleMessage("Well written"),
+        "Whats_new": MessageLookupByLibrary.simpleMessage("What\'s new"),
         "Winter_2008": MessageLookupByLibrary.simpleMessage("Winter 2008"),
         "Winter_2009": MessageLookupByLibrary.simpleMessage("Winter 2009"),
         "Winter_2010": MessageLookupByLibrary.simpleMessage("Winter 2010"),

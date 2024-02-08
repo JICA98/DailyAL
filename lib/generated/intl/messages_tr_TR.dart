@@ -172,6 +172,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Gündelik Tartışma"),
         "Categories": MessageLookupByLibrary.simpleMessage("Kategoriler"),
         "Category": MessageLookupByLibrary.simpleMessage("Kategori"),
+        "ChangeLog": MessageLookupByLibrary.simpleMessage("Değişiklik Günlüğü"),
         "Chapters": MessageLookupByLibrary.simpleMessage("Bölümler"),
         "Character": MessageLookupByLibrary.simpleMessage("Karakter"),
         "Character_Analysis":
@@ -182,6 +183,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "Characters_and_staff":
             MessageLookupByLibrary.simpleMessage("Karakterler ve Kadrolar"),
         "Chart_color": MessageLookupByLibrary.simpleMessage("Grafik rengi"),
+        "Check_for_updates":
+            MessageLookupByLibrary.simpleMessage("Güncellemeleri kontrol et"),
+        "Checking_for_updates": MessageLookupByLibrary.simpleMessage(
+            "Güncellemeler kontrol ediliyor"),
         "Childcare": MessageLookupByLibrary.simpleMessage("Çocuk bakımı"),
         "Choose_a_Language":
             MessageLookupByLibrary.simpleMessage("Bir dil seçin"),
@@ -221,6 +226,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Güncellenemedi!"),
         "Couldnt_connect_network":
             MessageLookupByLibrary.simpleMessage("Ağa bağlanılamadı"),
+        "Couldnt_find_release":
+            MessageLookupByLibrary.simpleMessage("Yayın bulunamadı"),
+        "Couldnt_generate_graph":
+            MessageLookupByLibrary.simpleMessage("Grafik oluşturulamadı"),
         "Couldnt_get_promos":
             MessageLookupByLibrary.simpleMessage("Promosyonlar alınamadı"),
         "Couldnt_open_Club":
@@ -426,6 +435,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "Good": MessageLookupByLibrary.simpleMessage("İyi"),
         "Gore": MessageLookupByLibrary.simpleMessage("Kan"),
         "Gourmet": MessageLookupByLibrary.simpleMessage("Gurme"),
+        "Graph_Edge_Info":
+            MessageLookupByLibrary.simpleMessage("Kenar bilgisi"),
+        "Graph_Order_By_Sequel":
+            MessageLookupByLibrary.simpleMessage("Devamına göre sırala"),
+        "Graph_Order_From_Selected":
+            MessageLookupByLibrary.simpleMessage("Seçilenlerden sipariş ver"),
+        "Graph_loaded": MessageLookupByLibrary.simpleMessage("Grafik yüklendi"),
         "Great": MessageLookupByLibrary.simpleMessage("Harika"),
         "Grid": MessageLookupByLibrary.simpleMessage("Kafes"),
         "Grid_Axis_Size":
@@ -570,6 +586,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "Love_Polygon": MessageLookupByLibrary.simpleMessage("Aşk_Poligon"),
         "Love_it": MessageLookupByLibrary.simpleMessage("Onu seviyorum"),
         "Low": MessageLookupByLibrary.simpleMessage("Düşük"),
+        "MAL_API_Licence":
+            MessageLookupByLibrary.simpleMessage("MAL Anlaşması"),
+        "MAL_API_Licence_Desc": MessageLookupByLibrary.simpleMessage(
+            "MyAnimeList API Lisansı ve Geliştirici Sözleşmesi"),
         "MAL_Contests": MessageLookupByLibrary.simpleMessage("MAL Yarışmaları"),
         "MAL_Guidelines_FAQ":
             MessageLookupByLibrary.simpleMessage("MAL Yönergeleri ve SSS"),
@@ -696,6 +716,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Arkadaş bulunamadı.."),
         "No_history_found":
             MessageLookupByLibrary.simpleMessage("Geçmiş bulunamadı"),
+        "No_new_updates":
+            MessageLookupByLibrary.simpleMessage("Yeni güncelleme yok"),
         "No_of_Posts": MessageLookupByLibrary.simpleMessage("Mesaj Sayısı"),
         "No_of_items_desc": MessageLookupByLibrary.simpleMessage(
             "Örneğin, sezonluk animede varsayılan olarak 14 öğe bulunur"),
@@ -727,6 +749,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "One_Piece": MessageLookupByLibrary.simpleMessage("Bir parça"),
         "One_Punch_Man":
             MessageLookupByLibrary.simpleMessage("Tek yumruk adam"),
+        "Open": MessageLookupByLibrary.simpleMessage("Açık"),
         "Open_In_Browser":
             MessageLookupByLibrary.simpleMessage("Tarayıcıda aç"),
         "Opening_Songs":
@@ -779,6 +802,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "PreferredTitle_Desc": MessageLookupByLibrary.simpleMessage(
             "Animeniz/manganız için İngilizce, Japonca ve Romanlaştırılmış başlıklar arasından seçim yapın"),
         "Premiered": MessageLookupByLibrary.simpleMessage("Prömiyeri yapıldı"),
+        "Prequel": MessageLookupByLibrary.simpleMessage("Öncesi niteliğinde"),
         "Preview": MessageLookupByLibrary.simpleMessage("Ön izleme"),
         "Previous": MessageLookupByLibrary.simpleMessage("Öncesi"),
         "Primary_background_color":
@@ -947,6 +971,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Select_the_no_of_items":
             MessageLookupByLibrary.simpleMessage("Hayır\'ı seçin. öğelerin"),
         "Selected": MessageLookupByLibrary.simpleMessage("Seçildi"),
+        "Sequel": MessageLookupByLibrary.simpleMessage("Devam filmi"),
         "Serialization": MessageLookupByLibrary.simpleMessage("Serileştirme"),
         "Series_Discussion":
             MessageLookupByLibrary.simpleMessage("Dizi Tartışması"),
@@ -1072,6 +1097,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Support": MessageLookupByLibrary.simpleMessage("Destek"),
         "Survival": MessageLookupByLibrary.simpleMessage("Hayatta kalma"),
         "Suspense": MessageLookupByLibrary.simpleMessage("Gerilim"),
+        "Switch": MessageLookupByLibrary.simpleMessage("Anahtar"),
         "Synonyms": MessageLookupByLibrary.simpleMessage("Eş anlamlı"),
         "Synopsis": MessageLookupByLibrary.simpleMessage("özet"),
         "Tags": MessageLookupByLibrary.simpleMessage("Etiketler"),
@@ -1145,8 +1171,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Yukarıdaki metni çevir"),
         "Translate_Below_Text":
             MessageLookupByLibrary.simpleMessage("Aşağıdaki metni çevir"),
-        "Translate_Synopsis":
-            MessageLookupByLibrary.simpleMessage("Yukarıdaki özeti çevirin"),
+        "Translate_Synopsis2":
+            MessageLookupByLibrary.simpleMessage("Özeti tercüme et"),
         "Trivia": MessageLookupByLibrary.simpleMessage("Diğer bilgiler"),
         "Turkish": MessageLookupByLibrary.simpleMessage("Türkçe"),
         "Two_Months_ago": MessageLookupByLibrary.simpleMessage("İki ay önce"),
@@ -1157,6 +1183,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "Un_Ranked_Shows":
             MessageLookupByLibrary.simpleMessage("Sıralanmamış Şovlar"),
         "Unseen": MessageLookupByLibrary.simpleMessage("Görünmeyen"),
+        "Update": MessageLookupByLibrary.simpleMessage("Güncelleme"),
+        "Update_available":
+            MessageLookupByLibrary.simpleMessage("Güncelleme uygun"),
         "Updates_Announcements":
             MessageLookupByLibrary.simpleMessage("Güncellemeler ve Duyurular"),
         "Updating": MessageLookupByLibrary.simpleMessage("Güncelleniyor"),
@@ -1181,6 +1210,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Users": MessageLookupByLibrary.simpleMessage("kullanıcılar"),
         "Value": MessageLookupByLibrary.simpleMessage("Değer"),
         "Vampire": MessageLookupByLibrary.simpleMessage("Vampir"),
+        "Version": MessageLookupByLibrary.simpleMessage("Sürüm"),
         "Very_Bad": MessageLookupByLibrary.simpleMessage("Çok Kötü"),
         "Very_Good": MessageLookupByLibrary.simpleMessage("Çok güzel"),
         "Very_High": MessageLookupByLibrary.simpleMessage("Çok yüksek"),
@@ -1203,6 +1233,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Weapons": MessageLookupByLibrary.simpleMessage("Silahlar"),
         "WeeklyAnime": MessageLookupByLibrary.simpleMessage("Haftalık Anime"),
         "Well_written": MessageLookupByLibrary.simpleMessage("İyi yazılmış"),
+        "Whats_new": MessageLookupByLibrary.simpleMessage("Ne var ne yok"),
         "Winter_2008": MessageLookupByLibrary.simpleMessage("Kış 2008"),
         "Winter_2009": MessageLookupByLibrary.simpleMessage("Kış 2009"),
         "Winter_2010": MessageLookupByLibrary.simpleMessage("Kış 2010"),

@@ -139,13 +139,20 @@ Widget starField(
   String score, {
   double starHeight = 17.0,
   TextStyle? textStyle,
+  bool useIcon = false,
 }) {
   return Row(
     children: [
-      Container(
-        height: starHeight,
-        child: Image.asset("assets/images/star.png"),
-      ),
+      if (useIcon)
+        Icon(
+          Icons.star,
+          size: starHeight,
+        )
+      else
+        Container(
+          height: starHeight,
+          child: Image.asset("assets/images/star.png"),
+        ),
       const SizedBox(
         width: 5,
       ),
@@ -337,11 +344,11 @@ Widget loadingText(BuildContext context) {
   );
 }
 
-void showSnackBar(Widget content) async {
+void showSnackBar(Widget content, [Duration? duration]) async {
   messenger.currentState!.showSnackBar(
     SnackBar(
       content: content,
-      duration: const Duration(seconds: 4),
+      duration: duration ?? const Duration(seconds: 4),
     ),
   );
 }
@@ -1366,12 +1373,13 @@ bool nullOrEmpty(dynamic list) {
   return false;
 }
 
-openFutureAndNavigate<T>({
+Future<void> openFutureAndNavigate<T>({
   required String text,
   required Future<T> future,
   required Widget? Function(T) onData,
   required BuildContext context,
   String? customError,
+  bool isPopup = false,
 }) async {
   showModalBottomSheet(
     context: context,
@@ -1383,7 +1391,13 @@ openFutureAndNavigate<T>({
     if (result == null) throw Error();
     final newPage = onData(result);
     Navigator.pop(context);
-    if (newPage != null) gotoPage(context: context, newPage: newPage);
+    if (newPage != null) {
+      if (isPopup) {
+        showDialog(context: context, builder: (_) => newPage);
+      } else {
+        gotoPage(context: context, newPage: newPage);
+      }
+    }
   } catch (e) {
     logDal(e);
     Navigator.pop(context);

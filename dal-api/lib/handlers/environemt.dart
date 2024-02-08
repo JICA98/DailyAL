@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:dal_commons/dal_commons.dart';
 
 class Environment {
   Environment._();
@@ -16,9 +15,5 @@ class Environment {
 
   String? get malClientId {
     return _malClientId ?? '${environment['MAL_CLIENT_ID']}';
-  }
-
-  bool get isLambda {
-    return 'true'.equalsIgnoreCase('${environment['IS_LAMBDA']}');
   }
 }

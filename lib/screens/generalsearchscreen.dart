@@ -1346,6 +1346,7 @@ class _GeneralSearchScreenState extends State<GeneralSearchScreen>
     return TabBar(
       controller: tabController,
       isScrollable: true,
+      tabAlignment: TabAlignment.start,
       tabs: allSectionSearch
           .map((e) => Tab(
                 child: Text('${e.capitalize()}'),

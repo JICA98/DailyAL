@@ -40,6 +40,7 @@ class SettingsSliverHeader extends StatelessWidget {
                 : Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 22.0),
           ),
           centerTitle: true,
+          titlePadding: EdgeInsetsDirectional.only(start: 0, bottom: 16),
         ),
       ),
     );

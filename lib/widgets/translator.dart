@@ -4,7 +4,7 @@ import 'package:dailyanimelist/widgets/custombutton.dart';
 import 'package:dailyanimelist/widgets/customfuture.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:translator/translator.dart';
+import 'package:translator_plus/translator_plus.dart';
 
 class TranslaterWidget extends StatefulWidget {
   final String? content;

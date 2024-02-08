@@ -455,6 +455,24 @@ class _ContentDetailedScreenState extends State<ContentDetailedScreen>
     };
   }
 
+  Map<int, MyListStatus> _statusMap() {
+    return Map.fromEntries(
+        (contentDetailed.relatedAnime as List<RelatedContent>?)
+                ?.map((e) {
+                  var id = e.relatedNode?.id;
+                  var myListStatus = e.relatedNode?.myListStatus;
+                  if (id != null && myListStatus != null) {
+                    return MapEntry(id, myListStatus);
+                  }
+                  return null;
+                })
+                .where((e) => e != null)
+                .map((e) => e!)
+                .toList() ??
+            [])
+      ..putIfAbsent(_id, () => contentDetailed.myListStatus);
+  }
+
   T? _nullIf<T>(bool condition, T Function() child) {
     if (condition) {
       return child();
@@ -716,6 +734,7 @@ class _ContentDetailedScreenState extends State<ContentDetailedScreen>
             horizPadding: horizPadding,
             id: _id,
             displayType: DisplayType.grid,
+            statusMap: _statusMap(),
           ),
           appbarTitle: S.current.Related,
           useAppbar: false,
@@ -1019,6 +1038,7 @@ class _ContentDetailedScreenState extends State<ContentDetailedScreen>
     final tabBar = TabBar(
       isScrollable: true,
       controller: _tabController,
+      tabAlignment: TabAlignment.start,
       onTap: (index) => _autoScrollController?.scrollToIndex(
         index,
         preferPosition: AutoScrollPosition.middle,
@@ -1685,18 +1705,3 @@ class NoScalingAnimation extends FloatingActionButtonAnimator {
   }
 }
 
-class ColoredTabBar extends Container implements PreferredSizeWidget {
-  ColoredTabBar(this.color, this.tabBar);
-
-  final Color color;
-  final TabBar tabBar;
-
-  @override
-  Size get preferredSize => tabBar.preferredSize;
-
-  @override
-  Widget build(BuildContext context) => Container(
-        color: color,
-        child: tabBar,
-      );
-}

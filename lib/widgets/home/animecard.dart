@@ -134,13 +134,15 @@ class AnimeGridCard extends StatelessWidget {
     if (aspectRatio != null)
       return AspectRatio(
         aspectRatio: aspectRatio!,
-        child: cardWidget(context, nodeTitle, borderRadius: borderRadius, time: time),
+        child: cardWidget(context, nodeTitle,
+            borderRadius: borderRadius, time: time),
       );
     else
       return Container(
         height: gridHeight != null ? null : height,
         width: gridHeight != null ? null : width,
-        child: cardWidget(context, nodeTitle, borderRadius: borderRadius, time: time),
+        child: cardWidget(context, nodeTitle,
+            borderRadius: borderRadius, time: time),
       );
   }
 
@@ -565,6 +567,7 @@ Widget editIconButton(
   VoidCallback onEdit,
   double borderRadius, [
   dynamic myListStatus,
+  OutlinedBorder? shape,
 ]) {
   Widget child;
   final score = myListStatus?.score as int?;
@@ -598,11 +601,12 @@ Widget editIconButton(
     child: ShadowButton(
       backgroundColor: bgColor,
       padding: EdgeInsets.zero,
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-        topLeft: Radius.circular(borderRadius * 2),
-        bottomRight: Radius.circular(borderRadius),
-      )),
+      shape: shape ??
+          RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(borderRadius * 2),
+            bottomRight: Radius.circular(borderRadius),
+          )),
       onPressed: onEdit,
       child: child,
     ),

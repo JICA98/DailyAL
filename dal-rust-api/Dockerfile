@@ -10,6 +10,6 @@ FROM gcr.io/distroless/cc
 
 COPY --from=builder /builder/target/release/dal-rust-api /
 
-EXPOSE 8000
+EXPOSE 8001
 
 CMD ["./dal-rust-api"]

@@ -167,6 +167,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("مناقشة غير رسمية"),
         "Categories": MessageLookupByLibrary.simpleMessage("فئات"),
         "Category": MessageLookupByLibrary.simpleMessage("فئة"),
+        "ChangeLog": MessageLookupByLibrary.simpleMessage("سجل التغيير"),
         "Chapters": MessageLookupByLibrary.simpleMessage("فصول"),
         "Character": MessageLookupByLibrary.simpleMessage("اختلاف الشخصيات"),
         "Character_Analysis":
@@ -178,6 +179,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("الشخصيات والموظفين"),
         "Chart_color":
             MessageLookupByLibrary.simpleMessage("لون الرسم البياني"),
+        "Check_for_updates":
+            MessageLookupByLibrary.simpleMessage("تحقق من وجود تحديثات"),
+        "Checking_for_updates":
+            MessageLookupByLibrary.simpleMessage("البحث عن تحديثات"),
         "Childcare": MessageLookupByLibrary.simpleMessage("رعاية الأطفال"),
         "Choose_a_Language": MessageLookupByLibrary.simpleMessage("اختر لغة"),
         "Clear": MessageLookupByLibrary.simpleMessage("واضح"),
@@ -217,6 +222,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("لا يمكن التحديث!"),
         "Couldnt_connect_network":
             MessageLookupByLibrary.simpleMessage("لا يمكن الاتصال بالشبكة"),
+        "Couldnt_find_release":
+            MessageLookupByLibrary.simpleMessage("تعذر العثور على الإصدار"),
+        "Couldnt_generate_graph":
+            MessageLookupByLibrary.simpleMessage("تعذر إنشاء الرسم البياني"),
         "Couldnt_get_promos":
             MessageLookupByLibrary.simpleMessage("لا يمكن الحصول على البروموس"),
         "Couldnt_open_Club":
@@ -421,6 +430,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "Good": MessageLookupByLibrary.simpleMessage("جيد"),
         "Gore": MessageLookupByLibrary.simpleMessage("جور"),
         "Gourmet": MessageLookupByLibrary.simpleMessage("جورميه"),
+        "Graph_Edge_Info":
+            MessageLookupByLibrary.simpleMessage("معلومات الحافة"),
+        "Graph_Order_By_Sequel":
+            MessageLookupByLibrary.simpleMessage("الترتيب حسب التكملة"),
+        "Graph_Order_From_Selected":
+            MessageLookupByLibrary.simpleMessage("الطلب من المحدد"),
+        "Graph_loaded":
+            MessageLookupByLibrary.simpleMessage("تم تحميل الرسم البياني"),
         "Great": MessageLookupByLibrary.simpleMessage("عظيم"),
         "Grid": MessageLookupByLibrary.simpleMessage("جريد"),
         "Grid_Axis_Size":
@@ -566,6 +583,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "Love_Polygon": MessageLookupByLibrary.simpleMessage("الحب_المضلع"),
         "Love_it": MessageLookupByLibrary.simpleMessage("أحبها"),
         "Low": MessageLookupByLibrary.simpleMessage("قليل"),
+        "MAL_API_Licence":
+            MessageLookupByLibrary.simpleMessage("اتفاقية القانون النموذجي"),
+        "MAL_API_Licence_Desc": MessageLookupByLibrary.simpleMessage(
+            "ترخيص MyAnimeList API واتفاقية المطور"),
         "MAL_Contests": MessageLookupByLibrary.simpleMessage("مسابقات مال"),
         "MAL_Guidelines_FAQ":
             MessageLookupByLibrary.simpleMessage("إرشادات وأسئلة وأجوبة"),
@@ -691,6 +712,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("لم يتم العثور على أصدقاء .."),
         "No_history_found":
             MessageLookupByLibrary.simpleMessage("لم يتم العثور على التاريخ"),
+        "No_new_updates":
+            MessageLookupByLibrary.simpleMessage("لا توجد تحديثات جديدة"),
         "No_of_Posts": MessageLookupByLibrary.simpleMessage("عدد المشاركات"),
         "No_of_items_desc": MessageLookupByLibrary.simpleMessage(
             "بالنسبة إلى السابقين، بشكل افتراضي أنيمي الموسم لديه 14 عنصر"),
@@ -723,6 +746,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "One_Piece": MessageLookupByLibrary.simpleMessage("قطعه"),
         "One_Punch_Man":
             MessageLookupByLibrary.simpleMessage("لكمة الرجل واحد"),
+        "Open": MessageLookupByLibrary.simpleMessage("يفتح"),
         "Open_In_Browser":
             MessageLookupByLibrary.simpleMessage("افتح في المتصفح"),
         "Opening_Songs": MessageLookupByLibrary.simpleMessage("فتح الأغاني"),
@@ -773,6 +797,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "PreferredTitle_Desc": MessageLookupByLibrary.simpleMessage(
             "اختر بين العناوين الإنجليزية واليابانية والحروف اللاتينية للأنمي/المانجا الخاص بك"),
         "Premiered": MessageLookupByLibrary.simpleMessage("prestered."),
+        "Prequel": MessageLookupByLibrary.simpleMessage("بادئة"),
         "Preview": MessageLookupByLibrary.simpleMessage("معاينة"),
         "Previous": MessageLookupByLibrary.simpleMessage("سابق"),
         "Primary_background_color":
@@ -931,6 +956,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Select_the_no_of_items":
             MessageLookupByLibrary.simpleMessage("حدد لا.من العناصر"),
         "Selected": MessageLookupByLibrary.simpleMessage("المحدد"),
+        "Sequel": MessageLookupByLibrary.simpleMessage("تتمة"),
         "Serialization": MessageLookupByLibrary.simpleMessage("تسلسل"),
         "Series_Discussion":
             MessageLookupByLibrary.simpleMessage("مناقشة السلسلة"),
@@ -1051,6 +1077,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Support": MessageLookupByLibrary.simpleMessage("الدعم"),
         "Survival": MessageLookupByLibrary.simpleMessage("نجاة"),
         "Suspense": MessageLookupByLibrary.simpleMessage("تشويق"),
+        "Switch": MessageLookupByLibrary.simpleMessage("يُحوّل"),
         "Synonyms": MessageLookupByLibrary.simpleMessage("المرادفات"),
         "Synopsis": MessageLookupByLibrary.simpleMessage("ملخص"),
         "Tags": MessageLookupByLibrary.simpleMessage("كذا"),
@@ -1124,8 +1151,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("ترجمة النص أعلاه"),
         "Translate_Below_Text":
             MessageLookupByLibrary.simpleMessage("ترجمة النص أدناه"),
-        "Translate_Synopsis":
-            MessageLookupByLibrary.simpleMessage("ترجمة ملخص أعلاه"),
+        "Translate_Synopsis2":
+            MessageLookupByLibrary.simpleMessage("ترجمة الملخص"),
         "Trivia": MessageLookupByLibrary.simpleMessage("أمور تافهة"),
         "Turkish": MessageLookupByLibrary.simpleMessage("اللغة التركية"),
         "Two_Months_ago": MessageLookupByLibrary.simpleMessage("قبل شهرين"),
@@ -1136,6 +1163,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "Un_Ranked_Shows":
             MessageLookupByLibrary.simpleMessage("العروض غير المصنفة"),
         "Unseen": MessageLookupByLibrary.simpleMessage("غير مرئي"),
+        "Update": MessageLookupByLibrary.simpleMessage("تحديث"),
+        "Update_available":
+            MessageLookupByLibrary.simpleMessage("التحديث متاح"),
         "Updates_Announcements":
             MessageLookupByLibrary.simpleMessage("التحديثات والإعلانات"),
         "Updating": MessageLookupByLibrary.simpleMessage("تحديث"),
@@ -1160,6 +1190,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Users": MessageLookupByLibrary.simpleMessage("المستخدمين"),
         "Value": MessageLookupByLibrary.simpleMessage("قيمة"),
         "Vampire": MessageLookupByLibrary.simpleMessage("مصاص دماء"),
+        "Version": MessageLookupByLibrary.simpleMessage("إصدار"),
         "Very_Bad": MessageLookupByLibrary.simpleMessage("سيئ جدا"),
         "Very_Good": MessageLookupByLibrary.simpleMessage("جيد جدًا"),
         "Very_High": MessageLookupByLibrary.simpleMessage("عالي جدا"),
@@ -1183,6 +1214,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Weapons": MessageLookupByLibrary.simpleMessage("الأسلحة"),
         "WeeklyAnime": MessageLookupByLibrary.simpleMessage("أنيمي الأسبوعي"),
         "Well_written": MessageLookupByLibrary.simpleMessage("مكتوب جيدا"),
+        "Whats_new": MessageLookupByLibrary.simpleMessage("ما هو الجديد"),
         "Winter_2008": MessageLookupByLibrary.simpleMessage("شتاء 2008."),
         "Winter_2009": MessageLookupByLibrary.simpleMessage("شتاء 2009."),
         "Winter_2010": MessageLookupByLibrary.simpleMessage("الشتاء 2010."),

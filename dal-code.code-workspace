@@ -10,7 +10,7 @@
 		"editor.fontWeight": "100",
 		"editor.insertSpaces": true,
 		"editor.fontSize": 16,
-		"dart.flutterSdkPath": "~/src/flutter/flutter_linux_3.13.1-stable/flutter"
+		"dart.flutterSdkPath": "~/src/flutter/flutter_linux_3.16.9-stable/flutter"
 	},
 	"launch": {
 		"version": "0.2.0",
@@ -19,7 +19,8 @@
 				"name": "dailyanimelist",
 				"request": "launch",
 				"type": "dart",
-				"flutterMode": "debug"
+				"flutterMode": "debug",
+				"program": "lib/main.dart"
 			}
 		]
 	},

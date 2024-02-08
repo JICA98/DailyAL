@@ -25,7 +25,7 @@ async fn main() {
     let config = Config::init();
     let app = routes::setup_app(config).await;
 
-    println!("Server started at http://localhost:8000");
+    println!("Server started at http://localhost:8001");
     let listener = tokio::net::TcpListener::bind("0.0.0.0:8001").await.unwrap();
     axum::serve(listener, app).await.unwrap();
 }

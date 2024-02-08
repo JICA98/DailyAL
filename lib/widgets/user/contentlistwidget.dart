@@ -1402,7 +1402,15 @@ class _ContentAllWidgetState extends State<ContentAllWidget>
       onTap: () => _onTileTap(),
       subtitle: _timeWidget(),
       trailing: widget.showStatus
-          ? editIconButton(nsv, () => showEditSheet(context), 6.0)
+          ? editIconButton(
+              nsv,
+              () => showEditSheet(context),
+              6.0,
+              null,
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+            )
           : null,
     );
   }

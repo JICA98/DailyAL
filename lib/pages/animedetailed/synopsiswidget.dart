@@ -16,7 +16,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:translator/translator.dart';
+import 'package:translator_plus/translator_plus.dart';
 
 // HapticFeedback
 
@@ -253,7 +253,7 @@ class _SysonpsisWidgetState extends State<SysonpsisWidget>
       content: widget.synopsis!,
       done: (s) => _buildRichTextWithAnchors(s ?? ''),
       loading: loadingText(context),
-      preButtonText: S.current.Translate_Synopsis,
+      preButtonText: S.current.Translate_Synopsis2,
       postButtonText: S.current.Show_Original,
       buttonPadding: EdgeInsets.zero,
       reversed: true,

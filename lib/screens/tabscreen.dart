@@ -61,6 +61,7 @@ class _TabScreenState<T> extends State<TabScreen<T>> {
   PreferredSizeWidget tabsWidget(List<String> tabs) {
     return TabBar(
       isScrollable: true,
+      tabAlignment: TabAlignment.start,
       tabs: tabs.map((e) => Tab(text: e.standardize() ?? '')).toList(),
     );
   }

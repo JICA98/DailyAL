@@ -1,0 +1,31 @@
+Search through the huge MyAnimeList database and find your favorite anime and manga. Surf through the forums and find millions of discussions at your finger tips. Get detailed reviews and find tons of recommendations for all the anime and manga in MyAnimeList.
+
+⚡️ Anime & Manga ⚡️
+
+⭐ Seasonal Anime, Top Upcoming Anime, Most Popular Anime, Anime Ranking List, All time Favorites and more.
+
+⭐ Anime/Manga Synopsis. Related and Recommended content.
+
+⭐ Detailed Anime reviews and Anime/Manga Statistics.
+
+⚡️ Theming and Customization⚡️
+
+⭐ Select from 4 different Dark Themes, namely Spring, Summer, Fall and Winter.
+
+⭐ Customize even the Bottom Navigation bar and cache update frequency.
+
+⚡️ MyAnimeList Forums ⚡️
+
+⭐ Forums regarding MyAnimeList, Anime & Manga and even General Discussions.
+
+⚡️ Advanced Search Bar⚡️
+
+⭐ Make advanced searches directly from the search bar using "@" "#" with ease.
+
+⭐ Faster search loading times using caching mechanisms.
+
+⚡️ User Specific Features⚡️
+
+⭐ Edit/Update your Anime/Manga List within seconds.
+
+⭐ Sort your list by Title, List Score, Start Date and Updated Date.
