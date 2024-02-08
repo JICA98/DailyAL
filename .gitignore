@@ -44,9 +44,4 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-#keystore
-*.jks
-
-#.env file
-.env
 .vscode/settings.json
