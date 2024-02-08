@@ -1,0 +1,4 @@
+storePassword=fdroid_keystore
+keyPassword=fdroid_keystore
+keyAlias=key0
+storeFile=fdroid_keystore.jks
