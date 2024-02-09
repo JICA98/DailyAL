@@ -52,4 +52,9 @@ impl CacheService {
             Err(_) => None,
         }
     }
+
+    pub async fn delete_by_id(&self, content_type: &str, id: String) {
+        let mut connection = self.get_connection().await;
+        let _: RedisResult<String> = connection.del(format!("{}_{}", content_type, id)).await;
+    }
 }

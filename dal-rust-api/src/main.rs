@@ -11,7 +11,7 @@ mod routes;
 mod mal_api;
 mod model_dto;
 mod cache_service;
-mod storage_service;
+mod file_storage_service;
 mod image_service;
 
 pub struct AppState {

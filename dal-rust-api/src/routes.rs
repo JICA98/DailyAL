@@ -6,7 +6,7 @@ use crate::{
     config::Config,
     handlers, image_service,
     mal_api::MalAPI,
-    storage_service::{self, StorageService},
+    file_storage_service::FileStorageService,
     AppState,
 };
 use axum::{
@@ -15,7 +15,7 @@ use axum::{
         HeaderValue, Method,
     },
     middleware,
-    routing::get,
+    routing::{get, post},
     Router,
 };
 use tower_http::cors::CorsLayer;
@@ -28,7 +28,7 @@ pub async fn setup_app(config: Config) -> Router {
         config: config.clone(),
     };
     let image_service = image_service::ImageService {
-        storage_service: StorageService {
+        storage_service: FileStorageService {
             config: config.clone(),
         },
         cache_service: cache_service.clone(),
@@ -51,6 +51,11 @@ pub async fn setup_app(config: Config) -> Router {
         .route(
             "/types/:image_type/images/:image_id",
             get(handlers::get_image_url)
+                .route_layer(middleware::from_fn_with_state(state.clone(), auth::auth)),
+        )
+        .route(
+            "/types/:image_type/images/:image_id",
+            post(handlers::save_image)
                 .route_layer(middleware::from_fn_with_state(state.clone(), auth::auth)),
         )
         .with_state(state)
