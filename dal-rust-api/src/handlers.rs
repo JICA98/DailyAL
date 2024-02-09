@@ -1,7 +1,7 @@
 use core::panic;
 use std::sync::Arc;
 
-use crate::{file_storage_service::SignedURLResponse, model_dto::ContentGraphDTO, AppState};
+use crate::{file_storage_service::SignedURLResponse, model::File, model_dto::ContentGraphDTO, AppState};
 
 use axum::{
     extract::{Multipart, Path, State},
@@ -31,11 +31,26 @@ pub async fn save_image(
 ) -> String {
     let field = multipart.next_field().await.unwrap().unwrap();
     validate_field("image", &field);
-    let mut bytes: Vec<u8> = field.bytes().await.unwrap().into();
+    let file = field_to_file(field).await;
     data.image_service
-        .save_image(image_type, image_id, &mut bytes)
+        .save_image(
+            image_type,
+            image_id,
+            file,
+        )
         .await;
     "ok".to_string()
+}
+
+async fn field_to_file(field: axum::extract::multipart::Field<'_>) -> File {
+    let content_type = field.content_type().unwrap().to_string();
+    let file_name = field.file_name().unwrap().to_string();
+    let content: Vec<u8> = field.bytes().await.unwrap().into();
+    File {
+        content,
+        content_type,
+        file_name,
+    }
 }
 
 fn validate_field(field_name: &str, field: &axum::extract::multipart::Field<'_>) {

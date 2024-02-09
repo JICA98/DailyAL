@@ -1,6 +1,6 @@
 use crate::{
     cache_service::CacheService,
-    file_storage_service::{SignedURLResponse, FileStorageService},
+    file_storage_service::{FileStorageService, SignedURLResponse}, model::File,
 };
 
 pub struct ImageService {
@@ -33,13 +33,13 @@ impl ImageService {
         }
     }
 
-    pub async fn save_image(&self, image_type: String, image_id: String, bytes: &mut Vec<u8>) {
+    pub async fn save_image(&self, image_type: String, image_id: String, file: File) {
         if image_type != "user-bgs" {
             panic!("Invalid image type");
         }
         let image_path = format!("public/{}.image", image_id);
         self.storage_service
-            .save_image(image_type.to_string(), image_path, bytes)
+            .save_image(image_type.to_string(), image_path, file)
             .await;
         self.cache_service
             .delete_by_id(image_type.as_str(), image_id)

@@ -1,9 +1,9 @@
-use crate::config::Config;
-use axum::http::response;
+use crate::{config::Config, model::File};
 use reqwest::{
-    multipart::{Form, Part},
+    multipart::Part,
     Response,
 };
+
 use serde::{Deserialize, Serialize};
 
 pub struct FileStorageService {
@@ -44,14 +44,13 @@ impl FileStorageService {
         }
     }
 
-    pub async fn save_image(&self, image_type: String, image_path: String, bytes: &mut Vec<u8>) {
+    pub async fn save_image(&self, image_type: String, image_path: String, file: File) {
         let url = format!(
             "{}/object/{}/{}",
             self.config.secrets.subastorage_url, image_type, image_path
         );
         let client = reqwest::Client::new();
-        let content: Vec<u8> = bytes.to_vec();
-        let part = Part::bytes(content.clone()).file_name("file");
+        let part = Part::bytes(file.content).file_name("file");
         let file = reqwest::multipart::Form::new().part("file", part);
         let request = client
             .post(url)
