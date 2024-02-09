@@ -10,7 +10,6 @@ use async_recursion::async_recursion;
 use chrono::{DateTime, Utc};
 use futures::{stream, StreamExt};
 
-#[derive(Debug, Clone)]
 pub struct AnimeService {
     pub config: Config,
     pub mal_api: crate::mal_api::MalAPI,
@@ -135,7 +134,7 @@ impl AnimeService {
     async fn get_anime_by_id(&self, id: i64, from_cache: bool) -> Result<Anime, Box<dyn Error>> {
         let now = chrono::Utc::now();
         let result = match from_cache {
-            true => self.cache_service.get_anime_by_id(id).await,
+            true => self.cache_service.get_by_id("anime", id.to_string()).await,
             false => None,
         };
 
@@ -149,7 +148,7 @@ impl AnimeService {
             let anime = self.mal_api.get_anime_details(id).await?;
 
             // Store the anime in the cache for future use
-            self.cache_service.set_anime_by_id(id, &anime).await;
+            self.cache_service.set_by_id("anime", id.to_string(), &anime, None).await;
             let then = chrono::Utc::now();
             self.log_anime(&anime, "Saved".to_string(), then, now);
             Ok(anime)

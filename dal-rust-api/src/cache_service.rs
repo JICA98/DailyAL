@@ -1,5 +1,6 @@
-use crate::{config::Config, model::Anime};
-use redis::{JsonAsyncCommands, RedisResult};
+use crate::config::Config;
+use redis::{AsyncCommands, JsonAsyncCommands, RedisResult};
+use serde::{de::DeserializeOwned, Serialize};
 
 #[derive(Debug, Clone)]
 pub struct CacheService {
@@ -12,25 +13,39 @@ impl CacheService {
         return client.get_async_connection().await.unwrap();
     }
 
-    pub async fn get_anime_by_id(&self, id: i64) -> Option<Anime> {
+    pub async fn get_by_id<T: DeserializeOwned + Clone>(
+        &self,
+        content_type: &str,
+        id: String,
+    ) -> Option<T> {
         let mut connection = self.get_connection().await;
-        let result: Result<String, redis::RedisError> =
-            connection.json_get(format!("anime_{}", id), "$").await;
+        let result: Result<String, redis::RedisError> = connection
+            .json_get(format!("{}_{}", content_type, id), "$")
+            .await;
         match result {
             Ok(json) => {
-                let anime: Vec<Anime> = serde_json::from_str(&json).unwrap();
+                let anime: Vec<T> = serde_json::from_str(&json).unwrap();
                 Some(anime[0].clone())
             }
             Err(_) => None,
         }
     }
 
-    pub async fn set_anime_by_id(&self, id: i64, anime: &Anime) -> Option<()> {
+    pub async fn set_by_id<T: Serialize + std::marker::Sync + std::marker::Send>(
+        &self,
+        content_type: &str,
+        id: String,
+        anime: &T,
+        expiry: Option<i64>,
+    ) -> Option<()> {
         let mut connection = self.get_connection().await;
 
-        let result: RedisResult<String> = connection
-            .json_set(format!("anime_{}", id), "$", anime)
-            .await;
+        let key = format!("{}_{}", content_type, id);
+        let result: RedisResult<String> = connection.json_set(key.clone(), "$", anime).await;
+
+        if expiry.is_some() {
+            let _: RedisResult<String> = connection.expire(key, expiry.unwrap()).await;
+        }
 
         match result {
             Ok(_) => Some(()),

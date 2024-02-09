@@ -1,6 +1,14 @@
 use std::sync::Arc;
 
-use crate::{anime_service, auth, config::Config, handlers, AppState};
+use crate::{
+    anime_service, auth,
+    cache_service::CacheService,
+    config::Config,
+    handlers, image_service,
+    mal_api::MalAPI,
+    storage_service::{self, StorageService},
+    AppState,
+};
 use axum::{
     http::{
         header::{ACCEPT, AUTHORIZATION, CONTENT_TYPE},
@@ -13,22 +21,36 @@ use axum::{
 use tower_http::cors::CorsLayer;
 
 pub async fn setup_app(config: Config) -> Router {
+    let cache_service = CacheService {
+        config: config.clone(),
+    };
+    let mal_api = MalAPI {
+        config: config.clone(),
+    };
+    let image_service = image_service::ImageService {
+        storage_service: StorageService {
+            config: config.clone(),
+        },
+        cache_service: cache_service.clone(),
+    };
     let state = Arc::new(AppState {
         config: config.clone(),
+        image_service,
         anime_service: anime_service::AnimeService {
             config: config.clone(),
-            mal_api: crate::mal_api::MalAPI {
-                config: config.clone(),
-            },
-            cache_service: crate::cache_service::CacheService {
-                config: config.clone(),
-            },
+            mal_api,
+            cache_service,
         },
     });
     Router::new()
         .route(
             "/anime/:id/related",
             get(handlers::get_related_anime)
+                .route_layer(middleware::from_fn_with_state(state.clone(), auth::auth)),
+        )
+        .route(
+            "/types/:image_type/images/:image_id",
+            get(handlers::get_image_url)
                 .route_layer(middleware::from_fn_with_state(state.clone(), auth::auth)),
         )
         .with_state(state)
