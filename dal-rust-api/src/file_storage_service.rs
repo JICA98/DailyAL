@@ -57,17 +57,33 @@ impl FileStorageService {
             .bearer_auth(&self.config.secrets.subastorage_key)
             .body(Body::from(file.content));
         let response = request.send().await.unwrap();
-        self.validate_reponse(response).await;
+        validate_reponse(response).await;
     }
 
-    async fn validate_reponse(&self, response: Response) -> String {
-        let status = response.status();
-        let text = response.text().await.unwrap();
-        println!("Status: {:?} and Reponse: {}", status, text);
-        if status.is_success() {
-            return text;
-        } else {
-            panic!("Error saving image");
-        }
+    pub async fn delete_image(&self, image_type: String, image_path: String) {
+        let url = format!(
+            "{}/object/{}/{}",
+            self.config.secrets.subastorage_url, image_type, image_path
+        );
+        println!("Hitting url: {}", url);
+        let client: reqwest::Client = reqwest::Client::new();
+        let response = client
+            .delete(url)
+            .bearer_auth(&self.config.secrets.subastorage_key)
+            .send()
+            .await
+            .unwrap();
+        validate_reponse(response).await;
+    }
+}
+
+async fn validate_reponse(response: Response) -> String {
+    let status = response.status();
+    let text = response.text().await.unwrap();
+    println!("Status: {:?} and Reponse: {}", status, text);
+    if status.is_success() {
+        return text;
+    } else {
+        panic!("Error saving image");
     }
 }

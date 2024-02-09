@@ -1,7 +1,9 @@
 use core::panic;
 use std::sync::Arc;
 
-use crate::{file_storage_service::SignedURLResponse, model::File, model_dto::ContentGraphDTO, AppState};
+use crate::{
+    file_storage_service::SignedURLResponse, model::File, model_dto::ContentGraphDTO, AppState,
+};
 
 use axum::{
     extract::{Multipart, Path, State},
@@ -33,12 +35,16 @@ pub async fn save_image(
     validate_field("image", &field);
     let file = field_to_file(field).await;
     data.image_service
-        .save_image(
-            image_type,
-            image_id,
-            file,
-        )
+        .save_image(image_type, image_id, file)
         .await;
+    "ok".to_string()
+}
+
+pub async fn delete_image(
+    State(data): State<Arc<AppState>>,
+    Path((image_type, image_id)): Path<(String, String)>,
+) -> String {
+    data.image_service.delete_image(image_type, image_id).await;
     "ok".to_string()
 }
 
