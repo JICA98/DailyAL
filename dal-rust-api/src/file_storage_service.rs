@@ -1,8 +1,5 @@
 use crate::{config::Config, model::File};
-use reqwest::{
-    multipart::Part,
-    Response,
-};
+use reqwest::{multipart::Part, Response};
 
 use serde::{Deserialize, Serialize};
 
@@ -50,7 +47,10 @@ impl FileStorageService {
             self.config.secrets.subastorage_url, image_type, image_path
         );
         let client = reqwest::Client::new();
-        let part = Part::bytes(file.content).file_name("file");
+        let part = Part::bytes(file.content)
+            .file_name(file.file_name)
+            .mime_str(&file.content_type)
+            .unwrap();
         let file = reqwest::multipart::Form::new().part("file", part);
         let request = client
             .post(url)
