@@ -23,7 +23,7 @@ impl AnimeService {
             nodes: HashSet::new(),
             edges: Vec::new(),
         };
-        self.get_related_anime_with_graph(id, &mut graph, false)
+        self.get_related_anime_with_graph(id, &mut graph, false, true)
             .await?;
         return Ok(graph);
     }
@@ -34,12 +34,13 @@ impl AnimeService {
         id: i64,
         graph: &mut ContentGraphDTO,
         from_cache: bool,
+        include_others: bool,
     ) -> Result<(), Box<dyn Error>> {
         let anime = self.get_anime_by_id(id, from_cache).await.unwrap();
         graph.nodes.insert(anime.clone().into());
 
         let unvisited_edges = self.filter_by_nodes(
-            self.get_unvisited_edges(id, anime.related_anime.clone()),
+            self.get_unvisited_edges(id, anime.related_anime.clone(), include_others),
             &graph.nodes,
         );
 
@@ -71,7 +72,7 @@ impl AnimeService {
         for edge in filter_by_nodes.iter() {
             graph.edges.push(edge.clone().into());
             let _ = self
-                .get_related_anime_with_graph(edge.target, graph, true)
+                .get_related_anime_with_graph(edge.target, graph, true, false)
                 .await;
         }
         return Ok(());
@@ -80,17 +81,17 @@ impl AnimeService {
     async fn get_edges_from_id(&self, id: i64) -> (Anime, Vec<Edge>) {
         let anime = self.get_anime_by_id(id, true).await.unwrap();
         let vec = anime.related_anime.clone();
-        (anime, self.get_unvisited_edges(id, vec))
+        (anime, self.get_unvisited_edges(id, vec, false))
     }
 
-    fn get_unvisited_edges(&self, id: i64, related_anime: Option<Vec<RelatedAnime>>) -> Vec<Edge> {
+    fn get_unvisited_edges(&self, id: i64, related_anime: Option<Vec<RelatedAnime>>, include_others: bool) -> Vec<Edge> {
         let mut unvisited_edges: Vec<Edge> = Vec::new();
         if related_anime.is_some() {
             unvisited_edges.extend(
                 related_anime
                     .unwrap()
                     .iter()
-                    .filter(|related_anime| self.valid_relation(&related_anime.relation_type))
+                    .filter(|related_anime| self.valid_relation(&related_anime.relation_type, include_others))
                     .map(|related_anime| Edge {
                         source: id,
                         target: related_anime.node.id,
@@ -115,7 +116,7 @@ impl AnimeService {
             .collect()
     }
 
-    fn valid_relation(&self, relation_type: &RelationType) -> bool {
+    fn valid_relation(&self, relation_type: &RelationType, include_others: bool) -> bool {
         match relation_type {
             RelationType::alternative_setting => true,
             RelationType::sequel => true,
@@ -127,7 +128,7 @@ impl AnimeService {
             RelationType::full_story => true,
             RelationType::spin_off => true,
             RelationType::character => false,
-            RelationType::other => false,
+            RelationType::other => include_others,
         }
     }
 
