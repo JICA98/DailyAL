@@ -1,12 +1,12 @@
 import 'dart:io';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dailyanimelist/constant.dart';
 import 'package:dailyanimelist/enums.dart';
 import 'package:dailyanimelist/pages/settings/optiontile.dart';
 import 'package:dailyanimelist/screens/contentdetailedscreen.dart';
 import 'package:dailyanimelist/screens/generalsearchscreen.dart';
 import 'package:dailyanimelist/widgets/avatarwidget.dart';
-import 'package:dailyanimelist/widgets/bottomnavbar.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:path_provider/path_provider.dart';
@@ -69,7 +69,6 @@ Widget startUpPageFeature(ValueChanged<int> onChanged) {
   return OptionTile(
     iconData: Icons.navigation,
     text: S.current.StartUp_page,
-    desc: S.current.Customize_Bottom_Navbar_desc,
     trailing: SelectButton(
       popupText: S.current.StartUp_page,
       selectedOption: _options[user.pref.startUpPage],
@@ -234,18 +233,6 @@ class _UserPrefSettingsState extends State<UserPrefSettings> {
               onToggled: (value) => changeShowOnlyLastQuote(value),
             ),
           ),
-          // OptionTile(
-          //   text: S.current.Default_Display_Type,
-          //   iconData: Icons.display_settings,
-          //   desc: S.current.Default_Display_Type_Desc,
-          //   onPressed: () => changedefaultDisplayType(
-          //       !(user.pref.defaultDisplayType == DisplayType.list_vert)),
-          //   trailing: ToggleButton(
-          //     toggleValue:
-          //         user.pref.defaultDisplayType == DisplayType.list_vert,
-          //     onToggled: (value) => changedefaultDisplayType(value),
-          //   ),
-          // ),
           OptionTile(
             text: S.current.Auto_Add_Start_End_Date,
             iconData: Icons.date_range,
@@ -286,9 +273,8 @@ class _UserPrefSettingsState extends State<UserPrefSettings> {
                 height: 60,
                 child: OptionTile(
                   text: S.current.User_Statistics_Chart_Preferences,
-                  desc: S.current.Restart_to_see_changes,
                   iconData: Icons.color_lens,
-                  multiLine: true,
+                  multiLine: false,
                   trailing: Icon(
                     colorOptions
                         ? Icons.keyboard_arrow_up
@@ -342,9 +328,10 @@ class _UserPrefSettingsState extends State<UserPrefSettings> {
       contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
       leading: SB.w10,
       title: title(
-          myAnimeStatusMap.values.elementAt(i) + "  ${S.current.Chart_color}",
-          opacity: 1,
-          fontSize: 16),
+        myAnimeStatusMap.values.elementAt(i) + "  ${S.current.Chart_color}",
+        opacity: 1,
+        fontSize: 13,
+      ),
       subtitle: color != -1
           ? Padding(
               padding: const EdgeInsets.only(top: 15),
@@ -353,7 +340,10 @@ class _UserPrefSettingsState extends State<UserPrefSettings> {
                 alignment: Alignment.centerLeft,
                 child: PlainButton(
                   padding: EdgeInsets.symmetric(horizontal: 14),
-                  child: Text(S.current.Clear),
+                  child: AutoSizeText(
+                    S.current.Clear,
+                    maxFontSize: 12,
+                  ),
                   onPressed: () {
                     if (mounted)
                       setState(() {
@@ -378,7 +368,11 @@ class _UserPrefSettingsState extends State<UserPrefSettings> {
           child: InkWell(
             child: color == -1
                 ? Center(
-                    child: title(S.current.Select),
+                    child: AutoSizeText(
+                      S.current.Select,
+                      maxFontSize: 9,
+                      minFontSize: 7,
+                    ),
                   )
                 : null,
             onTap: () async {
