@@ -6,7 +6,7 @@ import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
 
-class MainActivity: FlutterActivity() {
+class MainActivity : FlutterActivity() {
 
     private val CHANNEL = "io.github.jica98.dailal_support"
 
@@ -26,15 +26,14 @@ class MainActivity: FlutterActivity() {
     private fun getDataFromNative(): String? {
         return try {
             val app = "io.github.jica98";
-            val appInfo = packageManager.getApplicationInfo(app, 0);
             val packageInfo = packageManager.getPackageInfo(app, 0)
-            """
-                    { 
-                        "appName": "${packageManager.getApplicationLabel(appInfo)}",
-                        "versionName": "${packageInfo.versionName}",
-                        "versionCode": "${getVersionCode(packageInfo)}",
-                    }
-                """.trimIndent()
+            val versionName = packageInfo.versionName
+            val versionCode = getVersionCode(packageInfo)
+            return if (versionCode != null && versionName != null) {
+                "$versionName+$versionCode"
+            } else {
+                null
+            }
         } catch (e: Exception) {
             println(e.message);
             null
