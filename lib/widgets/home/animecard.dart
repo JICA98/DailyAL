@@ -20,7 +20,6 @@ import 'package:dailyanimelist/widgets/user/stats_screen.dart';
 import 'package:dal_commons/commons.dart';
 import 'package:dal_commons/dal_commons.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
 final NumberFormat userCountFormat = NumberFormat.compact();

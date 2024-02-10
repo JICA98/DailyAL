@@ -6,7 +6,6 @@ import 'package:dailyanimelist/widgets/custombutton.dart';
 import 'package:dal_commons/dal_commons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:webviewtube/webviewtube.dart';
 
 class VideoTile {

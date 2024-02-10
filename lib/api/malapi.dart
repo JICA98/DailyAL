@@ -14,8 +14,6 @@ import 'package:dal_commons/dal_commons.dart';
 import 'package:dal_commons/dal_commons.dart' as commons;
 import 'package:dio/dio.dart';
 import 'package:intl/intl.dart';
-import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart'
-    as plus;
 
 class MalApi {
   static const weekdaysOrderMap = {

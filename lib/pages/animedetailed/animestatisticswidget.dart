@@ -1,13 +1,9 @@
-import 'dart:collection';
 import 'dart:math';
 
-import 'package:dailyanimelist/main.dart';
 import 'package:dailyanimelist/widgets/user/stats_screen.dart';
 import 'package:dal_commons/dal_commons.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
-import 'package:shimmer/shimmer.dart';
 import 'package:dailyanimelist/generated/l10n.dart';
 
 class AnimeStatisticsWidget extends StatefulWidget {

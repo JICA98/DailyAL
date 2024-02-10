@@ -7,8 +7,6 @@ import 'package:dailyanimelist/widgets/shimmecolor.dart';
 import 'package:dal_commons/dal_commons.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:shimmer/shimmer.dart';
 
 import '../../constant.dart';
 

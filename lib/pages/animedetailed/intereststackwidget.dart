@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dailyanimelist/api/dalapi.dart';
 import 'package:dailyanimelist/constant.dart';
 import 'package:dailyanimelist/generated/l10n.dart';
-import 'package:dailyanimelist/main.dart';
 import 'package:dailyanimelist/pages/animedetailed/synopsiswidget.dart';
 import 'package:dailyanimelist/screens/contentdetailedscreen.dart';
 import 'package:dailyanimelist/screens/generalsearchscreen.dart';
@@ -21,7 +20,6 @@ import 'package:dailyanimelist/widgets/translator.dart';
 import 'package:dailyanimelist/widgets/user/contentlistwidget.dart';
 import 'package:dal_commons/commons.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
 class InterestStackContentList extends StatelessWidget {

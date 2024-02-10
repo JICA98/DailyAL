@@ -2,16 +2,14 @@ import 'package:dailyal_support/api.dart';
 import 'package:dailyal_support/constant.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:installed_apps/app_info.dart';
-import 'package:installed_apps/installed_apps.dart';
 import 'package:line_icons/line_icons.dart';
 
 String _githubApiLink = 'https://api.github.com/repos/JICA98/DailyAL/releases';
 String _githubHtmlLink = 'https://github.com/JICA98/DailyAL/releases';
 
 Future<String> getCurrentTag() async {
-  AppInfo app = await InstalledApps.getAppInfo('io.github.jica98');
-  return '${app.versionName}+${app.versionCode}';
+  var s = 'io.github.jica98';
+  return '$s.versionName+app.versionCode';
 }
 
 Future<GithubResponse> getLatestRelease() async {

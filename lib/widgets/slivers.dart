@@ -1,6 +1,4 @@
-import 'package:dailyanimelist/main.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class SliverWrapper extends StatelessWidget {
   final Widget child;

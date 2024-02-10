@@ -18,7 +18,6 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:restart_app/restart_app.dart';
@@ -38,7 +37,7 @@ void main() async {
   try {
     // Universal Log Config for DailyAL
     dalLogConfig.debugMode = kDebugMode;
-    await dotenv.load(fileName: 'configFile');
+    await dotenv.load(fileName: 'assets/n8TN5qDG22PAuP50Il');
     Environment.i.malClientId = CredMal.clientId;
     WidgetsFlutterBinding.ensureInitialized();
     ErrorReporting.init();
@@ -142,12 +141,12 @@ class MyApp extends StatelessWidget {
               darkTheme: ThemeData(
                 colorScheme: colorScheme,
                 useMaterial3: true,
-                fontFamily: GoogleFonts.poppins().fontFamily,
+                fontFamily: 'Poppins',
               ),
               theme: ThemeData(
                 colorScheme: colorScheme,
                 useMaterial3: true,
-                fontFamily: GoogleFonts.poppins().fontFamily,
+                fontFamily: 'Poppins',
               ),
               title: 'DailyAL',
               localizationsDelegates: [

@@ -1,11 +1,7 @@
-import 'package:dailyanimelist/constant.dart';
-import 'package:dailyanimelist/main.dart';
 import 'package:dailyanimelist/screens/plainscreen.dart';
 import 'package:dailyanimelist/widgets/customfuture.dart';
 import 'package:dailyanimelist/widgets/shimmecolor.dart';
-import 'package:dailyanimelist/widgets/slivers.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:dal_commons/dal_commons.dart';
 
 class TabScreen<T> extends StatefulWidget {
