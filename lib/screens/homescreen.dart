@@ -1,3 +1,4 @@
+import 'package:dailyanimelist/api/credmal.dart';
 import 'package:dailyanimelist/constant.dart';
 import 'package:dailyanimelist/notifservice.dart';
 import 'package:dailyanimelist/pages/explorepage.dart';
@@ -125,6 +126,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   Future<void> _checkForUpdates() async {
     try {
+      if ('fdroid'.equals(CredMal.buildVariant)) {
+        return;
+      }
       final tag = await getCurrentTag();
       final git = await getLatestRelease();
       final available = isUpdateAvailable(tag, git.tagName ?? '');
