@@ -22,7 +22,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:restart_app/restart_app.dart';
-import 'package:supabase_flutter/supabase_flutter.dart' as supa;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 /// Global UserData
@@ -46,7 +45,6 @@ void main() async {
     await StreamUtils.i.init();
     final androidInfo = await DeviceInfoPlugin().androidInfo;
     androidSDKVersion = androidInfo.version.sdkInt;
-    await _initSupabase();
   } catch (e) {}
 
   Node? node;
@@ -59,13 +57,6 @@ void main() async {
   }
 
   runApp(_buildProvider(node));
-}
-
-Future<void> _initSupabase() async {
-  await supa.Supabase.initialize(
-    url: CredMal.supabaseUrl,
-    anonKey: CredMal.supabaseKey,
-  );
 }
 
 void restartApp() {

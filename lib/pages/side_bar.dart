@@ -36,7 +36,6 @@ import 'package:dal_commons/dal_commons.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
-import 'package:supabase_flutter/supabase_flutter.dart' as supa;
 
 import '../constant.dart';
 import '../main.dart';
@@ -63,33 +62,24 @@ class UserProfService {
     }
   }
 
-  static Future<String?> getProfileBGDownloadUrl(int id) async {
-    String? url = null;
-    final path = getProfileBGPath(id);
+  Future<String?> getProfileBGDownloadUrl(int id) async {
     try {
-      final expiresIn = 3600 * 24 * 30;
-      final cachedUrl = await CacheManager.instance
-          .getValueForServiceAutoExpire(
-              AppSideBar.serviceName, path, expiresIn);
-      if (cachedUrl != null) return cachedUrl;
-      supa.SupabaseClient client = supa.Supabase.instance.client;
-
-      url = await client.storage
-          .from('user-bgs')
-          .createSignedUrl(path, expiresIn);
+      return await DalApi.i.getSignedImageUrl('user-bgs', id.toString());
     } catch (e) {
       logDal(e);
     }
-    await setCacheUrl(path, url);
-    return url;
+    return null;
+  }
+
+  Future<void> saveImage(int id, Uint8List bytes, String extension) async {
+    await DalApi.i.saveImage('user-bgs', id.toString(), bytes, extension);
+  }
+
+  Future<void> removeImage(int id) async {
+    await DalApi.i.removeImage('user-bgs', id.toString());
   }
 
   static String getProfileBGPath(int id) => 'public/$id.image';
-
-  static Future<void> setCacheUrl(String path, String? url) async {
-    await CacheManager.instance
-        .setValueForServiceAutoExpireIn(AppSideBar.serviceName, path, url);
-  }
 
   static UserProfService i = UserProfService._();
   factory UserProfService() => i;
@@ -159,7 +149,7 @@ class _AppSideBarState extends State<AppSideBar> with TickerProviderStateMixin {
     if (id == null) {
       return Future.value(null);
     } else {
-      return UserProfService.getProfileBGDownloadUrl(id);
+      return UserProfService.i.getProfileBGDownloadUrl(id);
     }
   }
 
@@ -450,10 +440,7 @@ class _AppSideBarState extends State<AppSideBar> with TickerProviderStateMixin {
       if (userProf == null) return false;
       final id = userProf.id;
       if (id == null) return false;
-      supa.SupabaseClient client = supa.Supabase.instance.client;
-      await client.storage.from('user-bgs').remove(['public/$id.image']);
-      await UserProfService.setCacheUrl(
-          UserProfService.getProfileBGPath(id), null);
+      await UserProfService.i.removeImage(id);
       return true;
     } catch (e) {
       logDal(e);
@@ -478,9 +465,8 @@ class _AppSideBarState extends State<AppSideBar> with TickerProviderStateMixin {
         showToast(S.current.Invalid_extension);
         return false;
       }
-      supa.SupabaseClient client = supa.Supabase.instance.client;
-      await client.storage.from('user-bgs').upload('public/$id.image', bgFile,
-          fileOptions: supa.FileOptions(contentType: 'image/$extension'));
+      final bytes = await bgFile.readAsBytes();
+      await UserProfService.i.saveImage(id, bytes, extension);
       return true;
     } catch (e) {
       logDal(e);

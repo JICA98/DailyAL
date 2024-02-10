@@ -421,7 +421,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
 
   StateFullFutureWidget<String?> _profileBackground(UserProf prof) {
     return StateFullFutureWidget<String?>(
-      future: () => UserProfService.getProfileBGDownloadUrl(prof.id!),
+      future: () => UserProfService.i.getProfileBGDownloadUrl(prof.id!),
       loadingChild: SB.z,
       done: (snapshot) {
         final url = snapshot.data;
