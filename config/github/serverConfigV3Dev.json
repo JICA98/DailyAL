@@ -10,7 +10,6 @@
         "url": "http://0.0.0.0:8080/"
       }
     ],
-    "storeUrl": "storeUrl",
     "strategy": "load",
     "telegramLink": "https://t.me/dailyalofficial"
   }

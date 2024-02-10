@@ -45,13 +45,11 @@ Widget showUpdateAvailablePopup(
   final hasUpdate = isUpdateAvailable(tag, git.tagName ?? '');
   final changeLog = git.changeLog;
   return AlertDialog(
-    title: Text(hasUpdate
-        ? S.current.Update_available
-        : S.current.No_new_updates),
+    title:
+        Text(hasUpdate ? S.current.Update_available : S.current.No_new_updates),
     content: SingleChildScrollView(
-      child: Text(hasUpdate
-          ? ('${S.current.Whats_new}\n\n${changeLog ?? ''}')
-          : ''),
+      child: Text(
+          hasUpdate ? ('${S.current.Whats_new}\n\n${changeLog ?? ''}') : ''),
     ),
     actions: [
       _closeButton(context),
@@ -234,7 +232,15 @@ class _AboutPageState extends State<AboutPage> {
     );
   }
 
-  void _checkForUpdates(BuildContext context) {
+  void _checkForUpdates(BuildContext context) async {
+    final storeUrl = (await DalApi.i.dalConfigFuture)?.storeUrl;
+    if (storeUrl != null) {
+      launchURLWithConfirmation(
+        storeUrl,
+        context: context,
+      );
+      return;
+    }
     openFutureAndNavigate(
       text: S.current.Checking_for_updates,
       future: getLatestRelease(),
