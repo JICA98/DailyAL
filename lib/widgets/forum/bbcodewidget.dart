@@ -1,12 +1,8 @@
-import 'package:dailyanimelist/generated/l10n.dart';
-import 'package:dailyanimelist/widgets/custombutton.dart';
 import 'package:dal_commons/dal_commons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../../constant.dart';
-import '../../main.dart';
 
 class BbcodeWidget extends StatelessWidget {
   static const tagsToReplace = {

@@ -6,7 +6,6 @@ import 'package:dailyanimelist/pages/settings/userprefsetting.dart';
 import 'package:dailyanimelist/widgets/custombutton.dart';
 import 'package:dailyanimelist/widgets/home/accordion.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 bool get hasNewFeatures {
   return [

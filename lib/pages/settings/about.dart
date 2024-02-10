@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
-String _githubApiLink = 'https://api.github.com/repos/JICA98/DailyAL/releases';
+String githubApiLink = 'https://api.github.com/repos/JICA98/DailyAL/releases';
 String _githubHtmlLink = 'https://github.com/JICA98/DailyAL/releases';
 String _malAgreement = 'https://myanimelist.net/static/apiagreement.html';
 
@@ -21,7 +21,7 @@ Future<String> getCurrentTag() async {
 }
 
 Future<_GithubResponse> getLatestRelease() async {
-  final response = await Dio().get('$_githubApiLink/latest');
+  final response = await Dio().get('$githubApiLink/latest');
   final git = _GithubResponse.fromJson(response.data ?? {});
   if (git.tagName == null) {
     throw Exception('Couldnt find release');
@@ -250,7 +250,7 @@ class _AboutPageState extends State<AboutPage> {
   void _onGetChangeLog(BuildContext context) {
     openFutureAndNavigate(
       text: '${S.current.Loading} ${S.current.ChangeLog}',
-      future: Dio().get('$_githubApiLink/tags/$_tag'),
+      future: Dio().get('$githubApiLink/tags/$_tag'),
       isPopup: true,
       onData: (data) {
         final response = _GithubResponse.fromJson(data.data ?? {});

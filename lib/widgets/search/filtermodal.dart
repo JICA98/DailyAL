@@ -4,12 +4,10 @@ import 'package:dailyanimelist/widgets/selectbottom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:dailyanimelist/generated/l10n.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:dal_commons/dal_commons.dart';
 
 import '../../constant.dart';
-import '../../main.dart';
 import '../custombutton.dart';
 
 enum FilterType { select, date, multiple, equal, single_list }

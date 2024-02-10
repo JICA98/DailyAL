@@ -5,13 +5,17 @@ import 'dart:math';
 import 'package:dailyanimelist/api/credmal.dart';
 import 'package:dailyanimelist/api/malconnect.dart';
 import 'package:dailyanimelist/api/maluser.dart';
+import 'package:dailyanimelist/cache/cachemanager.dart';
 import 'package:dailyanimelist/cache/history_data.dart';
 import 'package:dailyanimelist/constant.dart';
 import 'package:dal_api/handlers/handler_core.dart';
 import 'package:dal_api/services/helpers.dart';
 import 'package:dal_commons/commons.dart';
 import 'package:dal_commons/dal_commons.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:http/http.dart' as http;
+import 'package:http_parser/src/media_type.dart';
 
 class DalApi {
   static DalApi _internal = DalApi._();
@@ -398,10 +402,11 @@ class DalApi {
   }
 
   Future<dynamic> _apiGET(String endpoint) async {
-    final apiURL = (await _dalConfigFuture)?.dalAPIUrl;
-    return MalConnect.getContent('${apiURL ?? CredMal.apiURL}/$endpoint',
+    final apiURL = await _getAPIBaseUrl();
+    return MalConnect.getContent('$apiURL/$endpoint',
         retryOnFail: false,
         withNoHeaders: true,
+        includeNsfw: false,
         headers: {
           'Authorization': 'Bearer ${CredMal.apiSecret}',
         });
@@ -415,24 +420,51 @@ class DalApi {
     );
   }
 
-  List<T> _mapAsList<T>(data, T Function(Map<String, dynamic>) mapper) {
-    if (data is Map) {
-      final list = data['data'];
-      if (list is List) {
-        return list
-            .map((e) {
-              if (e == null) {
-                return null;
-              } else {
-                return mapper(e);
-              }
-            })
-            .where((e) => e != null)
-            .map((e) => e!)
-            .toList();
-      }
+  Future<String> getSignedImageUrl(String type, String id) async {
+    final response = await _apiGET('types/$type/images/$id');
+    return response['signedURL'];
+  }
+
+  Future<void> saveImage(
+      String type, String id, Uint8List data, String extension) async {
+    final apiURL = await _getAPIBaseUrl();
+    http.MultipartRequest request = http.MultipartRequest(
+      'POST',
+      Uri.parse('$apiURL/types/$type/images/$id'),
+    );
+    request.headers.addAll({
+      'Authorization': 'Bearer ${CredMal.apiSecret}',
+    });
+    request.files.add(
+      http.MultipartFile.fromBytes(
+        'image',
+        data,
+        filename: '$id.image',
+        contentType: MediaType('image', extension),
+      ),
+    );
+    final response = await request.send();
+    if (response.statusCode != 200) {
+      throw Exception('Failed to save image');
     }
-    return [];
+  }
+
+  Future<String> _getAPIBaseUrl() async =>
+      ((await _dalConfigFuture)?.dalAPIUrl ?? CredMal.apiURL);
+
+  Future<void> removeImage(String type, String id) async {
+    final baseUrl = await _getAPIBaseUrl();
+    final url = '$baseUrl/types/$type/images/$id';
+    final response = await http.delete(
+      Uri.parse(url),
+      headers: {
+        'Authorization': 'Bearer ${CredMal.apiSecret}',
+      },
+    );
+    if (response.statusCode != 200) {
+      throw Exception('Failed to delete image');
+    }
+    await CacheManager.instance.setValue(url, '');
   }
 }
 
@@ -440,4 +472,24 @@ class UserAbout {
   final String about;
   final bool modern;
   const UserAbout(this.about, this.modern);
+}
+
+List<T> _mapAsList<T>(data, T Function(Map<String, dynamic>) mapper) {
+  if (data is Map) {
+    final list = data['data'];
+    if (list is List) {
+      return list
+          .map((e) {
+            if (e == null) {
+              return null;
+            } else {
+              return mapper(e);
+            }
+          })
+          .where((e) => e != null)
+          .map((e) => e!)
+          .toList();
+    }
+  }
+  return [];
 }

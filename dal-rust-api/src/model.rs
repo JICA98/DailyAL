@@ -66,3 +66,9 @@ pub enum RelationType {
     character,
     other,
 }
+
+pub struct File {
+    pub content: Vec<u8>,
+    pub content_type: String,
+    pub file_name: String,
+}

@@ -1,13 +1,9 @@
 import 'package:dailyanimelist/constant.dart';
-import 'package:dailyanimelist/main.dart';
 import 'package:dailyanimelist/screens/generalsearchscreen.dart';
-import 'package:dailyanimelist/widgets/background.dart';
-import 'package:dailyanimelist/widgets/customappbar.dart';
 import 'package:dailyanimelist/widgets/custombutton.dart';
 import 'package:dailyanimelist/widgets/home/bookmarks_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:dailyanimelist/generated/l10n.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 void _gotoSearch(BuildContext context) {
   gotoPage(context: context, newPage: GeneralSearchScreen(autoFocus: false));

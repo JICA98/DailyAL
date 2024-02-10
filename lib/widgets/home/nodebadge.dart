@@ -2,10 +2,8 @@ import 'package:dailyanimelist/user/hompagepref.dart';
 import 'package:dailyanimelist/widgets/home/animecard.dart';
 import 'package:dal_commons/dal_commons.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../../constant.dart';
-import '../../main.dart';
 
 class AnimeCardBar extends StatelessWidget {
   final NodeStatusValue? nsv;

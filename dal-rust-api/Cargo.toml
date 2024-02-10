@@ -8,7 +8,7 @@ edition = "2021"
 [dependencies]
 argon2 = "0.5.2"
 async-recursion = "1.0.5"
-axum = "0.7.3"
+axum = { version = "0.7.3", features = ["multipart"] }
 axum-extra = "0.9.1"
 chrono = "0.4.31"
 dotenv = "0.15.0"

@@ -5,10 +5,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dailyanimelist/cache/cachemanager.dart';
 import 'package:dailyanimelist/widgets/common/image_preview.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-
 import '../constant.dart';
-import '../main.dart';
 
 class AvatarWidget extends StatelessWidget {
   final double? height, width;

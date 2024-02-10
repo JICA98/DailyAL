@@ -1,17 +1,19 @@
 import 'dart:collection';
 
+import 'package:connectivity/connectivity.dart';
 import 'package:dailyanimelist/api/credmal.dart';
 import 'package:dailyanimelist/api/malconnect.dart';
 import 'package:dailyanimelist/api/maluser.dart';
 import 'package:dailyanimelist/constant.dart';
 import 'package:dailyanimelist/enums.dart';
 import 'package:dailyanimelist/main.dart';
+import 'package:dailyanimelist/pages/settings/about.dart';
 import 'package:dailyanimelist/user/anime_manga_pref.dart';
 import 'package:dailyanimelist/user/user.dart';
 import 'package:dal_commons/dal_commons.dart';
 import 'package:dal_commons/dal_commons.dart' as commons;
+import 'package:dio/dio.dart';
 import 'package:intl/intl.dart';
-import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart' as plus;
 
 class MalApi {
   static const weekdaysOrderMap = {
@@ -417,7 +419,15 @@ class MalApi {
   }
 
   static Future<bool> _checkIfDeviceIsConnected() async {
-    return await plus.InternetConnection().hasInternetAccess;
+    try {
+      final connectivityResult = await (Connectivity().checkConnectivity());
+      if (connectivityResult == ConnectivityResult.mobile ||
+          connectivityResult == ConnectivityResult.wifi) {
+        await Dio().get(githubApiLink);
+        return true;
+      }
+    } catch (e) {}
+    return false;
   }
 }
 

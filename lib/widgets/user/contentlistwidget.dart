@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:collection/collection.dart';
 import 'package:dailyanimelist/api/auth/auth.dart';
 import 'package:dailyanimelist/api/dalapi.dart';
 import 'package:dailyanimelist/api/malapi.dart';
@@ -17,7 +16,6 @@ import 'package:dailyanimelist/screens/contentdetailedscreen.dart';
 import 'package:dailyanimelist/screens/featurescreen.dart';
 import 'package:dailyanimelist/screens/forumposts.dart';
 import 'package:dailyanimelist/screens/generalsearchscreen.dart';
-import 'package:dailyanimelist/screens/plainscreen.dart';
 import 'package:dailyanimelist/user/hompagepref.dart';
 import 'package:dailyanimelist/user/user.dart';
 import 'package:dailyanimelist/widgets/common/image_preview.dart';
@@ -25,14 +23,12 @@ import 'package:dailyanimelist/widgets/custombutton.dart';
 import 'package:dailyanimelist/widgets/customfuture.dart';
 import 'package:dailyanimelist/widgets/featured/tagswidget.dart';
 import 'package:dailyanimelist/widgets/home/animecard.dart';
-import 'package:dailyanimelist/widgets/home/nodebadge.dart';
 import 'package:dailyanimelist/widgets/listsortfilter.dart';
 import 'package:dailyanimelist/widgets/web/c_webview.dart';
 import 'package:dal_commons/commons.dart';
 import 'package:dal_commons/dal_commons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
 import '../../constant.dart';
@@ -956,7 +952,7 @@ class _ContentAllWidgetState extends State<ContentAllWidget>
       ),
       child: Text(
         '${NumberFormat.compact().format(epsDifference)}',
-        style: GoogleFonts.roboto(
+        style: TextStyle(
           fontSize: 10,
           color: Colors.white,
         ),

@@ -5,17 +5,13 @@ import 'package:dailyanimelist/api/dalapi.dart';
 import 'package:dailyanimelist/constant.dart';
 import 'package:dailyanimelist/generated/l10n.dart';
 import 'package:dailyanimelist/main.dart';
-import 'package:dailyanimelist/widgets/custombutton.dart';
-import 'package:dailyanimelist/widgets/customfuture.dart';
 import 'package:dailyanimelist/widgets/fadingeffect.dart';
 import 'package:dailyanimelist/widgets/translator.dart';
 import 'package:dal_commons/commons.dart';
 import 'package:dal_commons/dal_commons.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
-import 'package:shimmer/shimmer.dart';
 import 'package:translator_plus/translator_plus.dart';
 
 // HapticFeedback

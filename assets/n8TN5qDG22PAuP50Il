@@ -1,0 +1,6 @@
+MAL_CLIENT_ID=4a2616916ea55dd75b7ad461bea38b08
+MAL_CLIENT_SECRET=eda146d87caf3408468d0b1b8dd6d84bad3ae5522a4597c495496e743a38bbce
+APP_CONFIG_URL=https://raw.githubusercontent.com/JICA98/DailyAL/psycho/config
+ERROR_REPORT_URL=
+API_URL=https://dal-rust-api.onrender.com
+API_SECRET=9XkJNP7ACL4BCVpXzwAzFZaeqdPpwv0aWpV1b89AxkCCSXq6N035YN8wCV8fX1yijaJzinJBMHhyku92qVPXFiQSayfXYajtZtwktYJMrzSTSva18yGLQf9vvQuTALCc

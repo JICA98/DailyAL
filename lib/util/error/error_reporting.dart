@@ -53,7 +53,7 @@ class ErrorReporting {
   static Future<void> _pushError(Map<String, dynamic> data) async {
     try {
       final url =
-          '${CredMal.appConfigUrl}/errorReporting${kDebugMode ? 'Dev' : ''}.json';
+          '${CredMal.errorReportingUrl}/errorReporting${kDebugMode ? 'Dev' : ''}.json';
       final response = await http.post(Uri.parse(url), body: jsonEncode(data));
       logDal(response);
     } catch (e) {

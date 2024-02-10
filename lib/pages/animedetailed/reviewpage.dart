@@ -14,11 +14,8 @@ import 'package:dailyanimelist/widgets/slivers.dart';
 import 'package:dailyanimelist/widgets/translator.dart';
 import 'package:dal_commons/dal_commons.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
-
-import '../../main.dart';
 
 class Filter {
   String title;

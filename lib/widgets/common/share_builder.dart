@@ -1,13 +1,10 @@
 import 'package:dailyanimelist/constant.dart';
-import 'package:dailyanimelist/main.dart';
 import 'package:dailyanimelist/widgets/custombutton.dart';
 import 'package:dailyanimelist/widgets/home/animecard.dart';
 import 'package:dal_commons/commons.dart';
-import 'package:dal_commons/dal_commons.dart';
 import 'package:flutter/material.dart';
 import 'package:dailyanimelist/generated/l10n.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:share/share.dart';
 
 class ShareOutputProps {
