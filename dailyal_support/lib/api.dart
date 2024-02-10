@@ -19,7 +19,7 @@ class Api {
   }
 
   Future<Config> _getDalConfigFuture() async {
-    const refUrl = '$_configUrl/serverConfigV3${kDebugMode ? 'Dev' : ''}.json';
+    const refUrl = '$_configUrl/github/serverConfigV3${kDebugMode ? 'Dev' : ''}.json';
     return Config.fromJson(
       jsonDecode((await Dio().get(refUrl)).data),
     );

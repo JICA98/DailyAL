@@ -70,6 +70,10 @@ class CredMal {
     return '${environment['APP_CONFIG_URL']}';
   }
 
+  static String get buildVariant {
+    return (environment['BUILD_VARIANT'] as String?) ?? 'github';
+  }
+
   static String get errorReportingUrl {
     return '${environment['ERROR_REPORT_URL']}';
   }
