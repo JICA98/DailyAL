@@ -6,11 +6,11 @@
     "maxLoad": 100,
     "preferredServers": [
       {
-        "load": 10,
+        "load": 1,
         "url": "http://0.0.0.0:8080/"
       },
         {
-        "load": 1,
+        "load": 10,
         "url": "https://dal-api.onrender.com/"
       }
     ],
