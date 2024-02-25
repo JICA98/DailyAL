@@ -2,6 +2,12 @@
 
 Unofficial client for MyAnimeList
 
+[<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
+     alt="Get it on F-Droid"
+     height="70">](https://f-droid.org/packages/io.github.jica98/)
+
+Or download the latest APK from the [Releases Section](https://github.com/JICA98/DailyAL/releases/latest).
+
 ### Getting Started
 
 - To run this project, you need to have [Flutter](https://flutter.dev/docs/get-started/install) installed on your machine.
