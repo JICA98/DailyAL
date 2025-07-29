@@ -687,6 +687,8 @@
     "Auto_Add_Start_End_Date_Desc": "Automatically adds start and end date when status is moved to watching/completed.",
     "Show_Airing_info_AnimeList": "Show airing time on anime list",
     "Show_Airing_info_AnimeList_Desc": "Show airing info of ongoing anime with the next episode count",
+    "Show_dub_status_AnimeList": "Show dub status on anime list",
+    "Show_dub_status_AnimeList_Desc": "Show dub (English) status of an anime in list",
     "Made_With_Flutter": "Made with",
     "Anime_Manga_BG": "Background for Anime/Manga",
     "Anime_Manga_BG_Desc": "Show anime/manga picture as background",

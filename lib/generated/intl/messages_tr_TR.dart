@@ -1093,6 +1093,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Orjinali göster"),
         "Show_Spoiler":
             MessageLookupByLibrary.simpleMessage("Spoiler\'ı Göster"),
+        "Show_dub_status_AnimeList": MessageLookupByLibrary.simpleMessage(
+            "Anime listesinde dublaj durumunu göster"),
+        "Show_dub_status_AnimeList_Desc": MessageLookupByLibrary.simpleMessage(
+            "Bir animenin listedeki dublaj (İngilizce) durumunu göster"),
         "Show_priority_in_anime_manga_list":
             MessageLookupByLibrary.simpleMessage(
                 "Anime/manga listesinde önceliği göster"),

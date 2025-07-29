@@ -4,9 +4,11 @@ import 'dart:ui';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dailyanimelist/api/malapi.dart';
+import 'package:dailyanimelist/cache/dubinfomanager.dart';
 import 'package:dailyanimelist/constant.dart';
 import 'package:dailyanimelist/enums.dart';
 import 'package:dailyanimelist/generated/l10n.dart';
+import 'package:dailyanimelist/icons/dub_icons.dart';
 import 'package:dailyanimelist/main.dart';
 import 'package:dailyanimelist/screens/contentdetailedscreen.dart';
 import 'package:dailyanimelist/screens/generalsearchscreen.dart';
@@ -380,6 +382,7 @@ class AnimeGridCard extends StatelessWidget {
             _episodeWatchProgressBar(myListStatus),
             _memberCountMeanScore(time),
           ],
+          _dubStatusIcon(),
           if (time != null) _timeCard(time),
           if (numRecommendations != null) _recomWidget(context, borderRadius),
           if (addtionalWidget != null && !_coverOnly) addtionalWidget!,
@@ -439,6 +442,44 @@ class AnimeGridCard extends StatelessWidget {
     }
 
     return SB.z;
+  }
+
+  Widget _dubStatusIcon() {
+    if (!user.pref.showDubStatus || node is! AnimeDetailed) return SB.z;
+    
+    final content = node as dynamic;
+    final int? id = content.id;
+    if (id == null) return SB.z;
+
+    IconData? icon;
+    if (DubInfoManager().isDubbed(id)) {
+      icon = DubIcons.dubs;
+    } else if (DubInfoManager().isIncomplete(id)) {
+      icon = DubIcons.dubs_incomplete;
+    } else {
+      return SB.z;
+    }
+
+    return Positioned(
+      top: 7,
+      right: 5,
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.black.withOpacity(0.5),
+          borderRadius: BorderRadius.circular(borderRadius),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(8, 4, 9, 4),
+          child: Center(
+            child: Icon(
+              icon,
+              size: 14,
+              color: Colors.white,
+            ),
+          ),
+        ),
+      ),
+    );
   }
 
   Widget _episodeWatchProgressBar(MyListStatus? myListStatus) {

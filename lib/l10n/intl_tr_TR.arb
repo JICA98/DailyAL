@@ -686,6 +686,8 @@
     "Auto_Add_Start_End_Date_Desc": "Durum izleniyor/tamamland\u0131 durumuna ge\u00e7ti\u011finde otomatik olarak ba\u015flang\u0131\u00e7 \u200b\u200bve biti\u015f tarihini ekler.",
     "Show_Airing_info_AnimeList": "Anime listesinde yay\u0131n saatini g\u00f6ster",
     "Show_Airing_info_AnimeList_Desc": "Bir sonraki b\u00f6l\u00fcm say\u0131s\u0131yla birlikte devam eden animenin yay\u0131n bilgilerini g\u00f6ster",
+    "Show_dub_status_AnimeList": "Anime listesinde dublaj durumunu g\u00F6ster",
+    "Show_dub_status_AnimeList_Desc": "Bir animenin listedeki dublaj (\u0130ngilizce) durumunu g\u00F6ster",
     "Made_With_Flutter": "\u0130le yap\u0131lan",
     "Anime_Manga_BG": "Anime/Manga i\u00e7in Arka Plan",
     "Anime_Manga_BG_Desc": "Anime/manga resmini arka plan olarak g\u00f6ster",

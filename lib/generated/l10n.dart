@@ -6920,6 +6920,26 @@ class S {
     );
   }
 
+  /// `Show dub status on anime list`
+  String get Show_dub_status_AnimeList {
+    return Intl.message(
+      'Show dub status on anime list',
+      name: 'Show_dub_status_AnimeList',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Show dub (English) status of an anime in list`
+  String get Show_dub_status_AnimeList_Desc {
+    return Intl.message(
+      'Show dub (English) status of an anime in list',
+      name: 'Show_dub_status_AnimeList_Desc',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Made with`
   String get Made_With_Flutter {
     return Intl.message(

@@ -686,6 +686,8 @@
     "Auto_Add_Start_End_Date_Desc": "F\u00fcgt automatisch Start- und Enddatum hinzu, wenn der Status auf \"Beobachtet/abgeschlossen\" verschoben wird.",
     "Show_Airing_info_AnimeList": "Sendezeit auf der Anime-Liste anzeigen",
     "Show_Airing_info_AnimeList_Desc": "Ausstrahlungsinformationen des laufenden Animes mit der n\u00e4chsten Episodenanzahl anzeigen",
+    "Show_dub_status_AnimeList": "Synchronstatus in der Anime-Liste anzeigen",
+    "Show_dub_status_AnimeList_Desc": "Synchronisationsstatus (Englisch) eines Animes in der Liste anzeigen",
     "Made_With_Flutter": "Gemacht mit",
     "Cannot_launch": "Kann nicht starten",
     "Anime_Manga_BG": "Hintergrund f\u00fcr Anime/Manga",

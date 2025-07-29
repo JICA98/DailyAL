@@ -1,8 +1,10 @@
 import 'dart:io';
 
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:dailyanimelist/cache/dubinfomanager.dart';
 import 'package:dailyanimelist/constant.dart';
 import 'package:dailyanimelist/enums.dart';
+import 'package:dailyanimelist/icons/dub_icons.dart';
 import 'package:dailyanimelist/pages/settings/optiontile.dart';
 import 'package:dailyanimelist/screens/contentdetailedscreen.dart';
 import 'package:dailyanimelist/screens/generalsearchscreen.dart';
@@ -250,6 +252,16 @@ class _UserPrefSettingsState extends State<UserPrefSettings> {
               onToggled: (value) => changeShowAiringInfo(value),
             ),
           ),
+          OptionTile(
+            text: S.current.Show_dub_status_AnimeList,
+            iconData: DubIcons.dubs,
+            desc: S.current.Show_dub_status_AnimeList_Desc,
+            onPressed: () => changeShowDubStatus(!user.pref.showDubStatus),
+            trailing: ToggleButton(
+              toggleValue: user.pref.showDubStatus,
+              onToggled: (value) => changeShowDubStatus(value),
+            ),
+          ),
           if (user.pref.userchart != null)
             Accordion(
               isOpen: colorOptions,
@@ -450,6 +462,13 @@ class _UserPrefSettingsState extends State<UserPrefSettings> {
   changeShowAiringInfo(bool value) {
     user.pref.showAiringInfo = value;
     user.setIntance();
+    setState(() {});
+  }
+
+  changeShowDubStatus(bool value) {
+    user.pref.showDubStatus = value;
+    user.setIntance();
+    if (value) DubInfoManager().ensureLoaded();
     setState(() {});
   }
 

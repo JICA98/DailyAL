@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dailyanimelist/api/credmal.dart';
+import 'package:dailyanimelist/cache/dubinfomanager.dart';
 import 'package:dailyanimelist/constant.dart';
 import 'package:dailyanimelist/generated/l10n.dart';
 import 'package:dailyanimelist/notifservice.dart';
@@ -120,7 +121,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StateFullFutureWidget<User>(
-        future: () => User.getInstance(),
+        future: () async {
+          final user = await User.getInstance();
+          if (user.pref.showDubStatus) {
+            await DubInfoManager().ensureLoaded();
+          }
+          return user;
+        },
         loadingChild: loadingStartup,
         done: (snap) {
           user = snap.data!;

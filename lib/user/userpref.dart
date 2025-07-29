@@ -20,6 +20,7 @@ class UserPreferences {
   bool autoTranslateSynopsis;
   bool autoAddStartEndDate;
   bool showAiringInfo;
+  bool showDubStatus;
   bool showAnimeMangaCard;
   NotifPref notifPref;
   List<HomePageApiPref> hpApiPrefList;
@@ -55,6 +56,7 @@ class UserPreferences {
     required this.userchart,
     required this.userLanguage,
     required this.showAiringInfo,
+    required this.showDubStatus,
     required this.isRtl,
     required this.brightness,
     required this.showAnimeMangaBg,
@@ -88,7 +90,8 @@ class UserPreferences {
         _keepPagesInMemory = false,
         _showOnlyLastQuote = true,
         _autoAddStartEndDate = true,
-        _showAiringInfo = false;
+        _showAiringInfo = false,
+        _showDubStatus = false;
     Brightness _brightness = Brightness.dark;
     bool _showPriority = false,
         _autoTranslateSynopsis = false,
@@ -169,6 +172,9 @@ class UserPreferences {
       if (json.containsKey("showAiringInfo_v2")) {
         _showAiringInfo = json["showAiringInfo_v2"] ?? false;
       }
+      if (json.containsKey("showDubStatus")) {
+        _showDubStatus = json["showDubStatus"] ?? false;
+      }
       if (json.containsKey("showAnimeMangaBg")) {
         showAnimeMangaBg = json['showAnimeMangaBg'] ?? showAnimeMangaBg;
       }
@@ -203,6 +209,7 @@ class UserPreferences {
             brightness: _brightness,
             notifPref: _notifPref,
             showAiringInfo: _showAiringInfo,
+            showDubStatus: _showDubStatus,
             showAnimeMangaBg: showAnimeMangaBg,
             userPageAnimeSortType:
                 json['userPageAnimeSortType'] ?? 'list_updated_at',
@@ -247,6 +254,7 @@ class UserPreferences {
             autoTranslateSynopsis: _autoTranslateSynopsis,
             showBg: _showBg,
             showAiringInfo: _showAiringInfo,
+            showDubStatus: _showDubStatus,
             defaultDisplayType: DisplayType.list_vert,
             showAnimeMangaBg: showAnimeMangaBg,
             userPageAnimeSortType: 'list_updated_at',
@@ -285,6 +293,7 @@ class UserPreferences {
       "showOnlyLastQuote": showOnlyLastQuote,
       "bgPath": bgPath,
       "showAiringInfo_v2": showAiringInfo,
+      "showDubStatus": showDubStatus,
       "autoAddStartEndDate": autoAddStartEndDate,
       "defaultDisplayType": defaultDisplayType.index,
       'showAnimeMangaBg': showAnimeMangaBg,

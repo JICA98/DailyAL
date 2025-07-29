@@ -1100,6 +1100,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Menunjukkan yang asli"),
         "Show_Spoiler":
             MessageLookupByLibrary.simpleMessage("Tampilkan Spoiler."),
+        "Show_dub_status_AnimeList": MessageLookupByLibrary.simpleMessage(
+            "Tampilkan status dub pada daftar anime"),
+        "Show_dub_status_AnimeList_Desc": MessageLookupByLibrary.simpleMessage(
+            "Tampilkan status dub (bahasa Inggris) anime dalam daftar"),
         "Show_priority_in_anime_manga_list":
             MessageLookupByLibrary.simpleMessage(
                 "Tampilkan prioritas dalam daftar anime / manga"),

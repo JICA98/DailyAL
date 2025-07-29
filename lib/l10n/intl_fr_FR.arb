@@ -685,6 +685,8 @@
     "Auto_Add_Start_End_Date_Desc": "Ajoute automatiquement la date de d\u00e9but et de fin lorsque le statut est d\u00e9plac\u00e9 vers visionnage/termin\u00e9.",
     "Show_Airing_info_AnimeList": "Afficher le temps de diffusion sur la liste des anime",
     "Show_Airing_info_AnimeList_Desc": "Afficher les informations de diffusion de l'anime en cours avec le prochain nombre d'\u00e9pisodes",
+    "Show_dub_status_AnimeList": "Afficher le statut du doublage sur la liste des animes",
+    "Show_dub_status_AnimeList_Desc": "Afficher le statut de doublage (anglais) d'un anime dans la liste",
     "Made_With_Flutter": "Fabriqu\u00e9 avec",
     "Cannot_launch": "Impossible de lancer",
     "Anime_Manga_BG": "Arri\u00e8re-plan pour Anime/Manga",

@@ -1134,6 +1134,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "Show_Original":
             MessageLookupByLibrary.simpleMessage("Montrer l\'original"),
         "Show_Spoiler": MessageLookupByLibrary.simpleMessage("Show spoiler"),
+        "Show_dub_status_AnimeList": MessageLookupByLibrary.simpleMessage(
+            "Afficher le statut du doublage sur la liste des animes"),
+        "Show_dub_status_AnimeList_Desc": MessageLookupByLibrary.simpleMessage(
+            "Afficher le statut de doublage (anglais) d\'un anime dans la liste"),
         "Show_priority_in_anime_manga_list":
             MessageLookupByLibrary.simpleMessage(
                 "Afficher la priorité dans la liste anime / manga"),

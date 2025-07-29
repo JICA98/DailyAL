@@ -973,6 +973,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "Show_Menu": MessageLookupByLibrary.simpleMessage("메뉴 보기"),
         "Show_Original": MessageLookupByLibrary.simpleMessage("원본보기"),
         "Show_Spoiler": MessageLookupByLibrary.simpleMessage("쇼 스포일러"),
+        "Show_dub_status_AnimeList":
+            MessageLookupByLibrary.simpleMessage("애니메이션 목록에 더빙 상태 표시"),
+        "Show_dub_status_AnimeList_Desc": MessageLookupByLibrary.simpleMessage(
+            "목록에서 애니메이션의 더빙(영어) 상태를 표시합니다"),
         "Show_priority_in_anime_manga_list":
             MessageLookupByLibrary.simpleMessage(
                 "Anime / Manga 목록에서 우선 순위를 표시합니다"),

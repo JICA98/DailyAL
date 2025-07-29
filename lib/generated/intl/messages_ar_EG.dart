@@ -1076,6 +1076,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "Show_Original":
             MessageLookupByLibrary.simpleMessage("إظهار النسخة الأصلية"),
         "Show_Spoiler": MessageLookupByLibrary.simpleMessage("عرض المفسد"),
+        "Show_dub_status_AnimeList": MessageLookupByLibrary.simpleMessage(
+            "إظهار حالة الدبلجة في قائمة الأنمي"),
+        "Show_dub_status_AnimeList_Desc": MessageLookupByLibrary.simpleMessage(
+            "إظهار حالة الدبلجة (الإنجليزية) لأنمي في القائمة"),
         "Show_priority_in_anime_manga_list":
             MessageLookupByLibrary.simpleMessage(
                 "إظهار الأولوية في قائمة أنيمي / مانغا"),

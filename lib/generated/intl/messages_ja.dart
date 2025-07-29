@@ -970,6 +970,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "Show_Menu": MessageLookupByLibrary.simpleMessage("メニューを表示"),
         "Show_Original": MessageLookupByLibrary.simpleMessage("オリジナルを見せる"),
         "Show_Spoiler": MessageLookupByLibrary.simpleMessage("スポイラーを見せる"),
+        "Show_dub_status_AnimeList":
+            MessageLookupByLibrary.simpleMessage("アニメリストに吹き替えステータスを表示する"),
+        "Show_dub_status_AnimeList_Desc":
+            MessageLookupByLibrary.simpleMessage("アニメの吹き替え（英語）ステータスをリストに表示する"),
         "Show_priority_in_anime_manga_list":
             MessageLookupByLibrary.simpleMessage("アニメ/マンガリストの優先順位を表示します"),
         "Show_priority_in_anime_manga_list_desc":

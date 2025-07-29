@@ -1111,6 +1111,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Показать оригинал"),
         "Show_Spoiler":
             MessageLookupByLibrary.simpleMessage("Показать спойлер"),
+        "Show_dub_status_AnimeList": MessageLookupByLibrary.simpleMessage(
+            "Показывать статус дубляжа в списке аниме"),
+        "Show_dub_status_AnimeList_Desc": MessageLookupByLibrary.simpleMessage(
+            "Показывать статус дубляжа (английский) аниме в списке"),
         "Show_priority_in_anime_manga_list":
             MessageLookupByLibrary.simpleMessage(
                 "Показывать приоритет в списке аниме/манги"),
