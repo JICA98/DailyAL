@@ -249,7 +249,7 @@ Widget _baseBaseNode(
     myListStatus: listStatus(node, category),
     category: category,
     aspectRatio: 2.35,
-    imageAspectRatio: 0.5,
+    imageAspectRatio: 0.55,
     showBackgroundImage: false,
     displayType: displayType,
     index: index,
