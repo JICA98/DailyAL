@@ -952,7 +952,8 @@ class _ContentAllWidgetState extends State<ContentAllWidget>
     var content2 = widget.dynContent?.content;
     if (_anime() &&
         content2 is AnimeDetailed &&
-        myListStatus?.numEpisodesWatched != null) {
+        myListStatus?.numEpisodesWatched != null &&
+        !user.pref.showDubStatus) {
       final alreadyAired = "finished_airing".equalsIgnoreCase(content2.status);
       var episodesWatched = myListStatus?.numEpisodesWatched as int;
       if (alreadyAired && content2.numEpisodes != null) {
