@@ -446,6 +446,7 @@ class AnimeGridCard extends StatelessWidget {
 
   Widget _dubStatusIcon() {
     if (!user.pref.showDubStatus || node is! AnimeDetailed) return SB.z;
+    if (!category.equals("anime")) return SB.z;
     
     final content = node as dynamic;
     final int? id = content.id;
