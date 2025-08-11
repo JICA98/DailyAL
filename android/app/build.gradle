@@ -30,7 +30,7 @@ if (keystorePropertiesFile.exists()) {
 
 android {
     namespace "com.teen.dailyanimelist"
-    compileSdk 34
+    compileSdk 35
     ndkVersion = "26.1.10909125"
 
     signingConfigs {
@@ -60,7 +60,7 @@ android {
     defaultConfig {
         applicationId "io.github.jica98"
         minSdkVersion 21
-        targetSdkVersion 34
+        targetSdkVersion 35
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         manifestPlaceholders = [

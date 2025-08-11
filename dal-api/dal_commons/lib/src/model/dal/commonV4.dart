@@ -139,8 +139,9 @@ class JikanV4Node {
   String ?url;
   Images? images;
   String ?title;
+  String ?name;
 
-  JikanV4Node({this.malId, this.url, this.images, this.title});
+  JikanV4Node({this.malId, this.url, this.images, this.title, this.name});
 
   JikanV4Node.fromJson(Map<String, dynamic>? json) {
     if (json == null) return;
@@ -149,6 +150,7 @@ class JikanV4Node {
     images =
         json['images'] != null ? Images.fromJson(json['images']) : null;
     title = json['title'];
+    name = json['name'];
   }
 
   Map<String, dynamic> toJson() {
@@ -157,6 +159,7 @@ class JikanV4Node {
     data['url'] = url;
     data['images'] = images?.toJson();
     data['title'] = title;
+    data['name'] = name;
     return data;
   }
 }

@@ -40,11 +40,11 @@ class AnimeGridCard extends StatelessWidget {
   final double smallHeight;
   final double smallWidth;
   final double? aspectRatio;
-  final int? numRecommendations;
   final bool updateCache;
   final double borderRadius;
   final bool showTime;
   final bool showMemberCount;
+  final bool showRecommendations;
   final bool showCardBar;
   final VoidCallback? onEdit;
   final NodeStatusValue? parentNsv;
@@ -62,7 +62,6 @@ class AnimeGridCard extends StatelessWidget {
     required this.node,
     this.category = "anime",
     this.onTap,
-    this.numRecommendations,
     this.showText = true,
     this.showEdit = false,
     this.updateCache = false,
@@ -76,6 +75,7 @@ class AnimeGridCard extends StatelessWidget {
     this.smallHeight = 30,
     this.smallWidth = 30,
     this.showMemberCount = true,
+    this.showRecommendations = false,
     this.onEdit,
     this.parentNsv,
     this.horizPadding = 5.0,
@@ -380,12 +380,12 @@ class AnimeGridCard extends StatelessWidget {
             _blackBGforText(borderRadius),
             _editAndText(context, nodeTitle, borderRadius, myListStatus),
             _episodeWatchProgressBar(myListStatus),
-            _memberCountMeanScore(time),
+            showRecommendations ? _recommendationBadge() : _memberCountMeanScore(time),
           ],
           _dubStatusIcon(),
           if (time != null) _timeCard(time),
-          if (numRecommendations != null) _recomWidget(context, borderRadius),
           if (addtionalWidget != null && !_coverOnly) addtionalWidget!,
+          _favoriteCountWidget(),
         ],
       ),
     );
@@ -484,6 +484,38 @@ class AnimeGridCard extends StatelessWidget {
     );
   }
 
+  Widget _recommendationBadge() {
+    if (showRecommendations && (node is AnimeDetailed || node is MangaDetailed)) {
+      final content = node as dynamic;
+      final int? recommendations = content.numRecommendations;
+
+      return Positioned(
+        top: 7,
+        left: 5,
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.black.withOpacity(0.5),
+            borderRadius: BorderRadius.circular(borderRadius),
+          ),
+          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(Icons.people, size: 14, color: Colors.white),
+              const SizedBox(width: 4),
+              Text(
+                userCountFormat.format(recommendations),
+                style: const TextStyle(color: Colors.white, fontSize: 10),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+
+    return SB.z;
+  }
+
   Widget _episodeWatchProgressBar(MyListStatus? myListStatus) {
     double? watchProgress;
     double? releaseProgress;
@@ -533,26 +565,36 @@ class AnimeGridCard extends StatelessWidget {
     );
   }
 
-  Transform _recomWidget(BuildContext context, double borderRadius) {
-    return Transform.translate(
-      offset: Offset(-3, -3),
+  Widget _favoriteCountWidget() {
+    if (node is AnimeDetailed || node is MangaDetailed) return SB.z;
+    final dynamic detailed = node;
+    final int? favorites = detailed.favorites;
+    if (favorites == null ) return SB.z;
+
+    return Positioned(
+      bottom: 5,
+      left: 5,
       child: Container(
-          width: smallWidth,
-          height: smallHeight,
-          decoration: BoxDecoration(
-              color: Theme.of(context).cardColor,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(borderRadius),
-                bottomRight: Radius.circular(borderRadius),
-              )),
-          child: Center(
-            child: Text(
-              numRecommendations.toString(),
-              overflow: TextOverflow.ellipsis,
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 14),
+        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
+        decoration: BoxDecoration(
+          color: Colors.black.withOpacity(0.6),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Row(
+          children: [
+            Icon(
+              Icons.favorite,
+              color: Colors.redAccent,
+              size: 12,
             ),
-          )),
+            SizedBox(width: 4),
+            Text(
+              userCountFormat.format(favorites),
+              style: TextStyle(color: Colors.white, fontSize: 10),
+            ),
+          ],
+        ),
+      ),
     );
   }
 

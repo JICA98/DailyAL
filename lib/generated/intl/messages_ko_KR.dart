@@ -825,6 +825,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "Rate_Review": MessageLookupByLibrary.simpleMessage("요금 및 검토"),
         "Rate_Review_desc": MessageLookupByLibrary.simpleMessage(
             "이것은 우리가 앱을 더 잘 만들 수 있도록 도와줍니다."),
+        "Rate_limit_reached":
+            MessageLookupByLibrary.simpleMessage("API 속도 제한에 도달했습니다"),
         "Rating": MessageLookupByLibrary.simpleMessage("평가"),
         "Read": MessageLookupByLibrary.simpleMessage("읽다"),
         "Reading": MessageLookupByLibrary.simpleMessage("독서"),
@@ -1012,6 +1014,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Sort_and_Filter": MessageLookupByLibrary.simpleMessage("정렬 및 필터"),
         "Sort_the_list_based_on":
             MessageLookupByLibrary.simpleMessage("목록을 기반으로 목록을 정렬합니다"),
+        "Sorting_finished": MessageLookupByLibrary.simpleMessage("정렬 완료"),
         "Sound": MessageLookupByLibrary.simpleMessage("소리"),
         "Source": MessageLookupByLibrary.simpleMessage("원천"),
         "Space": MessageLookupByLibrary.simpleMessage("우주"),

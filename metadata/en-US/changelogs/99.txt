@@ -1,0 +1,6 @@
+- Show recommendation count in anime/manga page (joelis57)
+- Add option to select different fonts
+- Show roles of your favorite VA (joelis57)
+- Sort VA roles by recent/most favorite (joelis57)
+- Fix comments keyboard obstruction (joelis57)
+- Add favorites next to characters in the anime all characters page (joelis57)

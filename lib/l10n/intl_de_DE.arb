@@ -951,6 +951,8 @@
     "MAL_API_Licence": "MAL-Vereinbarung",
     "Whats_new": "Was ist neu",
     "MAL_API_Licence_Desc": "MyAnimeList API-Lizenz- und Entwicklervereinbarung",
+    "Rate_limit_reached": "API-Ratenlimit erreicht",
+    "Sorting_finished": "Sortierung abgeschlossen",
     "Genre_Include_Exclude_desc_v2": "W\u00e4hlen Sie ein Genre aus, das Sie einschlie\u00dfen m\u00f6chten, und tippen Sie dann erneut, um es auszuschlie\u00dfen.",
     "Search": "Suchen",
     "NextShow": "N\u00e4chste Show",

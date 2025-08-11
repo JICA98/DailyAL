@@ -951,6 +951,8 @@
     "MAL_API_Licence": "Acordo RUIM",
     "Whats_new": "O que h\u00e1 de novo",
     "MAL_API_Licence_Desc": "Licen\u00e7a da API MyAnimeList e contrato de desenvolvedor",
+    "Rate_limit_reached": "Limite de taxa de API atingido",
+    "Sorting_finished": "Classifica\u00E7\u00E3o conclu\u00EDda",
     "Genre_Include_Exclude_desc_v2": "Selecione um g\u00eanero para incluir e toque novamente para excluir.",
     "Search": "Procurar",
     "NextShow": "Pr\u00f3ximo programa",

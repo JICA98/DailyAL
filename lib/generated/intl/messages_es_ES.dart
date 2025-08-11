@@ -964,6 +964,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Revisión de tasas"),
         "Rate_Review_desc": MessageLookupByLibrary.simpleMessage(
             "Esto nos ayudará a mejorar la aplicación."),
+        "Rate_limit_reached": MessageLookupByLibrary.simpleMessage(
+            "Se alcanzó el límite de velocidad de la API"),
         "Rating": MessageLookupByLibrary.simpleMessage("Clasificación"),
         "Read": MessageLookupByLibrary.simpleMessage("Leer"),
         "Reading": MessageLookupByLibrary.simpleMessage("Leer"),
@@ -1187,6 +1189,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Filtro de clasificación"),
         "Sort_the_list_based_on":
             MessageLookupByLibrary.simpleMessage("Ordenar la lista basada en"),
+        "Sorting_finished":
+            MessageLookupByLibrary.simpleMessage("Clasificación terminada"),
         "Sound": MessageLookupByLibrary.simpleMessage("Sonido"),
         "Source": MessageLookupByLibrary.simpleMessage("Fuente"),
         "Space": MessageLookupByLibrary.simpleMessage("Espacio"),

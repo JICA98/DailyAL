@@ -293,6 +293,14 @@ class _AllCharsWidgetState extends State<AllCharsWidget> {
     if (dd?.data == null) return showNoContent();
     final chars = dd?.data?.characters ?? [];
     final staffs = dd?.data?.staffs ?? [];
+
+    // Sort by favorites
+    chars.sort((a, b) {
+      final favA = a.charInfo?.favorites ?? 0;
+      final favB = b.charInfo?.favorites ?? 0;
+      return favB.compareTo(favA);
+    });
+
     return CustomScrollView(
       slivers: [
         if (staffs.isNotEmpty)
@@ -330,6 +338,7 @@ class _AllCharsWidgetState extends State<AllCharsWidget> {
   }
 
   Widget _buildCharTile(Character char) {
+    final favorites = char.charInfo?.favorites;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       child: Row(
@@ -347,9 +356,29 @@ class _AllCharsWidgetState extends State<AllCharsWidget> {
                 ),
                 SB.w10,
                 Expanded(
-                  child: _buildNameAndRole(char.charInfo?.name ?? '',
-                      _roleMap[char.charInfo?.role ?? 's'] ?? 'Unknown'),
-                )
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _buildNameAndRole(
+                        char.charInfo?.name ?? '',
+                        _roleMap[char.charInfo?.role ?? 's'] ?? 'Unknown',
+                      ),
+                      SB.h5,
+                      if (favorites != null)
+                        Row(
+                          children: [
+                            const Icon(Icons.favorite,
+                                size: 14, color: Colors.redAccent),
+                            const SizedBox(width: 5),
+                            Text(
+                              favorites.toString(),
+                              style: const TextStyle(fontSize: 12),
+                            ),
+                          ],
+                        ),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),

@@ -2300,10 +2300,10 @@ class S {
     );
   }
 
-  /// `Search for your favourite anime, manga and more..`
+  /// `Search for your favorite anime, manga and more..`
   String get Search_Page_Intro {
     return Intl.message(
-      'Search for your favourite anime, manga and more..',
+      'Search for your favorite anime, manga and more..',
       name: 'Search_Page_Intro',
       desc: '',
       args: [],
@@ -9525,6 +9525,26 @@ class S {
     return Intl.message(
       'MyAnimeList API Licence and Developer Agreement',
       name: 'MAL_API_Licence_Desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Rate limit reached`
+  String get Rate_limit_reached {
+    return Intl.message(
+      'Rate limit reached',
+      name: 'Rate_limit_reached',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sorting finished`
+  String get Sorting_finished {
+    return Intl.message(
+      'Sorting finished',
+      name: 'Sorting_finished',
       desc: '',
       args: [],
     );

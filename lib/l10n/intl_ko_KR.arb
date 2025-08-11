@@ -950,6 +950,8 @@
     "MAL_API_Licence": "MAL \uacc4\uc57d",
     "Whats_new": "\uc0c8\ub85c\uc6b4 \uc18c\uc2dd",
     "MAL_API_Licence_Desc": "MyAnimeList API \ub77c\uc774\uc13c\uc2a4 \ubc0f \uac1c\ubc1c\uc790 \uacc4\uc57d",
+    "Rate_limit_reached": "API \uC18D\uB3C4 \uC81C\uD55C\uC5D0 \uB3C4\uB2EC\uD588\uC2B5\uB2C8\uB2E4",
+    "Sorting_finished": "\uC815\uB82C \uC644\uB8CC",
     "Genre_Include_Exclude_desc_v2": "\ud3ec\ud568\ud560 \uc7a5\ub974\ub97c \uc120\ud0dd\ud55c \ud6c4 \ub2e4\uc2dc \ud0ed\ud558\uc5ec \uc81c\uc678\ud558\uc138\uc694.",
     "Search": "\ucc3e\ub2e4",
     "NextShow": "\ub2e4\uc74c \uc1fc",

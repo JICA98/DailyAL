@@ -24,6 +24,7 @@ class RecommendedAnimeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return horizontalList(
+      showRecommendations: true,
       category: category,
       padding: EdgeInsets.symmetric(horizontal: horizPadding + 5.0),
       items: recommAnime
@@ -196,12 +197,17 @@ class SelectorNodesWidget extends StatefulWidget {
 
 class _SelectorNodesWidgetState extends State<SelectorNodesWidget> {
   final BorderRadius borderRadius = BorderRadius.circular(12);
+  final _tabScrollController = ScrollController();
+  static const double tabWidth = 240.0;
 
   @override
   void initState() {
     super.initState();
-    widget.controller?.addListener(() {
-      if (mounted) setState(() {});
+    widget.controller.addListener(() {
+      if (mounted) {
+        setState(() {});
+        _centerSelectedTab(widget.controller.index);
+      }
     });
   }
 
@@ -211,66 +217,101 @@ class _SelectorNodesWidgetState extends State<SelectorNodesWidget> {
   }
 
   SliverWrapper get _buildSelectorNodes {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final double sidePadding = (screenWidth - tabWidth) / 2;
+
     return SliverWrapper(
-      TabBar(
-        isScrollable: true,
-        controller: widget.controller,
-        indicatorColor: Colors.transparent,
-        padding: EdgeInsets.symmetric(horizontal: 35),
-        dividerColor: Colors.transparent,
-        tabs: List.generate(
+      SizedBox(
+        height: 80,
+        child: TabBar(
+          isScrollable: true,
+          controller: widget.controller,
+          indicatorColor: Colors.transparent,
+          dividerColor: Colors.transparent,
+          physics: const BouncingScrollPhysics(),
+          labelPadding: EdgeInsets.zero,
+          tabAlignment: TabAlignment.start,
+          tabs: List.generate(
             widget.data.length,
             (i) => Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: _buildSelectorNode(widget.data[i].relatedNode!, i),
-                )).toList(),
+              padding: EdgeInsets.only(
+                left: i == 0 ? sidePadding : 8,
+                right: i == widget.data.length - 1 ? sidePadding : 8,
+              ),
+              child: _buildSelectorNode(widget.data[i].relatedNode!, i),
+            ),
+          ),
+        ),
       ),
     );
   }
 
   Widget _buildSelectorNode(Node node, int index) {
     return SizedBox(
-      width: 240,
-      child: Card(
-        child: InkWell(
+      width: tabWidth,
+      child: RepaintBoundary(
+        child: GestureDetector(
           onTap: () {
-            if (mounted)
+            if (mounted) {
               setState(() {
                 widget.controller.index = index;
               });
+            }
           },
-          borderRadius: borderRadius,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                AvatarWidget(
-                  url:
-                      node.mainPicture?.large ?? node.mainPicture?.medium ?? '',
-                  height: 50,
-                  width: 50,
-                  onTap: () => gotoPage(
-                      context: context,
-                      newPage: ContentDetailedScreen(
-                        category: widget.category,
-                        id: node.id,
-                        node: node,
-                      )),
-                ),
-                SB.w10,
-                Expanded(
-                  child: title(
-                    node.title ?? '',
-                    textOverflow: TextOverflow.fade,
+          child: Card(
+            elevation: 0,
+            shape: RoundedRectangleBorder(
+              borderRadius: borderRadius,
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  RepaintBoundary(
+                    child: AvatarWidget(
+                      url: node.mainPicture?.large ?? node.mainPicture?.medium ?? '',
+                      height: 50,
+                      width: 50,
+                      onTap: () => gotoPage(
+                        context: context,
+                        newPage: ContentDetailedScreen(
+                          category: widget.category,
+                          id: node.id,
+                          node: node,
+                        )
+                      ),
+                    ),
                   ),
-                )
-              ],
+                  SB.w10,
+                  Expanded(
+                    child: title(
+                      node.title ?? '',
+                      textOverflow: TextOverflow.fade,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
       ),
     );
+  }
+
+  void _centerSelectedTab(int index) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final offset = (index * tabWidth) - (screenWidth - tabWidth) / 2;
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!_tabScrollController.hasClients) return;
+      final maxScroll = _tabScrollController.position.maxScrollExtent;
+      final safeOffset = offset.clamp(0.0, maxScroll);
+      _tabScrollController.animateTo(
+        safeOffset,
+        duration: Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
+    });
   }
 }

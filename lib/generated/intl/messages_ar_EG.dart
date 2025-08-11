@@ -917,6 +917,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "Rate_Review": MessageLookupByLibrary.simpleMessage("مراجعة معدل"),
         "Rate_Review_desc": MessageLookupByLibrary.simpleMessage(
             "هذا سوف يساعدنا في جعل التطبيق أفضل."),
+        "Rate_limit_reached":
+            MessageLookupByLibrary.simpleMessage("تم الوصول إلى حد معدل API"),
         "Rating": MessageLookupByLibrary.simpleMessage("تقييم"),
         "Read": MessageLookupByLibrary.simpleMessage("يقرأ"),
         "Reading": MessageLookupByLibrary.simpleMessage("قراءة"),
@@ -1121,6 +1123,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "Sort_and_Filter": MessageLookupByLibrary.simpleMessage("فرز وتصفية"),
         "Sort_the_list_based_on":
             MessageLookupByLibrary.simpleMessage("فرز القائمة بناء على"),
+        "Sorting_finished":
+            MessageLookupByLibrary.simpleMessage("تم الانتهاء من الفرز"),
         "Sound": MessageLookupByLibrary.simpleMessage("يبدو"),
         "Source": MessageLookupByLibrary.simpleMessage("مصدر"),
         "Space": MessageLookupByLibrary.simpleMessage("فضاء"),

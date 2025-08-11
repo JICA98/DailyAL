@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 # 1. Insert after line 75 in android/app/build.gradle
-sed -i '75a\            proguardFiles getDefaultProguardFile('\''proguard-android.txt'\'')' android/app/build.gradle
+sed -i '75a\            proguardFiles getDefaultProguardFile('\''proguard-android.txt'\''), '\''proguard-rules.prop'\''' android/app/build.gradle
 
 # 2. Replace line 26 in android/settings.gradle
 sed -i '26s/.*/    id "com.android.application" version '\''8.4.2'\'' apply false/' android/settings.gradle
@@ -45,6 +45,10 @@ cat <<EOL > android/app/proguard-rules.prop
 # Retain generic signatures of TypeToken and its subclasses with R8 version 3.0 and higher.
 -keep,allowobfuscation,allowshrinking class com.google.gson.reflect.TypeToken
 -keep,allowobfuscation,allowshrinking class * extends com.google.gson.reflect.TypeToken
+
+# Missing javax.annotation classes - suppress warnings
+-dontwarn javax.annotation.Nullable
+-dontwarn javax.annotation.concurrent.GuardedBy
 EOL
 
 echo "Changes applied."
@@ -54,4 +58,4 @@ git update-index --assume-unchanged android/settings.gradle
 
 echo "Files marked as unchanged in git."
 echo "Press any key to continue..."
-read -n 1 -s
+read -k 1

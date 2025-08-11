@@ -212,6 +212,7 @@ Widget cachedImage(
 }) {
   return CachedNetworkImage(
     imageUrl: url ?? '',
+    fadeInDuration: Duration.zero,
     placeholder: (context, url) => cardLoading(
         borderRadius:
             userRoundBorderforLoading ? BorderRadius.circular(32) : radius),

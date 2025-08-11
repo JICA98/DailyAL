@@ -933,6 +933,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "Rate_Review": MessageLookupByLibrary.simpleMessage("Nilai & Ulasan"),
         "Rate_Review_desc": MessageLookupByLibrary.simpleMessage(
             "Ini akan membantu kami membuat aplikasi lebih baik."),
+        "Rate_limit_reached": MessageLookupByLibrary.simpleMessage(
+            "Batas kecepatan API tercapai"),
         "Rating": MessageLookupByLibrary.simpleMessage("Peringkat"),
         "Read": MessageLookupByLibrary.simpleMessage("Membaca"),
         "Reading": MessageLookupByLibrary.simpleMessage("Membaca"),
@@ -1146,6 +1148,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Sortir & Filter"),
         "Sort_the_list_based_on":
             MessageLookupByLibrary.simpleMessage("Urutkan daftar berdasarkan"),
+        "Sorting_finished":
+            MessageLookupByLibrary.simpleMessage("Penyortiran selesai"),
         "Sound": MessageLookupByLibrary.simpleMessage("Suara"),
         "Source": MessageLookupByLibrary.simpleMessage("Sumber"),
         "Space": MessageLookupByLibrary.simpleMessage("Ruang angkasa"),

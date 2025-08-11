@@ -11,7 +11,7 @@
 [![Discord Users](https://img.shields.io/discord/1147503264741478452.svg?label=&labelColor=6A7EC2&color=7389D8&logo=discord&logoColor=FFFFFF)](https://discord.gg/ap4Wghv5e8)
 [![Github downloads](https://img.shields.io/github/downloads/jica98/dailyal/total?label=downloads&labelColor=27303D&color=0D1117&logo=github&logoColor=FFFFFF&style=flat)](https://github.com/JICA98/DailyAL/releases)
 [![GitHub stars](https://img.shields.io/github/stars/jica98/dailyal?label=stars&labelColor=27303D&color=0D1117&logo=github&logoColor=FFFFFF&style=flat)](#)
-[![License: Apache-2.0](https://img.shields.io/github/license/jica98/dailyal?labelColor=27303D&color=818cf8)](/LICENSE)
+[![License: AGPL-3.0](https://img.shields.io/github/license/jica98/dailyal?labelColor=27303D&color=818cf8)](/LICENSE)
 [![Languages](https://img.shields.io/github/languages/count/jica98/dailyal?label=Languages&logo=googleearth)](/lib/l10n)
 
 ## Download
@@ -77,6 +77,7 @@ Explore the extensive MyAnimeList database to discover your favorite anime and m
 - To run this project, you need to have [Flutter](https://flutter.dev/docs/get-started/install) installed on your machine.
 - Clone this repo to your machine: `git clone`
 - Use `dal-code.code-workspace` to open the project in VSCode
+- Run the script `update_gradle.sh` to make the gradle files ready for development
 - Run `flutter pub get` to install dependencies
 - Launch the app using `flutter run` or `F5` in VSCode
 

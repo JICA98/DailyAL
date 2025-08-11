@@ -950,6 +950,8 @@
     "MAL_API_Licence": "MAL Agreement",
     "Whats_new": "Quoi de neuf",
     "MAL_API_Licence_Desc": "Licence API MyAnimeList et accord de d\u00e9veloppeur",
+    "Rate_limit_reached": "Limite de d\u00E9bit API atteinte",
+    "Sorting_finished": "Tri termin\u00E9",
     "Genre_Include_Exclude_desc_v2": "S\u00e9lectionnez un genre \u00e0 inclure, puis appuyez \u00e0 nouveau pour l'exclure.",
     "Search": "Recherche",
     "NextShow": "Spectacle suivant",

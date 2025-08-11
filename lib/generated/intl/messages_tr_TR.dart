@@ -921,6 +921,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "Rate_Review": MessageLookupByLibrary.simpleMessage("Oran incelemesi"),
         "Rate_Review_desc": MessageLookupByLibrary.simpleMessage(
             "Bu, uygulamayı daha iyi hale getirmemize yardımcı olacaktır."),
+        "Rate_limit_reached":
+            MessageLookupByLibrary.simpleMessage("API oranı sınırına ulaşıldı"),
         "Rating": MessageLookupByLibrary.simpleMessage("Değerlendirme"),
         "Read": MessageLookupByLibrary.simpleMessage("Okumak"),
         "Reading": MessageLookupByLibrary.simpleMessage("Okuma"),
@@ -1140,6 +1142,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Sırala ve Filtrele"),
         "Sort_the_list_based_on": MessageLookupByLibrary.simpleMessage(
             "Listeyi şuna göre sıralayın:"),
+        "Sorting_finished":
+            MessageLookupByLibrary.simpleMessage("Sıralama tamamlandı"),
         "Sound": MessageLookupByLibrary.simpleMessage("Ses"),
         "Source": MessageLookupByLibrary.simpleMessage("Kaynak"),
         "Space": MessageLookupByLibrary.simpleMessage("Uzay"),

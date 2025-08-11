@@ -906,6 +906,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "Rate_Review": MessageLookupByLibrary.simpleMessage("Rate & Review"),
         "Rate_Review_desc": MessageLookupByLibrary.simpleMessage(
             "This will help us make the app better."),
+        "Rate_limit_reached":
+            MessageLookupByLibrary.simpleMessage("Rate limit reached"),
         "Rating": MessageLookupByLibrary.simpleMessage("Rating"),
         "Read": MessageLookupByLibrary.simpleMessage("Read"),
         "Reading": MessageLookupByLibrary.simpleMessage("Reading"),
@@ -1009,7 +1011,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Search_By_Season":
             MessageLookupByLibrary.simpleMessage("Search By Season"),
         "Search_Page_Intro": MessageLookupByLibrary.simpleMessage(
-            "Search for your favourite anime, manga and more.."),
+            "Search for your favorite anime, manga and more.."),
         "Search_Results":
             MessageLookupByLibrary.simpleMessage("Search Results"),
         "Search_by_genre":
@@ -1121,6 +1123,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Sort & Filter"),
         "Sort_the_list_based_on":
             MessageLookupByLibrary.simpleMessage("Sort the list based on"),
+        "Sorting_finished":
+            MessageLookupByLibrary.simpleMessage("Sorting finished"),
         "Sound": MessageLookupByLibrary.simpleMessage("Sound"),
         "Source": MessageLookupByLibrary.simpleMessage("Source"),
         "Space": MessageLookupByLibrary.simpleMessage("Space"),

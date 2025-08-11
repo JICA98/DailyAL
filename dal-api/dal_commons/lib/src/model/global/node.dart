@@ -19,6 +19,7 @@ class Node with AnimeDetailedMixin {
   String? url;
   final String? nodeCategory;
   int? numRecommendations;
+  int? favorites;
 
   Node({
     this.id,
@@ -32,7 +33,38 @@ class Node with AnimeDetailedMixin {
     this.myListStatus,
     this.nodeCategory,
     this.numRecommendations,
+    this.favorites,
   });
+
+  Node copyWith({
+    int? id,
+    String? title,
+    String? status,
+    Picture? mainPicture,
+    MyListStatus? myListStatus,
+    Broadcast? broadcast,
+    int? numEpisodes,
+    bool? fromCache,
+    String? url,
+    String? nodeCategory,
+    int? numRecommendations,
+    int? favorites,
+  }) {
+    return Node(
+      id: id ?? this.id,
+      title: title ?? this.title,
+      status: status ?? this.status,
+      mainPicture: mainPicture ?? this.mainPicture,
+      myListStatus: myListStatus ?? this.myListStatus,
+      broadcast: broadcast ?? this.broadcast,
+      numEpisodes: numEpisodes ?? this.numEpisodes,
+      fromCache: fromCache ?? this.fromCache,
+      url: url ?? this.url,
+      nodeCategory: nodeCategory ?? this.nodeCategory,
+      numRecommendations: numRecommendations ?? this.numRecommendations,
+      favorites: favorites ?? this.favorites,
+    );
+  }
 
   factory Node.fromJson(Map<String, dynamic>? json) {
     MyAnimeListStatus? animeList;

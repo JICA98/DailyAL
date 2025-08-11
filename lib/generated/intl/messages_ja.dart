@@ -821,6 +821,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "Rate_Review": MessageLookupByLibrary.simpleMessage("料金＆口コミ"),
         "Rate_Review_desc":
             MessageLookupByLibrary.simpleMessage("これは私達がアプリをより良くするのを助けるでしょう。"),
+        "Rate_limit_reached":
+            MessageLookupByLibrary.simpleMessage("API レート制限に達しました"),
         "Rating": MessageLookupByLibrary.simpleMessage("評価"),
         "Read": MessageLookupByLibrary.simpleMessage("読んだ"),
         "Reading": MessageLookupByLibrary.simpleMessage("読む"),
@@ -1008,6 +1010,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Sort_and_Filter": MessageLookupByLibrary.simpleMessage("並べ替えとフィルター"),
         "Sort_the_list_based_on":
             MessageLookupByLibrary.simpleMessage("に基づいてリストを並べ替えます"),
+        "Sorting_finished": MessageLookupByLibrary.simpleMessage("仕分け完了"),
         "Sound": MessageLookupByLibrary.simpleMessage("音"),
         "Source": MessageLookupByLibrary.simpleMessage("ソース"),
         "Space": MessageLookupByLibrary.simpleMessage("スペース"),

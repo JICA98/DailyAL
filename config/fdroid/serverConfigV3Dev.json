@@ -4,6 +4,9 @@
     "discordLink": "https://discord.gg/ap4Wghv5e8",
     "errorLogging": false,
     "maxLoad": 100,
+    "featureFlags":  {
+      "aireviews": true
+    },
     "preferredServers": [
       {
         "load": 1,

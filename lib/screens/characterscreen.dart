@@ -17,9 +17,13 @@ import 'package:dailyanimelist/widgets/shimmecolor.dart';
 import 'package:dailyanimelist/widgets/translator.dart';
 import 'package:dal_commons/dal_commons.dart';
 import 'package:flutter/material.dart';
+import 'package:dailyanimelist/data/top_character_ids.dart';
 
 import '../main.dart';
 
+enum VoiceSortType { mostRecent, favorites, title }
+
+final Map<int, int> _favoritesCache = {};
 class CharacterScreen extends StatefulWidget {
   final int id;
   final String charaCategory;
@@ -39,12 +43,17 @@ class _CharacterScreenState extends State<CharacterScreen> {
   String chara = "character";
   List<String> characterPics = [];
   StreamListener listener = StreamListener(0);
+  VoiceSortType _voiceSort = VoiceSortType.mostRecent;
+  bool _isSortingFavorites = false;
+  List<VoicesFull> _originalVoices = [], _sortedVoices = [];
+  bool _disposed = false;
 
   @override
   void initState() {
     super.initState();
     id = widget.id;
     chara = widget.charaCategory;
+
     if (chara.equals("character")) {
       getCharacterDetails();
       getCharacterPictures();
@@ -54,11 +63,30 @@ class _CharacterScreenState extends State<CharacterScreen> {
     }
   }
 
+  @override
+  void dispose() {
+    _disposed = true;
+    super.dispose();
+  }
+
   getSeiyuuDetails() async {
     var _personInfo =
         await DalApi.i.getCharaPeopleInfo(id, DataUnionType.people);
     if (_personInfo != null) {
       personInfo = _personInfo as PeopleV4Data;
+
+      // add voiced characters excluding duplicates
+      final seen = <int>{};
+      _originalVoices = [];
+      for (final v in personInfo?.voices ?? []) {
+        final id = v.character?.malId;
+        if (id != null && !seen.contains(id)) {
+          seen.add(id);
+          _originalVoices.add(v);
+        }
+      }
+      _sortedVoices = List.from(_originalVoices);
+
       characterPics.insert(0, personInfo!.images?.jpg?.imageUrl ?? '');
       applyChanges();
     } else {
@@ -284,103 +312,289 @@ class _CharacterScreenState extends State<CharacterScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 30),
+        if (chara.equals("character"))
+          _detailBuilder(
+            title: "Animeography",
+            category: "anime",
+            rawList: characterInfo?.anime?.map((e) => e.anime).toList(),
+          )
+        else
+          _detailBuilder(
+            title: S.current.Voice_Acting_Roles,
+            category: "character",
+            rawList: _sortedVoices,
+            showSort: true,
+          ),
+
         _detailBuilder(
-            chara.equals("character")
-                ? "Animeography"
-                : S.current.Voice_Acting_Roles,
-            "anime",
-            (chara.equals("character")
-                ? characterInfo?.anime
-                    ?.map((e) => _getNode(e.anime)..title = e.anime!.title!)
-                : personInfo?.voices
-                    ?.map((e) => _getNode(e.anime)..title = e.anime!.title))),
+          title: chara.equals("character")
+              ? "Mangaography"
+              : S.current.Published_Manga,
+          category: "manga",
+          rawList: chara.equals("character")
+              ? characterInfo?.manga?.map((e) => e.manga).toList()
+              : personInfo?.manga?.map((e) => e.manga).toList(),
+        ),
+
         _detailBuilder(
-            chara.equals("character")
-                ? "Mangaography"
-                : S.current.Published_Manga,
-            "manga",
-            chara.equals("character")
-                ? characterInfo?.manga
-                    ?.map((e) => _getNode(e.manga)..title = e.manga!.title)
-                : personInfo?.manga
-                    ?.map((e) => _getNode(e.manga)..title = e.manga!.title)),
-        _detailBuilder(
-            chara.equals("character")
-                ? S.current.Voice_Actors
-                : S.current.Anime_Staff,
-            chara.equals("character") ? "person" : "anime",
-            chara.equals("character")
-                ? characterInfo?.voices
-                    ?.map((e) => _getNode(e.person)..title = e.person!.name)
-                : personInfo?.anime
-                    ?.map((e) => _getNode(e.anime)..title = e.anime!.title)),
-        const SizedBox(height: 30)
+          title: chara.equals("character")
+              ? S.current.Voice_Actors
+              : S.current.Anime_Staff,
+          category: chara.equals("character") ? "person" : "anime",
+          rawList: chara.equals("character")
+              ? characterInfo?.voices?.map((e) => e.person).toList()
+              : personInfo?.anime?.map((e) => e.anime).toList(),
+        ),
+        const SizedBox(height: 30),
       ],
     );
   }
+  
+  Widget titleWidget(String value) {
+    if (value.isEmpty) return SizedBox.shrink();
+    return title(value, opacity: 1, fontSize: 22);
+  }
 
-  Widget _detailBuilder(String _title, String category, Iterable? _list) {
+  Widget _detailBuilder({
+    required String title,
+    required String category,
+    required List? rawList,
+    bool showSort = false,
+  }) {
+    List list = rawList ?? [];
+
+    if (showSort) {
+      list = _sortedVoices;
+    }
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        title(_title, opacity: 1, fontSize: 22),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            titleWidget(title),
+            if (showSort)
+              SizedBox(
+                width: 28,
+                height: 28,
+                child: _isSortingFavorites
+                    ? Padding(
+                        padding: const EdgeInsets.all(4),
+                        child: CircularProgressIndicator(strokeWidth: 2),
+                      )
+                    : PopupMenuButton<VoiceSortType>(
+                        padding: EdgeInsets.zero,
+                        tooltip: 'Sort',
+                        icon: Icon(Icons.sort, size: 20),
+                        onSelected: (sort) async {
+                          if (sort == VoiceSortType.favorites) {
+                            if (mounted) setState(() => _isSortingFavorites = true);
+                            await _fetchMissingFavorites();
+                            if (mounted) setState(() => _isSortingFavorites = false);
+                          }
+                          if (mounted) {
+                            setState(() {
+                              _voiceSort = sort;
+                            });
+                            _sortVoices();
+                          }
+                        },
+                        itemBuilder: (_) => [
+                          PopupMenuItem(
+                              value: VoiceSortType.mostRecent,
+                              child: Text('Most Recent')),
+                          PopupMenuItem(
+                              value: VoiceSortType.favorites,
+                              child: Text('Favorites')),
+                          PopupMenuItem(
+                              value: VoiceSortType.title,
+                              child: Text('Title')),
+                        ],
+                      ),
+              ),
+          ],
+        ),
         const SizedBox(height: 30),
-        _list == null || _list.isEmpty
+        list.isEmpty
             ? Padding(
-                padding: EdgeInsets.only(bottom: 30), child: showNoContent())
-            : Container(
-                height: 140,
-                child: ListView.builder(
-                    itemCount: _list.length,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (_, index) {
-                      Node _node;
-                      var role = _list.elementAt(index);
-                      if (role is Node) {
-                        _node = role;
-                      } else {
-                        _node = _getNode(role);
-                      }
-                      return Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 5),
-                        child: AnimeGridCard(
-                          category: category,
-                          height: 100,
-                          width: 80,
-                          onTap: () {
-                            if (category.equals("character") ||
-                                category.equals("person")) {
-                              gotoPage(
-                                  context: context,
-                                  newPage: CharacterScreen(
-                                    id: _node.id!,
-                                    charaCategory: category,
-                                  ));
-                            } else
-                              gotoPage(
-                                  context: context,
-                                  newPage: ContentDetailedScreen(
-                                    category: category,
-                                    id: _node.id,
-                                    node: _node,
-                                  ));
-                          },
-                          node: _node,
-                        ),
-                      );
-                    }),
+                padding: EdgeInsets.only(bottom: 30),
+                child: showNoContent(),
               )
+            : Container(
+                height: 180,
+                child: ListView.builder(
+                  key: showSort ? ValueKey(_voiceSort) : null,
+                  itemCount: list.length,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (_, index) {
+                    final item = list[index];
+                    final role = showSort ? item.character : item;
+
+                    if (role == null) return SizedBox.shrink();
+                    return Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 5),
+                      child: CharacterCardLoader(
+                        role: role,
+                        category: category,
+                      ),
+                    );
+                  },
+                ),
+              ),
       ],
     );
   }
 
-  Node _getNode(dynamic role) {
-    return Node(
-      id: role.malId,
+  Future<bool> _fetchFavorites(List<VoicesFull> voices) async {
+    for (var voice in voices) {
+      if (_disposed) return false;
+
+      final id = voice.character?.malId;
+      if (id != null && !_favoritesCache.containsKey(id)) {
+        try {
+          final data = await DalApi.i.getCharaPeopleInfo(id, DataUnionType.character);
+          if (data is CharacterV4Data) {
+            _favoritesCache[id] = data.favorites ?? 0;
+          } else {
+            showToast(S.current.Rate_limit_reached);
+            return false;
+          }
+        } catch (_) {}
+      }
+    }
+    return true;
+  }
+
+  Future<void> _fetchMissingFavorites() async {
+    // Build topVoices in the same order as topCharacterIds (descending by favorites)
+    final Map<int, VoicesFull> voiceMap = {
+      for (final voice in _originalVoices)
+        if (voice.character?.malId != null) voice.character!.malId!: voice
+    };
+    final topVoices = <VoicesFull>[];
+    for (final id in topCharacterIds) {
+      final voice = voiceMap[id];
+      if (voice != null) {
+        topVoices.add(voice);
+      }
+    }
+
+    if (await _fetchFavorites(topVoices) && await _fetchFavorites(_originalVoices)) {
+      showToast(S.current.Sorting_finished);
+    }
+  }
+
+  void _sortVoices() {
+    if (_originalVoices.isEmpty) return;
+
+    List<VoicesFull> voices = List.from(_originalVoices);
+
+    if (_voiceSort == VoiceSortType.title) {
+      voices.sort((a, b) =>
+          (a.character?.name ?? '').compareTo(b.character?.name ?? ''));
+    } else if (_voiceSort == VoiceSortType.favorites) {
+      voices.sort((a, b) {
+        final favA = _favoritesCache[a.character?.malId ?? -1] ?? 0;
+        final favB = _favoritesCache[b.character?.malId ?? -1] ?? 0;
+        return favB.compareTo(favA);
+      });
+    } else {
+      // no sorting needed as Most Recent is the default order
+    }
+
+    setState(() {
+      _sortedVoices = voices;
+    });
+  }
+}
+
+class CharacterCardLoader extends StatefulWidget {
+  final dynamic role;
+  final String category;
+
+  const CharacterCardLoader({required this.role, required this.category, super.key});
+
+  @override
+  State<CharacterCardLoader> createState() => _CharacterCardLoaderState();
+}
+
+class _CharacterCardLoaderState extends State<CharacterCardLoader> {
+  late Node _node;
+
+  @override
+  void initState() {
+    super.initState();
+    final String? title = (widget.category.equals("character") || widget.category.equals("person"))
+      ? widget.role?.name
+      : widget.role?.title;
+    final imageUrl = widget.role.images?.webp?.imageUrl ?? widget.role.images?.jpg?.imageUrl;
+
+    _node = Node(
+      id: widget.role.malId,
+      title: title,
       mainPicture: Picture(
-        large: role.images?.jpg?.imageUrl,
-        medium: role.images?.jpg?.imageUrl,
+        large: imageUrl,
+        medium: imageUrl,
       ),
+      favorites: null,
+    );
+
+    _loadFavoritesIfNeeded();
+  }
+
+  void _loadFavoritesIfNeeded() async {
+    if (_node.favorites != null || _node.id == null) return;
+    if (widget.category != "character") return;
+
+    try {
+      final data = await DalApi.i.getCharaPeopleInfo(_node.id!, DataUnionType.character);
+      if (data is CharacterV4Data && mounted) {
+        final imageUrl = data.images?.webp?.imageUrl ?? data.images?.jpg?.imageUrl;
+        _favoritesCache[_node.id!] = data.favorites ?? 0;
+        setState(() {
+          _node = Node(
+            id: _node.id,
+            title: _node.title,
+            mainPicture: Picture(
+              large: imageUrl,
+              medium: imageUrl,
+            ),
+            favorites: data.favorites,
+          );
+        });
+      }
+    } catch (_) {
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimeGridCard(
+      category: widget.category,
+      height: 140,
+      width: 105,
+      onTap: () {
+        if (widget.category.equals("character") || widget.category.equals("person")) {
+          gotoPage(
+            context: context,
+            newPage: CharacterScreen(
+              id: _node.id!,
+              charaCategory: widget.category,
+            ),
+          );
+        } else {
+          gotoPage(
+            context: context,
+            newPage: ContentDetailedScreen(
+              category: widget.category,
+              id: _node.id,
+              node: _node,
+            ),
+          );
+        }
+      },
+      node: _node,
     );
   }
 }

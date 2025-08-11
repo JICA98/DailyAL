@@ -945,6 +945,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Rate & Bewertung."),
         "Rate_Review_desc": MessageLookupByLibrary.simpleMessage(
             "Dies wird uns helfen, die App besser zu machen."),
+        "Rate_limit_reached":
+            MessageLookupByLibrary.simpleMessage("API-Ratenlimit erreicht"),
         "Rating": MessageLookupByLibrary.simpleMessage("Nennen"),
         "Read": MessageLookupByLibrary.simpleMessage("Lesen"),
         "Reading": MessageLookupByLibrary.simpleMessage("Lektüre"),
@@ -1162,6 +1164,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Sortieren und filtern"),
         "Sort_the_list_based_on": MessageLookupByLibrary.simpleMessage(
             "Sortieren Sie die Liste basierend auf"),
+        "Sorting_finished":
+            MessageLookupByLibrary.simpleMessage("Sortierung abgeschlossen"),
         "Sound": MessageLookupByLibrary.simpleMessage("Klang"),
         "Source": MessageLookupByLibrary.simpleMessage("Quelle"),
         "Space": MessageLookupByLibrary.simpleMessage("Platz"),

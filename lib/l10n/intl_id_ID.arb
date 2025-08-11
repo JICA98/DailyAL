@@ -950,6 +950,8 @@
     "MAL_API_Licence": "Perjanjian MAL",
     "Whats_new": "Apa yang baru",
     "MAL_API_Licence_Desc": "Lisensi API MyAnimeList dan Perjanjian Pengembang",
+    "Rate_limit_reached": "Batas kecepatan API tercapai",
+    "Sorting_finished": "Penyortiran selesai",
     "Genre_Include_Exclude_desc_v2": "Pilih genre yang ingin disertakan lalu ketuk lagi untuk dikecualikan.",
     "Search": "Mencari",
     "NextShow": "Pertunjukan Berikutnya",
