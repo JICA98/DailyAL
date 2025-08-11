@@ -340,6 +340,24 @@ class MessageLookup extends MessageLookupByLibrary {
         "Dragon_Ball": MessageLookupByLibrary.simpleMessage("Dragon Ball"),
         "Drama": MessageLookupByLibrary.simpleMessage("Theater"),
         "Dropped": MessageLookupByLibrary.simpleMessage("Fallen gelassen"),
+        "Dub_Icon_Style": MessageLookupByLibrary.simpleMessage("Symbolstil"),
+        "Dub_Icon_Style_Desc": MessageLookupByLibrary.simpleMessage(
+            "Wählen Sie den Symbolstil für synchronisierte und teilweise synchronisierte Anime"),
+        "Dub_Language": MessageLookupByLibrary.simpleMessage("Synchronsprache"),
+        "Dub_Language_Desc": MessageLookupByLibrary.simpleMessage(
+            "Wählen Sie die Sprache für die Synchronisation"),
+        "Dub_Report":
+            MessageLookupByLibrary.simpleMessage("Ungenaue Dubs melden"),
+        "Dub_Settings":
+            MessageLookupByLibrary.simpleMessage("Dub-Einstellungen"),
+        "Dub_Settings_Desc": MessageLookupByLibrary.simpleMessage(
+            "Passen Sie Ihre Dub-Einstellungen an"),
+        "Dub_Show_Icon":
+            MessageLookupByLibrary.simpleMessage("Dub-Symbol anzeigen"),
+        "Dub_Show_Icon_Desc": MessageLookupByLibrary.simpleMessage(
+            "Aktivieren Sie das Synchronisationssymbol neben synchronisierten Animes"),
+        "Dub_Support": MessageLookupByLibrary.simpleMessage(
+            "Unterstützen Sie das MyDubList-Projekt"),
         "Duration": MessageLookupByLibrary.simpleMessage("Dauer"),
         "Ecchi": MessageLookupByLibrary.simpleMessage("Ecchi."),
         "Edit": MessageLookupByLibrary.simpleMessage("Bearbeiten"),
@@ -1114,10 +1132,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "Show_Original":
             MessageLookupByLibrary.simpleMessage("Original zeigen"),
         "Show_Spoiler": MessageLookupByLibrary.simpleMessage("Spoiler zeigen"),
-        "Show_dub_status_AnimeList": MessageLookupByLibrary.simpleMessage(
-            "Synchronstatus in der Anime-Liste anzeigen"),
-        "Show_dub_status_AnimeList_Desc": MessageLookupByLibrary.simpleMessage(
-            "Synchronisationsstatus (Englisch) eines Animes in der Liste anzeigen"),
         "Show_priority_in_anime_manga_list":
             MessageLookupByLibrary.simpleMessage(
                 "Priorität in Anime / Manga-Liste anzeigen"),

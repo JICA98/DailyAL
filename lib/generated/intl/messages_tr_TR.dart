@@ -334,6 +334,23 @@ class MessageLookup extends MessageLookupByLibrary {
         "Dragon_Ball": MessageLookupByLibrary.simpleMessage("Ejder topu"),
         "Drama": MessageLookupByLibrary.simpleMessage("Dram"),
         "Dropped": MessageLookupByLibrary.simpleMessage("Düştü"),
+        "Dub_Icon_Style": MessageLookupByLibrary.simpleMessage("Simge stili"),
+        "Dub_Icon_Style_Desc": MessageLookupByLibrary.simpleMessage(
+            "Dublajlı ve kısmen dublajlı anime için simge stilini seçin"),
+        "Dub_Language": MessageLookupByLibrary.simpleMessage("Dublaj dili"),
+        "Dub_Language_Desc":
+            MessageLookupByLibrary.simpleMessage("Dublaj için dili seçin"),
+        "Dub_Report":
+            MessageLookupByLibrary.simpleMessage("Hatalı dublajları bildirin"),
+        "Dub_Settings": MessageLookupByLibrary.simpleMessage("Dublaj Ayarları"),
+        "Dub_Settings_Desc": MessageLookupByLibrary.simpleMessage(
+            "Dublaj ayarlarınızı özelleştirin"),
+        "Dub_Show_Icon":
+            MessageLookupByLibrary.simpleMessage("Dub simgesini göster"),
+        "Dub_Show_Icon_Desc": MessageLookupByLibrary.simpleMessage(
+            "Dublajlı animenin yanındaki dublaj simgesini etkinleştirin"),
+        "Dub_Support": MessageLookupByLibrary.simpleMessage(
+            "MyDubList projesini destekleyin"),
         "Duration": MessageLookupByLibrary.simpleMessage("Süre"),
         "Ecchi": MessageLookupByLibrary.simpleMessage("Ecchi"),
         "Edit": MessageLookupByLibrary.simpleMessage("Düzenlemek"),
@@ -1093,10 +1110,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Orjinali göster"),
         "Show_Spoiler":
             MessageLookupByLibrary.simpleMessage("Spoiler\'ı Göster"),
-        "Show_dub_status_AnimeList": MessageLookupByLibrary.simpleMessage(
-            "Anime listesinde dublaj durumunu göster"),
-        "Show_dub_status_AnimeList_Desc": MessageLookupByLibrary.simpleMessage(
-            "Bir animenin listedeki dublaj (İngilizce) durumunu göster"),
         "Show_priority_in_anime_manga_list":
             MessageLookupByLibrary.simpleMessage(
                 "Anime/manga listesinde önceliği göster"),

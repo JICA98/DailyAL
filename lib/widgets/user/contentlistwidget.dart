@@ -1161,8 +1161,8 @@ class _ContentAllWidgetState extends State<ContentAllWidget>
     if (id == null) return SB.z;
     if (DubInfoManager().hasAnyDub(id)) {
       final icon = DubInfoManager().isDubbed(id)
-          ? DubIcons.dubs
-          : DubIcons.dubs_incomplete;
+          ? DubIcons.preferredDubIcon
+          : DubIcons.preferredIncompleteDubIcon;
       return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 5.0),
         child: Tooltip(
@@ -1591,6 +1591,7 @@ Widget buildGridResults(var _results, var _category,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       AnimeGridCard(
+                        category: _category,
                         height: 60,
                         width: 60,
                         smallHeight: 25,

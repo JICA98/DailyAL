@@ -180,7 +180,7 @@ flutter:
 
     - family: DubStatus
       fonts:
-        - asset: assets/fonts/DubIcons.ttf
+        - asset: assets/fonts/MyDubListIcons.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

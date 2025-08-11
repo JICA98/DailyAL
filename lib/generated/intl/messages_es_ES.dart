@@ -347,6 +347,26 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("esfera del dragón"),
         "Drama": MessageLookupByLibrary.simpleMessage("Drama"),
         "Dropped": MessageLookupByLibrary.simpleMessage("Abandonó"),
+        "Dub_Icon_Style":
+            MessageLookupByLibrary.simpleMessage("Estilo de icono"),
+        "Dub_Icon_Style_Desc": MessageLookupByLibrary.simpleMessage(
+            "Seleccione el estilo de icono para anime doblado y parcialmente doblado"),
+        "Dub_Language":
+            MessageLookupByLibrary.simpleMessage("Lenguaje de doblaje"),
+        "Dub_Language_Desc": MessageLookupByLibrary.simpleMessage(
+            "Seleccione el idioma para los doblajes"),
+        "Dub_Report": MessageLookupByLibrary.simpleMessage(
+            "Informar sobre doblajes inexactos"),
+        "Dub_Settings":
+            MessageLookupByLibrary.simpleMessage("Configuración de doblaje"),
+        "Dub_Settings_Desc": MessageLookupByLibrary.simpleMessage(
+            "Personaliza tu configuración de doblaje"),
+        "Dub_Show_Icon":
+            MessageLookupByLibrary.simpleMessage("Mostrar icono de doblaje"),
+        "Dub_Show_Icon_Desc": MessageLookupByLibrary.simpleMessage(
+            "Habilitar el icono de doblaje junto al anime doblado"),
+        "Dub_Support":
+            MessageLookupByLibrary.simpleMessage("Apoya el proyecto MyDubList"),
         "Duration": MessageLookupByLibrary.simpleMessage("Duración"),
         "Ecchi": MessageLookupByLibrary.simpleMessage("Ecchi"),
         "Edit": MessageLookupByLibrary.simpleMessage("Editar"),
@@ -1136,10 +1156,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "Show_Original":
             MessageLookupByLibrary.simpleMessage("Mostrar original"),
         "Show_Spoiler": MessageLookupByLibrary.simpleMessage("Mostrar spoiler"),
-        "Show_dub_status_AnimeList": MessageLookupByLibrary.simpleMessage(
-            "Mostrar el estado del doblaje en la lista de anime"),
-        "Show_dub_status_AnimeList_Desc": MessageLookupByLibrary.simpleMessage(
-            "Mostrar el estado de doblaje (inglés) de un anime en la lista"),
         "Show_priority_in_anime_manga_list":
             MessageLookupByLibrary.simpleMessage(
                 "Mostrar prioridad en la lista de anime / manga"),

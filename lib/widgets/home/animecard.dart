@@ -447,6 +447,7 @@ class AnimeGridCard extends StatelessWidget {
   Widget _dubStatusIcon() {
     if (!user.pref.showDubStatus || node is! AnimeDetailed) return SB.z;
     if (!category.equals("anime")) return SB.z;
+    if (onClose != null) return SB.z;
     
     final content = node as dynamic;
     final int? id = content.id;
@@ -454,9 +455,9 @@ class AnimeGridCard extends StatelessWidget {
 
     IconData? icon;
     if (DubInfoManager().isDubbed(id)) {
-      icon = DubIcons.dubs;
+      icon = DubIcons.preferredDubIcon;
     } else if (DubInfoManager().isIncomplete(id)) {
-      icon = DubIcons.dubs_incomplete;
+      icon = DubIcons.preferredIncompleteDubIcon;
     } else {
       return SB.z;
     }
@@ -470,7 +471,7 @@ class AnimeGridCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(borderRadius),
         ),
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(8, 4, 9, 4),
+          padding: DubIcons.preferredPadding,
           child: Center(
             child: Icon(
               icon,
