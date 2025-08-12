@@ -141,6 +141,18 @@ class _ContentEditWidgetState extends State<ContentEditWidget> {
     if (mounted) {
       setState(() {});
     }
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted && _episodeSelectMode == EpisodeSelectMode.bar) {
+        try {
+          _scrollToEpisodeCount();
+        } catch (e) {
+          logDal(e);
+          if (e is Error) {
+            ErrorReporting.reportError(e);
+          }
+        }
+      }
+    });
   }
 
   int? get _id {
@@ -899,8 +911,8 @@ class _ContentEditWidgetState extends State<ContentEditWidget> {
                 },
                 option: FilterOption(
                     value: unescape
-                      .convert(contentDetailed?.myListStatus?.comments ?? '')
-                      .replaceAll("<br />", ""),
+                        .convert(contentDetailed?.myListStatus?.comments ?? '')
+                        .replaceAll("<br />", ""),
                     fieldName: "Comments",
                     openTextFormAsModal: true),
               ),
@@ -926,10 +938,11 @@ class _ContentEditWidgetState extends State<ContentEditWidget> {
                       },
                       option: FilterOption(
                           value: unescape.convert(
-                              (contentDetailed?.myListStatus?.tags != null &&
-                                      contentDetailed.myListStatus.tags.isNotEmpty)
-                                  ? contentDetailed?.myListStatus?.tags[0]
-                                  : '',
+                            (contentDetailed?.myListStatus?.tags != null &&
+                                    contentDetailed
+                                        .myListStatus.tags.isNotEmpty)
+                                ? contentDetailed?.myListStatus?.tags[0]
+                                : '',
                           ),
                           fieldName: "Tags")),
                 ),
@@ -1387,14 +1400,7 @@ class _ContentEditWidgetState extends State<ContentEditWidget> {
               setState(() {
                 if (_episodeSelectMode == EpisodeSelectMode.text) {
                   _episodeSelectMode = EpisodeSelectMode.bar;
-                  const duration = const Duration(milliseconds: 200);
-                  Future.delayed(duration).then(
-                    (value) => _episodeScrollController.scrollTo(
-                      index: _episodeCount(),
-                      alignment: 0.6,
-                      duration: duration,
-                    ),
-                  );
+                  _scrollToEpisodeCount();
                 } else {
                   _episodeSelectMode = EpisodeSelectMode.text;
                 }
@@ -1407,6 +1413,17 @@ class _ContentEditWidgetState extends State<ContentEditWidget> {
         ),
         SB.w20,
       ],
+    );
+  }
+
+  void _scrollToEpisodeCount() {
+    const duration = const Duration(milliseconds: 200);
+    Future.delayed(duration).then(
+      (value) => _episodeScrollController.scrollTo(
+        index: _episodeCount(),
+        alignment: 0.6,
+        duration: duration,
+      ),
     );
   }
 
