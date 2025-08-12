@@ -10009,6 +10009,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Event added to calendar`
+  String get Event_Added_To_Calendar {
+    return Intl.message(
+      'Event added to calendar',
+      name: 'Event_Added_To_Calendar',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error adding event to calendar`
+  String get Error_Adding_Event_To_Calendar {
+    return Intl.message(
+      'Error adding event to calendar',
+      name: 'Error_Adding_Event_To_Calendar',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

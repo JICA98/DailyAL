@@ -3,7 +3,7 @@ import 'package:dailyanimelist/pages/userpop.dart';
 import 'package:dailyanimelist/user/user.dart';
 import 'package:dailyanimelist/widgets/custombutton.dart';
 import 'package:dailyanimelist/widgets/home/bookmarks_widget.dart';
-import 'package:dailyanimelist/widgets/home/notifications.dart';
+import 'package:dailyanimelist/widgets/home/anime_calendar.dart';
 import 'package:dal_commons/commons.dart';
 import 'package:flutter/material.dart';
 

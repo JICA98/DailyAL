@@ -940,8 +940,8 @@
     "MAL_API_Licence": "MAL Agreement",
     "Whats_new": "Quoi de neuf",
     "MAL_API_Licence_Desc": "Licence API MyAnimeList et accord de d\u00e9veloppeur",
-    "Rate_limit_reached": "Limite de d\u00E9bit API atteinte",
-    "Sorting_finished": "Tri termin\u00E9",
+    "Rate_limit_reached": "Limite de d\u00e9bit API atteinte",
+    "Sorting_finished": "Tri termin\u00e9",
     "Genre_Include_Exclude_desc_v2": "S\u00e9lectionnez un genre \u00e0 inclure, puis appuyez \u00e0 nouveau pour l'exclure.",
     "Search": "Recherche",
     "NextShow": "Spectacle suivant",
@@ -998,5 +998,7 @@
     "Font_Sample_Text": "Le renard brun rapide saute par-dessus le chien paresseux.",
     "Font_Heading_Sample": "Texte de t\u00eate",
     "Font_Preview_Description": "C'est ainsi que le texte appara\u00eetra dans l'application.",
-    "Font_Restart_Notice": "Vous devrez peut-\u00eatre red\u00e9marrer l'application pour voir tous les modifications."
+    "Font_Restart_Notice": "Vous devrez peut-\u00eatre red\u00e9marrer l'application pour voir tous les modifications.",
+    "Event_Added_To_Calendar": "\u00c9v\u00e9nement ajout\u00e9 au calendrier",
+    "Error_Adding_Event_To_Calendar": "Erreur d'ajout d'\u00e9v\u00e9nement au calendrier"
 }

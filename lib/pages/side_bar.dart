@@ -18,7 +18,7 @@ import 'package:dailyanimelist/widgets/customfuture.dart';
 import 'package:dailyanimelist/widgets/fadingeffect.dart';
 import 'package:dailyanimelist/widgets/home/accordion.dart';
 import 'package:dailyanimelist/widgets/home/bookmarks_widget.dart';
-import 'package:dailyanimelist/widgets/home/notifications.dart';
+import 'package:dailyanimelist/widgets/home/anime_calendar.dart';
 import 'package:dailyanimelist/widgets/shimmecolor.dart';
 import 'package:dailyanimelist/widgets/slivers.dart';
 import 'package:dailyanimelist/widgets/user/stats_screen.dart';

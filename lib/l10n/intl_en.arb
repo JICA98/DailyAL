@@ -995,5 +995,7 @@
     "Font_Sample_Text": "The quick brown fox jumps over the lazy dog.",
     "Font_Heading_Sample": "Heading Text",
     "Font_Preview_Description": "This is how text will appear throughout the app.",
-    "Font_Restart_Notice": "You may need to restart the app to see all changes."
+    "Font_Restart_Notice": "You may need to restart the app to see all changes.",
+    "Event_Added_To_Calendar": "Event added to calendar",
+    "Error_Adding_Event_To_Calendar": "Error adding event to calendar"
 }

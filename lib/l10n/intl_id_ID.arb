@@ -998,5 +998,7 @@
     "Font_Sample_Text": "Rubah cokelat cepat melompat di atas anjing malas.",
     "Font_Heading_Sample": "Heading Text",
     "Font_Preview_Description": "Beginilah teks akan muncul di seluruh aplikasi.",
-    "Font_Restart_Notice": "Anda mungkin perlu memulai kembali aplikasi untuk melihat semua perubahan."
+    "Font_Restart_Notice": "Anda mungkin perlu memulai kembali aplikasi untuk melihat semua perubahan.",
+    "Event_Added_To_Calendar": "Acara ditambahkan ke kalender",
+    "Error_Adding_Event_To_Calendar": "Kesalahan Menambahkan Acara ke Kalender"
 }

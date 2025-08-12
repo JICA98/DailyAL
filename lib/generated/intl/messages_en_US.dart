@@ -358,10 +358,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "Episodes": MessageLookupByLibrary.simpleMessage("Episodes"),
         "Episodes_seen": MessageLookupByLibrary.simpleMessage("Episodes Seen"),
         "Erotica": MessageLookupByLibrary.simpleMessage("Erotica"),
+        "Error_Adding_Event_To_Calendar": MessageLookupByLibrary.simpleMessage(
+            "Error adding event to calendar"),
         "Error_removing_image":
             MessageLookupByLibrary.simpleMessage("Error removing image"),
         "Error_uploading_image":
             MessageLookupByLibrary.simpleMessage("Error uploading image"),
+        "Event_Added_To_Calendar":
+            MessageLookupByLibrary.simpleMessage("Event added to calendar"),
         "Events": MessageLookupByLibrary.simpleMessage("Events"),
         "Exclude_the_genre_here":
             MessageLookupByLibrary.simpleMessage("Exclude the genre here"),

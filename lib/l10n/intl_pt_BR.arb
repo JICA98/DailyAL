@@ -942,7 +942,7 @@
     "Whats_new": "O que h\u00e1 de novo",
     "MAL_API_Licence_Desc": "Licen\u00e7a da API MyAnimeList e contrato de desenvolvedor",
     "Rate_limit_reached": "Limite de taxa de API atingido",
-    "Sorting_finished": "Classifica\u00E7\u00E3o conclu\u00EDda",
+    "Sorting_finished": "Classifica\u00e7\u00e3o conclu\u00edda",
     "Genre_Include_Exclude_desc_v2": "Selecione um g\u00eanero para incluir e toque novamente para excluir.",
     "Search": "Procurar",
     "NextShow": "Pr\u00f3ximo programa",
@@ -999,5 +999,7 @@
     "Font_Sample_Text": "A r\u00e1pida raposa marrom pula sobre o cachorro pregui\u00e7oso.",
     "Font_Heading_Sample": "Texto do cabe\u00e7alho",
     "Font_Preview_Description": "\u00c9 assim que o texto aparecer\u00e1 em todo o aplicativo.",
-    "Font_Restart_Notice": "Pode ser necess\u00e1rio reiniciar o aplicativo para ver todas as altera\u00e7\u00f5es."
+    "Font_Restart_Notice": "Pode ser necess\u00e1rio reiniciar o aplicativo para ver todas as altera\u00e7\u00f5es.",
+    "Event_Added_To_Calendar": "Evento adicionado ao calend\u00e1rio",
+    "Error_Adding_Event_To_Calendar": "Erro adicionando evento ao calend\u00e1rio"
 }

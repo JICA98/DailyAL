@@ -999,5 +999,7 @@
     "Font_Sample_Text": "Der schnelle braune Fuchs springt \u00fcber den faulen Hund.",
     "Font_Heading_Sample": "\u00dcbergangstext",
     "Font_Preview_Description": "So wird in der App Text angezeigt.",
-    "Font_Restart_Notice": "M\u00f6glicherweise m\u00fcssen Sie die App neu starten, um alle \u00c4nderungen anzuzeigen."
+    "Font_Restart_Notice": "M\u00f6glicherweise m\u00fcssen Sie die App neu starten, um alle \u00c4nderungen anzuzeigen.",
+    "Event_Added_To_Calendar": "Ereignis zum Kalender hinzugef\u00fcgt",
+    "Error_Adding_Event_To_Calendar": "Fehler beim Addieren von Ereignissen zum Kalender"
 }

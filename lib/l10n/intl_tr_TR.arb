@@ -938,7 +938,7 @@
     "MAL_API_Licence": "MAL Anla\u015fmas\u0131",
     "Whats_new": "Ne var ne yok",
     "MAL_API_Licence_Desc": "MyAnimeList API Lisans\u0131 ve Geli\u015ftirici S\u00f6zle\u015fmesi",
-    "Rate_limit_reached": "API oran\u0131 s\u0131n\u0131r\u0131na ula\u015F\u0131ld\u0131",
+    "Rate_limit_reached": "API oran\u0131 s\u0131n\u0131r\u0131na ula\u015f\u0131ld\u0131",
     "Sorting_finished": "S\u0131ralama tamamland\u0131",
     "Genre_Include_Exclude_desc_v2": "Dahil edilecek bir t\u00fcr se\u00e7in ve ard\u0131ndan hari\u00e7 tutmak i\u00e7in tekrar dokunun.",
     "Search": "Aramak",
@@ -996,5 +996,7 @@
     "Font_Sample_Text": "H\u0131zl\u0131 kahverengi tilki tembel k\u00f6pe\u011fin \u00fczerine atlar.",
     "Font_Heading_Sample": "Ba\u015fl\u0131k metni",
     "Font_Preview_Description": "Uygulama boyunca metin b\u00f6yle g\u00f6r\u00fcnecektir.",
-    "Font_Restart_Notice": "T\u00fcm de\u011fi\u015fiklikleri g\u00f6rmek i\u00e7in uygulamay\u0131 yeniden ba\u015flatman\u0131z gerekebilir."
+    "Font_Restart_Notice": "T\u00fcm de\u011fi\u015fiklikleri g\u00f6rmek i\u00e7in uygulamay\u0131 yeniden ba\u015flatman\u0131z gerekebilir.",
+    "Event_Added_To_Calendar": "Takvime eklenen etkinlik",
+    "Error_Adding_Event_To_Calendar": "Takvime olay ekleme hatas\u0131"
 }

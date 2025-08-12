@@ -361,6 +361,7 @@ class CountDownWidget extends StatefulWidget {
   final Widget? extraWidget;
   final double? elevation;
   final Widget Function(CWTime)? customTimer;
+  final TextStyle? style;
 
   const CountDownWidget({
     Key? key,
@@ -370,6 +371,7 @@ class CountDownWidget extends StatefulWidget {
     this.extraWidget,
     this.elevation,
     this.customTimer,
+    this.style,
   }) : super(key: key);
 
   @override
@@ -559,6 +561,7 @@ class _CountDownWidgetState extends State<CountDownWidget> {
   Widget _timeUnit(String text, String time, [bool isLast = false]) {
     return Text(
       '${time}${text} ${isLast ? '' : '·'} ',
+      style: widget.style,
     );
   }
 }
