@@ -94,6 +94,7 @@ class _UserContentBuilderState extends State<UserContentBuilder>
         await SortFilterDisplay.fromCache(_cacheKey, key, _defaultObject());
     _sortFilterDisplay =
         _sortFilterDisplay!.copyWith(category: widget.category);
+    logDal('SortFilterDisplay: $_cacheKey ${jsonEncode(_sortFilterDisplay)}');
     if (widget.sortOption != null) {
       _sortFilterDisplay = _sortFilterDisplay!.copyWith(
         sort: widget.sortOption!,
@@ -122,8 +123,9 @@ class _UserContentBuilderState extends State<UserContentBuilder>
   }) async {
     try {
       final sortFilterDisplay = _sortFilterDisplay!.copyWith(
-        display:( _sortFilterDisplay?.displayOption.displaySubType ==
-                DisplaySubType.custom && widget.category.notEquals('anime'))
+        display: (_sortFilterDisplay?.displayOption.displaySubType ==
+                    DisplaySubType.custom &&
+                widget.category.notEquals('anime'))
             ? _sortFilterDisplay?.displayOption.copyWith(
                 displayType: DisplayType.list_vert,
                 displaySubType: DisplaySubType.comfortable,
@@ -384,7 +386,7 @@ class _UserContentBuilderState extends State<UserContentBuilder>
   void _changeDropDownValue(SortFilterDisplay value) {
     _prevSortFilterDisplay = _sortFilterDisplay!.clone();
     _sortFilterDisplay = value.clone();
-    value.toCache(UserContentBuilder.serviceName, key);
+    value.toCache(_cacheKey, key);
     if (mounted) setState(() {});
   }
 
