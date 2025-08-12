@@ -42,7 +42,7 @@ class UserThemeData {
     UserThemeColor.DeepOrange.name: Colors.deepOrange,
     UserThemeColor.Brown.name: Colors.brown,
     UserThemeColor.Grey.name: Color(0xff1F1F1F),
-    UserThemeColor.Black.name: Color.fromARGB(255, 2, 0, 27),
+    UserThemeColor.Black.name: Color.fromARGB(255, 0, 0, 0),
   };
 
   static Map<String, Color> get colorSchemeMap {
