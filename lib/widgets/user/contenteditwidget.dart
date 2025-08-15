@@ -644,7 +644,10 @@ class _ContentEditWidgetState extends State<ContentEditWidget> {
         child: Card(
           elevation: 4,
           margin: EdgeInsets.zero,
-          child: Material(child: editChild),
+          child: Material(
+            child: editChild,
+            borderRadius: BorderRadius.circular(12),
+          ),
         ),
       );
 
