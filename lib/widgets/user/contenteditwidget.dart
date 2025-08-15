@@ -1293,9 +1293,7 @@ class _ContentEditWidgetState extends State<ContentEditWidget> {
                 borderRadius: BorderRadius.circular(32),
                 side: BorderSide(
                     color: Theme.of(context).dividerColor, width: 1.0))
-            : RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(32),
-                side: BorderSide(width: 1.0)),
+            : RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
       ),
     );
   }
@@ -1387,7 +1385,7 @@ class _ContentEditWidgetState extends State<ContentEditWidget> {
                                       width: 1.0))
                               : RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(32),
-                                  side: BorderSide(width: 1.0)),
+                                ),
                         ),
                       )),
         ),
