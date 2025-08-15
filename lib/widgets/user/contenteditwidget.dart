@@ -57,6 +57,7 @@ class ContentEditWidget extends StatefulWidget {
     this.onDelete,
     this.editMode = EditMode.full,
   });
+
   @override
   _ContentEditWidgetState createState() => _ContentEditWidgetState();
 }
@@ -643,7 +644,7 @@ class _ContentEditWidgetState extends State<ContentEditWidget> {
         child: Card(
           elevation: 4,
           margin: EdgeInsets.zero,
-          child: editChild,
+          child: Material(child: editChild),
         ),
       );
 
@@ -795,7 +796,7 @@ class _ContentEditWidgetState extends State<ContentEditWidget> {
           child: advancedWidget,
         ),
         _deleteButton,
-        SB.h10,
+        SB.h30,
       ],
     );
   }
@@ -1289,7 +1290,9 @@ class _ContentEditWidgetState extends State<ContentEditWidget> {
                 borderRadius: BorderRadius.circular(32),
                 side: BorderSide(
                     color: Theme.of(context).dividerColor, width: 1.0))
-            : RoundedRectangleBorder(),
+            : RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(32),
+                side: BorderSide(width: 1.0)),
       ),
     );
   }
@@ -1379,7 +1382,9 @@ class _ContentEditWidgetState extends State<ContentEditWidget> {
                                   side: BorderSide(
                                       color: Theme.of(context).dividerColor,
                                       width: 1.0))
-                              : RoundedRectangleBorder(),
+                              : RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(32),
+                                  side: BorderSide(width: 1.0)),
                         ),
                       )),
         ),
