@@ -343,6 +343,25 @@ class MessageLookup extends MessageLookupByLibrary {
         "Dragon_Ball": MessageLookupByLibrary.simpleMessage("Жемчуг Дракона"),
         "Drama": MessageLookupByLibrary.simpleMessage("Драма"),
         "Dropped": MessageLookupByLibrary.simpleMessage("Упавший"),
+        "Dub_Icon_Style":
+            MessageLookupByLibrary.simpleMessage("Иконический стиль"),
+        "Dub_Icon_Style_Desc": MessageLookupByLibrary.simpleMessage(
+            "Выберите стиль значка для дублированного и частично дублированного аниме."),
+        "Dub_Language": MessageLookupByLibrary.simpleMessage("язык дубляжа"),
+        "Dub_Language_Desc":
+            MessageLookupByLibrary.simpleMessage("Выберите язык для дубляжа"),
+        "Dub_Report": MessageLookupByLibrary.simpleMessage(
+            "Сообщить о неточных дубляжах"),
+        "Dub_Settings":
+            MessageLookupByLibrary.simpleMessage("Настройки дубляжа"),
+        "Dub_Settings_Desc":
+            MessageLookupByLibrary.simpleMessage("Настройте параметры дубляжа"),
+        "Dub_Show_Icon":
+            MessageLookupByLibrary.simpleMessage("Показать значок дубляжа"),
+        "Dub_Show_Icon_Desc": MessageLookupByLibrary.simpleMessage(
+            "Включить значок дубляжа рядом с дублированным аниме"),
+        "Dub_Support":
+            MessageLookupByLibrary.simpleMessage("Поддержите проект MyDubList"),
         "Duration": MessageLookupByLibrary.simpleMessage("Продолжительность"),
         "Ecchi": MessageLookupByLibrary.simpleMessage("Эччи"),
         "Edit": MessageLookupByLibrary.simpleMessage("Редактировать"),

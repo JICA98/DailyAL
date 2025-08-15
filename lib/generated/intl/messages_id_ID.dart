@@ -341,6 +341,24 @@ class MessageLookup extends MessageLookupByLibrary {
         "Dragon_Ball": MessageLookupByLibrary.simpleMessage("bola naga"),
         "Drama": MessageLookupByLibrary.simpleMessage("Drama"),
         "Dropped": MessageLookupByLibrary.simpleMessage("Menjatuhkan"),
+        "Dub_Icon_Style": MessageLookupByLibrary.simpleMessage("Gaya ikon"),
+        "Dub_Icon_Style_Desc": MessageLookupByLibrary.simpleMessage(
+            "Pilih gaya ikon untuk anime yang di-dubbing dan sebagian di-dubbing"),
+        "Dub_Language":
+            MessageLookupByLibrary.simpleMessage("Bahasa sulih suara"),
+        "Dub_Language_Desc":
+            MessageLookupByLibrary.simpleMessage("Pilih bahasa untuk dub"),
+        "Dub_Report": MessageLookupByLibrary.simpleMessage(
+            "Laporkan dub yang tidak akurat"),
+        "Dub_Settings": MessageLookupByLibrary.simpleMessage("Pengaturan Dub"),
+        "Dub_Settings_Desc": MessageLookupByLibrary.simpleMessage(
+            "Sesuaikan pengaturan dub Anda"),
+        "Dub_Show_Icon":
+            MessageLookupByLibrary.simpleMessage("Tampilkan ikon dub"),
+        "Dub_Show_Icon_Desc": MessageLookupByLibrary.simpleMessage(
+            "Aktifkan ikon dub di samping anime yang di-dubbing"),
+        "Dub_Support":
+            MessageLookupByLibrary.simpleMessage("Dukung proyek MyDubList"),
         "Duration": MessageLookupByLibrary.simpleMessage("Durasi"),
         "Ecchi": MessageLookupByLibrary.simpleMessage("Ecchi."),
         "Edit": MessageLookupByLibrary.simpleMessage("Sunting"),

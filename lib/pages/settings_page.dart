@@ -1,11 +1,13 @@
 import 'package:dailyanimelist/api/dalapi.dart';
 import 'package:dailyanimelist/constant.dart';
 import 'package:dailyanimelist/generated/l10n.dart';
+import 'package:dailyanimelist/icons/dub_icons.dart';
 import 'package:dailyanimelist/pages/settings/about.dart';
 import 'package:dailyanimelist/pages/settings/anime_manga_settings.dart';
 import 'package:dailyanimelist/pages/settings/backup_restore.dart';
 import 'package:dailyanimelist/pages/settings/cachesettings.dart';
 import 'package:dailyanimelist/pages/settings/customsettings.dart';
+import 'package:dailyanimelist/pages/settings/dubsettings.dart';
 import 'package:dailyanimelist/pages/settings/homepagesettings.dart';
 import 'package:dailyanimelist/pages/settings/langsettings.dart';
 import 'package:dailyanimelist/pages/settings/list_pref_settings.dart';
@@ -106,6 +108,12 @@ class _SettingsPageState extends State<SettingsPage> {
             gotoPage(context: context, newPage: AnimeMangaSettings());
           }),
       OptionTile(
+          text: S.current.Dub_Settings,
+          iconData: DubIcons.preferredDubIcon,
+          desc: S.current.Dub_Settings_Desc,
+        onPressed: () => gotoPage(context: context, newPage: DubSettingsPage()),
+      ),
+      OptionTile(
           text: S.current.Backup_And_Restore,
           iconData: Icons.settings_backup_restore,
           desc: S.current.Backup_And_Restore_desc,
@@ -173,6 +181,15 @@ class _SettingsPageState extends State<SettingsPage> {
               if (widget.onUiChange != null) widget.onUiChange!();
             },
           ),
+        ));
+  }
+
+  void _openDubSettings(BuildContext context) {
+    gotoPage(
+        context: context,
+        newPage: SettingSliverScreen(
+          titleString: "Dub Settings",
+          child: DubSettingsPage(),
         ));
   }
 }

@@ -300,6 +300,21 @@ class MessageLookup extends MessageLookupByLibrary {
         "Dragon_Ball": MessageLookupByLibrary.simpleMessage("드래곤 볼"),
         "Drama": MessageLookupByLibrary.simpleMessage("드라마"),
         "Dropped": MessageLookupByLibrary.simpleMessage("삭제했다"),
+        "Dub_Icon_Style": MessageLookupByLibrary.simpleMessage("아이콘 스타일"),
+        "Dub_Icon_Style_Desc": MessageLookupByLibrary.simpleMessage(
+            "더빙 및 부분 더빙 애니메이션의 아이콘 스타일을 선택하세요"),
+        "Dub_Language": MessageLookupByLibrary.simpleMessage("더브 언어"),
+        "Dub_Language_Desc":
+            MessageLookupByLibrary.simpleMessage("더빙 언어를 선택하세요"),
+        "Dub_Report": MessageLookupByLibrary.simpleMessage("부정확한 더빙 신고"),
+        "Dub_Settings": MessageLookupByLibrary.simpleMessage("더빙 설정"),
+        "Dub_Settings_Desc":
+            MessageLookupByLibrary.simpleMessage("더빙 설정 사용자 지정"),
+        "Dub_Show_Icon": MessageLookupByLibrary.simpleMessage("더빙 아이콘 표시"),
+        "Dub_Show_Icon_Desc": MessageLookupByLibrary.simpleMessage(
+            "더빙된 애니메이션 옆에 있는 더빙 아이콘을 활성화하세요"),
+        "Dub_Support":
+            MessageLookupByLibrary.simpleMessage("MyDubList 프로젝트를 지원하세요"),
         "Duration": MessageLookupByLibrary.simpleMessage("지속"),
         "Ecchi": MessageLookupByLibrary.simpleMessage("ecchi."),
         "Edit": MessageLookupByLibrary.simpleMessage("편집하다"),

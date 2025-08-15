@@ -348,6 +348,26 @@ class MessageLookup extends MessageLookupByLibrary {
         "Dragon_Ball": MessageLookupByLibrary.simpleMessage("Dragon Ball"),
         "Drama": MessageLookupByLibrary.simpleMessage("Drama"),
         "Dropped": MessageLookupByLibrary.simpleMessage("Dropped"),
+        "Dub_Icon_Style":
+            MessageLookupByLibrary.simpleMessage("Estilo de ícone"),
+        "Dub_Icon_Style_Desc": MessageLookupByLibrary.simpleMessage(
+            "Selecione o estilo do ícone para anime dublado e parcialmente dublado"),
+        "Dub_Language":
+            MessageLookupByLibrary.simpleMessage("Linguagem de dublagem"),
+        "Dub_Language_Desc": MessageLookupByLibrary.simpleMessage(
+            "Selecione o idioma para dublagens"),
+        "Dub_Report": MessageLookupByLibrary.simpleMessage(
+            "Denunciar dublagens imprecisas"),
+        "Dub_Settings":
+            MessageLookupByLibrary.simpleMessage("Configurações de dublagem"),
+        "Dub_Settings_Desc": MessageLookupByLibrary.simpleMessage(
+            "Personalize suas configurações de dublagem"),
+        "Dub_Show_Icon":
+            MessageLookupByLibrary.simpleMessage("Mostrar ícone de dublagem"),
+        "Dub_Show_Icon_Desc": MessageLookupByLibrary.simpleMessage(
+            "Habilitar o ícone de dublagem ao lado do anime dublado"),
+        "Dub_Support":
+            MessageLookupByLibrary.simpleMessage("Apoie o projeto MyDubList"),
         "Duration": MessageLookupByLibrary.simpleMessage("Duração"),
         "Ecchi": MessageLookupByLibrary.simpleMessage("Ecchi"),
         "Edit": MessageLookupByLibrary.simpleMessage("Editar"),

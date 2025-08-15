@@ -178,6 +178,10 @@ flutter:
           weight: 500
         - asset: assets/fonts/Quicksand-Bold.ttf
           weight: 700
+
+    - family: DubStatus
+      fonts:
+        - asset: assets/fonts/MyDubListIcons.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

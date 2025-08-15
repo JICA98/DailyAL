@@ -300,6 +300,21 @@ class MessageLookup extends MessageLookupByLibrary {
         "Dragon_Ball": MessageLookupByLibrary.simpleMessage("ドラゴンボール"),
         "Drama": MessageLookupByLibrary.simpleMessage("ドラマ"),
         "Dropped": MessageLookupByLibrary.simpleMessage("drop"),
+        "Dub_Icon_Style": MessageLookupByLibrary.simpleMessage("アイコンスタイル"),
+        "Dub_Icon_Style_Desc": MessageLookupByLibrary.simpleMessage(
+            "吹き替え版および部分吹き替え版アニメのアイコンスタイルを選択します"),
+        "Dub_Language": MessageLookupByLibrary.simpleMessage("吹き替え言語"),
+        "Dub_Language_Desc":
+            MessageLookupByLibrary.simpleMessage("吹き替えの言語を選択してください"),
+        "Dub_Report": MessageLookupByLibrary.simpleMessage("不正確な吹き替えを報告する"),
+        "Dub_Settings": MessageLookupByLibrary.simpleMessage("ダブ設定"),
+        "Dub_Settings_Desc":
+            MessageLookupByLibrary.simpleMessage("吹き替え設定をカスタマイズする"),
+        "Dub_Show_Icon": MessageLookupByLibrary.simpleMessage("吹き替えアイコンを表示"),
+        "Dub_Show_Icon_Desc":
+            MessageLookupByLibrary.simpleMessage("吹き替えアニメの横にある吹き替えアイコンを有効にする"),
+        "Dub_Support":
+            MessageLookupByLibrary.simpleMessage("MyDubListプロジェクトをサポートする"),
         "Duration": MessageLookupByLibrary.simpleMessage("間隔"),
         "Ecchi": MessageLookupByLibrary.simpleMessage("柏"),
         "Edit": MessageLookupByLibrary.simpleMessage("編集"),

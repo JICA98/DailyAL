@@ -1069,7 +1069,6 @@ class _GeneralSearchScreenState extends State<GeneralSearchScreen>
   SliverToBoxAdapter _buildRecentNodes(List<Node> nodes, String category) {
     return SliverToBoxAdapter(
       child: Container(
-        height: 250,
         child: horizontalList(
           padding: const EdgeInsets.symmetric(horizontal: 15.0),
           items: nodes.map((e) => BaseNode(content: e)).toList(),

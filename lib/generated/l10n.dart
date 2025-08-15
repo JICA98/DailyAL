@@ -6920,6 +6920,116 @@ class S {
     );
   }
 
+  /// `Dub Settings`
+  String get Dub_Settings {
+    return Intl.message(
+      'Dub Settings',
+      name: 'Dub_Settings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Customize your dub settings`
+  String get Dub_Settings_Desc {
+    return Intl.message(
+      'Customize your dub settings',
+      name: 'Dub_Settings_Desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Show dub icon`
+  String get Dub_Show_Icon {
+    return Intl.message(
+      'Show dub icon',
+      name: 'Dub_Show_Icon',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enable the dub icon next to dubbed anime`
+  String get Dub_Show_Icon_Desc {
+    return Intl.message(
+      'Enable the dub icon next to dubbed anime',
+      name: 'Dub_Show_Icon_Desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dub language`
+  String get Dub_Language {
+    return Intl.message(
+      'Dub language',
+      name: 'Dub_Language',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select the language for dubs`
+  String get Dub_Language_Desc {
+    return Intl.message(
+      'Select the language for dubs',
+      name: 'Dub_Language_Desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Icon style`
+  String get Dub_Icon_Style {
+    return Intl.message(
+      'Icon style',
+      name: 'Dub_Icon_Style',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select the icon style for dubbed and partially dubbed anime`
+  String get Dub_Icon_Style_Desc {
+    return Intl.message(
+      'Select the icon style for dubbed and partially dubbed anime',
+      name: 'Dub_Icon_Style_Desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Report inaccurate dubs`
+  String get Dub_Report {
+    return Intl.message(
+      'Report inaccurate dubs',
+      name: 'Dub_Report',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Support the MyDubList project`
+  String get Dub_Support {
+    return Intl.message(
+      'Support the MyDubList project',
+      name: 'Dub_Support',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Show dub (English) status of an anime in list`
+  String get Show_dub_status_AnimeList_Desc {
+    return Intl.message(
+      'Show dub (English) status of an anime in list',
+      name: 'Show_dub_status_AnimeList_Desc',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Made with`
   String get Made_With_Flutter {
     return Intl.message(

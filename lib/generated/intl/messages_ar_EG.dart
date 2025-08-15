@@ -335,6 +335,23 @@ class MessageLookup extends MessageLookupByLibrary {
         "Dragon_Ball": MessageLookupByLibrary.simpleMessage("كرة التنين"),
         "Drama": MessageLookupByLibrary.simpleMessage("دراما"),
         "Dropped": MessageLookupByLibrary.simpleMessage("إسقاط"),
+        "Dub_Icon_Style": MessageLookupByLibrary.simpleMessage("نمط الأيقونة"),
+        "Dub_Icon_Style_Desc": MessageLookupByLibrary.simpleMessage(
+            "حدد نمط الأيقونات للأنمي المدبلج والمدبلج جزئيًا"),
+        "Dub_Language": MessageLookupByLibrary.simpleMessage("لغة الدبلجة"),
+        "Dub_Language_Desc":
+            MessageLookupByLibrary.simpleMessage("حدد اللغة للدبلجة"),
+        "Dub_Report": MessageLookupByLibrary.simpleMessage(
+            "الإبلاغ عن الدبلجة غير الدقيقة"),
+        "Dub_Settings": MessageLookupByLibrary.simpleMessage("إعدادات الدبلجة"),
+        "Dub_Settings_Desc": MessageLookupByLibrary.simpleMessage(
+            "تخصيص إعدادات الدبلجة الخاصة بك"),
+        "Dub_Show_Icon":
+            MessageLookupByLibrary.simpleMessage("إظهار رمز الدبلجة"),
+        "Dub_Show_Icon_Desc": MessageLookupByLibrary.simpleMessage(
+            "تمكين أيقونة الدبلجة بجوار الأنمي المدبلج"),
+        "Dub_Support":
+            MessageLookupByLibrary.simpleMessage("ادعم مشروع MyDubList"),
         "Duration": MessageLookupByLibrary.simpleMessage("مدة"),
         "Ecchi": MessageLookupByLibrary.simpleMessage("ecchi."),
         "Edit": MessageLookupByLibrary.simpleMessage("يحرر"),

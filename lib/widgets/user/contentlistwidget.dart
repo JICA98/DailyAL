@@ -5,9 +5,11 @@ import 'package:dailyanimelist/api/auth/auth.dart';
 import 'package:dailyanimelist/api/dalapi.dart';
 import 'package:dailyanimelist/api/malapi.dart';
 import 'package:dailyanimelist/api/maluser.dart';
+import 'package:dailyanimelist/cache/dubinfomanager.dart';
 import 'package:dailyanimelist/enums.dart';
 import 'package:dailyanimelist/extensions.dart';
 import 'package:dailyanimelist/generated/l10n.dart';
+import 'package:dailyanimelist/icons/dub_icons.dart';
 import 'package:dailyanimelist/pages/animedetailed/intereststackwidget.dart';
 import 'package:dailyanimelist/pages/animedetailed/synopsiswidget.dart';
 import 'package:dailyanimelist/screens/characterscreen.dart';
@@ -248,7 +250,7 @@ Widget _baseBaseNode(
     myListStatus: listStatus(node, category),
     category: category,
     aspectRatio: 2.35,
-    imageAspectRatio: 0.5,
+    imageAspectRatio: 0.55,
     showBackgroundImage: false,
     displayType: displayType,
     index: index,
@@ -772,6 +774,8 @@ class _ContentAllWidgetState extends State<ContentAllWidget>
                                               priorityBadge,
                                             if (user.pref.showAiringInfo)
                                               airingBadge,
+                                            if (user.pref.showDubStatus)
+                                              dubStatusBadge,
                                           ],
                                         ),
                                       ),
@@ -960,7 +964,8 @@ class _ContentAllWidgetState extends State<ContentAllWidget>
     var content2 = widget.dynContent?.content;
     if (_anime() &&
         content2 is AnimeDetailed &&
-        myListStatus?.numEpisodesWatched != null) {
+        myListStatus?.numEpisodesWatched != null &&
+        !user.pref.showDubStatus) {
       final alreadyAired = "finished_airing".equalsIgnoreCase(content2.status);
       var episodesWatched = myListStatus?.numEpisodesWatched as int;
       if (alreadyAired && content2.numEpisodes != null) {
@@ -1158,6 +1163,29 @@ class _ContentAllWidgetState extends State<ContentAllWidget>
                 opacity: 1, fontSize: 11, colorVal: Colors.white.value),
           )),
     );
+  }
+
+  Widget get dubStatusBadge {
+    final content = widget.dynContent?.content;
+    if (content is! AnimeDetailed) return SB.z;
+
+    final id = content.id;
+    if (id == null) return SB.z;
+    if (DubInfoManager().hasAnyDub(id)) {
+      final icon = DubInfoManager().isDubbed(id)
+          ? DubIcons.preferredDubIcon
+          : DubIcons.preferredIncompleteDubIcon;
+      return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 5.0),
+        child: Tooltip(
+          message: DubInfoManager().isDubbed(id)
+              ? "Fully dubbed"
+              : "Partially dubbed",
+          child: Icon(icon, size: 16),
+        ),
+      );
+    }
+    return SB.z;
   }
 
   Widget indexWidget(index) => widget.showIndex
@@ -1501,7 +1529,7 @@ Widget usingSyncScheduler(int id, Widget Function(ScheduleData) widget) {
 
 Widget statusBadge(NodeStatusValue nsv) => Container(
     width: 40,
-    padding: EdgeInsets.zero,
+    padding: EdgeInsets.symmetric(horizontal: 1.0),
     decoration: BoxDecoration(
         color: nsv.color, borderRadius: BorderRadius.circular(16)),
     child: Center(
@@ -1575,6 +1603,7 @@ Widget buildGridResults(var _results, var _category,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       AnimeGridCard(
+                        category: _category,
                         height: 60,
                         width: 60,
                         smallHeight: 25,
