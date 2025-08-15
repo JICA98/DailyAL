@@ -11,6 +11,7 @@ import 'package:dailyanimelist/widgets/slivers.dart';
 import 'package:dailyanimelist/widgets/togglebutton.dart';
 import 'package:dal_commons/dal_commons.dart';
 import 'package:flutter/material.dart';
+import 'package:dailyanimelist/enums.dart';
 
 class AnimeMangaPageTabEdit extends StatefulWidget {
   final String title;
@@ -155,7 +156,63 @@ class _AnimeMangaSettingsState extends State<AnimeMangaSettings> {
                     },
                   ),
                 ),
+                // Preferred title option
                 preferredTitleOptionTile((lang) => setState(() {})),
+                // Default Add-to-List status for Anime
+                OptionTile(
+                  text: "${S.current.Add_to_List} (${S.current.Anime_Caps})",
+                  iconData: Icons.playlist_add_check,
+                  multiLine: false,
+                  trailing: SelectButton(
+                    popupText: "${S.current.Add_to_List} (${S.current.Anime_Caps})",
+                    selectedOption: myAnimeStatusMap[user
+                            .pref
+                            .animeMangaPagePreferences
+                            .defaultAnimeAddToListSelected] ??
+                        myAnimeStatusMap.values.first,
+                    options: myAnimeStatusMap.values.toList(),
+                    onChanged: (value) {
+                      final idx =
+                          myAnimeStatusMap.values.toList().indexOf(value);
+                      if (idx >= 0) {
+                        user.pref.animeMangaPagePreferences
+                                .defaultAnimeAddToList =
+                            myAnimeStatusMap.keys.elementAt(idx);
+                        user.setIntance(
+                            shouldNotify: false, updateAuth: false);
+                        setState(() {});
+                      }
+                    },
+                  ),
+                ),
+                // Default Add-to-List status for Manga
+                OptionTile(
+                  text: "${S.current.Add_to_List} (${S.current.Manga_Caps})",
+                  iconData: Icons.playlist_add_check,
+                  multiLine: false,
+                  trailing: SelectButton(
+                    popupText: "${S.current.Add_to_List} (${S.current.Manga_Caps})",
+                    selectedOption: myMangaStatusMap[user
+                            .pref
+                            .animeMangaPagePreferences
+                            .defaultMangaAddToListSelected] ??
+                        myMangaStatusMap.values.first,
+                    options: myMangaStatusMap.values.toList(),
+                    onChanged: (value) {
+                      final idx =
+                          myMangaStatusMap.values.toList().indexOf(value);
+                      if (idx >= 0) {
+                        user.pref.animeMangaPagePreferences
+                                .defaultMangaAddToList =
+                            myMangaStatusMap.keys.elementAt(idx);
+                        user.setIntance(
+                            shouldNotify: false, updateAuth: false);
+                        setState(() {});
+                      }
+                    },
+                  ),
+                ),
+                // Custom tabs
                 AnimeMangaPageTabEdit(
                   S.current.Custom_anime_tabs,
                   user.pref.animeMangaPagePreferences.animeTabs,

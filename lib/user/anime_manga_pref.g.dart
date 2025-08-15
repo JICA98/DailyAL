@@ -26,7 +26,9 @@ AnimeMangaPagePreferences _$AnimeMangaPagePreferencesFromJson(
       contentCardProps: (json['contentCardProps'] as List<dynamic>?)
           ?.map((e) => ContentCardProps.fromJson(e as Map<String, dynamic>?))
           .toList(),
-    );
+    )
+      ..defaultAnimeAddToList = json['defaultAnimeAddToList'] as String?
+      ..defaultMangaAddToList = json['defaultMangaAddToList'] as String?;
 
 Map<String, dynamic> _$AnimeMangaPagePreferencesToJson(
         AnimeMangaPagePreferences instance) =>
@@ -37,6 +39,8 @@ Map<String, dynamic> _$AnimeMangaPagePreferencesToJson(
       'defaultTab': instance.defaultTab,
       'defaultAnimeTab': instance.defaultAnimeTab,
       'defaultMangaTab': instance.defaultMangaTab,
+      'defaultAnimeAddToList': instance.defaultAnimeAddToList,
+      'defaultMangaAddToList': instance.defaultMangaAddToList,
       'contentCardProps': instance.contentCardProps,
     };
 

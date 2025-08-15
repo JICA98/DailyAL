@@ -692,8 +692,12 @@ class _ContentEditWidgetState extends State<ContentEditWidget> {
         _loading = true;
       });
     }
-    await updateWatchingStatus(
-        widget.category.equals('anime') ? 'watching' : 'reading');
+    bool isAnime = widget.category.equals('anime');
+    var pref = user.pref.animeMangaPagePreferences;
+    String status = isAnime
+        ? pref.defaultAnimeAddToListSelected
+        : pref.defaultMangaAddToListSelected;
+    await updateWatchingStatus(status);
     showAddOptions = true;
     _loading = false;
     setState(() {});

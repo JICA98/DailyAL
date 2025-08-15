@@ -15,6 +15,8 @@ class AnimeMangaPagePreferences {
   String? defaultTab;
   String? defaultAnimeTab;
   String? defaultMangaTab;
+  String? defaultAnimeAddToList;
+  String? defaultMangaAddToList;
   List<ContentCardProps>? contentCardProps;
 
   AnimeMangaPagePreferences({
@@ -25,6 +27,8 @@ class AnimeMangaPagePreferences {
     this.defaultAnimeTab,
     this.defaultMangaTab,
     this.contentCardProps,
+    this.defaultAnimeAddToList,
+    this.defaultMangaAddToList,
   });
 
   String get defaultTabSelected {
@@ -37,6 +41,14 @@ class AnimeMangaPagePreferences {
 
   String get defaultMangaTabSelected {
     return defaultMangaTab ?? 'none';
+  }
+
+  String get defaultAnimeAddToListSelected {
+    return defaultAnimeAddToList ?? 'watching';
+  }
+
+  String get defaultMangaAddToListSelected {
+    return defaultMangaAddToList ?? 'reading';
   }
 
   factory AnimeMangaPagePreferences.defaultObject() {
