@@ -575,6 +575,7 @@ class _UserPageState extends State<UserPage> with TickerProviderStateMixin {
     bool _canBeFetchedFromAPI =
         canBeFetchedFromAPI(category, sortFilterDisplay);
     if (_canBeFetchedFromAPI) {
+      logDal('Using mal api');
       future = MalUser.getMyContentList(
         limit: pageSize,
         fromCache: input.fromCache,
@@ -586,6 +587,7 @@ class _UserPageState extends State<UserPage> with TickerProviderStateMixin {
         fields: [],
       );
     } else {
+      logDal('using whole pagination output');
       final orderMap = category.equals('anime')
           ? animeListDefaultOrderMap
           : mangaListDefaultOrderMap;
@@ -615,7 +617,10 @@ class _UserPageState extends State<UserPage> with TickerProviderStateMixin {
       if (!defaultOrder) {
         list = list.reversed.toList();
       }
-    } else {}
+    }
+    if (!canTitleSortingBeDoneUsingApi(sortFilterDisplay)) {
+      isSorted = false;
+    }
     return await getSortedFilteredData(
       list,
       _canBeFetchedFromAPI,

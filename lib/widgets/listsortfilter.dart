@@ -7,10 +7,10 @@ import 'package:dailyanimelist/constant.dart';
 import 'package:dailyanimelist/enums.dart';
 import 'package:dailyanimelist/generated/l10n.dart';
 import 'package:dailyanimelist/main.dart';
+import 'package:dailyanimelist/screens/contentdetailedscreen.dart';
 import 'package:dailyanimelist/screens/generalsearchscreen.dart';
 import 'package:dailyanimelist/widgets/custombutton.dart';
 import 'package:dailyanimelist/widgets/search/filtermodal.dart';
-import 'package:dailyanimelist/widgets/selectbottom.dart';
 import 'package:dailyanimelist/widgets/user/contentbuilder.dart';
 import 'package:dailyanimelist/widgets/user/contentlistwidget.dart';
 import 'package:dailyanimelist/widgets/will_pop_widget.dart';
@@ -27,7 +27,17 @@ bool canBeFetchedFromAPI(
 
   return _sortFilterDisplay.filterOutputs.isEmpty &&
       orderMap.containsKey(_sortFilterDisplay.sort.value) &&
-      orderMap[_sortFilterDisplay.sort.value] == _sortFilterDisplay.sort.order;
+      orderMap[_sortFilterDisplay.sort.value] == _sortFilterDisplay.sort.order &&
+      canTitleSortingBeDoneUsingApi(_sortFilterDisplay);
+}
+
+bool canTitleSortingBeDoneUsingApi(SortFilterDisplay _sortFilterDisplay) {
+  final titles = ['anime_title', 'manga_title'];
+  final sortValue = _sortFilterDisplay.sort.value;
+  if (titles.contains(sortValue)) {
+    return user.pref.preferredAnimeTitle == TitleLang.ro;
+  }
+  return true;
 }
 
 List<FilterOption> getFilterOptions(String category) {
