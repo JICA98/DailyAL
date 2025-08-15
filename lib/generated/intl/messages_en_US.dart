@@ -32,9 +32,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "Action": MessageLookupByLibrary.simpleMessage("Action"),
         "Adaptations": MessageLookupByLibrary.simpleMessage("Adaptations"),
         "Adapts_Manga": MessageLookupByLibrary.simpleMessage("Adapts Manga"),
+        "Add": MessageLookupByLibrary.simpleMessage("Add"),
         "Add_Edit_Msg": MessageLookupByLibrary.simpleMessage(
             "Add or Edit your about section."),
         "Add_Friend": MessageLookupByLibrary.simpleMessage("Add Friend"),
+        "Add_Recurring_Event":
+            MessageLookupByLibrary.simpleMessage("Recurring weekly"),
+        "Add_Recurring_Event_Desc": MessageLookupByLibrary.simpleMessage(
+            "Add future episodes as weekly events"),
+        "Add_To_Calendar_Prompt":
+            MessageLookupByLibrary.simpleMessage("Add to Calendar"),
         "Add_an_Item": MessageLookupByLibrary.simpleMessage("Add an Item"),
         "Add_display_profile":
             MessageLookupByLibrary.simpleMessage("Add Display Profile"),

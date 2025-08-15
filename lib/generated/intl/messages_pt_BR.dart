@@ -32,9 +32,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "Action": MessageLookupByLibrary.simpleMessage("Açao"),
         "Adaptations": MessageLookupByLibrary.simpleMessage("Adaptações"),
         "Adapts_Manga": MessageLookupByLibrary.simpleMessage("Adapta mangá"),
+        "Add": MessageLookupByLibrary.simpleMessage("Adicionar"),
         "Add_Edit_Msg": MessageLookupByLibrary.simpleMessage(
             "Adicione ou edite sua seção sobre."),
         "Add_Friend": MessageLookupByLibrary.simpleMessage("Adicionar amigo"),
+        "Add_Recurring_Event":
+            MessageLookupByLibrary.simpleMessage("Recorrente semanalmente"),
+        "Add_Recurring_Event_Desc": MessageLookupByLibrary.simpleMessage(
+            "Adicione episódios futuros como eventos semanais"),
+        "Add_To_Calendar_Prompt":
+            MessageLookupByLibrary.simpleMessage("Adicione ao calendário"),
         "Add_an_Item": MessageLookupByLibrary.simpleMessage("Adicione um item"),
         "Add_display_profile": MessageLookupByLibrary.simpleMessage(
             "Adicionar perfil de exibição"),
@@ -371,10 +378,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "Episodes_seen":
             MessageLookupByLibrary.simpleMessage("Episódios vistos"),
         "Erotica": MessageLookupByLibrary.simpleMessage("Erótica"),
+        "Error_Adding_Event_To_Calendar": MessageLookupByLibrary.simpleMessage(
+            "Erro adicionando evento ao calendário"),
         "Error_removing_image":
             MessageLookupByLibrary.simpleMessage("Erro ao remover imagem"),
         "Error_uploading_image":
             MessageLookupByLibrary.simpleMessage("erro ao carregar a imagem"),
+        "Event_Added_To_Calendar": MessageLookupByLibrary.simpleMessage(
+            "Evento adicionado ao calendário"),
         "Events": MessageLookupByLibrary.simpleMessage("Eventos"),
         "Exclude_the_genre_here":
             MessageLookupByLibrary.simpleMessage("Excluir o gênero aqui"),

@@ -997,5 +997,9 @@
     "Font_Preview_Description": "This is how text will appear throughout the app.",
     "Font_Restart_Notice": "You may need to restart the app to see all changes.",
     "Event_Added_To_Calendar": "Event added to calendar",
-    "Error_Adding_Event_To_Calendar": "Error adding event to calendar"
+    "Error_Adding_Event_To_Calendar": "Error adding event to calendar",
+    "Add_To_Calendar_Prompt": "Add to Calendar",
+    "Add_Recurring_Event": "Recurring weekly",
+    "Add_Recurring_Event_Desc": "Add future episodes as weekly events",
+    "Add": "Add"
 }

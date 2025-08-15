@@ -1001,5 +1001,9 @@
     "Font_Preview_Description": "As\u00ed es como aparecer\u00e1 el texto en toda la aplicaci\u00f3n.",
     "Font_Restart_Notice": "Es posible que deba reiniciar la aplicaci\u00f3n para ver todos los cambios.",
     "Event_Added_To_Calendar": "Evento agregado al calendario",
-    "Error_Adding_Event_To_Calendar": "Error a agregar evento al calendario"
+    "Error_Adding_Event_To_Calendar": "Error a agregar evento al calendario",
+    "Add_To_Calendar_Prompt": "Agregar al calendario",
+    "Add_Recurring_Event": "Semanal recurrente",
+    "Add_Recurring_Event_Desc": "Agregar episodios futuros como eventos semanales",
+    "Add": "Agregar"
 }

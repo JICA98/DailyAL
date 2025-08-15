@@ -10029,6 +10029,46 @@ class S {
       args: [],
     );
   }
+
+  /// `Add to Calendar`
+  String get Add_To_Calendar_Prompt {
+    return Intl.message(
+      'Add to Calendar',
+      name: 'Add_To_Calendar_Prompt',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Recurring weekly`
+  String get Add_Recurring_Event {
+    return Intl.message(
+      'Recurring weekly',
+      name: 'Add_Recurring_Event',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add future episodes as weekly events`
+  String get Add_Recurring_Event_Desc {
+    return Intl.message(
+      'Add future episodes as weekly events',
+      name: 'Add_Recurring_Event_Desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add`
+  String get Add {
+    return Intl.message(
+      'Add',
+      name: 'Add',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

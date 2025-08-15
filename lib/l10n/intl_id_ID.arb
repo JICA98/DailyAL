@@ -1000,5 +1000,9 @@
     "Font_Preview_Description": "Beginilah teks akan muncul di seluruh aplikasi.",
     "Font_Restart_Notice": "Anda mungkin perlu memulai kembali aplikasi untuk melihat semua perubahan.",
     "Event_Added_To_Calendar": "Acara ditambahkan ke kalender",
-    "Error_Adding_Event_To_Calendar": "Kesalahan Menambahkan Acara ke Kalender"
+    "Error_Adding_Event_To_Calendar": "Kesalahan Menambahkan Acara ke Kalender",
+    "Add_To_Calendar_Prompt": "Tambahkan ke Kalender",
+    "Add_Recurring_Event": "Berulang mingguan",
+    "Add_Recurring_Event_Desc": "Tambahkan episode masa depan sebagai acara mingguan",
+    "Add": "Menambahkan"
 }

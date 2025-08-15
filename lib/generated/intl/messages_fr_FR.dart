@@ -32,9 +32,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "Action": MessageLookupByLibrary.simpleMessage("action"),
         "Adaptations": MessageLookupByLibrary.simpleMessage("Adaptations"),
         "Adapts_Manga": MessageLookupByLibrary.simpleMessage("Adapte manga"),
+        "Add": MessageLookupByLibrary.simpleMessage("Ajouter"),
         "Add_Edit_Msg": MessageLookupByLibrary.simpleMessage(
             "Ajoutez ou modifiez votre section À propos."),
         "Add_Friend": MessageLookupByLibrary.simpleMessage("Ajouter un ami"),
+        "Add_Recurring_Event":
+            MessageLookupByLibrary.simpleMessage("Hebdomadaire récurrent"),
+        "Add_Recurring_Event_Desc": MessageLookupByLibrary.simpleMessage(
+            "Ajouter les futurs épisodes comme événements hebdomadaires"),
+        "Add_To_Calendar_Prompt":
+            MessageLookupByLibrary.simpleMessage("Ajouter au calendrier"),
         "Add_an_Item":
             MessageLookupByLibrary.simpleMessage("Ajouter un article"),
         "Add_display_profile": MessageLookupByLibrary.simpleMessage(
@@ -374,10 +381,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "Episodes": MessageLookupByLibrary.simpleMessage("Épisodes"),
         "Episodes_seen": MessageLookupByLibrary.simpleMessage("Épisodes vus"),
         "Erotica": MessageLookupByLibrary.simpleMessage("Érotique"),
+        "Error_Adding_Event_To_Calendar": MessageLookupByLibrary.simpleMessage(
+            "Erreur d\'ajout d\'événement au calendrier"),
         "Error_removing_image": MessageLookupByLibrary.simpleMessage(
             "Erreur lors de la suppression de l\'image"),
         "Error_uploading_image": MessageLookupByLibrary.simpleMessage(
             "Erreur lors de l\'envoi de l\'image"),
+        "Event_Added_To_Calendar": MessageLookupByLibrary.simpleMessage(
+            "Événement ajouté au calendrier"),
         "Events": MessageLookupByLibrary.simpleMessage("Événements"),
         "Exclude_the_genre_here":
             MessageLookupByLibrary.simpleMessage("Exclure le genre ici"),

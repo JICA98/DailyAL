@@ -998,5 +998,9 @@
     "Font_Preview_Description": "Uygulama boyunca metin b\u00f6yle g\u00f6r\u00fcnecektir.",
     "Font_Restart_Notice": "T\u00fcm de\u011fi\u015fiklikleri g\u00f6rmek i\u00e7in uygulamay\u0131 yeniden ba\u015flatman\u0131z gerekebilir.",
     "Event_Added_To_Calendar": "Takvime eklenen etkinlik",
-    "Error_Adding_Event_To_Calendar": "Takvime olay ekleme hatas\u0131"
+    "Error_Adding_Event_To_Calendar": "Takvime olay ekleme hatas\u0131",
+    "Add_To_Calendar_Prompt": "Takvime ekle",
+    "Add_Recurring_Event": "Tekrarlayan haftal\u0131k",
+    "Add_Recurring_Event_Desc": "Haftal\u0131k etkinlikler olarak gelecekteki b\u00f6l\u00fcmleri ekleyin",
+    "Add": "Eklemek"
 }

@@ -32,9 +32,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "Action": MessageLookupByLibrary.simpleMessage("عمل"),
         "Adaptations": MessageLookupByLibrary.simpleMessage("الاقتباسات"),
         "Adapts_Manga": MessageLookupByLibrary.simpleMessage("تتكيف مانجا"),
+        "Add": MessageLookupByLibrary.simpleMessage("يضيف"),
         "Add_Edit_Msg": MessageLookupByLibrary.simpleMessage(
             "إضافة أو تحرير القسم الخاص بك."),
         "Add_Friend": MessageLookupByLibrary.simpleMessage("إضافة صديق"),
+        "Add_Recurring_Event":
+            MessageLookupByLibrary.simpleMessage("متكرر أسبوعي"),
+        "Add_Recurring_Event_Desc": MessageLookupByLibrary.simpleMessage(
+            "أضف الحلقات المستقبلية كأحداث أسبوعية"),
+        "Add_To_Calendar_Prompt":
+            MessageLookupByLibrary.simpleMessage("إضافة إلى التقويم"),
         "Add_an_Item": MessageLookupByLibrary.simpleMessage("إضافة عنصر"),
         "Add_display_profile":
             MessageLookupByLibrary.simpleMessage("إضافة ملف تعريف العرض"),
@@ -356,10 +363,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "Episodes": MessageLookupByLibrary.simpleMessage("الحلقات"),
         "Episodes_seen": MessageLookupByLibrary.simpleMessage("حلقات ينظر"),
         "Erotica": MessageLookupByLibrary.simpleMessage("الشبقية"),
+        "Error_Adding_Event_To_Calendar": MessageLookupByLibrary.simpleMessage(
+            "خطأ في إضافة حدث إلى التقويم"),
         "Error_removing_image":
             MessageLookupByLibrary.simpleMessage("حدث خطأ أثناء إزالة الصورة"),
         "Error_uploading_image":
             MessageLookupByLibrary.simpleMessage("حدث خطأ أثناء رفع الصورة"),
+        "Event_Added_To_Calendar":
+            MessageLookupByLibrary.simpleMessage("تمت إضافة الحدث إلى التقويم"),
         "Events": MessageLookupByLibrary.simpleMessage("الأحداث"),
         "Exclude_the_genre_here":
             MessageLookupByLibrary.simpleMessage("استبعاد هذا النوع هنا"),

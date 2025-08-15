@@ -1000,5 +1000,9 @@
     "Font_Preview_Description": "C'est ainsi que le texte appara\u00eetra dans l'application.",
     "Font_Restart_Notice": "Vous devrez peut-\u00eatre red\u00e9marrer l'application pour voir tous les modifications.",
     "Event_Added_To_Calendar": "\u00c9v\u00e9nement ajout\u00e9 au calendrier",
-    "Error_Adding_Event_To_Calendar": "Erreur d'ajout d'\u00e9v\u00e9nement au calendrier"
+    "Error_Adding_Event_To_Calendar": "Erreur d'ajout d'\u00e9v\u00e9nement au calendrier",
+    "Add_To_Calendar_Prompt": "Ajouter au calendrier",
+    "Add_Recurring_Event": "Hebdomadaire r\u00e9current",
+    "Add_Recurring_Event_Desc": "Ajouter les futurs \u00e9pisodes comme \u00e9v\u00e9nements hebdomadaires",
+    "Add": "Ajouter"
 }

@@ -33,9 +33,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "Adaptations": MessageLookupByLibrary.simpleMessage("Адаптации"),
         "Adapts_Manga":
             MessageLookupByLibrary.simpleMessage("Адаптирует мангу"),
+        "Add": MessageLookupByLibrary.simpleMessage("Добавлять"),
         "Add_Edit_Msg": MessageLookupByLibrary.simpleMessage(
             "Добавьте или отредактируйте раздел «О себе»."),
         "Add_Friend": MessageLookupByLibrary.simpleMessage("Добавить в друзья"),
+        "Add_Recurring_Event":
+            MessageLookupByLibrary.simpleMessage("Повторяющийся еженедельный"),
+        "Add_Recurring_Event_Desc": MessageLookupByLibrary.simpleMessage(
+            "Добавить будущие эпизоды как еженедельные мероприятия"),
+        "Add_To_Calendar_Prompt":
+            MessageLookupByLibrary.simpleMessage("Добавить в календарь"),
         "Add_an_Item": MessageLookupByLibrary.simpleMessage("Добавить элемент"),
         "Add_display_profile":
             MessageLookupByLibrary.simpleMessage("Добавить профиль дисплея"),
@@ -367,10 +374,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "Episodes_seen":
             MessageLookupByLibrary.simpleMessage("Просмотренные эпизоды"),
         "Erotica": MessageLookupByLibrary.simpleMessage("Эротика"),
+        "Error_Adding_Event_To_Calendar": MessageLookupByLibrary.simpleMessage(
+            "Ошибка добавления события в календарь"),
         "Error_removing_image": MessageLookupByLibrary.simpleMessage(
             "Ошибка удаления изображения."),
         "Error_uploading_image": MessageLookupByLibrary.simpleMessage(
             "Ошибка при загрузке изображения"),
+        "Event_Added_To_Calendar": MessageLookupByLibrary.simpleMessage(
+            "Событие добавлено в календарь"),
         "Events": MessageLookupByLibrary.simpleMessage("События"),
         "Exclude_the_genre_here":
             MessageLookupByLibrary.simpleMessage("Исключите жанр здесь"),

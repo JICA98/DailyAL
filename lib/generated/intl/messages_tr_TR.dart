@@ -33,9 +33,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "Adaptations": MessageLookupByLibrary.simpleMessage("Uyarlamalar"),
         "Adapts_Manga":
             MessageLookupByLibrary.simpleMessage("Manga\'yı uyarlar"),
+        "Add": MessageLookupByLibrary.simpleMessage("Eklemek"),
         "Add_Edit_Msg": MessageLookupByLibrary.simpleMessage(
             "Hakkında bölümünüzü ekleyin veya düzenleyin."),
         "Add_Friend": MessageLookupByLibrary.simpleMessage("Arkadaş Ekle"),
+        "Add_Recurring_Event":
+            MessageLookupByLibrary.simpleMessage("Tekrarlayan haftalık"),
+        "Add_Recurring_Event_Desc": MessageLookupByLibrary.simpleMessage(
+            "Haftalık etkinlikler olarak gelecekteki bölümleri ekleyin"),
+        "Add_To_Calendar_Prompt":
+            MessageLookupByLibrary.simpleMessage("Takvime ekle"),
         "Add_an_Item": MessageLookupByLibrary.simpleMessage("Bir Öğe Ekle"),
         "Add_display_profile":
             MessageLookupByLibrary.simpleMessage("Görüntü Profili Ekle"),
@@ -363,10 +370,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "Episodes_seen":
             MessageLookupByLibrary.simpleMessage("Görülen Bölümler"),
         "Erotica": MessageLookupByLibrary.simpleMessage("Erotik"),
+        "Error_Adding_Event_To_Calendar":
+            MessageLookupByLibrary.simpleMessage("Takvime olay ekleme hatası"),
         "Error_removing_image": MessageLookupByLibrary.simpleMessage(
             "Resim kaldırılırken hata oluştu"),
         "Error_uploading_image":
             MessageLookupByLibrary.simpleMessage("Resmi yüklerken hata"),
+        "Event_Added_To_Calendar":
+            MessageLookupByLibrary.simpleMessage("Takvime eklenen etkinlik"),
         "Events": MessageLookupByLibrary.simpleMessage("Olaylar"),
         "Exclude_the_genre_here":
             MessageLookupByLibrary.simpleMessage("Türü burada hariç tutun"),

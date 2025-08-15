@@ -32,9 +32,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "Action": MessageLookupByLibrary.simpleMessage("Handlung"),
         "Adaptations": MessageLookupByLibrary.simpleMessage("Anpassungen"),
         "Adapts_Manga": MessageLookupByLibrary.simpleMessage("Passt Manga an"),
+        "Add": MessageLookupByLibrary.simpleMessage("Hinzufügen"),
         "Add_Edit_Msg": MessageLookupByLibrary.simpleMessage(
             "Fügen Sie Ihren About-Bereich hinzu oder bearbeiten Sie ihn."),
         "Add_Friend": MessageLookupByLibrary.simpleMessage("Freund hinzufügen"),
+        "Add_Recurring_Event": MessageLookupByLibrary.simpleMessage(
+            "Wiederkehrendes wöchentliches"),
+        "Add_Recurring_Event_Desc": MessageLookupByLibrary.simpleMessage(
+            "Fügen Sie zukünftige Episoden als wöchentliche Ereignisse hinzu"),
+        "Add_To_Calendar_Prompt":
+            MessageLookupByLibrary.simpleMessage("Zum Kalender hinzufügen"),
         "Add_an_Item":
             MessageLookupByLibrary.simpleMessage("Einen Artikel hinzufügen"),
         "Add_display_profile":
@@ -370,10 +377,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "Episodes_seen":
             MessageLookupByLibrary.simpleMessage("Episoden gesehen."),
         "Erotica": MessageLookupByLibrary.simpleMessage("Erotik"),
+        "Error_Adding_Event_To_Calendar": MessageLookupByLibrary.simpleMessage(
+            "Fehler beim Addieren von Ereignissen zum Kalender"),
         "Error_removing_image": MessageLookupByLibrary.simpleMessage(
             "Fehler beim Entfernen des Bildes"),
         "Error_uploading_image": MessageLookupByLibrary.simpleMessage(
             "Fehler beim hochladen des Bildes"),
+        "Event_Added_To_Calendar": MessageLookupByLibrary.simpleMessage(
+            "Ereignis zum Kalender hinzugefügt"),
         "Events": MessageLookupByLibrary.simpleMessage("Veranstaltungen"),
         "Exclude_the_genre_here": MessageLookupByLibrary.simpleMessage(
             "Schließen Sie das Genr hier aus"),
