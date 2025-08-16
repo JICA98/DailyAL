@@ -11,7 +11,7 @@
 [![Discord Users](https://img.shields.io/discord/1147503264741478452.svg?label=&labelColor=6A7EC2&color=7389D8&logo=discord&logoColor=FFFFFF)](https://discord.gg/ap4Wghv5e8)
 [![Github downloads](https://img.shields.io/github/downloads/jica98/dailyal/total?label=downloads&labelColor=27303D&color=0D1117&logo=github&logoColor=FFFFFF&style=flat)](https://github.com/JICA98/DailyAL/releases)
 [![GitHub stars](https://img.shields.io/github/stars/jica98/dailyal?label=stars&labelColor=27303D&color=0D1117&logo=github&logoColor=FFFFFF&style=flat)](#)
-[![License: AGPL-3.0](https://img.shields.io/github/license/jica98/dailyal?labelColor=27303D&color=818cf8)](/LICENSE)
+[![License: MIT](https://img.shields.io/github/license/jica98/dailyal?labelColor=27303D&color=818cf8)](/LICENSE)
 [![Languages](https://img.shields.io/github/languages/count/jica98/dailyal?label=Languages&logo=googleearth)](/lib/l10n)
 
 ## Download
