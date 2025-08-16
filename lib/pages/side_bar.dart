@@ -495,7 +495,7 @@ class _AppSideBarState extends State<AppSideBar> with TickerProviderStateMixin {
                 // desc: S.current.Buy_Me_A_Copy_Desc,
                 iconData: Icons.coffee,
                 onPressed: () =>
-                    launchURL("https://www.buymeacoffee.com/dailyanimelist"),
+                    launchURL("https://ko-fi.com/abhaybyte"),
               );
             else
               return SB.z;
