@@ -152,7 +152,9 @@ class _GeneralSearchScreenState extends State<GeneralSearchScreen>
   }
 
   DisplayOption get _displayOption => _sortFilterDisplay.displayOption;
+
   DisplayType get displayType => _displayOption.displayType;
+
   bool get _hasLoadMore {
     var length = searchResult?.data?.length;
     return length != null && length > 10;
@@ -435,13 +437,18 @@ class _GeneralSearchScreenState extends State<GeneralSearchScreen>
               fromCache: true,
               filters: _filterOutputs);
         } else {
-          searchResult = await MalApi.searchForContent(query,
-              category: category,
-              fromCache: fromCache,
-              limit: 31,
-              fields: [
-                "num_episodes,broadcast,alternative_titles,start_date,status,mean,num_list_users,genres,media_type,num_volumes,my_list_status"
-              ]);
+          if (int.tryParse(query) != null) {
+            searchResult =
+                await MalApi.searchById(int.tryParse(query)!, category);
+          } else {
+            searchResult = await MalApi.searchForContent(query,
+                category: category,
+                fromCache: fromCache,
+                limit: 31,
+                fields: [
+                  "num_episodes,broadcast,alternative_titles,start_date,status,mean,num_list_users,genres,media_type,num_volumes,my_list_status"
+                ]);
+          }
         }
         if (stage != SearchStage.started) {
           return;

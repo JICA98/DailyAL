@@ -430,6 +430,18 @@ class MalApi {
     } catch (e) {}
     return false;
   }
+
+  static Future<SearchResult> searchById(int id, String category) async {
+    commons.Node content;
+    if (category.equals('anime')) {
+      content = await getAnimeDetails(id);
+    } else {
+      content = await getMangaDetails(id);
+    }
+    return SearchResult(
+      data: [BaseNode(content: content)],
+    );
+  }
 }
 
 // curl 'https://api.myanimelist.net/v2/manga/2?fields=id,title,main_picture,alternative_titles,start_date,end_date,synopsis,mean,rank,popularity,num_list_users,num_scoring_users,nsfw,created_at,updated_at,media_type,status,genres,my_list_status,num_volumes,num_chapters,authors{first_name,last_name},pictures,background,related_anime,related_manga,recommendations,serialization{name}' \
