@@ -1,5 +1,5 @@
 {
-    "bmacLink": false,
+    "bmacLink": true,
     "dalAPIUrl": "https://dal-rust-api.onrender.com",
     "discordLink": "https://discord.gg/ap4Wghv5e8",
     "errorLogging": false,

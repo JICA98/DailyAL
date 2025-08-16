@@ -1,5 +1,5 @@
 {
-    "bmacLink": false,
+    "bmacLink": true,
     "dalAPIUrl": "https://daily-al-rust-f72806ebd296.herokuapp.com",
     "discordLink": "https://discord.gg/ap4Wghv5e8",
     "errorLogging": false,
