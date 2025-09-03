@@ -8,28 +8,40 @@ class DubInfoManager {
   factory DubInfoManager() => _instance;
   DubInfoManager._internal();
 
-  static const String _base = 'https://raw.githubusercontent.com/Joelis57/MyDubList/main/final';
+  static const String _baseRoot = 'https://raw.githubusercontent.com/Joelis57/MyDubList/main/dubs/confidence';
   static const String _service = 'mydublist';
   static const int _cacheDurationSeconds = 60 * 60; // 1 hour
 
   String? _loadedLanguage;
+  String? _loadedConfidenceSlug; // low / normal / high / very-high
+
   List<int> _dubbedIds = [];
-  List<int> _incompleteIds = [];
+  List<int> _partialIds = [];
 
-  /// Ensure dub info for the language is loaded.
-  /// If [language] is null, uses user.pref.dubLanguage (fallback: 'english').
-  /// Set [force] to true to bypass cached value even if present.
-  Future<void> ensureLoaded({String? language, bool force = false}) async {
+  /// Ensure dub info is loaded for [language] and the confidence implied by [minSourceCount].
+  /// - If [language] is null, uses user.pref.dubLanguage (fallback 'english').
+  /// - If [minSourceCount] is null, uses user.pref.dubMinSourceCount (fallback 1).
+  /// - Set [force] to true to bypass cache retrieval.
+  Future<void> ensureLoaded({
+    String? language,
+    int? minSourceCount,
+    bool force = false,
+  }) async {
     final lang = (language ?? _preferredLanguage()).toLowerCase();
+    final minCount = minSourceCount ?? _preferredMinSourceCount();
+    final slug = _confidenceSlug(minCount);
 
-    // If already loaded and not forced, skip
-    if (!force && _loadedLanguage == lang && (_dubbedIds.isNotEmpty || _incompleteIds.isNotEmpty)) {
+    // If already loaded for same tuple, skip
+    if (!force &&
+        _loadedLanguage == lang &&
+        _loadedConfidenceSlug == slug &&
+        (_dubbedIds.isNotEmpty || _partialIds.isNotEmpty)) {
       return;
     }
 
-    final cacheKey = _cacheKey(lang);
+    final cacheKey = _cacheKey(lang, slug);
 
-    // Try cached first
+    // Try cache
     if (!force) {
       final cached = await CacheManager.instance.getValueForServiceAutoExpire(
         _service,
@@ -37,39 +49,46 @@ class DubInfoManager {
         _cacheDurationSeconds,
       );
       if (cached != null) {
-        _parseAndSet(cached, lang);
+        _parseAndSet(cached, lang, slug);
         return;
       }
     }
 
-    // Fetch from network
+    // Fetch network
     try {
-      final url = _fileUrl(lang);
+      final url = _fileUrl(lang, slug);
       final resp = await http.get(Uri.parse(url));
       if (resp.statusCode == 200) {
         final body = resp.body;
+
         await CacheManager.instance.setValueForServiceAutoExpireIn(
           _service,
           cacheKey,
           body,
         );
-        _parseAndSet(body, lang);
+
+        _parseAndSet(body, lang, slug);
         return;
       }
     } catch (_) {}
 
-    // If we fail to load, keep prior data (if any), but record language
     _loadedLanguage = lang;
+    _loadedConfidenceSlug = slug;
   }
 
+  // Public
+
   bool isDubbed(int id) => _dubbedIds.contains(id);
-  bool isIncomplete(int id) => _incompleteIds.contains(id);
-  bool hasAnyDub(int id) => isDubbed(id) || isIncomplete(id);
+  bool isPartial(int id) => _partialIds.contains(id);
+  bool hasAnyDub(int id) => isDubbed(id) || isPartial(id);
 
-  // ===== Helpers =====
+  // Helpers
 
-  static String _fileUrl(String lang) => '$_base/dubbed_${lang}.json';
-  static String _cacheKey(String lang) => 'dubInfo_${lang}.json';
+  static String _fileUrl(String lang, String slug) =>
+      '$_baseRoot/$slug/dubbed_${lang}.json';
+
+  static String _cacheKey(String lang, String slug) =>
+      'dubInfo_${lang}_$slug.json';
 
   String _preferredLanguage() {
     try {
@@ -79,21 +98,37 @@ class DubInfoManager {
     return 'english';
   }
 
-  void _parseAndSet(String jsonStr, String lang) {
+  int _preferredMinSourceCount() {
+    try {
+      final parsed = int.tryParse(user.pref.dubMinSourceCount);
+      if (parsed != null && parsed >= 1) return parsed;
+    } catch (_) {}
+    return 1; // default to Low
+  }
+
+  String _confidenceSlug(int minSourceCount) {
+    if (minSourceCount <= 1) return 'low';
+    if (minSourceCount == 2) return 'normal';
+    if (minSourceCount == 3) return 'high';
+    return 'very-high'; // 4+
+  }
+
+  void _parseAndSet(String jsonStr, String lang, String slug) {
     try {
       final decoded = jsonDecode(jsonStr);
       if (decoded is Map<String, dynamic>) {
         _dubbedIds = _toIntList(decoded['dubbed']);
-        _incompleteIds = _toIntList(decoded['incomplete']);
+        _partialIds = _toIntList(decoded['partial']);
       } else {
         _dubbedIds = [];
-        _incompleteIds = [];
+        _partialIds = [];
       }
     } catch (_) {
       _dubbedIds = [];
-      _incompleteIds = [];
+      _partialIds = [];
     }
     _loadedLanguage = lang;
+    _loadedConfidenceSlug = slug;
   }
 
   List<int> _toIntList(dynamic v) {

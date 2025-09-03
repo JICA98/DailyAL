@@ -341,6 +341,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "Dragon_Ball": MessageLookupByLibrary.simpleMessage("bola naga"),
         "Drama": MessageLookupByLibrary.simpleMessage("Drama"),
         "Dropped": MessageLookupByLibrary.simpleMessage("Menjatuhkan"),
+        "Dub_Confidence":
+            MessageLookupByLibrary.simpleMessage("Kepercayaan diri Dub"),
+        "Dub_Confidence_Desc": MessageLookupByLibrary.simpleMessage(
+            "Jumlah minimum sumber yang diperlukan untuk menandai anime sebagai di-dubbing (tampilkan ikon dubbing)"),
         "Dub_Icon_Style": MessageLookupByLibrary.simpleMessage("Gaya ikon"),
         "Dub_Icon_Style_Desc": MessageLookupByLibrary.simpleMessage(
             "Pilih gaya ikon untuk anime yang di-dubbing dan sebagian di-dubbing"),

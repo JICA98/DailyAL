@@ -691,6 +691,8 @@
     "Dub_Show_Icon_Desc": "Aktifkan ikon dub di samping anime yang di-dubbing",
     "Dub_Language": "Bahasa sulih suara",
     "Dub_Language_Desc": "Pilih bahasa untuk dub",
+    "Dub_Confidence": "Kepercayaan diri Dub",
+    "Dub_Confidence_Desc": "Jumlah minimum sumber yang diperlukan untuk menandai anime sebagai di-dubbing (tampilkan ikon dubbing)",
     "Dub_Icon_Style": "Gaya ikon",
     "Dub_Icon_Style_Desc": "Pilih gaya ikon untuk anime yang di-dubbing dan sebagian di-dubbing",
     "Dub_Report": "Laporkan dub yang tidak akurat",

@@ -9,22 +9,22 @@ class DubIcons {
   static const String? _kFontPkg = null;
 
   static const IconData style0Dub = IconData(0xE900, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData style0Incomplete = IconData(0xE901, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData style0Partial = IconData(0xE901, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 
   static const IconData style1Dub = IconData(0xE902, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData style1Incomplete = IconData(0xE903, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData style1Partial = IconData(0xE903, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 
   static const IconData style2Dub = IconData(0xE904, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData style2Incomplete = IconData(0xE905, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData style2Partial = IconData(0xE905, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 
   static const IconData style3Dub = IconData(0xE906, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData style3Incomplete = IconData(0xE907, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData style3Partial = IconData(0xE907, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 
   static const Map<int, List<IconData>> _stylePairs = {
-    0: [style0Dub, style0Incomplete],
-    1: [style1Dub, style1Incomplete],
-    2: [style2Dub, style2Incomplete],
-    3: [style3Dub, style3Incomplete],
+    0: [style0Dub, style0Partial],
+    1: [style1Dub, style1Partial],
+    2: [style2Dub, style2Partial],
+    3: [style3Dub, style3Partial],
   };
 
   static const Map<int, EdgeInsets> _stylePaddings = {
@@ -45,7 +45,7 @@ class DubIcons {
   }
 
   static IconData get preferredDubIcon => forStyle(_safeUserStyle())[0];
-  static IconData get preferredIncompleteDubIcon => forStyle(_safeUserStyle())[1];
+  static IconData get preferredPartialDubIcon => forStyle(_safeUserStyle())[1];
 
   static EdgeInsets get preferredPadding => paddingForStyle(_safeUserStyle());
 

@@ -693,6 +693,8 @@
     "Dub_Show_Icon_Desc": "Enable the dub icon next to dubbed anime",
     "Dub_Language": "Dub language",
     "Dub_Language_Desc": "Select the language for dubs",
+    "Dub_Confidence": "Dub confidence",
+    "Dub_Confidence_Desc": "Minimum number of sources required to mark an anime as dubbed (show the dub icon)",
     "Dub_Icon_Style": "Icon style",
     "Dub_Icon_Style_Desc": "Select the icon style for dubbed and partially dubbed anime",
     "Dub_Report": "Report inaccurate dubs",

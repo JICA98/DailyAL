@@ -341,6 +341,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "Dragon_Ball": MessageLookupByLibrary.simpleMessage("Ejder topu"),
         "Drama": MessageLookupByLibrary.simpleMessage("Dram"),
         "Dropped": MessageLookupByLibrary.simpleMessage("Düştü"),
+        "Dub_Confidence": MessageLookupByLibrary.simpleMessage("Lakaplı güven"),
+        "Dub_Confidence_Desc": MessageLookupByLibrary.simpleMessage(
+            "Bir animeyi dublajlı olarak işaretlemek için gereken minimum kaynak sayısı (dub simgesini göster)"),
         "Dub_Icon_Style": MessageLookupByLibrary.simpleMessage("Simge stili"),
         "Dub_Icon_Style_Desc": MessageLookupByLibrary.simpleMessage(
             "Dublajlı ve kısmen dublajlı anime için simge stilini seçin"),

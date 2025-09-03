@@ -456,8 +456,8 @@ class AnimeGridCard extends StatelessWidget {
     IconData? icon;
     if (DubInfoManager().isDubbed(id)) {
       icon = DubIcons.preferredDubIcon;
-    } else if (DubInfoManager().isIncomplete(id)) {
-      icon = DubIcons.preferredIncompleteDubIcon;
+    } else if (DubInfoManager().isPartial(id)) {
+      icon = DubIcons.preferredPartialDubIcon;
     } else {
       return SB.z;
     }

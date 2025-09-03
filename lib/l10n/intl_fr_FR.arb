@@ -691,6 +691,8 @@
     "Dub_Show_Icon_Desc": "Activer l'ic\u00F4ne de doublage \u00E0 c\u00F4t\u00E9 de l'anime doubl\u00E9",
     "Dub_Language": "Langue dub",
     "Dub_Language_Desc": "S\u00E9lectionnez la langue pour les doublages",
+    "Dub_Confidence": "Doublage de confiance",
+    "Dub_Confidence_Desc": "Nombre minimum de sources requises pour marquer un anime comme doubl\u00E9 (afficher l'ic\u00F4ne de doublage)",
     "Dub_Icon_Style": "Style d'ic\u00F4ne",
     "Dub_Icon_Style_Desc": "S\u00E9lectionnez le style d'ic\u00F4ne pour les animes doubl\u00E9s et partiellement doubl\u00E9s",
     "Dub_Report": "Signaler les doublages inexacts",

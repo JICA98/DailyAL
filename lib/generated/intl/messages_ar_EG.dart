@@ -335,6 +335,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "Dragon_Ball": MessageLookupByLibrary.simpleMessage("كرة التنين"),
         "Drama": MessageLookupByLibrary.simpleMessage("دراما"),
         "Dropped": MessageLookupByLibrary.simpleMessage("إسقاط"),
+        "Dub_Confidence": MessageLookupByLibrary.simpleMessage("ثقة الدبلجة"),
+        "Dub_Confidence_Desc": MessageLookupByLibrary.simpleMessage(
+            "الحد الأدنى لعدد المصادر المطلوبة لوضع علامة على أنمي بأنه مدبلج (إظهار رمز الدبلجة)"),
         "Dub_Icon_Style": MessageLookupByLibrary.simpleMessage("نمط الأيقونة"),
         "Dub_Icon_Style_Desc": MessageLookupByLibrary.simpleMessage(
             "حدد نمط الأيقونات للأنمي المدبلج والمدبلج جزئيًا"),

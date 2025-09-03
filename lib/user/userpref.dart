@@ -23,6 +23,7 @@ class UserPreferences {
   bool showDubStatus;
   String dubLanguage;
   String dubIconStyle;
+  String dubMinSourceCount;
   bool showAnimeMangaCard;
   NotifPref notifPref;
   List<HomePageApiPref> hpApiPrefList;
@@ -61,6 +62,7 @@ class UserPreferences {
     required this.showDubStatus,
     required this.dubLanguage,
     required this.dubIconStyle,
+    required this.dubMinSourceCount,
     required this.isRtl,
     required this.brightness,
     required this.showAnimeMangaBg,
@@ -97,7 +99,8 @@ class UserPreferences {
         _showAiringInfo = false,
         _showDubStatus = false;
     String _dubLanguage = 'english',
-           _dubIconStyle = '0';
+           _dubIconStyle = '0',
+           _dubMinSourceCount = '1';
     Brightness _brightness = Brightness.dark;
     bool _showPriority = false,
         _autoTranslateSynopsis = false,
@@ -187,6 +190,9 @@ class UserPreferences {
       if (json.containsKey("dubIconStyle")) {
         _dubIconStyle = json["dubIconStyle"] ?? false;
       }
+      if (json.containsKey("dubMinSourceCount")) {
+        _dubMinSourceCount = json["dubMinSourceCount"] ?? false;
+      }
       if (json.containsKey("showAnimeMangaBg")) {
         showAnimeMangaBg = json['showAnimeMangaBg'] ?? showAnimeMangaBg;
       }
@@ -224,6 +230,7 @@ class UserPreferences {
             showDubStatus: _showDubStatus,
             dubLanguage: _dubLanguage,
             dubIconStyle: _dubIconStyle,
+            dubMinSourceCount: _dubMinSourceCount,
             showAnimeMangaBg: showAnimeMangaBg,
             userPageAnimeSortType:
                 json['userPageAnimeSortType'] ?? 'list_updated_at',
@@ -271,6 +278,7 @@ class UserPreferences {
             showDubStatus: _showDubStatus,
             dubLanguage: _dubLanguage,
             dubIconStyle: _dubIconStyle,
+            dubMinSourceCount: _dubMinSourceCount,
             defaultDisplayType: DisplayType.list_vert,
             showAnimeMangaBg: showAnimeMangaBg,
             userPageAnimeSortType: 'list_updated_at',
@@ -312,6 +320,7 @@ class UserPreferences {
       "showDubStatus": showDubStatus,
       "dubLanguage": dubLanguage,
       "dubIconStyle": dubIconStyle,
+      "dubMinSourceCount": dubMinSourceCount,
       "autoAddStartEndDate": autoAddStartEndDate,
       "defaultDisplayType": defaultDisplayType.index,
       'showAnimeMangaBg': showAnimeMangaBg,

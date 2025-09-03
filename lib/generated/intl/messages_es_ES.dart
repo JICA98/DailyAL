@@ -354,6 +354,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("esfera del dragón"),
         "Drama": MessageLookupByLibrary.simpleMessage("Drama"),
         "Dropped": MessageLookupByLibrary.simpleMessage("Abandonó"),
+        "Dub_Confidence": MessageLookupByLibrary.simpleMessage("Dub confianza"),
+        "Dub_Confidence_Desc": MessageLookupByLibrary.simpleMessage(
+            "Número mínimo de fuentes necesarias para marcar un anime como doblado (mostrar el ícono de doblaje)"),
         "Dub_Icon_Style":
             MessageLookupByLibrary.simpleMessage("Estilo de icono"),
         "Dub_Icon_Style_Desc": MessageLookupByLibrary.simpleMessage(

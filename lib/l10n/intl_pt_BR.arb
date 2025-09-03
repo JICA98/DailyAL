@@ -692,6 +692,8 @@
     "Dub_Show_Icon_Desc": "Habilitar o \u00EDcone de dublagem ao lado do anime dublado",
     "Dub_Language": "Linguagem de dublagem",
     "Dub_Language_Desc": "Selecione o idioma para dublagens",
+    "Dub_Confidence": "Confian\u00E7a Dub",
+    "Dub_Confidence_Desc": "N\u00FAmero m\u00EDnimo de fontes necess\u00E1rias para marcar um anime como dublado (mostrar o \u00EDcone de dublagem)",
     "Dub_Icon_Style": "Estilo de \u00EDcone",
     "Dub_Icon_Style_Desc": "Selecione o estilo do \u00EDcone para anime dublado e parcialmente dublado",
     "Dub_Report": "Denunciar dublagens imprecisas",

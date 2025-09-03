@@ -343,6 +343,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "Dragon_Ball": MessageLookupByLibrary.simpleMessage("Жемчуг Дракона"),
         "Drama": MessageLookupByLibrary.simpleMessage("Драма"),
         "Dropped": MessageLookupByLibrary.simpleMessage("Упавший"),
+        "Dub_Confidence":
+            MessageLookupByLibrary.simpleMessage("Дублированная уверенность"),
+        "Dub_Confidence_Desc": MessageLookupByLibrary.simpleMessage(
+            "Минимальное количество источников, необходимое для того, чтобы отметить аниме как дублированное (показать значок дубляжа)"),
         "Dub_Icon_Style":
             MessageLookupByLibrary.simpleMessage("Иконический стиль"),
         "Dub_Icon_Style_Desc": MessageLookupByLibrary.simpleMessage(
