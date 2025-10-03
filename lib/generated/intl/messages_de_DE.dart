@@ -58,7 +58,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Aired": MessageLookupByLibrary.simpleMessage("Ausgestrahlt"),
         "All": MessageLookupByLibrary.simpleMessage("Alle"),
         "All_time_Favorites":
-            MessageLookupByLibrary.simpleMessage("Alle Zeitfavoriten"),
+            MessageLookupByLibrary.simpleMessage("Allzeit-Favoriten"),
         "Allow_YT_Player":
             MessageLookupByLibrary.simpleMessage("Youtube-Player zulassen"),
         "Allow_YT_Player_Desc": MessageLookupByLibrary.simpleMessage(
@@ -133,7 +133,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Angriff auf Titan."),
         "Author_Distribution":
             MessageLookupByLibrary.simpleMessage("Autorenverteilung"),
-        "Authors": MessageLookupByLibrary.simpleMessage("Authors"),
+        "Authors": MessageLookupByLibrary.simpleMessage("Autoren"),
         "Auto": MessageLookupByLibrary.simpleMessage("Auto"),
         "Auto_Add_Start_End_Date": MessageLookupByLibrary.simpleMessage(
             "Start-/Enddatum automatisch hinzufügen"),
@@ -201,7 +201,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Charakteranalyse"),
         "Character_People_DB":
             MessageLookupByLibrary.simpleMessage("Charakter & Leute db"),
-        "Characters": MessageLookupByLibrary.simpleMessage("Zeichen"),
+        "Characters": MessageLookupByLibrary.simpleMessage("Charaktere"),
         "Characters_and_staff":
             MessageLookupByLibrary.simpleMessage("Charaktere und Stäbe"),
         "Chart_color": MessageLookupByLibrary.simpleMessage("Diagrammfarbe"),
@@ -216,7 +216,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Clear_All": MessageLookupByLibrary.simpleMessage("ALLES LÖSCHEN"),
         "Clear_All_Desc": MessageLookupByLibrary.simpleMessage(
             "Löschen Sie den gesamten Verlauf"),
-        "Close": MessageLookupByLibrary.simpleMessage("Nah dran"),
+        "Close": MessageLookupByLibrary.simpleMessage("Schließen"),
         "Clubs": MessageLookupByLibrary.simpleMessage("Vereine"),
         "Cold_hearted": MessageLookupByLibrary.simpleMessage("Kaltherzig"),
         "Collapse": MessageLookupByLibrary.simpleMessage("Zusammenbruch"),
@@ -541,7 +541,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Graph_loaded":
             MessageLookupByLibrary.simpleMessage("Diagramm geladen"),
         "Great": MessageLookupByLibrary.simpleMessage("Großartig"),
-        "Grid": MessageLookupByLibrary.simpleMessage("Netz"),
+        "Grid": MessageLookupByLibrary.simpleMessage("Raster"),
         "Grid_Axis_Size":
             MessageLookupByLibrary.simpleMessage("Größe der Rasterachse"),
         "Grid_Height": MessageLookupByLibrary.simpleMessage("Rasterhöhe"),
@@ -649,7 +649,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Light_Novel_Sales":
             MessageLookupByLibrary.simpleMessage("Leichter neuer Umsatz"),
         "Light_Novels": MessageLookupByLibrary.simpleMessage("Leichte Romane"),
-        "List": MessageLookupByLibrary.simpleMessage("Aufführen"),
+        "List": MessageLookupByLibrary.simpleMessage("Liste"),
         "List_preferences":
             MessageLookupByLibrary.simpleMessage("Listeneinstellungen"),
         "List_preferences_desc": MessageLookupByLibrary.simpleMessage(
@@ -751,7 +751,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "More_Information":
             MessageLookupByLibrary.simpleMessage("Mehr Informationen"),
         "Most_Popular_Anime":
-            MessageLookupByLibrary.simpleMessage("Am beliebtesten Anime."),
+            MessageLookupByLibrary.simpleMessage("Beliebteste Anime"),
         "Move_to_back":
             MessageLookupByLibrary.simpleMessage("Nach hinten bewegen"),
         "Move_to_front":
@@ -808,7 +808,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Keine Verbindung"),
         "No_Content": MessageLookupByLibrary.simpleMessage("Kein Inhalt"),
         "No_Discussions_Yet":
-            MessageLookupByLibrary.simpleMessage("Keine Diskussionen noch .."),
+            MessageLookupByLibrary.simpleMessage("Noch keine Diskussionen..."),
         "No_Enough_Data_To_generate_Graph": MessageLookupByLibrary.simpleMessage(
             "Es liegen nicht genügend Daten vor, um das Diagramm zu erstellen. Es sind mindestens drei eindeutige Genres erforderlich"),
         "No_Enough_Data_To_generate_Graph_Info":
@@ -820,13 +820,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "No_More_found":
             MessageLookupByLibrary.simpleMessage("Nicht mehr gefunden!"),
         "No_Pictures_yet":
-            MessageLookupByLibrary.simpleMessage("Keine Bilder noch nicht .."),
+            MessageLookupByLibrary.simpleMessage("Noch keine Bilder .."),
         "No_Recommendations_yet":
-            MessageLookupByLibrary.simpleMessage("Noch keine Empfehlungen .."),
+            MessageLookupByLibrary.simpleMessage("Noch keine Empfehlungen..."),
         "No_Related_Content_yet": MessageLookupByLibrary.simpleMessage(
-            "Noch nicht verwandter Inhalte .."),
-        "No_Reviews_yet": MessageLookupByLibrary.simpleMessage(
-            "Keine Bewertungen noch nicht .."),
+            "Noch keine verwandte Inhalte..."),
+        "No_Reviews_yet":
+            MessageLookupByLibrary.simpleMessage("Noch keine Bewertungen .."),
         "No_Scheduled_Notificatons": MessageLookupByLibrary.simpleMessage(
             "Sie haben keine geplanten Benachrichtigungen. Bitte verschieben Sie jeden Anime auf „Ansehen“ oder „Ansehen planen“."),
         "No_Title": MessageLookupByLibrary.simpleMessage("Kein Titel"),
@@ -874,7 +874,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "Open": MessageLookupByLibrary.simpleMessage("Offen"),
         "Open_In_Browser":
             MessageLookupByLibrary.simpleMessage("Im Browser öffnen"),
-        "Opening_Songs": MessageLookupByLibrary.simpleMessage("Songs öffnen."),
+        "Opening_Songs":
+            MessageLookupByLibrary.simpleMessage("Eröffnungslieder"),
         "Order_by": MessageLookupByLibrary.simpleMessage("Sortieren nach"),
         "Order_results_property": MessageLookupByLibrary.simpleMessage(
             "Bestell-Ergebnisse in Bezug auf ein Eigentum"),
@@ -905,13 +906,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Plane es anzusehen"),
         "Play_Promo": MessageLookupByLibrary.simpleMessage("Spiele Promo"),
         "Play_on_Youtube":
-            MessageLookupByLibrary.simpleMessage("Spiel auf youtube"),
+            MessageLookupByLibrary.simpleMessage("Auf YouTube abspielen"),
         "Please_select_a_board_or_sub_board":
             MessageLookupByLibrary.simpleMessage(
                 "Bitte wählen Sie eine Tafel oder ein Unterbrett aus"),
         "Please_wait_while_the_URL_is_loaded":
             MessageLookupByLibrary.simpleMessage(
-                "Bitte warten Sie, während die URL geladen ist."),
+                "Bitte warten Sie, während die URL geladen wird."),
         "Plot_twist": MessageLookupByLibrary.simpleMessage("Handlungswechsel"),
         "Police": MessageLookupByLibrary.simpleMessage("Polizei"),
         "Poll_Question": MessageLookupByLibrary.simpleMessage("Umfrage"),
@@ -1288,33 +1289,32 @@ class MessageLookup extends MessageLookupByLibrary {
         "Today": MessageLookupByLibrary.simpleMessage("Heute"),
         "Tokyo_Ghoul": MessageLookupByLibrary.simpleMessage("Tokyo Ghoul."),
         "Top_Airing_Anime":
-            MessageLookupByLibrary.simpleMessage("Top-Airing-Anime."),
-        "Top_All_Manga":
-            MessageLookupByLibrary.simpleMessage("Top alle manga."),
+            MessageLookupByLibrary.simpleMessage("Top laufende Anime"),
+        "Top_All_Manga": MessageLookupByLibrary.simpleMessage("Top alle Manga"),
         "Top_Anime_Categories":
             MessageLookupByLibrary.simpleMessage("Top-Anime-Kategorien."),
         "Top_Anime_Movies":
-            MessageLookupByLibrary.simpleMessage("Top-Anime-Filme."),
+            MessageLookupByLibrary.simpleMessage("Top Anime-Filme"),
         "Top_Anime_by_Score":
             MessageLookupByLibrary.simpleMessage("Top Anime nach Score"),
-        "Top_Doujin": MessageLookupByLibrary.simpleMessage("Top Doujin."),
+        "Top_Doujin": MessageLookupByLibrary.simpleMessage("Top Doujin"),
         "Top_Favorite_Manga":
             MessageLookupByLibrary.simpleMessage("Top Favoriten Manga."),
         "Top_Light_Novels":
-            MessageLookupByLibrary.simpleMessage("Obere leichte Romane"),
-        "Top_Manga": MessageLookupByLibrary.simpleMessage("Top Manga."),
+            MessageLookupByLibrary.simpleMessage("Top Light Novels"),
+        "Top_Manga": MessageLookupByLibrary.simpleMessage("Top Manga"),
         "Top_Manga_Bypopularity":
             MessageLookupByLibrary.simpleMessage("Top Manga Bypopularity."),
         "Top_Manhua": MessageLookupByLibrary.simpleMessage("Top Mannblume."),
         "Top_Manhwa": MessageLookupByLibrary.simpleMessage("Top Manhwa"),
-        "Top_Novels": MessageLookupByLibrary.simpleMessage("Top-Romane"),
+        "Top_Novels": MessageLookupByLibrary.simpleMessage("Top Romane"),
         "Top_ONA": MessageLookupByLibrary.simpleMessage("Top SIE"),
-        "Top_OVA": MessageLookupByLibrary.simpleMessage("Top das hier"),
-        "Top_Oneshots": MessageLookupByLibrary.simpleMessage("Top oneshots."),
-        "Top_Specials": MessageLookupByLibrary.simpleMessage("Top-Specials."),
-        "Top_TV_Shows": MessageLookupByLibrary.simpleMessage("Top-TV-Shows."),
+        "Top_OVA": MessageLookupByLibrary.simpleMessage("Top OVA"),
+        "Top_Oneshots": MessageLookupByLibrary.simpleMessage("Top One-Shots"),
+        "Top_Specials": MessageLookupByLibrary.simpleMessage("Top Specials"),
+        "Top_TV_Shows": MessageLookupByLibrary.simpleMessage("Top TV-Shows"),
         "Top_Upcoming_Anime":
-            MessageLookupByLibrary.simpleMessage("Top bevorstehende Anime."),
+            MessageLookupByLibrary.simpleMessage("Top bevorstehende Anime"),
         "Topic_Username_desc": MessageLookupByLibrary.simpleMessage(
             "Benutzername der Person, die das Thema erstellt hat"),
         "Translate_Above_Text": MessageLookupByLibrary.simpleMessage(
@@ -1452,10 +1452,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Anzahl der Scoring-Benutzer"),
         "numVolumes": MessageLookupByLibrary.simpleMessage("Anzahl der Bände"),
         "or": MessageLookupByLibrary.simpleMessage("oder"),
-        "popular_anime":
-            MessageLookupByLibrary.simpleMessage("Beliebter Anime."),
-        "popular_manga":
-            MessageLookupByLibrary.simpleMessage("Beliebte Manga."),
+        "popular_anime": MessageLookupByLibrary.simpleMessage("Beliebte Anime"),
+        "popular_manga": MessageLookupByLibrary.simpleMessage("Beliebte Manga"),
         "publishedEndDate": MessageLookupByLibrary.simpleMessage(
             "Enddatum der Veröffentlichung"),
         "publishedStartDate":
@@ -1471,7 +1469,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "showAnimeMangaCardDesc": MessageLookupByLibrary.simpleMessage(
             "Zeigen Sie nach Möglichkeit eine Schnur um den Inhalt in der Listenansicht an (komfortabel)."),
         "suggested_anime":
-            MessageLookupByLibrary.simpleMessage("Empfohlene Anime."),
+            MessageLookupByLibrary.simpleMessage("Empfohlene Anime"),
         "sunday": MessageLookupByLibrary.simpleMessage("Sonntag"),
         "thursday": MessageLookupByLibrary.simpleMessage("Donnerstag"),
         "title_not_found":
