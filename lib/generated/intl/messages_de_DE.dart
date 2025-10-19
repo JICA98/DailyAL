@@ -347,6 +347,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "Dragon_Ball": MessageLookupByLibrary.simpleMessage("Dragon Ball"),
         "Drama": MessageLookupByLibrary.simpleMessage("Theater"),
         "Dropped": MessageLookupByLibrary.simpleMessage("Fallen gelassen"),
+        "Dub_Confidence": MessageLookupByLibrary.simpleMessage("Dub-Vertrauen"),
+        "Dub_Confidence_Desc": MessageLookupByLibrary.simpleMessage(
+            "Mindestanzahl an Quellen, die erforderlich sind, um einen Anime als synchronisiert zu markieren (das Synchronisationssymbol anzeigen)"),
         "Dub_Icon_Style": MessageLookupByLibrary.simpleMessage("Symbolstil"),
         "Dub_Icon_Style_Desc": MessageLookupByLibrary.simpleMessage(
             "Wählen Sie den Symbolstil für synchronisierte und teilweise synchronisierte Anime"),

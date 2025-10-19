@@ -6980,6 +6980,26 @@ class S {
     );
   }
 
+  /// `Dub confidence`
+  String get Dub_Confidence {
+    return Intl.message(
+      'Dub confidence',
+      name: 'Dub_Confidence',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Minimum number of sources required to mark an anime as dubbed (show the dub icon)`
+  String get Dub_Confidence_Desc {
+    return Intl.message(
+      'Minimum number of sources required to mark an anime as dubbed (show the dub icon)',
+      name: 'Dub_Confidence_Desc',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Icon style`
   String get Dub_Icon_Style {
     return Intl.message(

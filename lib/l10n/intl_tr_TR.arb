@@ -692,6 +692,8 @@
     "Dub_Show_Icon_Desc": "Dublajl\u0131 animenin yan\u0131ndaki dublaj simgesini etkinle\u015Ftirin",
     "Dub_Language": "Dublaj dili",
     "Dub_Language_Desc": "Dublaj i\u00E7in dili se\u00E7in",
+    "Dub_Confidence": "Lakapl\u0131 g\u00FCven",
+    "Dub_Confidence_Desc": "Bir animeyi dublajl\u0131 olarak i\u015Faretlemek i\u00E7in gereken minimum kaynak say\u0131s\u0131 (dub simgesini g\u00F6ster)",
     "Dub_Icon_Style": "Simge stili",
     "Dub_Icon_Style_Desc": "Dublajl\u0131 ve k\u0131smen dublajl\u0131 anime i\u00E7in simge stilini se\u00E7in",
     "Dub_Report": "Hatal\u0131 dublajlar\u0131 bildirin",

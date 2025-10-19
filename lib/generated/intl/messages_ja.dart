@@ -300,6 +300,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "Dragon_Ball": MessageLookupByLibrary.simpleMessage("ドラゴンボール"),
         "Drama": MessageLookupByLibrary.simpleMessage("ドラマ"),
         "Dropped": MessageLookupByLibrary.simpleMessage("drop"),
+        "Dub_Confidence": MessageLookupByLibrary.simpleMessage("ダブの自信"),
+        "Dub_Confidence_Desc": MessageLookupByLibrary.simpleMessage(
+            "アニメを吹き替えとしてマークするために必要なソースの最小数（吹き替えアイコンを表示）"),
         "Dub_Icon_Style": MessageLookupByLibrary.simpleMessage("アイコンスタイル"),
         "Dub_Icon_Style_Desc": MessageLookupByLibrary.simpleMessage(
             "吹き替え版および部分吹き替え版アニメのアイコンスタイルを選択します"),

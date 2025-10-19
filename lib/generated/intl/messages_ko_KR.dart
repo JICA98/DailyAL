@@ -300,6 +300,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "Dragon_Ball": MessageLookupByLibrary.simpleMessage("드래곤 볼"),
         "Drama": MessageLookupByLibrary.simpleMessage("드라마"),
         "Dropped": MessageLookupByLibrary.simpleMessage("삭제했다"),
+        "Dub_Confidence": MessageLookupByLibrary.simpleMessage("더브 컨피던스"),
+        "Dub_Confidence_Desc": MessageLookupByLibrary.simpleMessage(
+            "애니메이션을 더빙으로 표시하는 데 필요한 최소 소스 수(더빙 아이콘 표시)"),
         "Dub_Icon_Style": MessageLookupByLibrary.simpleMessage("아이콘 스타일"),
         "Dub_Icon_Style_Desc": MessageLookupByLibrary.simpleMessage(
             "더빙 및 부분 더빙 애니메이션의 아이콘 스타일을 선택하세요"),

@@ -1174,7 +1174,7 @@ class _ContentAllWidgetState extends State<ContentAllWidget>
     if (DubInfoManager().hasAnyDub(id)) {
       final icon = DubInfoManager().isDubbed(id)
           ? DubIcons.preferredDubIcon
-          : DubIcons.preferredIncompleteDubIcon;
+          : DubIcons.preferredPartialDubIcon;
       return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 5.0),
         child: Tooltip(

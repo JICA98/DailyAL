@@ -352,6 +352,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "Dragon_Ball": MessageLookupByLibrary.simpleMessage("Dragon Ball"),
         "Drama": MessageLookupByLibrary.simpleMessage("Drame"),
         "Dropped": MessageLookupByLibrary.simpleMessage("Chuté"),
+        "Dub_Confidence":
+            MessageLookupByLibrary.simpleMessage("Doublage de confiance"),
+        "Dub_Confidence_Desc": MessageLookupByLibrary.simpleMessage(
+            "Nombre minimum de sources requises pour marquer un anime comme doublé (afficher l\'icône de doublage)"),
         "Dub_Icon_Style":
             MessageLookupByLibrary.simpleMessage("Style d\'icône"),
         "Dub_Icon_Style_Desc": MessageLookupByLibrary.simpleMessage(

@@ -17,30 +17,39 @@ const List<Map<String, String>> _dubLanguageOptions = [
   {'label': 'Italian', 'value': 'italian'},
   {'label': 'Portuguese', 'value': 'portuguese'},
   {'label': 'Korean', 'value': 'korean'},
+  {'label': 'Tagalog', 'value': 'tagalog'},
   {'label': 'Chinese', 'value': 'chinese'},
+  {'label': 'Arabic', 'value': 'arabic'},
   {'label': 'Polish', 'value': 'polish'},
   {'label': 'Hungarian', 'value': 'hungarian'},
-  {'label': 'Norwegian', 'value': 'norwegian'},
   {'label': 'Swedish', 'value': 'swedish'},
+  {'label': 'Norwegian', 'value': 'norwegian'},
   {'label': 'Hebrew', 'value': 'hebrew'},
+  {'label': 'Dutch', 'value': 'dutch'},
+  {'label': 'Russian', 'value': 'russian'},
   {'label': 'Indonesian', 'value': 'indonesian'},
+  {'label': 'Danish', 'value': 'danish'},
   {'label': 'Thai', 'value': 'thai'},
   {'label': 'Hindi', 'value': 'hindi'},
   {'label': 'Finnish', 'value': 'finnish'},
   {'label': 'Turkish', 'value': 'turkish'},
-  {'label': 'Tagalog', 'value': 'tagalog'},
-  {'label': 'Arabic', 'value': 'arabic'},
-  {'label': 'Dutch', 'value': 'dutch'},
   {'label': 'Catalan', 'value': 'catalan'},
   {'label': 'Vietnamese', 'value': 'vietnamese'},
-  {'label': 'Filipino', 'value': 'filipino'},
+  {'label': 'Lithuanian', 'value': 'lithuanian'},
+];
+
+const List<Map<String, String>> _dubConfidenceOptions = [
+  {'label': '1 Source',  'value': '1'},
+  {'label': '2 Sources', 'value': '2'},
+  {'label': '3 Sources', 'value': '3'},
+  {'label': '4 Sources', 'value': '4'},
 ];
 
 const Map<String, List<IconData>> _iconStyles = {
-  '0': [DubIcons.style0Dub, DubIcons.style0Incomplete],
-  '1': [DubIcons.style1Dub, DubIcons.style1Incomplete],
-  '2': [DubIcons.style2Dub, DubIcons.style2Incomplete],
-  '3': [DubIcons.style3Dub, DubIcons.style3Incomplete],
+  '0': [DubIcons.style0Dub, DubIcons.style0Partial],
+  '1': [DubIcons.style1Dub, DubIcons.style1Partial],
+  '2': [DubIcons.style2Dub, DubIcons.style2Partial],
+  '3': [DubIcons.style3Dub, DubIcons.style3Partial],
 };
 
 class DubSettingsPage extends StatefulWidget {
@@ -66,7 +75,9 @@ class _DubSettingsPageState extends State<DubSettingsPage> {
                 onToggled: (value) {
                   user.pref.showDubStatus = value;
                   user.setIntance();
-                  if (value) DubInfoManager().ensureLoaded();
+                  if (value) {
+                    DubInfoManager().ensureLoaded(force: true);
+                  }
                   setState(() {});
                 },
               ),
@@ -76,7 +87,7 @@ class _DubSettingsPageState extends State<DubSettingsPage> {
               text: S.current.Dub_Language,
               desc: S.current.Dub_Language_Desc,
               trailing: ConstrainedBox(
-                constraints: BoxConstraints(maxWidth: 100),
+                constraints: const BoxConstraints(maxWidth: 140),
                 child: SelectButton(
                   selectType: SelectType.select_top,
                   popupText: S.current.Dub_Language,
@@ -86,7 +97,28 @@ class _DubSettingsPageState extends State<DubSettingsPage> {
                   onChanged: (value) {
                     user.pref.dubLanguage = value;
                     user.setIntance();
-                    DubInfoManager().ensureLoaded();
+                    DubInfoManager().ensureLoaded(force: true);
+                    setState(() {});
+                  },
+                ),
+              ),
+            ),
+
+            OptionTile(
+              text: S.current.Dub_Confidence,
+              desc: S.current.Dub_Confidence_Desc,
+              trailing: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 140),
+                child: SelectButton(
+                  selectType: SelectType.select_top,
+                  popupText: S.current.Dub_Confidence,
+                  options: _dubConfidenceOptions.map((e) => e['value']!).toList(),
+                  displayValues: _dubConfidenceOptions.map((e) => e['label']!).toList(),
+                  selectedOption: user.pref.dubMinSourceCount,
+                  onChanged: (value) {
+                    user.pref.dubMinSourceCount = value;
+                    user.setIntance();
+                    DubInfoManager().ensureLoaded(force: true);
                     setState(() {});
                   },
                 ),
@@ -97,12 +129,12 @@ class _DubSettingsPageState extends State<DubSettingsPage> {
               text: S.current.Dub_Icon_Style,
               desc: S.current.Dub_Icon_Style_Desc,
               trailing: ConstrainedBox(
-                constraints: BoxConstraints(maxWidth: 100),
+                constraints: const BoxConstraints(maxWidth: 140),
                 child: DropdownButton<String>(
                   value: user.pref.dubIconStyle,
                   isExpanded: true,
                   alignment: Alignment.center,
-                  underline: SizedBox.shrink(),
+                  underline: const SizedBox.shrink(),
                   isDense: true,
                   selectedItemBuilder: (_) => _iconStyles.entries.map((entry) {
                     return Center(
@@ -110,9 +142,9 @@ class _DubSettingsPageState extends State<DubSettingsPage> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Icon(entry.value[0], size: 25),
-                          SizedBox(width: 16),
+                          const SizedBox(width: 16),
                           Icon(entry.value[1], size: 25),
-                          SizedBox(width: 10),
+                          const SizedBox(width: 10),
                         ],
                       ),
                     );
@@ -125,7 +157,7 @@ class _DubSettingsPageState extends State<DubSettingsPage> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Icon(entry.value[0], size: 25),
-                            SizedBox(width: 18),
+                            const SizedBox(width: 18),
                             Icon(entry.value[1], size: 25),
                           ],
                         ),

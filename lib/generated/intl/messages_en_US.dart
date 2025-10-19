@@ -337,6 +337,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "Dragon_Ball": MessageLookupByLibrary.simpleMessage("Dragon Ball"),
         "Drama": MessageLookupByLibrary.simpleMessage("Drama"),
         "Dropped": MessageLookupByLibrary.simpleMessage("Dropped"),
+        "Dub_Confidence":
+            MessageLookupByLibrary.simpleMessage("Dub confidence"),
+        "Dub_Confidence_Desc": MessageLookupByLibrary.simpleMessage(
+            "Minimum number of sources required to mark an anime as dubbed (show the dub icon)"),
         "Dub_Icon_Style": MessageLookupByLibrary.simpleMessage("Icon style"),
         "Dub_Icon_Style_Desc": MessageLookupByLibrary.simpleMessage(
             "Select the icon style for dubbed and partially dubbed anime"),

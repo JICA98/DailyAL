@@ -692,6 +692,8 @@
     "Dub_Show_Icon_Desc": "Aktivieren Sie das Synchronisationssymbol neben synchronisierten Animes",
     "Dub_Language": "Synchronsprache",
     "Dub_Language_Desc": "W\u00E4hlen Sie die Sprache f\u00FCr die Synchronisation",
+    "Dub_Confidence": "Dub-Vertrauen",
+    "Dub_Confidence_Desc": "Mindestanzahl an Quellen, die erforderlich sind, um einen Anime als synchronisiert zu markieren (das Synchronisationssymbol anzeigen)",
     "Dub_Icon_Style": "Symbolstil",
     "Dub_Icon_Style_Desc": "W\u00E4hlen Sie den Symbolstil f\u00FCr synchronisierte und teilweise synchronisierte Anime",
     "Dub_Report": "Ungenaue Dubs melden",
