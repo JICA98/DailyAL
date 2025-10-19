@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dailyanimelist/api/dalapi.dart';
+import 'package:dailyanimelist/cache/topcharactermanager.dart';
 import 'package:dailyanimelist/constant.dart';
 import 'package:dailyanimelist/generated/l10n.dart';
 import 'package:dailyanimelist/screens/contentdetailedscreen.dart';
@@ -17,13 +18,13 @@ import 'package:dailyanimelist/widgets/shimmecolor.dart';
 import 'package:dailyanimelist/widgets/translator.dart';
 import 'package:dal_commons/dal_commons.dart';
 import 'package:flutter/material.dart';
-import 'package:dailyanimelist/data/top_character_ids.dart';
 
 import '../main.dart';
 
 enum VoiceSortType { mostRecent, favorites, title }
 
 final Map<int, int> _favoritesCache = {};
+
 class CharacterScreen extends StatefulWidget {
   final int id;
   final String charaCategory;
@@ -273,10 +274,9 @@ class _CharacterScreenState extends State<CharacterScreen> {
                         ),
                       ))
                   .toList(),
-          // carouselController: carouselController,
           options: CarouselOptions(
               onPageChanged: (index, reason) {
-               listener.update(index);
+                listener.update(index);
               },
               aspectRatio: 2,
               viewportFraction: 0.45,
@@ -349,7 +349,7 @@ class _CharacterScreenState extends State<CharacterScreen> {
       ],
     );
   }
-  
+
   Widget titleWidget(String value) {
     if (value.isEmpty) return SizedBox.shrink();
     return title(value, opacity: 1, fontSize: 22);
@@ -384,15 +384,44 @@ class _CharacterScreenState extends State<CharacterScreen> {
                         child: CircularProgressIndicator(strokeWidth: 2),
                       )
                     : PopupMenuButton<VoiceSortType>(
+                        enabled: !_isSortingFavorites,
                         padding: EdgeInsets.zero,
                         tooltip: 'Sort',
                         icon: Icon(Icons.sort, size: 20),
                         onSelected: (sort) async {
+                          if (_isSortingFavorites) return;
+
                           if (sort == VoiceSortType.favorites) {
                             if (mounted) setState(() => _isSortingFavorites = true);
+
+                            // Preload top favorites for instant counts
+                            try {
+                              final tcm = TopCharactersManager();
+                              await tcm.ensureLoaded();
+                              for (final v in _originalVoices) {
+                                final id = v.character?.malId;
+                                if (id != null) {
+                                  final fav = tcm.getFavoriteCount(id);
+                                  if (fav != null) _favoritesCache[id] = fav;
+                                }
+                              }
+                            } catch (_) {}
+
+                            // Instant sort using what we have
+                            if (mounted) {
+                              setState(() {
+                                _voiceSort = sort;
+                              });
+                              _sortVoices();
+                            }
+
+                            // Keep the spinner visible while finishing the rest
                             await _fetchMissingFavorites();
+
                             if (mounted) setState(() => _isSortingFavorites = false);
+                            return;
                           }
+
                           if (mounted) {
                             setState(() {
                               _voiceSort = sort;
@@ -400,7 +429,7 @@ class _CharacterScreenState extends State<CharacterScreen> {
                             _sortVoices();
                           }
                         },
-                        itemBuilder: (_) => [
+                        itemBuilder: (_) => const [
                           PopupMenuItem(
                               value: VoiceSortType.mostRecent,
                               child: Text('Most Recent')),
@@ -421,7 +450,7 @@ class _CharacterScreenState extends State<CharacterScreen> {
                 padding: EdgeInsets.only(bottom: 30),
                 child: showNoContent(),
               )
-            : Container(
+            : SizedBox(
                 height: 180,
                 child: ListView.builder(
                   key: showSort ? ValueKey(_voiceSort) : null,
@@ -467,20 +496,29 @@ class _CharacterScreenState extends State<CharacterScreen> {
   }
 
   Future<void> _fetchMissingFavorites() async {
-    // Build topVoices in the same order as topCharacterIds (descending by favorites)
-    final Map<int, VoicesFull> voiceMap = {
-      for (final voice in _originalVoices)
-        if (voice.character?.malId != null) voice.character!.malId!: voice
-    };
-    final topVoices = <VoicesFull>[];
-    for (final id in topCharacterIds) {
-      final voice = voiceMap[id];
-      if (voice != null) {
-        topVoices.add(voice);
+    // 1) Fill from TopCharactersManager if available
+    try {
+      final tcm = TopCharactersManager();
+      await tcm.ensureLoaded();
+      for (final v in _originalVoices) {
+        final id = v.character?.malId;
+        if (id != null && !_favoritesCache.containsKey(id)) {
+          final fav = tcm.getFavoriteCount(id);
+          if (fav != null) _favoritesCache[id] = fav;
+        }
+      }
+    } catch (_) {}
+
+    // 2) Fetch the rest via DalApi (characters not present in the top dataset)
+    final remaining = <VoicesFull>[];
+    for (final v in _originalVoices) {
+      final id = v.character?.malId;
+      if (id != null && !_favoritesCache.containsKey(id)) {
+        remaining.add(v);
       }
     }
 
-    if (await _fetchFavorites(topVoices) && await _fetchFavorites(_originalVoices)) {
+    if (await _fetchFavorites(remaining)) {
       showToast(S.current.Sorting_finished);
     }
   }
@@ -547,6 +585,25 @@ class _CharacterCardLoaderState extends State<CharacterCardLoader> {
     if (_node.favorites != null || _node.id == null) return;
     if (widget.category != "character") return;
 
+    // 1) Try TopCharactersManager first for instant cached counts
+    try {
+      final tcm = TopCharactersManager();
+      await tcm.ensureLoaded();
+      final fav = tcm.getFavoriteCount(_node.id!);
+      if (fav != null && mounted) {
+        _favoritesCache[_node.id!] = fav;
+        setState(() {
+          _node = Node(
+            id: _node.id,
+            title: _node.title,
+            mainPicture: _node.mainPicture,
+            favorites: fav,
+          );
+        });
+      }
+    } catch (_) {}
+
+    // 2) Refresh via DalApi (also updates image if needed)
     try {
       final data = await DalApi.i.getCharaPeopleInfo(_node.id!, DataUnionType.character);
       if (data is CharacterV4Data && mounted) {
