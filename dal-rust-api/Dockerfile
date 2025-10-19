@@ -1,10 +1,8 @@
-FROM rust:1.85.1 as builder
+FROM rust:1.90.0 as builder
 
 WORKDIR /builder
 
 COPY . .
-
-RUN cargo update -p jsonwebtoken --precise 9.2.0
 
 RUN cargo build -p dal-rust-api --release
 
