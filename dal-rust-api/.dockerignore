@@ -1,0 +1,28 @@
+# Build artifacts
+/target
+**/target
+
+# VCS
+.git
+.gitignore
+
+# Node/npm/yarn
+node_modules
+
+# Env and secrets
+.env
+.env.*
+*.pem
+*.key
+*.crt
+
+# Logs
+*.log
+
+# OS/editor junk
+.DS_Store
+.vscode
+.idea
+
+# Docker
+Dockerfile*
