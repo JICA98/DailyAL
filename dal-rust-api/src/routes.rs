@@ -56,17 +56,17 @@ pub async fn setup_app(config: Config) -> Router {
     });
     Router::new()
         .route("/anime", get(handlers::get_anime))
-        .route("/anime/:id/related", get(handlers::get_related_anime))
+        .route("/anime/{id}/related", get(handlers::get_related_anime))
         .route(
-            "/types/:image_type/images/:image_id",
+            "/types/{image_type}/images/{image_id}",
             get(handlers::get_image_url),
         )
         .route(
-            "/types/:image_type/images/:image_id",
+            "/types/{image_type}/images/{image_id}",
             post(handlers::save_image),
         )
         .route(
-            "/types/:image_type/images/:image_id",
+            "/types/{image_type}/images/{image_id}",
             delete(handlers::delete_image),
         )
         .route("/schedules", post(handlers::start_schedules))
