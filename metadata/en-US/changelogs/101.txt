@@ -1,0 +1,5 @@
+- Add Search By ID in Search Screen
+- Improve German Translation a little bit by @hannesbraun
+- Added more dub languages and added a min source count dub setting by @Joelis57
+- Fetch and cache a list of all MAL characters that have >100 favorites by @Joelis57
+- Consolidate bookmark and info buttons into a single widget
