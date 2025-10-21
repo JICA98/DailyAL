@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dailyanimelist/api/dalapi.dart';
 import 'package:dailyanimelist/api/jikahelper.dart';
@@ -32,7 +30,6 @@ import 'package:dailyanimelist/user/user.dart';
 import 'package:dailyanimelist/util/pathutils.dart';
 import 'package:dailyanimelist/util/streamutils.dart';
 import 'package:dailyanimelist/widgets/autosize_copy_text.dart';
-import 'package:dailyanimelist/widgets/avatarwidget.dart';
 import 'package:dailyanimelist/widgets/background.dart';
 import 'package:dailyanimelist/widgets/common/image_preview.dart';
 import 'package:dailyanimelist/widgets/common/share_builder.dart';
@@ -50,7 +47,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:intl/intl.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
-import 'package:visibility_detector/visibility_detector.dart';
 
 import '../constant.dart';
 
@@ -887,15 +883,6 @@ class _ContentDetailedScreenState extends State<ContentDetailedScreen>
                 SB.lh80,
               ],
             ),
-            if (contentDetailed != null) ...[
-              scrollStreamWidget(
-                  Positioned(
-                    bottom: 80.0,
-                    right: 16.0,
-                    child: _bookmarkTag(),
-                  ),
-                  (_) => _ && !showContentEdit)
-            ],
             ExpandedSection(
               expand: showContentEdit,
               axisAlignment: 0.0,
@@ -971,11 +958,15 @@ class _ContentDetailedScreenState extends State<ContentDetailedScreen>
                   context: context,
                   newPage: GeneralSearchScreen(autoFocus: false)),
               icon: Icon(Icons.search)),
-          AppMenuWidget(
-            menuItems: _buildMenuItems,
-            onUserTap: () {},
-          ),
+          _appMenuWidget(),
         ]);
+  }
+
+  Widget _appMenuWidget() {
+    return AppMenuWidget(
+      menuItems: _buildMenuItems,
+      onUserTap: () {},
+    );
   }
 
   List<AppbarMenuItem> get _buildMenuItems {
@@ -1601,33 +1592,88 @@ class _ContentDetailedScreenState extends State<ContentDetailedScreen>
               ),
             ),
             Positioned(top: 5, right: 5, child: langChangeWidget()),
-            Positioned(bottom: 5, right: 5, child: _moreInfoButton()),
+            if (contentDetailed != null)
+              Positioned(bottom: 5, right: 5, child: _contentCardBottom()),
           ],
         ),
       ),
     );
   }
 
-  SizedBox _moreInfoButton() {
-    return SizedBox(
-      width: 40,
-      height: 40,
-      child: ShadowButton(
-        padding: EdgeInsets.zero,
-        onPressed: () => _openMoreInfo(),
-        child: Icon(Icons.info),
-      ),
-    );
-  }
+  Widget _contentCardBottom() {
+    const double btnSize = 40;
+    const double radius = 12;
+    final bg = Theme.of(context).colorScheme.surface.withValues(alpha: 0.9);
 
-  Widget _bookmarkTag() {
-    if (contentDetailed == null) return SB.z;
-    return BookMarkFloatingButton(
-      type: BookmarkType.values.byName(widget.category),
-      id: _id,
-      data: _getNode(),
-      addIcon: Icons.bookmark_outline,
-      removeIcon: Icons.bookmark,
+    return Material(
+      color: Colors.transparent,
+      elevation: 2,
+      borderRadius: BorderRadius.circular(radius),
+      child: Container(
+        decoration: BoxDecoration(
+          color: bg,
+          borderRadius: BorderRadius.circular(radius),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Material(
+              color: Colors.transparent,
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(radius),
+                bottomLeft: Radius.circular(radius),
+              ),
+              child: InkWell(
+                onTap: null,
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(radius),
+                  bottomLeft: Radius.circular(radius),
+                ),
+                child: SizedBox(
+                  width: btnSize,
+                  height: btnSize,
+                  child: Center(
+                      child: BookmarkTag(
+                    type: BookmarkType.values.byName(widget.category),
+                    id: _id,
+                    data: _getNode(),
+                  )),
+                ),
+              ),
+            ),
+            // Divider between segments
+            Container(
+              width: 1,
+              height: btnSize * .6,
+              color: Theme.of(context).dividerColor.withValues(
+                  alpha: Theme.of(context).brightness == Brightness.dark
+                      ? 0.3
+                      : 0.2),
+            ),
+            // Right segment: Info
+            Material(
+              color: Colors.transparent,
+              borderRadius: const BorderRadius.only(
+                topRight: Radius.circular(radius),
+                bottomRight: Radius.circular(radius),
+              ),
+              child: InkWell(
+                onTap: () => _openMoreInfo(),
+                borderRadius: const BorderRadius.only(
+                  topRight: Radius.circular(radius),
+                  bottomRight: Radius.circular(radius),
+                ),
+                child: const SizedBox(
+                  width: btnSize,
+                  height: btnSize,
+                  child: Center(child: Icon(Icons.info)),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
@@ -1694,7 +1740,7 @@ class _ContentDetailedScreenState extends State<ContentDetailedScreen>
       DalNode(
         category: widget.category,
         id: _id,
-        title: _title?.getFormattedTitleForHtml() ?? '_',
+        title: _title.getFormattedTitleForHtml(),
       ),
     );
   }
