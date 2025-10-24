@@ -32,6 +32,7 @@ final int homeIndex = 0;
 final int forumIndex = 1;
 final int userIndex = 2;
 final int exploreIndex = 3;
+final int clubsIndex = 4;
 GlobalKey<ScaffoldMessengerState> messenger = GlobalKey();
 
 void main() async {

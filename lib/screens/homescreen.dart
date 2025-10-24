@@ -3,6 +3,7 @@ import 'package:dailyanimelist/api/dalapi.dart';
 import 'package:dailyanimelist/cache/cachemanager.dart';
 import 'package:dailyanimelist/constant.dart';
 import 'package:dailyanimelist/notifservice.dart';
+import 'package:dailyanimelist/pages/clubspage.dart';
 import 'package:dailyanimelist/pages/explorepage.dart';
 import 'package:dailyanimelist/pages/forumpage.dart';
 import 'package:dailyanimelist/pages/homepage.dart';
@@ -74,15 +75,13 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       duration: Duration(milliseconds: 250),
     );
     animation = Tween(begin: 0.0, end: 1.0).animate(_animationController);
-    homeWidgets = {
-      homeIndex: OpacityAnima(child: HomePage(), animation: animation),
-      forumIndex: OpacityAnima(child: ForumPage(), animation: animation),
-      userIndex: OpacityAnima(child: UserPage(), animation: animation),
-      exploreIndex: OpacityAnima(child: ExplorePage(), animation: animation)
-    };
+    
+    // Initialize with phone widgets by default
+    // Will be updated in didChangeDependencies based on actual screen size
+    homeWidgets = _getPhoneWidgets();
 
     if (widget.pageIndex != null) {
-      pageIndex = widget.pageIndex! % homeWidgets.length;
+      pageIndex = widget.pageIndex! % 4; // Use 4 for initial calculation
     } else {
       pageIndex = user.pref.startUpPage;
     }
@@ -120,6 +119,53 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     });
   }
 
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    
+    // Now MediaQuery is available, determine the correct widget map
+    final screenSize = ResponsiveHelper.getScreenSize(context);
+    final useNavigationRail = screenSize.index >= ScreenSize.expanded.index;
+    
+    final newWidgets = useNavigationRail ? _getTabletWidgets() : _getPhoneWidgets();
+    
+    // Only update if the widget map has changed
+    if (homeWidgets.length != newWidgets.length) {
+      setState(() {
+        homeWidgets = newWidgets;
+        // Adjust pageIndex if it's out of bounds
+        if (pageIndex >= homeWidgets.length) {
+          pageIndex = 0;
+        }
+      });
+    }
+  }
+
+  Map<int, Widget> _getPhoneWidgets() {
+    return {
+      homeIndex: OpacityAnima(child: HomePage(), animation: animation),
+      forumIndex: OpacityAnima(child: ForumPage(), animation: animation),
+      userIndex: OpacityAnima(child: UserPage(), animation: animation),
+      exploreIndex: OpacityAnima(child: ExplorePage(), animation: animation),
+    };
+  }
+
+  Map<int, Widget> _getTabletWidgets() {
+    return {
+      homeIndex: OpacityAnima(child: HomePage(), animation: animation),
+      forumIndex: OpacityAnima(child: ForumPage(), animation: animation),
+      clubsIndex: OpacityAnima(child: ClubsPage(), animation: animation),
+      userIndex: OpacityAnima(child: UserPage(), animation: animation),
+      exploreIndex: OpacityAnima(child: ExplorePage(), animation: animation),
+    };
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
   setupScheduledNotifications() async {
     if (user.status == AuthStatus.AUTHENTICATED) {
       await NotificationService().askForPermission();
@@ -154,11 +200,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             ?.toString()
             .equals('true') ??
         false;
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
   }
 
   @override
@@ -210,6 +251,22 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   });
               },
               labelType: NavigationRailLabelType.selected,
+              leading: SizedBox(height: 20), // Top spacing
+              trailing: Expanded(
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 20.0),
+                    child: IconButton(
+                      icon: Icon(Icons.settings_outlined),
+                      onPressed: () {
+                        Scaffold.of(context).openEndDrawer();
+                      },
+                      tooltip: 'Settings',
+                    ),
+                  ),
+                ),
+              ),
               destinations: [
                 NavigationRailDestination(
                   icon: Icon(Icons.home_outlined),
@@ -217,9 +274,14 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   label: Text('Home'),
                 ),
                 NavigationRailDestination(
-                  icon: Icon(Icons.comment_outlined),
-                  selectedIcon: Icon(Icons.comment),
+                  icon: Icon(Icons.forum_outlined),
+                  selectedIcon: Icon(Icons.forum),
                   label: Text('Forum'),
+                ),
+                NavigationRailDestination(
+                  icon: Icon(Icons.groups_outlined),
+                  selectedIcon: Icon(Icons.groups),
+                  label: Text('Clubs'),
                 ),
                 NavigationRailDestination(
                   icon: Icon(Icons.person_outline),
