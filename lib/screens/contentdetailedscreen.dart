@@ -122,6 +122,7 @@ class _ContentDetailedScreenState extends State<ContentDetailedScreen>
   final GlobalKey _listKey = GlobalKey();
   List<GlobalKey> _globalKeys = [];
   ScheduleData? _scheduleData;
+  double _leftPanelWidth = 500.0; // Default width for left panel
 
   // Tablet detection and responsive values
   bool get _isTablet {
@@ -134,7 +135,13 @@ class _ContentDetailedScreenState extends State<ContentDetailedScreen>
     return width >= 840; // Large tablet/desktop breakpoint
   }
 
-  double get horizPadding => _isLargeTablet ? 24.0 : _isTablet ? 20.0 : 15.0;
+  bool get _isPhone => !_isTablet && !_isLargeTablet;
+
+  double get horizPadding => _isLargeTablet
+      ? 17.0
+      : _isTablet
+          ? 15.0
+          : 12.0;
 
   int get _id => (widget.node != null ? widget.node!.id : widget.id)!;
 
@@ -939,12 +946,12 @@ class _ContentDetailedScreenState extends State<ContentDetailedScreen>
       children: [
         // Left pane - Fixed details
         SizedBox(
-          width: _isLargeTablet ? 480 : 400,
+          width: _leftPanelWidth,
           child: Material(
             elevation: 2,
             child: CustomScrollView(
               slivers: [
-                _appBar,
+                _leftPaneAppBar,
                 SliverToBoxAdapter(
                   child: Padding(
                     padding: EdgeInsets.all(horizPadding),
@@ -953,16 +960,48 @@ class _ContentDetailedScreenState extends State<ContentDetailedScreen>
                       children: [
                         // Synopsis section
                         if (contentDetailed != null)
-                          _getVisibleSectionByTitle(S.current.Synopsis)?.child ?? SB.z,
+                          _getVisibleSectionByTitle(S.current.Synopsis)
+                                  ?.child ??
+                              SB.z,
                         SB.h20,
                         // More Info section
                         if (contentDetailed != null)
-                          _getVisibleSectionByTitle(S.current.More_Info)?.child ?? SB.z,
+                          _getVisibleSectionByTitle(S.current.More_Info)
+                                  ?.child ??
+                              SB.z,
                       ],
                     ),
                   ),
                 ),
               ],
+            ),
+          ),
+        ),
+        // Resizable divider with shimmer effect
+        ShimmerConditionally(
+          showShimmer: contentDetailed == null,
+          baseColor: Theme.of(context).scaffoldBackgroundColor,
+          highlightColor:
+              Theme.of(context).scaffoldBackgroundColor.withOpacity(.3),
+          child: MouseRegion(
+            cursor: SystemMouseCursors.resizeColumn,
+            child: GestureDetector(
+              onHorizontalDragUpdate: (details) {
+                setState(() {
+                  _leftPanelWidth += details.delta.dx;
+                  _leftPanelWidth = _leftPanelWidth.clamp(350.0, 550.0);
+                });
+              },
+              child: Container(
+                width: 8,
+                color: Theme.of(context).dividerColor.withOpacity(0.3),
+                child: Center(
+                  child: Container(
+                    width: 2,
+                    color: Theme.of(context).dividerColor,
+                  ),
+                ),
+              ),
             ),
           ),
         ),
@@ -981,6 +1020,14 @@ class _ContentDetailedScreenState extends State<ContentDetailedScreen>
                       automaticallyImplyLeading: false,
                       title: Text(animeTitle),
                       bottom: tabBarWidget,
+                      actions: [
+                        IconButton(
+                            onPressed: () => gotoPage(
+                                context: context,
+                                newPage: GeneralSearchScreen(autoFocus: false)),
+                            icon: Icon(Icons.search)),
+                        _appMenuWidget(),
+                      ],
                     ),
                     _buildTabletContentBody(),
                     SB.lh80,
@@ -1028,13 +1075,13 @@ class _ContentDetailedScreenState extends State<ContentDetailedScreen>
     if (contentDetailed == null) {
       return const SliverWrapper(const SysonpsisWidget());
     }
-    
+
     // Filter out sections shown in left pane
     final rightPaneSections = visibleSections.where((section) {
-      return section.title != S.current.Synopsis && 
-             section.title != S.current.More_Info;
+      return section.title != S.current.Synopsis &&
+          section.title != S.current.More_Info;
     }).toList();
-    
+
     return SliverList(
       delegate: SliverChildBuilderDelegate(
         ((context, index) {
@@ -1073,8 +1120,12 @@ class _ContentDetailedScreenState extends State<ContentDetailedScreen>
   }
 
   SliverAppBar get _appBar {
-    final expandedHeight = _isLargeTablet ? 520.0 : _isTablet ? 490.0 : 460.0;
-    
+    final expandedHeight = _isLargeTablet
+        ? 520.0
+        : _isTablet
+            ? 490.0
+            : 460.0;
+
     return SliverAppBar(
         pinned: true,
         floating: false,
@@ -1101,6 +1152,35 @@ class _ContentDetailedScreenState extends State<ContentDetailedScreen>
               icon: Icon(Icons.search)),
           _appMenuWidget(),
         ]);
+  }
+
+  // Left pane app bar for tablets (without title in collapsed state)
+  SliverAppBar get _leftPaneAppBar {
+    final expandedHeight = _isLargeTablet
+        ? 520.0
+        : _isTablet
+            ? 490.0
+            : 460.0;
+
+    return SliverAppBar(
+        pinned: true,
+        floating: false,
+        snap: false,
+        expandedHeight: expandedHeight,
+        toolbarHeight: 40.0,
+        title: SizedBox.shrink(), // No title on left pane
+        flexibleSpace: FlexibleSpaceBar(
+          collapseMode: CollapseMode.pin,
+          background: ShimmerConditionally(
+            showShimmer: contentDetailed == null,
+            child: animeHeader,
+            baseColor: Theme.of(context).scaffoldBackgroundColor,
+            highlightColor:
+                Theme.of(context).scaffoldBackgroundColor.withOpacity(.3),
+          ),
+        ),
+        bottom: null, // No tabs on left pane
+        actions: []); // No actions on left pane - moved to right pane
   }
 
   Widget _appMenuWidget() {
@@ -1234,8 +1314,7 @@ class _ContentDetailedScreenState extends State<ContentDetailedScreen>
                   Padding(
                     padding: EdgeInsets.only(right: horizPadding),
                     child: PlainButton(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: horizPadding),
+                      padding: EdgeInsets.symmetric(horizontal: horizPadding),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12)),
                       onPressed: section.onViewAll,
@@ -1611,11 +1690,16 @@ class _ContentDetailedScreenState extends State<ContentDetailedScreen>
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const SizedBox(height: 35),
-        _titleWidget,
-        const SizedBox(height: 10),
+        if (_isPhone) ...[
+          const SizedBox(height: 35),
+          _titleWidget,
+          const SizedBox(height: 10),
+        ] else
+          SB.h80,
         _isTablet ? _tabletHeaderLayout : _phoneHeaderLayout,
-        const SizedBox(height: 15),
+        if (_isPhone) ...[
+          const SizedBox(height: 15),
+        ],
       ],
     );
     return Stack(children: [
@@ -1649,24 +1733,31 @@ class _ContentDetailedScreenState extends State<ContentDetailedScreen>
   }
 
   Widget get _tabletHeaderLayout {
+    // Calculate poster width based on left panel width
+    // Use 50-60% of panel width for poster, with min/max constraints
+    final posterWidth = (_leftPanelWidth * 0.55).clamp(180.0, 320.0);
+
     return Center(
       child: ConstrainedBox(
         constraints: BoxConstraints(maxWidth: 1200),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Fixed width for poster
-            SizedBox(
-              width: _isLargeTablet ? 280 : 240,
-              child: animeCard,
-            ),
-            SizedBox(width: _isLargeTablet ? 40 : 30),
-            // Flexible details section
-            Expanded(
-              child: animeDetailsHeader,
-            ),
-          ],
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: horizPadding),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 10.0),
+                child: SizedBox(
+                  width: posterWidth,
+                  child: animeCard,
+                ),
+              ),
+              Expanded(
+                child: animeDetailsHeader,
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -1740,11 +1831,15 @@ class _ContentDetailedScreenState extends State<ContentDetailedScreen>
           .toList();
       urlList.addAll(list);
     }
-    
+
     // Calculate responsive dimensions
-    final posterHeight = _isLargeTablet ? 380.0 : _isTablet ? 340.0 : 320.0;
+    final posterHeight = _isLargeTablet
+        ? 380.0
+        : _isTablet
+            ? 340.0
+            : 320.0;
     final aspectRatio = 2 / 3; // Standard poster ratio
-    
+
     return _heroWrapper(
       AspectRatio(
         aspectRatio: aspectRatio,
