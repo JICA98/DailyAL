@@ -12,6 +12,7 @@ import 'package:dailyanimelist/screens/generalsearchscreen.dart';
 import 'package:dailyanimelist/user/hompagepref.dart';
 import 'package:dailyanimelist/user/user.dart';
 import 'package:dailyanimelist/util/homepageutils.dart';
+import 'package:dailyanimelist/util/responsive_helper.dart';
 import 'package:dailyanimelist/widgets/custombutton.dart';
 import 'package:dailyanimelist/widgets/forum/forumtopicwidget.dart';
 import 'package:dailyanimelist/widgets/homeappbar.dart';
@@ -160,6 +161,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final isTablet = ResponsiveHelper.isTabletOrLarger(context);
+    
     return Padding(
       padding: EdgeInsets.only(left: 0, right: 0, top: 0),
       child: AnimatedOpacity(
@@ -169,13 +172,13 @@ class _HomePageState extends State<HomePage> {
           length: topHeaders.length,
           child: NestedScrollView(
             controller: scrollController,
-            headerSliverBuilder: (_, __) => [_buildAppBar()],
+            headerSliverBuilder: (_, __) => [_buildAppBar(isTablet)],
             body: RefreshIndicator(
               onRefresh: () async {
                 setRefKey();
                 if (mounted) setState(() {});
               },
-              child: CustomScrollWrapper(newSlivers()),
+              child: CustomScrollWrapper(newSlivers(isTablet)),
             ),
           ),
         ),
@@ -183,18 +186,25 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  List<Widget> newSlivers() {
+  List<Widget> newSlivers(bool isTablet) {
+    if (isTablet) {
+      return [_buildTabletLayout(), SliverToBoxAdapter(child: SB.h80)];
+    }
     return [contentSliverBuilder(), SliverToBoxAdapter(child: SB.h80)];
   }
 
-  SliverLayoutBuilder _buildAppBar() {
+  SliverLayoutBuilder _buildAppBar([bool isTablet = false]) {
     return SliverLayoutBuilder(
       builder: (p0, c) => SliverAppBar(
         automaticallyImplyLeading: false,
         pinned: true,
         floating: true,
         title: Padding(
-          padding: const EdgeInsets.only(bottom: 5.0),
+          padding: EdgeInsets.only(
+            bottom: 5.0,
+            left: isTablet ? ResponsiveHelper.getHorizontalPadding(context) : 0,
+            right: isTablet ? ResponsiveHelper.getHorizontalPadding(context) : 0,
+          ),
           child: AppBarHome(
             onUiChange: () {
               if (mounted) setState(() {});
@@ -205,16 +215,21 @@ class _HomePageState extends State<HomePage> {
         titleSpacing: 0.0,
         backgroundColor: c.scrollOffset > 0 ? null : Colors.transparent,
         toolbarHeight: kToolbarHeight,
-        bottom: _buildTopHeader(c),
+        bottom: _buildTopHeader(c, isTablet),
       ),
     );
   }
 
-  PreferredSize _buildTopHeader(SliverConstraints c) {
+  PreferredSize _buildTopHeader(SliverConstraints c, [bool isTablet = false]) {
     return PreferredSize(
       preferredSize: Size(double.infinity, 52),
       child: Padding(
-        padding: const EdgeInsets.only(bottom: 10, top: 7.0),
+        padding: EdgeInsets.only(
+          bottom: 10,
+          top: 7.0,
+          left: isTablet ? ResponsiveHelper.getHorizontalPadding(context) : 0,
+          right: isTablet ? ResponsiveHelper.getHorizontalPadding(context) : 0,
+        ),
         child: Container(
           height: 35,
           child: Center(
@@ -262,6 +277,68 @@ class _HomePageState extends State<HomePage> {
           apiPref: user.pref.hpApiPrefList.elementAt(index),
         ),
         childCount: user.pref.hpApiPrefList.length,
+      ),
+    );
+  }
+
+  Widget _buildTabletLayout() {
+    // Split content into two columns for tablet layout
+    final apiPrefs = user.pref.hpApiPrefList;
+    final leftColumnItems = <HomePageApiPref>[];
+    final rightColumnItems = <HomePageApiPref>[];
+    
+    // Distribute items: alternate between left and right columns
+    for (int i = 0; i < apiPrefs.length; i++) {
+      if (i % 2 == 0) {
+        leftColumnItems.add(apiPrefs[i]);
+      } else {
+        rightColumnItems.add(apiPrefs[i]);
+      }
+    }
+    
+    return SliverPadding(
+      padding: ResponsiveHelper.getContentPadding(context),
+      sliver: SliverList(
+        delegate: SliverChildBuilderDelegate(
+          (_, index) {
+            if (index == 0) {
+              // Create the two-column layout
+              return Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Left Column (60%)
+                  Expanded(
+                    flex: 6,
+                    child: Column(
+                      children: leftColumnItems
+                          .map((apiPref) => ContentHomeWidget(
+                                refKey: refKey,
+                                apiPref: apiPref,
+                              ))
+                          .toList(),
+                    ),
+                  ),
+                  SizedBox(width: ResponsiveHelper.getCardSpacing(context) * 2),
+                  
+                  // Right Column (40%)
+                  Expanded(
+                    flex: 4,
+                    child: Column(
+                      children: rightColumnItems
+                          .map((apiPref) => ContentHomeWidget(
+                                refKey: refKey,
+                                apiPref: apiPref,
+                              ))
+                          .toList(),
+                    ),
+                  ),
+                ],
+              );
+            }
+            return SB.z;
+          },
+          childCount: 1,
+        ),
       ),
     );
   }
@@ -338,10 +415,16 @@ class _ContentHomeWidgetState extends State<ContentHomeWidget>
   }
 
   Widget get _forumTopics {
+    final isTablet = ResponsiveHelper.isTabletOrLarger(context);
+    final horizontalPadding = isTablet ? 0.0 : 15.0;
+    
     return Column(
       children: [
         SB.h20,
-        HomePageTitleWidget(content, apiPref),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+          child: HomePageTitleWidget(content, apiPref),
+        ),
         ForumTopicsList(
           topics: content?.data,
           shimmerItemCount: 3,
@@ -353,10 +436,16 @@ class _ContentHomeWidgetState extends State<ContentHomeWidget>
   }
 
   Widget get _buildNewsWidget {
+    final isTablet = ResponsiveHelper.isTabletOrLarger(context);
+    final horizontalPadding = isTablet ? 0.0 : 15.0;
+    
     return Column(
       children: [
         SB.h10,
-        HomePageTitleWidget(content, apiPref),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+          child: HomePageTitleWidget(content, apiPref),
+        ),
         SB.h5,
         if (content?.data == null || content.data.isEmpty)
           HomePageNewsWidget(List.generate(6, (index) => FeaturedBaseNode()))
@@ -375,10 +464,15 @@ class _ContentHomeWidgetState extends State<ContentHomeWidget>
     final tile = tileMap.tryAt(user.pref.homePageTileSize)!;
     var height = tile.containerHeight;
     var width = height * (2 / 3);
+    final isTablet = ResponsiveHelper.isTabletOrLarger(context);
+    final horizontalPadding = isTablet ? 0.0 : 15.0;
 
     return Column(children: [
       SB.h15,
-      HomePageTitleWidget(content, apiPref),
+      Padding(
+        padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+        child: HomePageTitleWidget(content, apiPref),
+      ),
       SB.h15,
       (content?.data != null && content.data.isNotEmpty)
           ? horizontalList(
@@ -389,7 +483,7 @@ class _ContentHomeWidgetState extends State<ContentHomeWidget>
               Container(
                 height: height,
                 child: ListView.builder(
-                  padding: EdgeInsets.only(left: 15, right: 15),
+                  padding: EdgeInsets.only(left: horizontalPadding, right: horizontalPadding),
                   itemCount: 10,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) => LoadingCard(
@@ -425,32 +519,29 @@ class HomePageTitleWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String _title = apiPref.value?.title ?? '';
+    String _title = apiPref.value.title;
     _title = HomePageUtils().titleBuilder(apiPref, context, true);
-    return Padding(
-      padding: EdgeInsets.only(left: 15, right: 15),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Expanded(
-            child: Text(
-              _title,
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Expanded(
+          child: Text(
+            _title,
+            style: Theme.of(context).textTheme.titleLarge,
           ),
-          IconButton(
-            icon: Icon(Icons.arrow_forward),
-            onPressed: (content?.data != null && content.data.isNotEmpty)
-                ? () {
-                    if ((content?.data != null && content.data.isNotEmpty))
-                      gotoPage(
-                          context: context,
-                          newPage: HomePageUtils().viewAllBuilder(apiPref));
-                  }
-                : null,
-          ),
-        ],
-      ),
+        ),
+        IconButton(
+          icon: Icon(Icons.arrow_forward),
+          onPressed: (content?.data != null && content.data.isNotEmpty)
+              ? () {
+                  if ((content?.data != null && content.data.isNotEmpty))
+                    gotoPage(
+                        context: context,
+                        newPage: HomePageUtils().viewAllBuilder(apiPref));
+                }
+              : null,
+        ),
+      ],
     );
   }
 }

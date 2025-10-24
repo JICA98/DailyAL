@@ -11,6 +11,7 @@ import 'package:dailyanimelist/pages/side_bar.dart';
 import 'package:dailyanimelist/pages/userpage.dart';
 import 'package:dailyanimelist/screens/contentdetailedscreen.dart';
 import 'package:dailyanimelist/user/user.dart';
+import 'package:dailyanimelist/util/responsive_helper.dart';
 import 'package:dailyanimelist/widgets/background.dart';
 import 'package:dailyanimelist/widgets/bottomnavbar.dart';
 import 'package:dailyanimelist/widgets/home/feature_first.dart';
@@ -162,46 +163,99 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      endDrawer: Drawer(
-        child: AppSideBar(),
-      ),
-      bottomNavigationBar: BottomNavBar(
-        startIndex: pageIndex,
-        onChanged: (value) {
-          _animationController.reset();
-          _animationController.forward();
-          if (mounted)
-            setState(() {
-              pageIndex = value;
-            });
-        },
-      ),
-      body: WillPopWidget(
-        onWillPop: () async {
-          return true;
-        },
-        child: Stack(
-          children: [
-            AnimatedOpacity(
-              opacity: backImagePages.contains(pageIndex) ? 1 : 0,
-              duration: Duration(milliseconds: 300),
-              child: Background(
-                context: context,
-                height: MediaQuery.of(context).size.height / 2,
-                showLocalFile: user.pref.bgPath != null,
-                url: user.pref.bgPath,
-              ),
+    final screenSize = ResponsiveHelper.getScreenSize(context);
+    final useNavigationRail = screenSize.index >= ScreenSize.expanded.index;
+    
+    final bodyContent = WillPopWidget(
+      onWillPop: () async {
+        return true;
+      },
+      child: Stack(
+        children: [
+          AnimatedOpacity(
+            opacity: backImagePages.contains(pageIndex) ? 1 : 0,
+            duration: Duration(milliseconds: 300),
+            child: Background(
+              context: context,
+              height: MediaQuery.of(context).size.height / 2,
+              showLocalFile: user.pref.bgPath != null,
+              url: user.pref.bgPath,
             ),
-            user.pref.keepPagesInMemory
-                ? IndexedStack(
-                    children: homeWidgets.values.toList(),
-                    index: pageIndex,
-                  )
-                : homeWidgets[pageIndex % homeWidgets.length]!,
-          ],
-        ),
+          ),
+          user.pref.keepPagesInMemory
+              ? IndexedStack(
+                  children: homeWidgets.values.toList(),
+                  index: pageIndex,
+                )
+              : homeWidgets[pageIndex % homeWidgets.length]!,
+        ],
       ),
     );
+    
+    if (useNavigationRail) {
+      return Scaffold(
+        endDrawer: Drawer(
+          child: AppSideBar(),
+        ),
+        body: Row(
+          children: [
+            NavigationRail(
+              selectedIndex: pageIndex,
+              onDestinationSelected: (value) {
+                _animationController.reset();
+                _animationController.forward();
+                if (mounted)
+                  setState(() {
+                    pageIndex = value;
+                  });
+              },
+              labelType: NavigationRailLabelType.selected,
+              destinations: [
+                NavigationRailDestination(
+                  icon: Icon(Icons.home_outlined),
+                  selectedIcon: Icon(Icons.home),
+                  label: Text('Home'),
+                ),
+                NavigationRailDestination(
+                  icon: Icon(Icons.comment_outlined),
+                  selectedIcon: Icon(Icons.comment),
+                  label: Text('Forum'),
+                ),
+                NavigationRailDestination(
+                  icon: Icon(Icons.person_outline),
+                  selectedIcon: Icon(Icons.person),
+                  label: Text('User'),
+                ),
+                NavigationRailDestination(
+                  icon: Icon(Icons.explore_outlined),
+                  selectedIcon: Icon(Icons.explore),
+                  label: Text('Explore'),
+                ),
+              ],
+            ),
+            VerticalDivider(thickness: 1, width: 1),
+            Expanded(child: bodyContent),
+          ],
+        ),
+      );
+    } else {
+      return Scaffold(
+        endDrawer: Drawer(
+          child: AppSideBar(),
+        ),
+        bottomNavigationBar: BottomNavBar(
+          startIndex: pageIndex,
+          onChanged: (value) {
+            _animationController.reset();
+            _animationController.forward();
+            if (mounted)
+              setState(() {
+                pageIndex = value;
+              });
+          },
+        ),
+        body: bodyContent,
+      );
+    }
   }
 }
