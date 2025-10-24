@@ -67,7 +67,7 @@ impl GeminiAPI {
             .text()
             .await?;
 
-        println!("Response from Gemini API");
+        println!("Response from Gemini API: {}", text);
 
         let response: GeminiReponse = serde_json::from_str(&text).unwrap();
 
