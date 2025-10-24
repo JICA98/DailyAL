@@ -16,7 +16,7 @@ class HomePageNewsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final radius = 12.0;
     return Container(
-      height: 250,
+      height: 295,
       child: ListView.builder(
         padding: EdgeInsets.only(left: 12, right: 15),
         itemCount: featuredList.length,
