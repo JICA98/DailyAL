@@ -12,12 +12,15 @@ import 'package:dailyanimelist/pages/settings/about.dart';
 import 'package:dailyanimelist/pages/settings_page.dart';
 import 'package:dailyanimelist/pages/side_bar.dart';
 import 'package:dailyanimelist/pages/userpage.dart';
+import 'package:dailyanimelist/pages/userpop.dart';
 import 'package:dailyanimelist/screens/contentdetailedscreen.dart';
 import 'package:dailyanimelist/screens/generalsearchscreen.dart';
 import 'package:dailyanimelist/user/user.dart';
 import 'package:dailyanimelist/util/responsive_helper.dart';
+import 'package:dailyanimelist/widgets/avatarwidget.dart';
 import 'package:dailyanimelist/widgets/background.dart';
 import 'package:dailyanimelist/widgets/bottomnavbar.dart';
+import 'package:dailyanimelist/widgets/customfuture.dart';
 import 'package:dailyanimelist/widgets/home/anime_calendar.dart';
 import 'package:dailyanimelist/widgets/home/bookmarks_widget.dart';
 import 'package:dailyanimelist/widgets/home/feature_first.dart';
@@ -167,10 +170,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           child: GeneralSearchScreen(
               autoFocus: false, showBackButton: false, onClose: _onSearchClose),
           animation: animation),
-      bookmarksIndex:
-          OpacityAnima(child: BookMarksWidget(), animation: animation),
-      calendarIndex:
-          OpacityAnima(child: AnimeCalendarWidget(), animation: animation),
+      profileIndex: OpacityAnima(
+          child: UserPopSlideOpenPage(isSelf: true, isFullScreen: true), animation: animation),
     };
   }
 
@@ -262,14 +263,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           children: [
             NavigationRail(
               selectedIndex: pageIndex,
-              onDestinationSelected: (value) {
-                _animationController.reset();
-                _animationController.forward();
-                if (mounted)
-                  setState(() {
-                    pageIndex = value;
-                  });
-              },
+              onDestinationSelected: (value) => _onSelected(value),
               labelType: NavigationRailLabelType.all,
               leading: Padding(
                 padding: const EdgeInsets.only(bottom: 40.0, top: 10.0),
@@ -288,13 +282,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   alignment: Alignment.bottomCenter,
                   child: Padding(
                     padding: const EdgeInsets.only(bottom: 20.0),
-                    child: IconButton(
-                      icon: Icon(Icons.settings_outlined),
-                      onPressed: () {
-                        gotoPage(context: context, newPage: SettingsPage());
-                      },
-                      tooltip: S.current.Settings,
-                    ),
                   ),
                 ),
               ),
@@ -329,16 +316,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   selectedIcon: Icon(Icons.search),
                   label: Text(S.current.Search),
                 ),
-                NavigationRailDestination(
-                  icon: Icon(Icons.bookmark_outline),
-                  selectedIcon: Icon(Icons.bookmark),
-                  label: Text(S.current.Bookmarks),
+                 NavigationRailDestination(
+                  label: Text(S.current.Profile),
+                  icon: _userProfileWidget(),
+                  selectedIcon: _userProfileWidget(isSelected: true),
                 ),
-                NavigationRailDestination(
-                  icon: Icon(Icons.calendar_today_outlined),
-                  selectedIcon: Icon(Icons.calendar_today),
-                  label: Text(S.current.Calendar),
-                ),
+                
               ],
             ),
             VerticalDivider(thickness: 1, width: 1),
@@ -362,5 +345,57 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         body: bodyContent,
       );
     }
+  }
+
+  void _onSelected(int value) {
+    _animationController.reset();
+    _animationController.forward();
+    if (mounted)
+      setState(() {
+        pageIndex = value;
+      });
+  }
+
+  Widget _userProfileWidget({bool isSelected = false}) {
+    if (user.status != AuthStatus.AUTHENTICATED) {
+      return IconButton(
+        icon: Icon(Icons.settings_outlined),
+        onPressed: () {
+          gotoPage(context: context, newPage: SettingsPage());
+        },
+        tooltip: S.current.Settings,
+      );
+    }
+    return CFutureBuilder<UserProf?>(
+        loadingChild: SB.z,
+        future: UserProfService.i.userProf,
+        done: (userProf) {
+          return Material(
+            color: Colors.transparent,
+            child: Container(
+              // height: 50,
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                child: Container(
+                    child: Container(
+                  height: 45,
+                  width: 45,
+                  decoration: BoxDecoration(
+                    border: isSelected
+                        ? Border.all(
+                            color: Theme.of(context).colorScheme.primary,
+                            width: 2.0)
+                        : null,
+                    borderRadius: BorderRadius.circular(22.5),
+                  ),
+                  child: AvatarWidget(
+                    url: userProf.data?.picture,
+                    onTap: () => _onSelected(profileIndex),
+                  ),
+                )),
+              ),
+            ),
+          );
+        });
   }
 }
