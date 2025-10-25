@@ -17,6 +17,7 @@ import 'package:dailyanimelist/screens/contentdetailedscreen.dart';
 import 'package:dailyanimelist/screens/generalsearchscreen.dart';
 import 'package:dailyanimelist/screens/plainscreen.dart';
 import 'package:dailyanimelist/user/user.dart';
+import 'package:dailyanimelist/util/responsive_helper.dart';
 import 'package:dailyanimelist/widgets/avatarwidget.dart';
 import 'package:dailyanimelist/widgets/custombutton.dart';
 import 'package:dailyanimelist/widgets/customfuture.dart';
@@ -65,14 +66,16 @@ class _ExplorePageState extends State<ExplorePage> {
 
   @override
   Widget build(BuildContext context) {
+    final isTablet = ResponsiveHelper.isTabletOrLarger(context);
     return CustomScrollView(
       slivers: [
         SB.lh35,
-        _wrapSliver(AppBarHome(
-          onUiChange: () {
-            if (mounted) setState(() {});
-          },
-        )),
+        if (!isTablet)
+          _wrapSliver(AppBarHome(
+            onUiChange: () {
+              if (mounted) setState(() {});
+            },
+          )),
         _buildAnimeMangaPicker,
         SB.lh20,
         _wrapSliver(_randomPickerWidget),
@@ -397,7 +400,8 @@ class _ExplorePageState extends State<ExplorePage> {
   Widget get _randomPickerWidget {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
-      padding: const EdgeInsets.symmetric(horizontal: horizPadding, vertical: 3.0),
+      padding:
+          const EdgeInsets.symmetric(horizontal: horizPadding, vertical: 3.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

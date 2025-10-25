@@ -162,7 +162,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final isTablet = ResponsiveHelper.isTabletOrLarger(context);
-    
+
     return Padding(
       padding: EdgeInsets.only(left: 0, right: 0, top: 0),
       child: AnimatedOpacity(
@@ -199,18 +199,16 @@ class _HomePageState extends State<HomePage> {
         automaticallyImplyLeading: false,
         pinned: true,
         floating: true,
-        title: Padding(
-          padding: EdgeInsets.only(
-            bottom: 5.0,
-            left: isTablet ? ResponsiveHelper.getHorizontalPadding(context) : 0,
-            right: isTablet ? ResponsiveHelper.getHorizontalPadding(context) : 0,
-          ),
-          child: AppBarHome(
-            onUiChange: () {
-              if (mounted) setState(() {});
-            },
-          ),
-        ),
+        title: isTablet
+            ? SB.z
+            : Padding(
+                padding: EdgeInsets.only(bottom: 5.0),
+                child: AppBarHome(
+                  onUiChange: () {
+                    if (mounted) setState(() {});
+                  },
+                ),
+              ),
         actions: <Widget>[SB.z],
         titleSpacing: 0.0,
         backgroundColor: c.scrollOffset > 0 ? null : Colors.transparent,
@@ -286,7 +284,7 @@ class _HomePageState extends State<HomePage> {
     final apiPrefs = user.pref.hpApiPrefList;
     final leftColumnItems = <HomePageApiPref>[];
     final rightColumnItems = <HomePageApiPref>[];
-    
+
     // Distribute items: alternate between left and right columns
     for (int i = 0; i < apiPrefs.length; i++) {
       if (i % 2 == 0) {
@@ -295,7 +293,7 @@ class _HomePageState extends State<HomePage> {
         rightColumnItems.add(apiPrefs[i]);
       }
     }
-    
+
     return SliverPadding(
       padding: ResponsiveHelper.getContentPadding(context),
       sliver: SliverList(
@@ -319,7 +317,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   SizedBox(width: ResponsiveHelper.getCardSpacing(context) * 2),
-                  
+
                   // Right Column (40%)
                   Expanded(
                     flex: 4,
@@ -417,7 +415,7 @@ class _ContentHomeWidgetState extends State<ContentHomeWidget>
   Widget get _forumTopics {
     final isTablet = ResponsiveHelper.isTabletOrLarger(context);
     final horizontalPadding = isTablet ? 0.0 : 15.0;
-    
+
     return Column(
       children: [
         SB.h20,
@@ -438,7 +436,7 @@ class _ContentHomeWidgetState extends State<ContentHomeWidget>
   Widget get _buildNewsWidget {
     final isTablet = ResponsiveHelper.isTabletOrLarger(context);
     final horizontalPadding = isTablet ? 0.0 : 15.0;
-    
+
     return Column(
       children: [
         SB.h10,
@@ -483,7 +481,8 @@ class _ContentHomeWidgetState extends State<ContentHomeWidget>
               Container(
                 height: height,
                 child: ListView.builder(
-                  padding: EdgeInsets.only(left: horizontalPadding, right: horizontalPadding),
+                  padding: EdgeInsets.only(
+                      left: horizontalPadding, right: horizontalPadding),
                   itemCount: 10,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) => LoadingCard(

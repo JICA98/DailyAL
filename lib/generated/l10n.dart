@@ -10199,6 +10199,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Calendar`
+  String get Calendar {
+    return Intl.message(
+      'Calendar',
+      name: 'Calendar',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

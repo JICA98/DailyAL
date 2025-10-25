@@ -1014,5 +1014,6 @@
     "Add_To_Calendar_Prompt": "Add to Calendar",
     "Add_Recurring_Event": "Recurring weekly",
     "Add_Recurring_Event_Desc": "Add future episodes as weekly events",
-    "Add": "Add"
+    "Add": "Add",
+    "Calendar": "Calendar"
 }

@@ -74,6 +74,7 @@ class GeneralSearchScreen extends StatefulWidget {
   final String? category;
   final Map<String, FilterOption>? filterOutputs;
   final bool exclusiveScreen;
+  final VoidCallback? onClose;
 
   const GeneralSearchScreen({
     this.searchQuery,
@@ -82,6 +83,7 @@ class GeneralSearchScreen extends StatefulWidget {
     this.filterOutputs,
     this.exclusiveScreen = false,
     this.autoFocus = true,
+    this.onClose,
   });
 
   @override
@@ -752,6 +754,10 @@ class _GeneralSearchScreenState extends State<GeneralSearchScreen>
         });
       return false;
     }
+    if (widget.onClose != null) {
+      widget.onClose!();
+      return false;
+    }
     return true;
   }
 
@@ -1411,6 +1417,10 @@ class _GeneralSearchScreenState extends State<GeneralSearchScreen>
                 });
               }
             } else {
+              if (widget.onClose != null) {
+                widget.onClose!();
+                return;
+              }
               Navigator.pop(context);
             }
           },

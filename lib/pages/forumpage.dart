@@ -112,17 +112,21 @@ class _ForumPageState extends State<ForumPage> with TickerProviderStateMixin {
   }
 
   getSuggestionsDiscussions([bool fromCache = false]) async {
-    suggestionsDisc = await getDiscussion(6, fromCache: fromCache); // DB Mods board for suggestions
+    suggestionsDisc = await getDiscussion(6,
+        fromCache: fromCache); // DB Mods board for suggestions
     if (mounted) setState(() {});
     if (shouldUpdateContent(
-        result: suggestionsDisc, timeinHours: user.pref.cacheUpdateFrequency[1])) {
-      suggestionsDisc = (await getDiscussion(6, fromCache: false)) ?? suggestionsDisc;
+        result: suggestionsDisc,
+        timeinHours: user.pref.cacheUpdateFrequency[1])) {
+      suggestionsDisc =
+          (await getDiscussion(6, fromCache: false)) ?? suggestionsDisc;
     }
     if (mounted) setState(() {});
   }
 
   getSeriesDiscussions([bool fromCache = false]) async {
-    seriesDisc = await getDiscussion(15, fromCache: fromCache); // Series Discussion board
+    seriesDisc = await getDiscussion(15,
+        fromCache: fromCache); // Series Discussion board
     if (mounted) setState(() {});
     if (shouldUpdateContent(
         result: seriesDisc, timeinHours: user.pref.cacheUpdateFrequency[1])) {
@@ -132,7 +136,8 @@ class _ForumPageState extends State<ForumPage> with TickerProviderStateMixin {
   }
 
   getNewDiscussions([bool fromCache = false]) async {
-    newDisc = await getDiscussion(5, fromCache: fromCache); // News & Discussion board
+    newDisc =
+        await getDiscussion(5, fromCache: fromCache); // News & Discussion board
     if (mounted) setState(() {});
     if (shouldUpdateContent(
         result: newDisc, timeinHours: user.pref.cacheUpdateFrequency[1])) {
@@ -151,13 +156,17 @@ class _ForumPageState extends State<ForumPage> with TickerProviderStateMixin {
   }
 
   Widget _buildForumPage() {
+    final isTablet = ResponsiveHelper.isTabletOrLarger(context);
     return NestedScrollView(
-      headerSliverBuilder: (_, __) => [_buildAppBar()],
+      headerSliverBuilder: (_, __) => [if (!isTablet) _buildAppBar()],
       body: RefreshIndicator(
         onRefresh: () async {
           _getStuff();
         },
-        child: _forumPage(),
+        child: Padding(
+          padding: EdgeInsets.only(top: !isTablet ? 0 : kToolbarHeight),
+          child: _forumPage(),
+        ),
       ),
     );
   }
@@ -227,7 +236,8 @@ class _ForumPageState extends State<ForumPage> with TickerProviderStateMixin {
     );
   }
 
-  Widget _buildTabletForumLayout(EdgeInsets contentPadding, double sectionSpacing) {
+  Widget _buildTabletForumLayout(
+      EdgeInsets contentPadding, double sectionSpacing) {
     final screenSize = ResponsiveHelper.getScreenSize(context);
     final isLargeTablet = screenSize.index >= ScreenSize.expanded.index;
 
@@ -248,11 +258,12 @@ class _ForumPageState extends State<ForumPage> with TickerProviderStateMixin {
                       setState(() => discussionIndex = 0);
                       gotoForumTopicsPage();
                     },
-                    child: _buildLimitedForumTopics(animeDisc, 0, limit: isLargeTablet ? 6 : 4),
+                    child: _buildLimitedForumTopics(animeDisc, 0,
+                        limit: isLargeTablet ? 6 : 4),
                   ),
                 ),
                 SizedBox(width: sectionSpacing),
-                
+
                 // Manga Discussions
                 Expanded(
                   child: _buildContentSection(
@@ -261,7 +272,8 @@ class _ForumPageState extends State<ForumPage> with TickerProviderStateMixin {
                       setState(() => discussionIndex = 1);
                       gotoForumTopicsPage();
                     },
-                    child: _buildLimitedForumTopics(mangaDisc, 1, limit: isLargeTablet ? 6 : 4),
+                    child: _buildLimitedForumTopics(mangaDisc, 1,
+                        limit: isLargeTablet ? 6 : 4),
                   ),
                 ),
               ],
@@ -269,7 +281,7 @@ class _ForumPageState extends State<ForumPage> with TickerProviderStateMixin {
           ),
         ),
         SliverToBoxAdapter(child: SizedBox(height: sectionSpacing)),
-        
+
         // Second Row: Additional Discussion Categories
         if (isLargeTablet) ...[
           SliverPadding(
@@ -296,7 +308,7 @@ class _ForumPageState extends State<ForumPage> with TickerProviderStateMixin {
                     ),
                   ),
                   SizedBox(width: sectionSpacing),
-                  
+
                   // News & Discussion
                   Expanded(
                     child: _buildContentSection(
@@ -315,7 +327,7 @@ class _ForumPageState extends State<ForumPage> with TickerProviderStateMixin {
                     ),
                   ),
                   SizedBox(width: sectionSpacing),
-                  
+
                   // Suggestions
                   Expanded(
                     child: _buildContentSection(
@@ -330,7 +342,8 @@ class _ForumPageState extends State<ForumPage> with TickerProviderStateMixin {
                           ),
                         );
                       },
-                      child: _buildLimitedForumTopics(suggestionsDisc, 6, limit: 4),
+                      child: _buildLimitedForumTopics(suggestionsDisc, 6,
+                          limit: 4),
                     ),
                   ),
                 ],
@@ -363,7 +376,6 @@ class _ForumPageState extends State<ForumPage> with TickerProviderStateMixin {
                     ),
                   ),
                   SizedBox(width: sectionSpacing),
-                  
                   Expanded(
                     child: _buildContentSection(
                       title: "News & Discussion",
@@ -386,7 +398,7 @@ class _ForumPageState extends State<ForumPage> with TickerProviderStateMixin {
           ),
           SliverToBoxAdapter(child: SizedBox(height: sectionSpacing)),
         ],
-        
+
         // Bottom: Compact Forum Boards Section
         SliverPadding(
           padding: contentPadding,
@@ -399,13 +411,14 @@ class _ForumPageState extends State<ForumPage> with TickerProviderStateMixin {
     );
   }
 
-  Widget _buildLimitedForumTopics(ForumTopics? topics, int boardId, {int limit = 5}) {
+  Widget _buildLimitedForumTopics(ForumTopics? topics, int boardId,
+      {int limit = 5}) {
     if (topics?.data == null) {
       return ShimmerWidget(padding: EdgeInsets.zero);
     }
 
     final limitedTopics = topics!.data!.take(limit).toList();
-    
+
     return ForumTopicsList(
       topics: limitedTopics,
       onPressed: () {
@@ -475,10 +488,10 @@ class _ForumPageState extends State<ForumPage> with TickerProviderStateMixin {
         allBoards.addAll(forum.boards!);
       }
     }
-    
+
     final crossAxisCount = isLargeTablet ? 3 : 2;
     final itemCount = allBoards.length.clamp(0, 9);
-    
+
     return GridView.builder(
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
@@ -522,7 +535,10 @@ class _ForumPageState extends State<ForumPage> with TickerProviderStateMixin {
             Container(
               padding: EdgeInsets.all(6),
               decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.primaryContainer.withOpacity(0.5),
+                color: Theme.of(context)
+                    .colorScheme
+                    .primaryContainer
+                    .withOpacity(0.5),
                 borderRadius: BorderRadius.circular(6),
               ),
               child: Icon(
@@ -540,19 +556,24 @@ class _ForumPageState extends State<ForumPage> with TickerProviderStateMixin {
                   Text(
                     board.title ?? '',
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
+                          fontWeight: FontWeight.w600,
+                        ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  if (board.description != null && board.description!.isNotEmpty) ...[
+                  if (board.description != null &&
+                      board.description!.isNotEmpty) ...[
                     SizedBox(height: 2),
                     Text(
                       board.description!,
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: Theme.of(context).textTheme.bodySmall?.color?.withOpacity(0.7),
-                        fontSize: 11,
-                      ),
+                            color: Theme.of(context)
+                                .textTheme
+                                .bodySmall
+                                ?.color
+                                ?.withOpacity(0.7),
+                            fontSize: 11,
+                          ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -563,7 +584,11 @@ class _ForumPageState extends State<ForumPage> with TickerProviderStateMixin {
             Icon(
               Icons.chevron_right,
               size: 18,
-              color: Theme.of(context).textTheme.bodySmall?.color?.withOpacity(0.4),
+              color: Theme.of(context)
+                  .textTheme
+                  .bodySmall
+                  ?.color
+                  ?.withOpacity(0.4),
             ),
           ],
         ),
@@ -626,7 +651,8 @@ class _ForumPageState extends State<ForumPage> with TickerProviderStateMixin {
           : isTablet
               ? _buildTabletBoardsLayout()
               : PageView.builder(
-                  controller: PageController(initialPage: 0, viewportFraction: .89),
+                  controller:
+                      PageController(initialPage: 0, viewportFraction: .89),
                   allowImplicitScrolling: true,
                   itemCount: 2,
                   itemBuilder: (context, index) => Column(
@@ -647,8 +673,9 @@ class _ForumPageState extends State<ForumPage> with TickerProviderStateMixin {
 
   Widget _buildTabletBoardsLayout() {
     final screenSize = ResponsiveHelper.getScreenSize(context);
-    final crossAxisCount = screenSize.index >= ScreenSize.expanded.index ? 2 : 1;
-    
+    final crossAxisCount =
+        screenSize.index >= ScreenSize.expanded.index ? 2 : 1;
+
     return GridView.builder(
       padding: EdgeInsets.symmetric(horizontal: 8.0),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

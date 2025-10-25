@@ -173,6 +173,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Buy_Me_A_Copy_Desc": MessageLookupByLibrary.simpleMessage(
             "Support the development of this app here"),
         "CGDCT": MessageLookupByLibrary.simpleMessage("CGDCT"),
+        "Calendar": MessageLookupByLibrary.simpleMessage("Calendar"),
         "Cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "Cancelled_Restore":
             MessageLookupByLibrary.simpleMessage("Cancelled Restore"),

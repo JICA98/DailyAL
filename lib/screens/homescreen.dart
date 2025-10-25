@@ -2,19 +2,24 @@ import 'package:dailyanimelist/api/credmal.dart';
 import 'package:dailyanimelist/api/dalapi.dart';
 import 'package:dailyanimelist/cache/cachemanager.dart';
 import 'package:dailyanimelist/constant.dart';
+import 'package:dailyanimelist/generated/l10n.dart';
 import 'package:dailyanimelist/notifservice.dart';
 import 'package:dailyanimelist/pages/clubspage.dart';
 import 'package:dailyanimelist/pages/explorepage.dart';
 import 'package:dailyanimelist/pages/forumpage.dart';
 import 'package:dailyanimelist/pages/homepage.dart';
 import 'package:dailyanimelist/pages/settings/about.dart';
+import 'package:dailyanimelist/pages/settings_page.dart';
 import 'package:dailyanimelist/pages/side_bar.dart';
 import 'package:dailyanimelist/pages/userpage.dart';
 import 'package:dailyanimelist/screens/contentdetailedscreen.dart';
+import 'package:dailyanimelist/screens/generalsearchscreen.dart';
 import 'package:dailyanimelist/user/user.dart';
 import 'package:dailyanimelist/util/responsive_helper.dart';
 import 'package:dailyanimelist/widgets/background.dart';
 import 'package:dailyanimelist/widgets/bottomnavbar.dart';
+import 'package:dailyanimelist/widgets/home/anime_calendar.dart';
+import 'package:dailyanimelist/widgets/home/bookmarks_widget.dart';
 import 'package:dailyanimelist/widgets/home/feature_first.dart';
 import 'package:dailyanimelist/widgets/will_pop_widget.dart';
 import 'package:dal_commons/dal_commons.dart';
@@ -75,7 +80,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       duration: Duration(milliseconds: 250),
     );
     animation = Tween(begin: 0.0, end: 1.0).animate(_animationController);
-    
+
     // Initialize with phone widgets by default
     // Will be updated in didChangeDependencies based on actual screen size
     homeWidgets = _getPhoneWidgets();
@@ -122,13 +127,14 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    
+
     // Now MediaQuery is available, determine the correct widget map
     final screenSize = ResponsiveHelper.getScreenSize(context);
     final useNavigationRail = screenSize.index >= ScreenSize.expanded.index;
-    
-    final newWidgets = useNavigationRail ? _getTabletWidgets() : _getPhoneWidgets();
-    
+
+    final newWidgets =
+        useNavigationRail ? _getTabletWidgets() : _getPhoneWidgets();
+
     // Only update if the widget map has changed
     if (homeWidgets.length != newWidgets.length) {
       setState(() {
@@ -154,10 +160,27 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     return {
       homeIndex: OpacityAnima(child: HomePage(), animation: animation),
       forumIndex: OpacityAnima(child: ForumPage(), animation: animation),
-      clubsIndex: OpacityAnima(child: ClubsPage(), animation: animation),
       userIndex: OpacityAnima(child: UserPage(), animation: animation),
       exploreIndex: OpacityAnima(child: ExplorePage(), animation: animation),
+      clubsIndex: OpacityAnima(child: ClubsPage(), animation: animation),
+      searchIndex: OpacityAnima(
+          child: GeneralSearchScreen(
+              autoFocus: false, showBackButton: false, onClose: _onSearchClose),
+          animation: animation),
+      bookmarksIndex:
+          OpacityAnima(child: BookMarksWidget(), animation: animation),
+      calendarIndex:
+          OpacityAnima(child: AnimeCalendarWidget(), animation: animation),
     };
+  }
+
+  void _onSearchClose() {
+    _animationController.reset();
+    _animationController.forward();
+    if (mounted)
+      setState(() {
+        pageIndex = homeIndex;
+      });
   }
 
   @override
@@ -206,7 +229,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     final screenSize = ResponsiveHelper.getScreenSize(context);
     final useNavigationRail = screenSize.index >= ScreenSize.expanded.index;
-    
+
     final bodyContent = WillPopWidget(
       onWillPop: () async {
         return true;
@@ -232,12 +255,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         ],
       ),
     );
-    
+
     if (useNavigationRail) {
       return Scaffold(
-        endDrawer: Drawer(
-          child: AppSideBar(),
-        ),
         body: Row(
           children: [
             NavigationRail(
@@ -250,8 +270,19 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     pageIndex = value;
                   });
               },
-              labelType: NavigationRailLabelType.selected,
-              leading: SizedBox(height: 20), // Top spacing
+              labelType: NavigationRailLabelType.all,
+              leading: Padding(
+                padding: const EdgeInsets.only(bottom: 40.0, top: 10.0),
+                child: SizedBox(
+                  height: 60,
+                  width: 60,
+                  child: CircleAvatar(
+                    backgroundImage:
+                        AssetImage('assets/images/dal-black-bg.png'),
+                    radius: 48.0,
+                  ),
+                ),
+              ), // Top spacing
               trailing: Expanded(
                 child: Align(
                   alignment: Alignment.bottomCenter,
@@ -260,9 +291,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     child: IconButton(
                       icon: Icon(Icons.settings_outlined),
                       onPressed: () {
-                        Scaffold.of(context).openEndDrawer();
+                        gotoPage(context: context, newPage: SettingsPage());
                       },
-                      tooltip: 'Settings',
+                      tooltip: S.current.Settings,
                     ),
                   ),
                 ),
@@ -271,27 +302,42 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 NavigationRailDestination(
                   icon: Icon(Icons.home_outlined),
                   selectedIcon: Icon(Icons.home),
-                  label: Text('Home'),
+                  label: Text(S.current.Home),
                 ),
                 NavigationRailDestination(
                   icon: Icon(Icons.forum_outlined),
                   selectedIcon: Icon(Icons.forum),
-                  label: Text('Forum'),
-                ),
-                NavigationRailDestination(
-                  icon: Icon(Icons.groups_outlined),
-                  selectedIcon: Icon(Icons.groups),
-                  label: Text('Clubs'),
+                  label: Text(S.current.Forums),
                 ),
                 NavigationRailDestination(
                   icon: Icon(Icons.person_outline),
                   selectedIcon: Icon(Icons.person),
-                  label: Text('User'),
+                  label: Text(S.current.User),
                 ),
                 NavigationRailDestination(
                   icon: Icon(Icons.explore_outlined),
                   selectedIcon: Icon(Icons.explore),
-                  label: Text('Explore'),
+                  label: Text(S.current.Explore),
+                ),
+                NavigationRailDestination(
+                  icon: Icon(Icons.groups_outlined),
+                  selectedIcon: Icon(Icons.groups),
+                  label: Text(S.current.Clubs),
+                ),
+                NavigationRailDestination(
+                  icon: Icon(Icons.search_outlined),
+                  selectedIcon: Icon(Icons.search),
+                  label: Text(S.current.Search),
+                ),
+                NavigationRailDestination(
+                  icon: Icon(Icons.bookmark_outline),
+                  selectedIcon: Icon(Icons.bookmark),
+                  label: Text(S.current.Bookmarks),
+                ),
+                NavigationRailDestination(
+                  icon: Icon(Icons.calendar_today_outlined),
+                  selectedIcon: Icon(Icons.calendar_today),
+                  label: Text(S.current.Calendar),
                 ),
               ],
             ),
@@ -302,9 +348,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       );
     } else {
       return Scaffold(
-        endDrawer: Drawer(
-          child: AppSideBar(),
-        ),
         bottomNavigationBar: BottomNavBar(
           startIndex: pageIndex,
           onChanged: (value) {
