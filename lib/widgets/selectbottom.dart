@@ -505,10 +505,10 @@ class ThreeStateSelectBar extends StatelessWidget {
     String displayText = displayValue;
 
     if (selectedOption == 'not_in_list') {
-      bgColor = Colors.red.shade900;
+      bgColor = Colors.red.shade300;
       displayText = 'Not in List';
     } else if (selectedOption == 'in_list') {
-      bgColor = Colors.green.shade900;
+      bgColor = Colors.green.shade300;
       displayText = 'In List';
     }
 
