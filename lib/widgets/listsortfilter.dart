@@ -141,12 +141,24 @@ List<BaseNode> _filterCustomList(
             if (modalValue is Map) {
               String? status = modalValue[option.apiFieldName];
               final convertValue = _convertValue(selectedValue!, option);
+
+              // Handle "in_list" - show items with ANY status
+              if ('in_list'.equals(convertValue)) {
+                if (status != null) {
+                  continue forLoop;
+                }
+                return false;
+              }
+
+              // Handle "not_in_list" - show items with no status
               if (status == null) {
                 if ('not_in_list'.equals(convertValue)) {
                   continue forLoop;
                 }
                 return false;
               }
+
+              // Handle specific status selection
               if ('not_in_list'.equals(status) || status.equals(convertValue)) {
                 continue forLoop;
               } else {
