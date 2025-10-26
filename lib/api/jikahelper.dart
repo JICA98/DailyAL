@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dailyanimelist/api/credmal.dart';
+import 'package:dailyanimelist/api/jikan_models.dart';
 import 'package:dailyanimelist/api/malconnect.dart';
 import 'package:dailyanimelist/constant.dart';
 import 'package:dailyanimelist/enums.dart';
@@ -97,6 +98,35 @@ class JikanHelper {
               timeoutDuration: const Duration(seconds: 2),
             )))
         .data as AnimeVideoV4?;
+  }
+
+  static Future<JikanAnimeStatistics?> getAnimeScoreStatistics(int id) async {
+    try {
+      final url = '${CredMal.jikanV4}anime/$id/statistics';
+      logDal('Fetching score statistics from: $url');
+
+      final response = await MalConnect.getContent(
+        url,
+        withNoHeaders: true,
+        useTimeout: true,
+        retryOnFail: false,
+        timeoutDuration: const Duration(seconds: 10),
+      );
+
+      if (response != null && response is Map<String, dynamic>) {
+        logDal('Score statistics response received, parsing...');
+        // MalConnect.getContent already returns decoded JSON, no need to jsonDecode
+        final stats = JikanAnimeStatistics.fromJson(response['data']);
+        logDal('Score statistics parsed successfully: ${stats.scores?.length ?? 0} scores');
+        return stats;
+      } else {
+        logDal('Score statistics response is null or invalid type');
+      }
+      return null;
+    } catch (e, stackTrace) {
+      logDal('Error fetching anime statistics: $e\n$stackTrace');
+      return null;
+    }
   }
 
   static const useNewApiFields = ['genre', 'genres_exclude'];

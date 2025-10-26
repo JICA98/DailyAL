@@ -19,6 +19,7 @@ import 'package:dailyanimelist/pages/animedetailed/media_platforms.dart';
 import 'package:dailyanimelist/pages/animedetailed/recommanimewidget.dart';
 import 'package:dailyanimelist/pages/animedetailed/relatedanimewidget.dart';
 import 'package:dailyanimelist/pages/animedetailed/reviewpage.dart';
+import 'package:dailyanimelist/pages/animedetailed/scorestatisticswidget.dart';
 import 'package:dailyanimelist/pages/animedetailed/synopsiswidget.dart';
 import 'package:dailyanimelist/pages/animedetailed/userupdates.dart';
 import 'package:dailyanimelist/pages/animedetailed/videoswidget.dart';
@@ -459,6 +460,13 @@ class _ContentDetailedScreenState extends State<ContentDetailedScreen>
                   horizPadding: horizPadding,
                 ),
               )),
+      TabType.Score_Stats => VisibleSection(
+            S.current.Score_Stats,
+            ScoreStatisticsWidget(
+              id: _id,
+              horizPadding: horizPadding,
+            ),
+          ),
     };
   }
 
@@ -631,6 +639,7 @@ class _ContentDetailedScreenState extends State<ContentDetailedScreen>
                 ),
               )),
       TabType.Stats => null,
+      TabType.Score_Stats => null, // Score statistics only available for anime
     };
   }
 

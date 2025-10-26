@@ -410,6 +410,16 @@ class S {
     );
   }
 
+  /// `Score Stats`
+  String get Score_Stats {
+    return Intl.message(
+      'Score Stats',
+      name: 'Score_Stats',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Pictures`
   String get Pictures {
     return Intl.message(

@@ -58,7 +58,41 @@ class AnimeMangaPagePreferences {
     );
   }
 
-  factory AnimeMangaPagePreferences.fromJson(Map<String, dynamic> json) =>
-      _$AnimeMangaPagePreferencesFromJson(json);
+  factory AnimeMangaPagePreferences.fromJson(Map<String, dynamic> json) {
+    final prefs = _$AnimeMangaPagePreferencesFromJson(json);
+    // Migration: Add missing tabs from defaults
+    prefs._migrateTabs();
+    return prefs;
+  }
+
+  /// Migrates tabs by adding any missing TabTypes from defaults
+  void _migrateTabs() {
+    // Migrate anime tabs
+    final existingAnimeTypes = animeTabs.map((e) => e.tabType).toSet();
+    for (var defaultTab in defaultAnimeTabs) {
+      if (!existingAnimeTypes.contains(defaultTab.tabType)) {
+        // Find the position to insert (after Stats if it's Score_Stats)
+        if (defaultTab.tabType == TabType.Score_Stats) {
+          final statsIndex = animeTabs.indexWhere((t) => t.tabType == TabType.Stats);
+          if (statsIndex != -1) {
+            animeTabs.insert(statsIndex + 1, AnimeMangaTabPreference(defaultTab.tabType, true));
+          } else {
+            animeTabs.add(AnimeMangaTabPreference(defaultTab.tabType, true));
+          }
+        } else {
+          animeTabs.add(AnimeMangaTabPreference(defaultTab.tabType, true));
+        }
+      }
+    }
+
+    // Migrate manga tabs (Score_Stats not added to manga as it's anime-only)
+    final existingMangaTypes = mangaTabs.map((e) => e.tabType).toSet();
+    for (var defaultTab in defaultMangaTabs) {
+      if (!existingMangaTypes.contains(defaultTab.tabType)) {
+        mangaTabs.add(AnimeMangaTabPreference(defaultTab.tabType, true));
+      }
+    }
+  }
+
   Map<String, dynamic> toJson() => _$AnimeMangaPagePreferencesToJson(this);
 }

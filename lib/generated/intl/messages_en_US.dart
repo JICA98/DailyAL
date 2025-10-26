@@ -1017,6 +1017,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Score": MessageLookupByLibrary.simpleMessage("Score"),
         "Score_Distribution":
             MessageLookupByLibrary.simpleMessage("Score Distribution"),
+        "Score_Stats": MessageLookupByLibrary.simpleMessage("Score Stats"),
         "Screening": MessageLookupByLibrary.simpleMessage("Screening"),
         "Search": MessageLookupByLibrary.simpleMessage("Search"),
         "SearchBarHintText":

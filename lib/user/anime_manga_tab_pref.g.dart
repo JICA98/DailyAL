@@ -37,4 +37,5 @@ const _$TabTypeEnumMap = {
   TabType.User_Updates: 'User_Updates',
   TabType.More_Info: 'More_Info',
   TabType.Stats: 'Stats',
+  TabType.Score_Stats: 'Score_Stats',
 };
