@@ -280,6 +280,7 @@ class FilterModal extends StatelessWidget {
         if (option.threeStateOption != null) {
           return ThreeStateSelectBar(
             options: option.values!,
+            apiValues: option.apiValues?.map((e) => e.toString()).toList(),
             selectedOption: filterOutputs[option.apiFieldName]?.value,
             threeStateOption: option.threeStateOption,
             onClear: () => removeFilter(option),

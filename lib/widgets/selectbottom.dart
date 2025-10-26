@@ -430,6 +430,7 @@ class MutiSelectBar extends StatelessWidget {
 
 class ThreeStateSelectBar extends StatelessWidget {
   final List<String> options;
+  final List<String>? apiValues;
   final String? selectedOption;
   final String? threeStateOption;
   final void Function(String?) onChanged;
@@ -441,6 +442,7 @@ class ThreeStateSelectBar extends StatelessWidget {
   const ThreeStateSelectBar({
     Key? key,
     required this.options,
+    this.apiValues,
     this.selectedOption,
     this.threeStateOption,
     this.onClear,
@@ -482,22 +484,25 @@ class ThreeStateSelectBar extends StatelessWidget {
         padding: listPadding ?? EdgeInsets.only(left: 15 + listPadEnd, right: 45),
         itemCount: list.length,
         itemBuilder: (context, index) {
-          final option = list[index];
-          final isThreeState = option == threeStateOption;
+          final displayValue = list[index];
+          final apiValue = apiValues != null && index < apiValues!.length
+              ? apiValues![index]
+              : displayValue;
+          final isThreeState = apiValue == threeStateOption;
 
           if (isThreeState) {
-            return _buildThreeStateButton(context, option);
+            return _buildThreeStateButton(context, displayValue, apiValue);
           } else {
-            return _buildRegularButton(context, option, list);
+            return _buildRegularButton(context, displayValue, apiValue);
           }
         },
       ),
     );
   }
 
-  Widget _buildThreeStateButton(BuildContext context, String option) {
+  Widget _buildThreeStateButton(BuildContext context, String displayValue, String apiValue) {
     Color? bgColor;
-    String displayText = option.replaceAll("_", " ");
+    String displayText = displayValue;
 
     if (selectedOption == 'not_in_list') {
       bgColor = Colors.red.shade900;
@@ -557,8 +562,8 @@ class ThreeStateSelectBar extends StatelessWidget {
     }
   }
 
-  Widget _buildRegularButton(BuildContext context, String option, List<String> list) {
-    final isSelected = selectedOption == option && selectedOption != 'not_in_list' && selectedOption != 'in_list';
+  Widget _buildRegularButton(BuildContext context, String displayValue, String apiValue) {
+    final isSelected = selectedOption == apiValue && selectedOption != 'not_in_list' && selectedOption != 'in_list';
 
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 3),
@@ -575,16 +580,16 @@ class ThreeStateSelectBar extends StatelessWidget {
                 },
                 padding: EdgeInsets.symmetric(horizontal: 14.0, vertical: 2.0),
                 child: Text(
-                  option.replaceAll("_", " "),
+                  displayValue,
                   style: TextStyle(fontSize: 15),
                 ),
               ),
             )
           : PlainButton(
-              onPressed: () => onChanged(option),
+              onPressed: () => onChanged(apiValue),
               padding: EdgeInsets.symmetric(horizontal: 14.0),
               child: Text(
-                option.replaceAll("_", " "),
+                displayValue,
                 style: TextStyle(
                   fontSize: 15,
                   color: Theme.of(context)
