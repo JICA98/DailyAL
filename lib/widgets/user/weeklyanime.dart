@@ -32,7 +32,6 @@ class _WeeklySchedulePageState extends State<WeeklySchedulePage>
   ];
   static const Map<String, String> animeStatusMap = {
     'not_in_list': 'Not in List',
-    'in_list': 'In List',
     "watching": "Watching",
     "completed": "Completed",
     "on_hold": "On Hold",
