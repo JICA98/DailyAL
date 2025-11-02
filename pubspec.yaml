@@ -44,8 +44,8 @@ dependencies:
   scroll_to_index: ^3.0.1
   share_plus: ^10.0.2
   built_collection: ^5.1.0
-  flutter_local_notifications: ^17.2.2
-  timezone: ^0.9.4
+  flutter_local_notifications: ^19.5.0
+  timezone: ^0.10.1
   flutter_custom_tabs: ^2.1.0
   flex_color_picker: ^3.5.1
   translator_plus: ^1.0.1
