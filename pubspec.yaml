@@ -77,7 +77,7 @@ dependencies:
   file_picker: ^8.1.2
   permission_handler: ^11.3.1
   path_provider: ^2.1.4
-  package_info_plus: ^8.0.2
+  package_info_plus: ^9.0.0
   webviewtube: ^2.1.1
   graphview: ^1.2.0
   flutter_displaymode: ^0.6.0

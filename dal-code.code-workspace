@@ -9,7 +9,8 @@
 		"editor.fontLigatures": true,
 		"editor.fontWeight": "100",
 		"editor.insertSpaces": true,
-		"editor.fontSize": 16
+		"editor.fontSize": 16,
+		"java.configuration.updateBuildConfiguration": "interactive"
 	},
 	"launch": {
 		"version": "0.2.0",
