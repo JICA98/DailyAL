@@ -774,7 +774,7 @@ class _ReviewGeneratedSummaryState extends State<ReviewGeneratedSummary> {
       return _buildIcon();
     }
     return StateFullFutureWidget(
-      done: (sp) => _reviewAnimation(),
+      done: (sp) => _buildSummary(sp.data),
       loadingChild: _reviewAnimation(),
       future: () => reviewSummaryFuture,
     );
