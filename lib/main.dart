@@ -55,9 +55,6 @@ void main() async {
   if (!kIsWeb && Platform.isAndroid) {
     await NotificationService().init();
     node = await NotificationService().onSelectWhileAsleep();
-    try {
-      await DalLocalApi.i.runApp();
-    } catch (e) {}
   }
 
   runApp(Phoenix(child: _buildProvider(node)));

@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dailyanimelist/constant.dart';
 import 'package:dailyanimelist/main.dart';
 import 'package:dailyanimelist/screens/featurescreen.dart';
+import 'package:dailyanimelist/util/responsive_helper.dart';
 import 'package:dailyanimelist/widgets/avatarwidget.dart';
 import 'package:dailyanimelist/widgets/common/image_preview.dart';
 import 'package:dailyanimelist/widgets/shimmecolor.dart';
@@ -14,9 +15,10 @@ class HomePageNewsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isTablet = ResponsiveHelper.isTabletOrLarger(context);
     final radius = 12.0;
     return Container(
-      height: 295,
+      height: isTablet ? 295: 250,
       child: ListView.builder(
         padding: EdgeInsets.only(left: 12, right: 15),
         itemCount: featuredList.length,

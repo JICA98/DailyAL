@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dal_api/cache/cache_manager.dart';
 import 'package:dal_api/handlers/environemt.dart';
 import 'package:dal_commons/commons.dart';
@@ -71,6 +73,11 @@ class HandlerCore {
     } else {
       return okResponse(json ?? {});
     }
+  }
+
+  Future<String?> handleRequestAsString(Uri uri) async {
+    final json = await handleRequestAsJson(Request('GET', uri));
+    return json != null ? jsonEncode(json) : null;
   }
 
   Future<dynamic> handleLambdaEvent(context, event) async {
