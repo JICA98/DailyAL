@@ -319,6 +319,16 @@ class S {
     return Intl.message('Stats', name: 'Stats', desc: '', args: []);
   }
 
+  /// `Score Stats`
+  String get Score_Stats {
+    return Intl.message(
+      'Score Stats',
+      name: 'Score_Stats',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Pictures`
   String get Pictures {
     return Intl.message('Pictures', name: 'Pictures', desc: '', args: []);

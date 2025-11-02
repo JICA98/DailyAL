@@ -41,6 +41,7 @@ class FilterOption {
   bool openTextFormAsModal = false;
   String? value;
   String? modalField;
+  final String? threeStateOption;
 
   FilterOption({
     this.type,
@@ -61,6 +62,7 @@ class FilterOption {
     this.modalField,
     this.hideOption = false,
     this.openTextFormAsModal = false,
+    this.threeStateOption,
   });
 
   FilterOption clone() {
@@ -83,6 +85,7 @@ class FilterOption {
       modalField: modalField,
       hideOption: hideOption,
       openTextFormAsModal: openTextFormAsModal,
+      threeStateOption: threeStateOption,
     );
   }
 
@@ -273,6 +276,23 @@ class FilterModal extends StatelessWidget {
 
     switch (option.type) {
       case FilterType.select:
+        // Use ThreeStateSelectBar if threeStateOption is specified
+        if (option.threeStateOption != null) {
+          return ThreeStateSelectBar(
+            options: option.values!,
+            apiValues: option.apiValues?.map((e) => e.toString()).toList(),
+            selectedOption: filterOutputs[option.apiFieldName]?.value,
+            threeStateOption: option.threeStateOption,
+            onClear: () => removeFilter(option),
+            onChanged: (value) {
+              if (value != null) {
+                option.value = value;
+                filterOutputs[option.apiFieldName!] = option;
+                onChange!(filterOutputs);
+              }
+            },
+          );
+        }
         return SelectBar(
           options: option.values!,
           selectedOption: filterOutputs[option.apiFieldName]?.value,

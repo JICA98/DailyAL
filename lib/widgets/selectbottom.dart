@@ -1,10 +1,8 @@
 import 'package:dailyanimelist/constant.dart';
-import 'package:dailyanimelist/main.dart';
 import 'package:dailyanimelist/pages/settings/optiontile.dart';
 import 'package:dailyanimelist/widgets/custombutton.dart';
 import 'package:dailyanimelist/widgets/headerwidget.dart';
 import 'package:dailyanimelist/widgets/selecttopper.dart';
-import 'package:dailyanimelist/widgets/slivers.dart';
 import 'package:dal_commons/dal_commons.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -124,7 +122,7 @@ class _SelectButtonState extends State<SelectButton> {
   void didUpdateWidget(covariant SelectButton oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (option != null &&
-        widget?.selectedOption != null &&
+        widget.selectedOption != null &&
         option!.notEquals(widget.selectedOption) &&
         mounted) {
       option = widget.selectedOption;
@@ -426,6 +424,182 @@ class MutiSelectBar extends StatelessWidget {
       onPressed: (include, exclude) => include.isEmpty && exclude.isEmpty
           ? onClear()
           : onChanged(include, exclude),
+    );
+  }
+}
+
+class ThreeStateSelectBar extends StatelessWidget {
+  final List<String> options;
+  final List<String>? apiValues;
+  final String? selectedOption;
+  final String? threeStateOption;
+  final void Function(String?) onChanged;
+  final void Function()? onClear;
+  final bool shouldBreak;
+  final bool disabled;
+  final String disabledReason;
+  final EdgeInsets? listPadding;
+  const ThreeStateSelectBar({
+    Key? key,
+    required this.options,
+    this.apiValues,
+    this.selectedOption,
+    this.threeStateOption,
+    this.onClear,
+    this.disabledReason = "",
+    this.disabled = false,
+    this.shouldBreak = true,
+    required this.onChanged,
+    this.listPadding,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    if (disabled) {
+      return showNoContent(text: disabledReason);
+    }
+
+    if (options.length > 30 && shouldBreak) {
+      var listOne = options.getRange(0, 30).toList();
+      var listTwo = options.getRange(30, options.length).toList();
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _selectBarWidget(listOne),
+          const SizedBox(height: 15),
+          _selectBarWidget(listTwo, listPadEnd: 20)
+        ],
+      );
+    } else {
+      return _selectBarWidget(options);
+    }
+  }
+
+  Widget _selectBarWidget(List<String> list, {double listPadEnd = 0}) {
+    return Container(
+      height: 55.0,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        padding: listPadding ?? EdgeInsets.only(left: 15 + listPadEnd, right: 45),
+        itemCount: list.length,
+        itemBuilder: (context, index) {
+          final displayValue = list[index];
+          final apiValue = apiValues != null && index < apiValues!.length
+              ? apiValues![index]
+              : displayValue;
+          final isThreeState = apiValue == threeStateOption;
+
+          if (isThreeState) {
+            return _buildThreeStateButton(context, displayValue, apiValue);
+          } else {
+            return _buildRegularButton(context, displayValue, apiValue);
+          }
+        },
+      ),
+    );
+  }
+
+  Widget _buildThreeStateButton(BuildContext context, String displayValue, String apiValue) {
+    Color? bgColor;
+    String displayText = displayValue;
+
+    if (selectedOption == 'not_in_list') {
+      bgColor = Colors.red.shade300;
+      displayText = 'Not in List';
+    } else if (selectedOption == 'in_list') {
+      bgColor = Colors.green.shade300;
+      displayText = 'In List';
+    }
+
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 3),
+      child: selectedOption == 'not_in_list' || selectedOption == 'in_list'
+          ? Padding(
+              padding: const EdgeInsets.symmetric(vertical: 3.0),
+              child: ShadowButton(
+                onPressed: () => _handleThreeStateClick(),
+                padding: EdgeInsets.symmetric(horizontal: 14.0, vertical: 2.0),
+                backgroundColor: bgColor,
+                child: Text(
+                  displayText,
+                  style: TextStyle(fontSize: 15),
+                ),
+              ),
+            )
+          : PlainButton(
+              onPressed: () => _handleThreeStateClick(),
+              padding: EdgeInsets.symmetric(horizontal: 14.0),
+              child: Text(
+                displayText,
+                style: TextStyle(
+                  fontSize: 15,
+                  color: Theme.of(context)
+                      .textTheme
+                      .bodyMedium
+                      ?.color
+                      ?.withOpacity(0.4),
+                ),
+              ),
+            ),
+    );
+  }
+
+  void _handleThreeStateClick() {
+    if (selectedOption == null || (selectedOption != 'not_in_list' && selectedOption != 'in_list')) {
+      // State 1 → State 2: Unselected → Not in List (red)
+      onChanged('not_in_list');
+    } else if (selectedOption == 'not_in_list') {
+      // State 2 → State 3: Not in List → In List (green)
+      onChanged('in_list');
+    } else {
+      // State 3 → State 1: In List → Unselected
+      if (onClear != null) {
+        onClear!();
+      } else {
+        onChanged(null);
+      }
+    }
+  }
+
+  Widget _buildRegularButton(BuildContext context, String displayValue, String apiValue) {
+    final isSelected = selectedOption == apiValue && selectedOption != 'not_in_list' && selectedOption != 'in_list';
+
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 3),
+      child: isSelected
+          ? Padding(
+              padding: const EdgeInsets.symmetric(vertical: 3.0),
+              child: ShadowButton(
+                onPressed: () {
+                  if (onClear != null) {
+                    onClear!();
+                  } else {
+                    onChanged(null);
+                  }
+                },
+                padding: EdgeInsets.symmetric(horizontal: 14.0, vertical: 2.0),
+                child: Text(
+                  displayValue,
+                  style: TextStyle(fontSize: 15),
+                ),
+              ),
+            )
+          : PlainButton(
+              onPressed: () => onChanged(apiValue),
+              padding: EdgeInsets.symmetric(horizontal: 14.0),
+              child: Text(
+                displayValue,
+                style: TextStyle(
+                  fontSize: 15,
+                  color: Theme.of(context)
+                      .textTheme
+                      .bodyMedium
+                      ?.color
+                      ?.withOpacity(0.4),
+                ),
+              ),
+            ),
     );
   }
 }

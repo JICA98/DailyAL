@@ -2,14 +2,10 @@ import 'package:dailyanimelist/api/malapi.dart';
 import 'package:dailyanimelist/constant.dart';
 import 'package:dailyanimelist/enums.dart';
 import 'package:dailyanimelist/generated/l10n.dart';
-import 'package:dailyanimelist/main.dart';
-import 'package:dailyanimelist/screens/contentdetailedscreen.dart';
 import 'package:dailyanimelist/screens/generalsearchscreen.dart';
 import 'package:dailyanimelist/screens/plainscreen.dart';
-import 'package:dailyanimelist/user/hompagepref.dart';
 import 'package:dailyanimelist/widgets/custombutton.dart';
 import 'package:dailyanimelist/widgets/customfuture.dart';
-import 'package:dailyanimelist/widgets/home/animecard.dart';
 import 'package:dailyanimelist/widgets/listsortfilter.dart';
 import 'package:dailyanimelist/widgets/search/filtermodal.dart';
 import 'package:dailyanimelist/widgets/slivers.dart';
@@ -51,6 +47,7 @@ class _WeeklySchedulePageState extends State<WeeklySchedulePage>
       desc: S.current.Filter_type_of_results,
       values: animeStatusMap.values.toList(),
       apiValues: animeStatusMap.keys.toList(),
+      threeStateOption: 'not_in_list',
     ),
   ];
   late SortFilterDisplay _sortFilterDisplay;

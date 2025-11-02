@@ -19,6 +19,7 @@ enum TabType {
   User_Updates,
   More_Info,
   Stats,
+  Score_Stats,
 }
 
 @JsonSerializable()
@@ -47,6 +48,7 @@ final defaultAnimeTabs = [
   AnimeMangaTabPreference(TabType.Featured_Articles, true),
   AnimeMangaTabPreference(TabType.User_Updates, true),
   AnimeMangaTabPreference(TabType.Stats, true),
+  AnimeMangaTabPreference(TabType.Score_Stats, true),
   AnimeMangaTabPreference(TabType.More_Info, true)
 ];
 
