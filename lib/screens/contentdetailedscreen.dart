@@ -364,14 +364,20 @@ class _ContentDetailedScreenState extends State<ContentDetailedScreen>
       TabType.Related => _nullIf(
           !nullOrEmpty(contentDetailed?.relatedAnime),
           () => VisibleSection(
-                S.current.Related,
-                RelatedAnimeWidget(
-                  relatedAnimeList: contentDetailed.relatedAnime,
-                  horizPadding: horizPadding,
-                  id: _id,
-                ),
-                onViewAll: _relatedAll,
-              )),
+            S.current.Related,
+            RelatedAnimeWidget(
+              relatedAnimeList: contentDetailed.relatedAnime,
+              horizPadding: horizPadding,
+              id: _id,
+            ),
+            onViewAll: _relatedAll,
+            additionalWidget: PlainButton(
+              padding: EdgeInsets.zero,
+              onPressed: () => _relatedAll(selectedView: RelatedSelectedView.graph),
+              child: Icon(Icons.graphic_eq),
+            ),
+          ),
+        ),
       TabType.Reviews => _nullIf(
           !nullOrEmpty(animeDetailedHtml?.animeReviewList),
           () => VisibleSection(
@@ -746,11 +752,12 @@ class _ContentDetailedScreenState extends State<ContentDetailedScreen>
     );
   }
 
-  void _relatedAll() {
+  void _relatedAll({RelatedSelectedView selectedView = RelatedSelectedView.list}) {
     gotoPage(
         context: context,
         newPage: TitlebarScreen(
           RelatedAnimeWidget(
+            selectedView: selectedView,
             relatedAnimeList: isAnime
                 ? contentDetailed.relatedAnime
                 : contentDetailed.relatedManga,

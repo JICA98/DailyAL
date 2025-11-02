@@ -1015,5 +1015,6 @@
     "Add_Recurring_Event": "Recurring weekly",
     "Add_Recurring_Event_Desc": "Add future episodes as weekly events",
     "Add": "Add",
+    "View_Related_Graph_Tooltip": "View related anime/manga graph",
     "Calendar": "Calendar"
 }
