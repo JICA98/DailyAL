@@ -38,8 +38,23 @@
                 "run",
                 "build_runner",
                 "build",
-                "--delete-conflicting-outputs",
+                "--delete-conflicting-outputs"
             ]
+        },
+        {
+            "type": "shell",
+            "label": "Launch Emulator",
+            "command": "emulator",
+            "args": [
+                "-avd",
+                "Medium_Phone_API_36.1",
+                "-netdelay",
+                "none",
+                "-netspeed",
+                "full"
+            ],
+            "isBackground": true,
+            "problemMatcher": []
         }
     ]
 }
