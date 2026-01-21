@@ -188,7 +188,13 @@ class _HomePageState extends State<HomePage> {
 
   List<Widget> newSlivers(bool isTablet) {
     if (isTablet) {
-      return [_buildTabletLayout(), SliverToBoxAdapter(child: SB.h80)];
+      return [
+        SliverPadding(
+          padding: ResponsiveHelper.getContentPadding(context),
+          sliver: contentSliverBuilder(),
+        ),
+        SliverToBoxAdapter(child: SB.h80)
+      ];
     }
     return [contentSliverBuilder(), SliverToBoxAdapter(child: SB.h80)];
   }
@@ -275,68 +281,6 @@ class _HomePageState extends State<HomePage> {
           apiPref: user.pref.hpApiPrefList.elementAt(index),
         ),
         childCount: user.pref.hpApiPrefList.length,
-      ),
-    );
-  }
-
-  Widget _buildTabletLayout() {
-    // Split content into two columns for tablet layout
-    final apiPrefs = user.pref.hpApiPrefList;
-    final leftColumnItems = <HomePageApiPref>[];
-    final rightColumnItems = <HomePageApiPref>[];
-
-    // Distribute items: alternate between left and right columns
-    for (int i = 0; i < apiPrefs.length; i++) {
-      if (i % 2 == 0) {
-        leftColumnItems.add(apiPrefs[i]);
-      } else {
-        rightColumnItems.add(apiPrefs[i]);
-      }
-    }
-
-    return SliverPadding(
-      padding: ResponsiveHelper.getContentPadding(context),
-      sliver: SliverList(
-        delegate: SliverChildBuilderDelegate(
-          (_, index) {
-            if (index == 0) {
-              // Create the two-column layout
-              return Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Left Column (60%)
-                  Expanded(
-                    flex: 6,
-                    child: Column(
-                      children: leftColumnItems
-                          .map((apiPref) => ContentHomeWidget(
-                                refKey: refKey,
-                                apiPref: apiPref,
-                              ))
-                          .toList(),
-                    ),
-                  ),
-                  SizedBox(width: ResponsiveHelper.getCardSpacing(context) * 2),
-
-                  // Right Column (40%)
-                  Expanded(
-                    flex: 4,
-                    child: Column(
-                      children: rightColumnItems
-                          .map((apiPref) => ContentHomeWidget(
-                                refKey: refKey,
-                                apiPref: apiPref,
-                              ))
-                          .toList(),
-                    ),
-                  ),
-                ],
-              );
-            }
-            return SB.z;
-          },
-          childCount: 1,
-        ),
       ),
     );
   }
