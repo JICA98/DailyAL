@@ -1,6 +1,7 @@
 import 'package:dailyanimelist/api/malforum.dart';
 import 'package:dailyanimelist/generated/l10n.dart';
 import 'package:dailyanimelist/main.dart';
+import 'package:dailyanimelist/pages/clubspage.dart';
 import 'package:dailyanimelist/screens/forumtopicsscreen.dart';
 import 'package:dailyanimelist/util/responsive_helper.dart';
 import 'package:dailyanimelist/widgets/forum/boardwidget.dart';
@@ -157,38 +158,63 @@ class _ForumPageState extends State<ForumPage> with TickerProviderStateMixin {
 
   Widget _buildForumPage() {
     final isTablet = ResponsiveHelper.isTabletOrLarger(context);
-    return NestedScrollView(
-      headerSliverBuilder: (_, __) => [if (!isTablet) _buildAppBar()],
-      body: RefreshIndicator(
-        onRefresh: () async {
-          _getStuff();
-        },
-        child: Padding(
-          padding: EdgeInsets.only(top: !isTablet ? 0 : kToolbarHeight),
-          child: _forumPage(),
-        ),
-      ),
-    );
-  }
 
-  SliverLayoutBuilder _buildAppBar() {
-    return SliverLayoutBuilder(
-      builder: (p0, c) => SliverAppBar(
-        automaticallyImplyLeading: false,
-        pinned: true,
-        floating: true,
-        expandedHeight: 120,
-        title: Padding(
-          padding: const EdgeInsets.only(bottom: 5.0),
-          child: AppBarHome(
-            onUiChange: () {
-              if (mounted) setState(() {});
-            },
+    if (isTablet) {
+      return NestedScrollView(
+        headerSliverBuilder: (_, __) => [],
+        body: RefreshIndicator(
+          onRefresh: () async {
+            _getStuff();
+          },
+          child: Padding(
+            padding: EdgeInsets.only(top: 20.0),
+            child: _forumPage(),
           ),
         ),
-        titleSpacing: 0.0,
-        toolbarHeight: kToolbarHeight,
-        actions: [SB.z],
+      );
+    }
+
+    return DefaultTabController(
+      length: 2,
+      child: NestedScrollView(
+        headerSliverBuilder: (_, __) => [
+          SliverLayoutBuilder(
+            builder: (p0, c) => SliverAppBar(
+              automaticallyImplyLeading: false,
+              pinned: true,
+              floating: true,
+              expandedHeight: 120,
+              title: Padding(
+                padding: const EdgeInsets.only(bottom: 5.0),
+                child: AppBarHome(
+                  onUiChange: () {
+                    if (mounted) setState(() {});
+                  },
+                ),
+              ),
+              titleSpacing: 0.0,
+              toolbarHeight: kToolbarHeight,
+              actions: [SB.z],
+              bottom: TabBar(
+                tabs: [
+                  Tab(text: S.current.Forums),
+                  Tab(text: S.current.Clubs),
+                ],
+              ),
+            ),
+          )
+        ],
+        body: TabBarView(
+          children: [
+            RefreshIndicator(
+              onRefresh: () async {
+                _getStuff();
+              },
+              child: _forumPage(),
+            ),
+            ClubsPage(hideAppBar: true),
+          ],
+        ),
       ),
     );
   }

@@ -12,7 +12,8 @@ import 'package:flutter/material.dart';
 import '../constant.dart';
 
 class ClubsPage extends StatefulWidget {
-  const ClubsPage({Key? key}) : super(key: key);
+  final bool hideAppBar;
+  const ClubsPage({Key? key, this.hideAppBar = false}) : super(key: key);
 
   @override
   _ClubsPageState createState() => _ClubsPageState();
@@ -56,6 +57,9 @@ class _ClubsPageState extends State<ClubsPage> {
 
   @override
   Widget build(BuildContext context) {
+    if (widget.hideAppBar) {
+      return _buildClubPage();
+    }
     final isTablet = ResponsiveHelper.isTabletOrLarger(context);
     final fabRightPosition = isTablet ? 50.0 : 30.0;
     final fabBottomPosition = isTablet ? 20.0 : 10.0;
@@ -83,6 +87,15 @@ class _ClubsPageState extends State<ClubsPage> {
 
   Widget _buildClubPage() {
     final isTablet = ResponsiveHelper.isTabletOrLarger(context);
+
+    if (widget.hideAppBar || isTablet) {
+      return RefreshIndicator(
+        onRefresh: () async {
+          getClubsInfo();
+        },
+        child: _buildClubContent(isTablet),
+      );
+    }
 
     return NestedScrollView(
       headerSliverBuilder: (_, __) => [_buildAppBar()],
@@ -121,7 +134,7 @@ class _ClubsPageState extends State<ClubsPage> {
   PreferredSize _buildHeaderWidget() {
     final isTablet = ResponsiveHelper.isTabletOrLarger(context);
     final horizontalPadding = ResponsiveHelper.getHorizontalPadding(context);
-    
+
     return PreferredSize(
       preferredSize: Size(double.infinity, 63),
       child: Padding(
@@ -137,8 +150,8 @@ class _ClubsPageState extends State<ClubsPage> {
             child: Text(
               S.current.Clubs,
               style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
+                    fontWeight: FontWeight.bold,
+                  ),
             ),
           ),
         ),
