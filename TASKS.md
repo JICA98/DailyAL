@@ -24,6 +24,7 @@ This document contains a detailed breakdown of screens and widgets that require 
   - Fixed alignment and spacing issues.
 ### 2. Home Home & Home Page (Priority: High)
 - **Files**: [lib/screens/homescreen.dart](file:///home/jica/repo/DailyAL/lib/screens/homescreen.dart), [lib/pages/homepage.dart](file:///home/jica/repo/DailyAL/lib/pages/homepage.dart)
+- **Status**: [x] Completed
 - **Current State**: [homescreen.dart](file:///home/jica/repo/DailyAL/lib/screens/homescreen.dart) has logic for `NavigationRail` but [homepage.dart](file:///home/jica/repo/DailyAL/lib/pages/homepage.dart) layout is mostly single column logic (`_columnWidget`).
 - **Instructions**:
   - **[homescreen.dart](file:///home/jica/repo/DailyAL/lib/screens/homescreen.dart)**:
@@ -35,6 +36,7 @@ This document contains a detailed breakdown of screens and widgets that require 
     - **Grid**: Use `AdaptiveAnimeCard` grid for lists instead of horizontal scrolling lists where appropriate, or ensure horizontal lists show more items.
 ### 3. Anime Character Widget
 - **File**: [lib/pages/animedetailed/animecharacterwidget.dart](file:///home/jica/repo/DailyAL/lib/pages/animedetailed/animecharacterwidget.dart)
+- **Status**: [x] Completed
 - **Current State**: Uses `PageView` with [ListView](file:///home/jica/repo/DailyAL/lib/pages/animedetailed/animecharacterwidget.dart#38-46) for grid ([_buildGridView](file:///home/jica/repo/DailyAL/lib/pages/animedetailed/animecharacterwidget.dart#113-141)).
 - **Instructions**:
   - Replace [_buildGridView](file:///home/jica/repo/DailyAL/lib/pages/animedetailed/animecharacterwidget.dart#113-141) with `GridView.builder`.
@@ -43,6 +45,7 @@ This document contains a detailed breakdown of screens and widgets that require 
   - **Card**: Redesign `_buildCharacterCard` to be wider (AspectRatio ~3) on tablet, showing Voice Actor info nicely next to character info.
 ### 4. Recommendations & Related Widgets
 - **File**: [lib/pages/animedetailed/recommanimewidget.dart](file:///home/jica/repo/DailyAL/lib/pages/animedetailed/recommanimewidget.dart)
+- **Status**: [x] Completed
 - **Current State**: Uses `horizontalList`.
 - **Instructions**:
   - **Responsive Grid**: Create/Use `_buildAdaptiveGrid` for recommendations on Tablet.
@@ -50,6 +53,7 @@ This document contains a detailed breakdown of screens and widgets that require 
   - **Card**: Ensure cards resize properly and don't stretch images.
 ### 5. Clubs Page & List
 - **Files**: [lib/pages/clubspage.dart](file:///home/jica/repo/DailyAL/lib/pages/clubspage.dart), [lib/widgets/club/clublistwidget.dart](file:///home/jica/repo/DailyAL/lib/widgets/club/clublistwidget.dart)
+- **Status**: [x] Completed
 - **Current State**: [ClubListWidget](file:///home/jica/repo/DailyAL/lib/widgets/club/clublistwidget.dart#12-20) uses [ListView](file:///home/jica/repo/DailyAL/lib/pages/animedetailed/animecharacterwidget.dart#38-46) (Single Column).
 - **Instructions**:
   - **[clublistwidget.dart](file:///home/jica/repo/DailyAL/lib/widgets/club/clublistwidget.dart)**:
@@ -58,6 +62,7 @@ This document contains a detailed breakdown of screens and widgets that require 
     - If Phone, keep [ListView](file:///home/jica/repo/DailyAL/lib/pages/animedetailed/animecharacterwidget.dart#38-46).
 ### 6. Explore Page
 - **File**: [lib/pages/explorepage.dart](file:///home/jica/repo/DailyAL/lib/pages/explorepage.dart)
+- **Status**: [x] Completed
 - **Current State**: `CustomScrollView` with vertical list of horizontal scrolling sections.
 - **Instructions**:
   - **Ranking/Genre**: These are full width. On large screens, consider side-by-side or a Grid for Top Anime/Manga if appropriate.
@@ -65,11 +70,12 @@ This document contains a detailed breakdown of screens and widgets that require 
   - **Review Section**: [_reviewsBuilder](file:///home/jica/repo/DailyAL/lib/pages/explorepage.dart#188-208). Ensure review cards don't become too wide/stretched. Limit max width of cards or use Grid.
 ### 7. Forum Page
 - **File**: [lib/pages/forumpage.dart](file:///home/jica/repo/DailyAL/lib/pages/forumpage.dart)
+- **Status**: [x] Completed
 - **Current State**: Has tablet logic ([_buildTabletForumLayout](file:///home/jica/repo/DailyAL/lib/pages/forumpage.dart#265-439), [_buildCompactBoardGrid](file:///home/jica/repo/DailyAL/lib/pages/forumpage.dart#509-536)).
 - **Instructions**:
   - **Review**: Validate that [_buildTabletForumLayout](file:///home/jica/repo/DailyAL/lib/pages/forumpage.dart#265-439) matches the specific "Two Column" requirement for Anime/Manga discussions and "Compact Board Grid" matches the desired column count (3 for Large Tablet).
   - **Update**: If breakpoints don't match [ResponsiveHelper](file:///home/jica/repo/DailyAL/lib/util/responsive_helper.dart#13-112), update them.
 ## General UI Polish Tasks
-- [ ] **Poster Aspect Ratio**: Ensure all `CachedNetworkImage` for posters use `aspectRatio: 1/1.4`.
-- [ ] **Text Size**: Verify `Theme.of(context).textTheme` is used so text scales, but consider larger font sizes for specific tablet headers if needed.
-- [ ] **Touch Targets**: Ensure buttons are accessible on touch screens (min 48x48dp).
+- [x] **Poster Aspect Ratio**: Ensure all `CachedNetworkImage` for posters use `aspectRatio: 1/1.4`.
+- [x] **Text Size**: Verify `Theme.of(context).textTheme` is used so text scales, but consider larger font sizes for specific tablet headers if needed.
+- [x] **Touch Targets**: Ensure buttons are accessible on touch screens (min 48x48dp).

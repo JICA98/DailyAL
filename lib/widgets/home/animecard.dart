@@ -133,9 +133,9 @@ class AnimeGridCard extends StatelessWidget {
   }
 
   Widget _buildImage(BuildContext context, String nodeTitle, String? time) {
-    if (aspectRatio != null)
+    if (aspectRatio != null || gridHeight == null)
       return AspectRatio(
-        aspectRatio: aspectRatio!,
+        aspectRatio: aspectRatio ?? 1 / 1.4,
         child: cardWidget(context, nodeTitle,
             borderRadius: borderRadius, time: time),
       );
@@ -380,7 +380,9 @@ class AnimeGridCard extends StatelessWidget {
             _blackBGforText(borderRadius),
             _editAndText(context, nodeTitle, borderRadius, myListStatus),
             _episodeWatchProgressBar(myListStatus),
-            showRecommendations ? _recommendationBadge() : _memberCountMeanScore(time),
+            showRecommendations
+                ? _recommendationBadge()
+                : _memberCountMeanScore(time),
           ],
           _dubStatusIcon(),
           if (time != null) _timeCard(time),
@@ -448,7 +450,7 @@ class AnimeGridCard extends StatelessWidget {
     if (!user.pref.showDubStatus || node is! AnimeDetailed) return SB.z;
     if (!category.equals("anime")) return SB.z;
     if (onClose != null) return SB.z;
-    
+
     final content = node as dynamic;
     final int? id = content.id;
     if (id == null) return SB.z;
@@ -485,7 +487,8 @@ class AnimeGridCard extends StatelessWidget {
   }
 
   Widget _recommendationBadge() {
-    if (showRecommendations && (node is AnimeDetailed || node is MangaDetailed)) {
+    if (showRecommendations &&
+        (node is AnimeDetailed || node is MangaDetailed)) {
       final content = node as dynamic;
       final int? recommendations = content.numRecommendations;
 
@@ -569,7 +572,7 @@ class AnimeGridCard extends StatelessWidget {
     if (node is AnimeDetailed || node is MangaDetailed) return SB.z;
     final dynamic detailed = node;
     final int? favorites = detailed.favorites;
-    if (favorites == null ) return SB.z;
+    if (favorites == null) return SB.z;
 
     return Positioned(
       bottom: 5,

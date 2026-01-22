@@ -525,7 +525,7 @@ class _ForumPageState extends State<ForumPage> with TickerProviderStateMixin {
         crossAxisCount: crossAxisCount,
         mainAxisSpacing: 12,
         crossAxisSpacing: 12,
-        childAspectRatio: 2.8,
+        mainAxisExtent: 110,
       ),
       itemCount: itemCount,
       itemBuilder: (context, index) => _buildCompactBoardCard(
@@ -708,7 +708,7 @@ class _ForumPageState extends State<ForumPage> with TickerProviderStateMixin {
         crossAxisCount: crossAxisCount,
         mainAxisSpacing: 8,
         crossAxisSpacing: 12,
-        childAspectRatio: 4.5,
+        mainAxisExtent: 80,
       ),
       itemCount: categories!.forums!.length.clamp(0, 4),
       itemBuilder: (context, index) => BoardWidget(

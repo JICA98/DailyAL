@@ -1,12 +1,11 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dailyanimelist/api/malclubs.dart';
 import 'package:dailyanimelist/constant.dart';
-import 'package:dailyanimelist/generated/l10n.dart';
 import 'package:dailyanimelist/main.dart';
 import 'package:dailyanimelist/screens/clubscreen.dart';
 import 'package:dailyanimelist/widgets/avatarwidget.dart';
 import 'package:dailyanimelist/widgets/custombutton.dart';
 import 'package:dal_commons/dal_commons.dart';
+import 'package:dailyanimelist/util/responsive_helper.dart';
 import 'package:flutter/material.dart';
 
 class ClubListWidget extends StatefulWidget {
@@ -93,6 +92,24 @@ class ClubList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (ResponsiveHelper.isTabletOrLarger(context)) {
+      return GridView.builder(
+        itemCount: clubs.length,
+        physics: const NeverScrollableScrollPhysics(),
+        padding: EdgeInsets.zero,
+        shrinkWrap: true,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          childAspectRatio: 3.5,
+          crossAxisSpacing: 10,
+          mainAxisSpacing: 10,
+        ),
+        itemBuilder: (_, index) {
+          var clubInfo = clubs.elementAt(index);
+          return ClubHtmlListWidget(clubInfo: clubInfo);
+        },
+      );
+    }
     return ListView.builder(
       itemCount: clubs.length,
       physics: const NeverScrollableScrollPhysics(),
@@ -173,7 +190,9 @@ class ClubHtmlListWidget extends StatelessWidget {
                               child: PlainButton(
                                 onPressed: () {
                                   if (clubInfo.lastPostBy != null) {
-                                    showUserPage(context: context, username: clubInfo.lastPostBy!);
+                                    showUserPage(
+                                        context: context,
+                                        username: clubInfo.lastPostBy!);
                                   }
                                 },
                                 padding: EdgeInsets.zero,

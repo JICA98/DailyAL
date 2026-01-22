@@ -1,7 +1,7 @@
 import 'package:dailyanimelist/api/dalapi.dart';
 import 'package:dailyanimelist/constant.dart';
 import 'package:dailyanimelist/generated/l10n.dart';
-import 'package:dailyanimelist/pages/settings/optiontile.dart';
+
 import 'package:dailyanimelist/screens/characterscreen.dart';
 import 'package:dailyanimelist/screens/generalsearchscreen.dart';
 import 'package:dailyanimelist/widgets/avatarwidget.dart';
@@ -9,10 +9,10 @@ import 'package:dailyanimelist/widgets/customfuture.dart';
 import 'package:dailyanimelist/widgets/headerwidget.dart';
 import 'package:dailyanimelist/widgets/slivers.dart';
 import 'package:dal_commons/commons.dart';
-import 'package:dal_commons/dal_commons.dart';
 import 'package:flutter/material.dart';
 
 import '../../main.dart';
+import 'package:dailyanimelist/util/responsive_helper.dart';
 
 class AnimeCharacterWidget extends StatelessWidget {
   final List<AnimeCharacterHtml> animeCharacterList;
@@ -26,10 +26,27 @@ class AnimeCharacterWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (type == DisplayType.grid) {
-      return _buildGridView(
-          animeCharacterList.length,
-          (i, pageIndex) =>
-              _buildCharacterWidget(animeCharacterList[pageIndex * 3 + i]));
+      if (ResponsiveHelper.isTabletOrLarger(context)) {
+        return GridView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            mainAxisSpacing: 8,
+            crossAxisSpacing: 8,
+            mainAxisExtent: 115,
+          ),
+          itemCount: animeCharacterList.length,
+          itemBuilder: (context, index) =>
+              _buildTabletCharacterWidget(animeCharacterList[index]),
+        );
+      } else {
+        return _buildPagingGridView(
+            animeCharacterList.length,
+            (i, pageIndex) =>
+                _buildCharacterWidget(animeCharacterList[pageIndex * 3 + i]));
+      }
     } else {
       return _buildListView();
     }
@@ -44,25 +61,58 @@ class AnimeCharacterWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildCharacterWidget(AnimeCharacterHtml? details) {
-    return Padding(
-      padding: type == DisplayType.grid
-          ? const EdgeInsets.fromLTRB(0, 5, 10, 5)
-          : const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-      child: Container(
-        width: double.infinity,
-        child: Material(
-            color: Colors.transparent,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                _characterWidget(details?.characterId, details?.animePicture),
-                Expanded(child: _centerTextWidegt(details)),
-                _seiyuuWidget(details?.seiyuuId, details?.seiyuuPicture),
-              ],
-            )),
+  Widget _buildTabletCharacterWidget(AnimeCharacterHtml? details) {
+    return Container(
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: Theme.of(MyApp.navigatorKey.currentContext!)
+            .cardColor
+            .withOpacity(0.5),
+        borderRadius: BorderRadius.circular(12),
       ),
+      padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Row(
+            children: [
+              _characterWidget(details?.characterId, details?.animePicture,
+                  height: 100, width: 70),
+              SizedBox(width: 15),
+              _buildNameAndRole(
+                  details?.characterName ?? "?", details?.characterType ?? ""),
+            ],
+          ),
+          Row(
+            children: [
+              _buildSeiyuuNameAndRole(details?.seiyuuName ?? 'Unknown',
+                  details?.seiyuuOrigin ?? ''),
+              SizedBox(width: 15),
+              _seiyuuWidget(details?.seiyuuId, details?.seiyuuPicture,
+                  height: 100, width: 70),
+            ],
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _buildCharacterWidget(AnimeCharacterHtml? details) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      child: Material(
+          color: Colors.transparent,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              _characterWidget(details?.characterId, details?.animePicture),
+              Expanded(child: _centerTextWidegt(details)),
+              _seiyuuWidget(details?.seiyuuId, details?.seiyuuPicture),
+            ],
+          )),
     );
   }
 
@@ -107,35 +157,6 @@ Widget _buildNameAndRole(String characterName, String characterType) {
       if (characterType.isNotBlank)
         title(characterType, opacity: .8, fontSize: 11, align: TextAlign.start),
     ],
-  );
-}
-
-Widget _buildGridView(
-  final int length,
-  Widget Function(int, int) itemBuilder, [
-  final double viewportFraction = .89,
-]) {
-  final pageController =
-      PageController(initialPage: 0, viewportFraction: viewportFraction);
-  final noOfPages = (length / 3).ceilToDouble().toInt();
-  final lastPage = noOfPages - 1;
-  return Container(
-    height: (noOfPages == 1 && length != 3) ? (length == 1 ? 140 : 280) : 390,
-    child: PageView.builder(
-      itemCount: noOfPages,
-      controller: pageController,
-      itemBuilder: ((context, pageIndex) {
-        return ListView.builder(
-          itemCount:
-              pageIndex == lastPage ? (length % 3 == 0 ? 3 : length % 3) : 3,
-          scrollDirection: Axis.vertical,
-          padding: EdgeInsets.zero,
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          itemBuilder: (_, i) => itemBuilder(i, pageIndex),
-        );
-      }),
-    ),
   );
 }
 
@@ -214,12 +235,29 @@ class MangaCharacterWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (type == DisplayType.grid) {
-      return _buildGridView(
-        mangaCharacters.length,
-        (i, pageIndex) =>
-            _buildCharacterRow(mangaCharacters.tryAt(pageIndex * 3 + i)),
-        .79,
-      );
+      if (ResponsiveHelper.isTabletOrLarger(context)) {
+        return GridView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            mainAxisSpacing: 12,
+            crossAxisSpacing: 12,
+            childAspectRatio: 3.0,
+          ),
+          itemCount: mangaCharacters.length,
+          itemBuilder: (context, index) =>
+              _buildCharacterRow(mangaCharacters.tryAt(index)),
+        );
+      } else {
+        return _buildPagingGridView(
+          mangaCharacters.length,
+          (i, pageIndex) =>
+              _buildCharacterRow(mangaCharacters.tryAt(pageIndex * 3 + i)),
+          .79,
+        );
+      }
     } else {
       return ListView.builder(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
@@ -389,8 +427,8 @@ class _AllCharsWidgetState extends State<AllCharsWidget> {
                     top: char.staffInfoList!.length == 1 ? 0 : 25),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
-                  children: char.staffInfoList
-                      !.map((staff) => Padding(
+                  children: char.staffInfoList!
+                      .map((staff) => Padding(
                             padding: const EdgeInsets.only(bottom: 10),
                             child: Row(
                               children: [
@@ -443,4 +481,33 @@ class _AllCharsWidgetState extends State<AllCharsWidget> {
       ),
     );
   }
+}
+
+Widget _buildPagingGridView(
+  final int length,
+  Widget Function(int, int) itemBuilder, [
+  final double viewportFraction = .89,
+]) {
+  final pageController =
+      PageController(initialPage: 0, viewportFraction: viewportFraction);
+  final noOfPages = (length / 3).ceilToDouble().toInt();
+  final lastPage = noOfPages - 1;
+  return Container(
+    height: (noOfPages == 1 && length != 3) ? (length == 1 ? 140 : 280) : 390,
+    child: PageView.builder(
+      itemCount: noOfPages,
+      controller: pageController,
+      itemBuilder: ((context, pageIndex) {
+        return ListView.builder(
+          itemCount:
+              pageIndex == lastPage ? (length % 3 == 0 ? 3 : length % 3) : 3,
+          scrollDirection: Axis.vertical,
+          padding: EdgeInsets.zero,
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          itemBuilder: (_, i) => itemBuilder(i, pageIndex),
+        );
+      }),
+    ),
+  );
 }

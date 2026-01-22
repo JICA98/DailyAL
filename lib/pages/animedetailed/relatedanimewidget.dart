@@ -3,11 +3,11 @@ import 'package:dailyanimelist/constant.dart';
 import 'package:dailyanimelist/screens/generalsearchscreen.dart';
 import 'package:dailyanimelist/screens/plainscreen.dart';
 import 'package:dailyanimelist/util/pathutils.dart';
+import 'package:dailyanimelist/util/responsive_helper.dart';
 import 'package:dailyanimelist/widgets/anime_graph.dart';
 import 'package:dailyanimelist/widgets/common/share_builder.dart';
 import 'package:dailyanimelist/widgets/customappbar.dart';
 import 'package:dailyanimelist/widgets/custombutton.dart';
-import 'package:dailyanimelist/widgets/customfuture.dart';
 import 'package:dailyanimelist/widgets/listsortfilter.dart';
 import 'package:dailyanimelist/widgets/slivers.dart';
 import 'package:dailyanimelist/widgets/user/contentlistwidget.dart';
@@ -91,6 +91,7 @@ class _RelatedAnimeWidgetState extends State<RelatedAnimeWidget>
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return DefaultTabController(
       length: animeWidgets.keys.length,
       child: isHoriz ? _horizView : _animeGraph,
@@ -269,6 +270,7 @@ class _RelatedAnimeWidgetState extends State<RelatedAnimeWidget>
         DisplayOption(
           displayType: DisplayType.grid,
           displaySubType: DisplaySubType.compact,
+          gridCrossAxisCount: ResponsiveHelper.getCrossAxisCount(context),
         ),
       ),
     );

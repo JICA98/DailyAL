@@ -429,7 +429,7 @@ class ContentListWithDisplayType extends StatelessWidget {
       return conditional(
         on: isHoriz,
         parent: (child) => SizedBox(
-          width: gridHeight * 2 / 3,
+          width: gridHeight / 1.4,
           child: child,
         ),
         child: buildBaseNodePageItem(

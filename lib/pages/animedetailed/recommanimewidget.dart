@@ -7,6 +7,7 @@ import 'package:dailyanimelist/widgets/avatarwidget.dart';
 import 'package:dailyanimelist/widgets/custombutton.dart';
 import 'package:dailyanimelist/widgets/customfuture.dart';
 import 'package:dailyanimelist/widgets/slivers.dart';
+import 'package:dailyanimelist/util/responsive_helper.dart';
 import 'package:dailyanimelist/widgets/translator.dart';
 import 'package:dailyanimelist/widgets/user/contentlistwidget.dart';
 import 'package:dal_commons/dal_commons.dart';
@@ -124,58 +125,61 @@ class _ContentFullRecommendationState extends State<ContentFullRecommendation>
     );
   }
 
-  SliverList _buildRecomComments(RecomBase selectedNode) {
-    return SliverList(
-      delegate: SliverChildBuilderDelegate((_, index) {
-        final item = selectedNode.recommendations![index];
-        return Card(
-          child: Column(children: [
-            SB.h10,
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Row(
-                children: [
-                  AvatarWidget(
-                    username: item.username,
-                    height: 40,
-                    width: 40,
-                    onTap: () => showUserPage(
-                        context: context, username: item.username!),
-                  ),
-                  SB.w20,
-                  title(item.username),
-                  Expanded(child: SB.z),
-                  ToolTipButton(
-                    onTap: () {
-                      reportWithConfirmation(
-                        type: ReportType.recommendation,
-                        context: context,
-                        content: title(
-                            '${S.current.Recommendation_made_by} ${item.username} & id: ${item.id}'),
-                        optionalUrl:
-                            '${CredMal.htmlEnd}dbchanges.php?go=reportanimerecommendation&id=${item.id}',
-                      );
-                    },
-                    message: S.current.Report_Recommendation,
-                    child: title(S.current.Report, fontSize: 11),
-                  ),
-                  SB.w20,
-                ],
+  Widget _buildRecomComments(RecomBase selectedNode) {
+    return SliverPadding(
+      padding: ResponsiveHelper.getContentPadding(context),
+      sliver: SliverList(
+        delegate: SliverChildBuilderDelegate((_, index) {
+          final item = selectedNode.recommendations![index];
+          return Card(
+            child: Column(children: [
+              SB.h10,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Row(
+                  children: [
+                    AvatarWidget(
+                      username: item.username,
+                      height: 40,
+                      width: 40,
+                      onTap: () => showUserPage(
+                          context: context, username: item.username!),
+                    ),
+                    SB.w20,
+                    title(item.username),
+                    Expanded(child: SB.z),
+                    ToolTipButton(
+                      onTap: () {
+                        reportWithConfirmation(
+                          type: ReportType.recommendation,
+                          context: context,
+                          content: title(
+                              '${S.current.Recommendation_made_by} ${item.username} & id: ${item.id}'),
+                          optionalUrl:
+                              '${CredMal.htmlEnd}dbchanges.php?go=reportanimerecommendation&id=${item.id}',
+                        );
+                      },
+                      message: S.current.Report_Recommendation,
+                      child: title(S.current.Report, fontSize: 11),
+                    ),
+                    SB.w20,
+                  ],
+                ),
               ),
-            ),
-            SB.h10,
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TranslaterWidget(
-                content: item.text,
-                done: (data) => title(data),
-                buttonPadding: EdgeInsets.zero,
+              SB.h10,
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TranslaterWidget(
+                  content: item.text,
+                  done: (data) => title(data),
+                  buttonPadding: EdgeInsets.zero,
+                ),
               ),
-            ),
-            SB.h10,
-          ]),
-        );
-      }, childCount: selectedNode.recommendations!.length),
+              SB.h10,
+            ]),
+          );
+        }, childCount: selectedNode.recommendations!.length),
+      ),
     );
   }
 }
@@ -270,17 +274,18 @@ class _SelectorNodesWidgetState extends State<SelectorNodesWidget> {
                 children: [
                   RepaintBoundary(
                     child: AvatarWidget(
-                      url: node.mainPicture?.large ?? node.mainPicture?.medium ?? '',
+                      url: node.mainPicture?.large ??
+                          node.mainPicture?.medium ??
+                          '',
                       height: 50,
                       width: 50,
                       onTap: () => gotoPage(
-                        context: context,
-                        newPage: ContentDetailedScreen(
-                          category: widget.category,
-                          id: node.id,
-                          node: node,
-                        )
-                      ),
+                          context: context,
+                          newPage: ContentDetailedScreen(
+                            category: widget.category,
+                            id: node.id,
+                            node: node,
+                          )),
                     ),
                   ),
                   SB.w10,
