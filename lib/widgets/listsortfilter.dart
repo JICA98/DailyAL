@@ -27,7 +27,8 @@ bool canBeFetchedFromAPI(
 
   return _sortFilterDisplay.filterOutputs.isEmpty &&
       orderMap.containsKey(_sortFilterDisplay.sort.value) &&
-      orderMap[_sortFilterDisplay.sort.value] == _sortFilterDisplay.sort.order &&
+      orderMap[_sortFilterDisplay.sort.value] ==
+          _sortFilterDisplay.sort.order &&
       canTitleSortingBeDoneUsingApi(_sortFilterDisplay);
 }
 
@@ -1021,7 +1022,7 @@ class _SortFilterPopupState extends State<SortFilterPopup> {
   Widget _gridAxisSizeSliderWidget() {
     final axisCount = _sortFilterDisplay.displayOption.gridCrossAxisCount;
     final min = 2;
-    final max = 4;
+    final max = 8;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -1048,7 +1049,7 @@ class _SortFilterPopupState extends State<SortFilterPopup> {
                     value: axisCount.toDouble(),
                     min: min.toDouble(),
                     max: max.toDouble(),
-                    divisions: 2,
+                    divisions: max - min,
                     label: _sortFilterDisplay.displayOption.gridCrossAxisCount
                         .toString(),
                     onChanged: (value) {

@@ -171,7 +171,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               autoFocus: false, showBackButton: false, onClose: _onSearchClose),
           animation: animation),
       profileIndex: OpacityAnima(
-          child: UserPopSlideOpenPage(isSelf: true, isFullScreen: true), animation: animation),
+          child: UserPopSlideOpenPage(isSelf: true, isFullScreen: true),
+          animation: animation),
+      bookmarksIndex:
+          OpacityAnima(child: BookMarksWidget(), animation: animation),
+      calendarIndex:
+          OpacityAnima(child: AnimeCalendarWidget(), animation: animation),
     };
   }
 
@@ -316,12 +321,21 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   selectedIcon: Icon(Icons.search),
                   label: Text(S.current.Search),
                 ),
-                 NavigationRailDestination(
+                NavigationRailDestination(
+                  icon: Icon(Icons.bookmarks_outlined),
+                  selectedIcon: Icon(Icons.bookmarks),
+                  label: Text(S.current.Bookmarks),
+                ),
+                NavigationRailDestination(
+                  icon: Icon(Icons.calendar_today_outlined),
+                  selectedIcon: Icon(Icons.calendar_today),
+                  label: Text(S.current.Calendar),
+                ),
+                NavigationRailDestination(
                   label: Text(S.current.Profile),
                   icon: _userProfileWidget(),
                   selectedIcon: _userProfileWidget(isSelected: true),
                 ),
-                
               ],
             ),
             VerticalDivider(thickness: 1, width: 1),

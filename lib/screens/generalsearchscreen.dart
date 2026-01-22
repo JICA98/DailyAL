@@ -33,6 +33,7 @@ import 'package:dal_commons/commons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:dailyanimelist/util/responsive_helper.dart';
 
 List<BaseNode> searchBaseNodes(List<BaseNode> base, String text) {
   final filtered = base.where((f) {
@@ -127,11 +128,21 @@ class _GeneralSearchScreenState extends State<GeneralSearchScreen>
   late Future<SearchResult> _seasonResult;
   late SortFilterDisplay _sortFilterDisplay;
 
+  bool _initDone = false;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (!_initDone) {
+      _initDone = true;
+      _setDefaultSortFilterDisplay();
+    }
+  }
+
   @override
   void initState() {
     super.initState();
     _searchTextListener = StreamListener('');
-    _setDefaultSortFilterDisplay();
 
     autoFocus = widget.autoFocus ?? false;
     if (autoFocus) {
@@ -183,7 +194,23 @@ class _GeneralSearchScreenState extends State<GeneralSearchScreen>
   }
 
   set category(String value) {
-    _sortFilterDisplay = _sortFilterDisplay.copyWith(category: value);
+    var displayOption = _sortFilterDisplay.displayOption;
+    if (ResponsiveHelper.isTabletOrLarger(context)) {
+      if (['anime', 'manga'].contains(value)) {
+        displayOption = displayOption.copyWith(
+          displayType: DisplayType.grid,
+          displaySubType: DisplaySubType.compact,
+          gridCrossAxisCount: ResponsiveHelper.getCrossAxisCount(context),
+        );
+      } else {
+        displayOption = displayOption.copyWith(
+          displayType: user.pref.defaultDisplayType,
+          displaySubType: DisplaySubType.comfortable,
+        );
+      }
+    }
+    _sortFilterDisplay =
+        _sortFilterDisplay.copyWith(category: value, display: displayOption);
   }
 
   _setDefaultSortFilterDisplay() async {
@@ -218,13 +245,20 @@ class _GeneralSearchScreenState extends State<GeneralSearchScreen>
   }
 
   SortFilterDisplay _defaultSortFilterDisplay() {
+    final isTablet = ResponsiveHelper.isTabletOrLarger(context);
+    final _cat = widget.category ?? "all";
+    final isGridTarget = isTablet && ['anime', 'manga'].contains(_cat);
+
     return SortFilterDisplay(
       sort: SortOption(name: 'name', value: 'value'),
       displayOption: DisplayOption(
-        displayType: user.pref.defaultDisplayType,
-        displaySubType: DisplaySubType.comfortable,
+        displayType:
+            isGridTarget ? DisplayType.grid : user.pref.defaultDisplayType,
+        displaySubType:
+            isGridTarget ? DisplaySubType.compact : DisplaySubType.comfortable,
+        gridCrossAxisCount: ResponsiveHelper.getCrossAxisCount(context),
       ),
-      category: widget.category ?? "all",
+      category: _cat,
       filterOutputs: widget.filterOutputs ?? {},
     );
   }
@@ -1243,7 +1277,7 @@ class _GeneralSearchScreenState extends State<GeneralSearchScreen>
   Widget _buildListResults(List<BaseNode>? _results, String _category) {
     if (_results == null || _results.isEmpty) return SB.z;
     Widget build;
-    if (contentTypes.contains(category)) {
+    if (contentTypes.contains(_category)) {
       build = _contentTypesList(_category, _results);
     } else {
       build = _contentList(_category, _results);
@@ -1272,10 +1306,19 @@ class _GeneralSearchScreenState extends State<GeneralSearchScreen>
   }
 
   Widget _contentTypesList(String _category, List<BaseNode> _results) {
+    var displayOption = _sortFilterDisplay;
+    if (category.equals('all') && ResponsiveHelper.isTabletOrLarger(context)) {
+      displayOption = displayOption.copyWith(
+          display: displayOption.displayOption.copyWith(
+        displayType: DisplayType.grid,
+        displaySubType: DisplaySubType.compact,
+        gridCrossAxisCount: ResponsiveHelper.getCrossAxisCount(context),
+      ));
+    }
     return ContentListWithDisplayType(
       category: _category,
       items: _results,
-      sortFilterDisplay: _sortFilterDisplay,
+      sortFilterDisplay: displayOption,
       showIndex: true,
       showEdit: true,
       updateCacheOnEdit: true,

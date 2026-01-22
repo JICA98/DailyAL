@@ -19,6 +19,7 @@ import 'package:dailyanimelist/widgets/user/customizedlist.dart';
 import 'package:dal_commons/dal_commons.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:dailyanimelist/util/responsive_helper.dart';
 
 class CustomSearchInput {
   final int offset;
@@ -86,7 +87,14 @@ class _UserContentBuilderState extends State<UserContentBuilder>
     _searchController.addListener(() {
       if (mounted) setState(() {});
     });
-    _setSortFilterDisplayFuture();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (_sortFilterDisplay == null) {
+      _setSortFilterDisplayFuture();
+    }
   }
 
   void _setSortFilterDisplayFuture() async {
@@ -107,11 +115,14 @@ class _UserContentBuilderState extends State<UserContentBuilder>
       UserContentBuilder.serviceName + (widget.optionsCacheKey ?? '');
 
   SortFilterDisplay _defaultObject() {
+    final isTablet = ResponsiveHelper.isTabletOrLarger(context);
     return SortFilterDisplay(
       sort: SortOption(name: 'Updated At', value: 'list_updated_at'),
       displayOption: DisplayOption(
-        displayType: user.pref.defaultDisplayType,
-        displaySubType: DisplaySubType.comfortable,
+        displayType: isTablet ? DisplayType.grid : user.pref.defaultDisplayType,
+        displaySubType:
+            isTablet ? DisplaySubType.compact : DisplaySubType.comfortable,
+        gridCrossAxisCount: ResponsiveHelper.getCrossAxisCount(context),
       ),
       filterOutputs: {},
     );

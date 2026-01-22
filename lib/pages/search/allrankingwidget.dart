@@ -1,13 +1,11 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dailyanimelist/api/credmal.dart';
 import 'package:dailyanimelist/constant.dart';
 import 'package:dailyanimelist/enums.dart';
-import 'package:dailyanimelist/extensions.dart';
 import 'package:dailyanimelist/generated/l10n.dart';
-import 'package:dailyanimelist/main.dart';
 import 'package:dailyanimelist/screens/generalsearchscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:dal_commons/dal_commons.dart';
+import 'package:dailyanimelist/util/responsive_helper.dart';
 
 class AllRankingWidget extends StatelessWidget {
   final String category;
@@ -49,45 +47,48 @@ class AllRankingWidget extends StatelessWidget {
       }
     }
 
+    /// Get adaptive grid column count for category cards
+    int _getCategoryGridCount(BuildContext context) {
+      final screenSize = ResponsiveHelper.getScreenSize(context);
+      return switch (screenSize) {
+        ScreenSize.compact => 2, // Phone: 2 columns
+        ScreenSize.medium => 3, // Small tablet: 3 columns
+        ScreenSize.expanded => 4, // Large tablet: 4 columns
+        ScreenSize.large => 5, // Desktop: 5 columns
+        ScreenSize.extraLarge => 6, // Ultra-wide: 6 columns
+      };
+    }
+
     Widget _buildBody(BuildContext context, Map<Enum, String> rankingMap,
         Map<Enum, String> rankingTypeMap) {
-      return SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 20.0),
-          child: Column(
-            children: rankingMap.keys
-                .chunked(2)
-                .map(
-                  (e) => SizedBox(
-                    height: 140,
-                    child: Row(
-                      children: e.map(
-                        (e) {
-                          final type = rankingTypeMap[e];
-                          return Expanded(
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 5),
-                              child: imageTextCard(
-                                context: context,
-                                borderRadius: borderRadius,
-                                bottomPadding:
-                                    EdgeInsets.symmetric(vertical: 5.0),
-                                onTap: () => _onCategoryTap(type, context),
-                                imageUrl:
-                                    '${CredMal.dalWeb}assets/${type}_$category.jpg',
-                                text: rankingMap[e]!,
-                              ),
-                            ),
-                          );
-                        },
-                      ).toList(),
-                    ),
-                  ),
-                )
-                .toList(),
-          ),
+      final entries = rankingMap.entries.toList();
+      final horizontalPadding = ResponsiveHelper.getHorizontalPadding(context);
+      final crossAxisCount = _getCategoryGridCount(context);
+
+      return GridView.builder(
+        padding: EdgeInsets.symmetric(
+          horizontal: horizontalPadding,
+          vertical: 20.0,
         ),
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: crossAxisCount,
+          mainAxisSpacing: 12,
+          crossAxisSpacing: 12,
+          childAspectRatio: 1.6, // Wider cards for category images
+        ),
+        itemCount: entries.length,
+        itemBuilder: (context, index) {
+          final entry = entries[index];
+          final type = rankingTypeMap[entry.key];
+          return imageTextCard(
+            context: context,
+            borderRadius: borderRadius,
+            bottomPadding: EdgeInsets.zero,
+            onTap: () => _onCategoryTap(type, context),
+            imageUrl: '${CredMal.dalWeb}assets/${type}_$category.jpg',
+            text: entry.value,
+          );
+        },
       );
     }
 
@@ -170,7 +171,7 @@ Widget imageTextCard({
                       opacity: .8,
                       fontSize: 15.0,
                       align: TextAlign.center,
-                      colorVal: Colors.white.value,
+                      colorVal: Theme.of(context).colorScheme.onSurface.value,
                     ),
               ),
             ),
