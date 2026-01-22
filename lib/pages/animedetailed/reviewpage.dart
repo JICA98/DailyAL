@@ -27,6 +27,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
+import 'package:dailyanimelist/util/responsive_helper.dart';
 
 class Filter {
   String title;
@@ -163,6 +164,9 @@ class _ContentReviewPageState extends State<ContentReviewPage> {
 
     showCustomSheet(
       context: context,
+      constraints: BoxConstraints(
+        maxWidth: double.infinity,
+      ),
       child: Padding(
         padding: EdgeInsets.only(top: 40),
         child: PageView.builder(
@@ -404,8 +408,9 @@ class _ContentReviewPageState extends State<ContentReviewPage> {
 
   Widget _buildHorizontalList() {
     final _reviews = _sortReviews(reviews?.where(_whereReview).toList());
+    final isTablet = ResponsiveHelper.isTabletOrLarger(context);
     return Container(
-      height: 385,
+      height: isTablet ? 430 : 385,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         controller: listController,
@@ -515,10 +520,11 @@ class ReviewWidget extends StatelessWidget {
     visibleRBs.sort((a, b) => b.count.compareTo(a.count));
     visibleRBs.removeWhere((e) => e.count == 0);
     final node = review.relatedNode;
+    final isTablet = ResponsiveHelper.isTabletOrLarger(context);
     return Container(
       width: axis == Axis.vertical
           ? double.infinity
-          : (showMore ? 320 : double.infinity),
+          : (showMore ? (isTablet ? 450 : 320) : double.infinity),
       height: axis == Axis.vertical
           ? 400
           : (showMore ? null : MediaQuery.of(context).size.height),
@@ -590,7 +596,7 @@ class ReviewWidget extends StatelessWidget {
               Expanded(
                 child: TranslaterWidget(
                   content: review.reviewText,
-                  done: (data) => reviewText(data),
+                  done: (data) => reviewText(data, context),
                 ),
               ),
               if (visibleRBs.length != 0) _showReactions(visibleRBs),
@@ -678,8 +684,9 @@ class ReviewWidget extends StatelessWidget {
     );
   }
 
-  Widget reviewText(String? reviewText) {
-    final style = TextStyle(fontSize: 13);
+  Widget reviewText(String? reviewText, BuildContext context) {
+    final style = TextStyle(
+        fontSize: ResponsiveHelper.isTabletOrLarger(context) ? 15 : 13);
     final textWidget = showMore
         ? Text(
             reviewText ?? "?",

@@ -399,12 +399,14 @@ void showCustomSheet({
   bool isScrollControlled = true,
   double elevation = 0,
   bool enableDrag = true,
+  BoxConstraints? constraints,
 }) {
   showModalBottomSheet(
     context: context,
     enableDrag: enableDrag,
     isScrollControlled: isScrollControlled,
     backgroundColor: color,
+    constraints: constraints,
     builder: (context) => Material(color: color, child: child),
   );
 }
@@ -1423,6 +1425,6 @@ Future<void> openFutureAndNavigate<T>({
 enum DeviceType { phone, tablet }
 
 DeviceType getDeviceType() {
-    final display = PlatformDispatcher.instance.views.first.display;
-    return display.size.shortestSide < 600 ? DeviceType.phone :DeviceType.tablet;
+  final display = PlatformDispatcher.instance.views.first.display;
+  return display.size.shortestSide < 600 ? DeviceType.phone : DeviceType.tablet;
 }

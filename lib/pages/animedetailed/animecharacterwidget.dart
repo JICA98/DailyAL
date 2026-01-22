@@ -35,7 +35,7 @@ class AnimeCharacterWidget extends StatelessWidget {
             crossAxisCount: 2,
             mainAxisSpacing: 8,
             crossAxisSpacing: 8,
-            mainAxisExtent: 115,
+            mainAxisExtent: 108,
           ),
           itemCount: animeCharacterList.length,
           itemBuilder: (context, index) =>
@@ -70,28 +70,39 @@ class AnimeCharacterWidget extends StatelessWidget {
             .withOpacity(0.5),
         borderRadius: BorderRadius.circular(12),
       ),
-      padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+      padding: EdgeInsets.symmetric(horizontal: 5, vertical: 4),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Row(
-            children: [
-              _characterWidget(details?.characterId, details?.animePicture,
-                  height: 100, width: 70),
-              SizedBox(width: 15),
-              _buildNameAndRole(
-                  details?.characterName ?? "?", details?.characterType ?? ""),
-            ],
+          Expanded(
+            child: Row(
+              children: [
+                _characterWidget(details?.characterId, details?.animePicture,
+                    height: 100, width: 70),
+                SizedBox(width: 10),
+                Expanded(
+                  child: _buildNameAndRole(details?.characterName ?? "?",
+                      details?.characterType ?? ""),
+                ),
+              ],
+            ),
           ),
-          Row(
-            children: [
-              _buildSeiyuuNameAndRole(details?.seiyuuName ?? 'Unknown',
-                  details?.seiyuuOrigin ?? ''),
-              SizedBox(width: 15),
-              _seiyuuWidget(details?.seiyuuId, details?.seiyuuPicture,
-                  height: 100, width: 70),
-            ],
+          SizedBox(width: 8),
+          Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Expanded(
+                  child: _buildSeiyuuNameAndRole(
+                      details?.seiyuuName ?? 'Unknown',
+                      details?.seiyuuOrigin ?? ''),
+                ),
+                SizedBox(width: 10),
+                _seiyuuWidget(details?.seiyuuId, details?.seiyuuPicture,
+                    height: 100, width: 70),
+              ],
+            ),
           )
         ],
       ),
@@ -242,9 +253,9 @@ class MangaCharacterWidget extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
-            mainAxisSpacing: 12,
-            crossAxisSpacing: 12,
-            childAspectRatio: 3.0,
+            mainAxisSpacing: 8,
+            crossAxisSpacing: 8,
+            mainAxisExtent: 108,
           ),
           itemCount: mangaCharacters.length,
           itemBuilder: (context, index) =>
