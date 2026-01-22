@@ -15,22 +15,13 @@ This document contains a detailed breakdown of screens and widgets that require 
 ## Screen-Specific Tasks
 ### 1. Content Detailed Screen (Priority: High)
 - **File**: [lib/screens/contentdetailedscreen.dart](file:///home/jica/repo/DailyAL/lib/screens/contentdetailedscreen.dart)
-- **Current State**: Has basic [Row](file:///home/jica/repo/DailyAL/lib/pages/animedetailed/animecharacterwidget.dart#232-259) based split for `_isTablet`. Left panel width is clamped between 350-550. Right pane filters out sections.
-- **Issues**:
-  - Left panel width logic is hardcoded, not using [ResponsiveHelper](file:///home/jica/repo/DailyAL/lib/util/responsive_helper.dart#13-112) breakpoints.
-  - "Hero Image" is likely just the standard image widget, needs adapting for aspect ratio.
-  - Right pane tabs might be missing new sections (User Updates, Forums, etc.) or just showing them in a list.
-  - Divider resize logic needs to be robust (min/max constraints).
-- **Instructions**:
-  - **Layout**: Implement `AdaptiveLayout` (or [_buildTabletLayout](file:///home/jica/repo/DailyAL/lib/screens/contentdetailedscreen.dart#960-1089) logic) to switch between `_buildCompactLayout` (Phone), `_buildMediumLayout` (Split view), `_buildExpandedLayout`.
-  - **Left Pane**: 
-    - Width: 35% (Medium), 40% (Expanded), Fixed 480px (Large).
-    - Content: Hero Image (Aspect Ratio 1:1.4), Title (with Lang toggle), Score/Ranking Badges, Quick Stats, Synopsis (collapsible), Genres, More Info, Quick Actions.
-  - **Right Pane**:
-    - Layout: `CustomScrollView` with `SliverAppBar` (Sticky Tabs).
-    - Tabs: Characters & Staff (Grid), Episodes, Reviews, Recommendations, Related, Media, News, User Updates, Forums, Pictures, Stats.
-    - Behavior: Independent scrolling.
-  - **Divider**: Implement the "Resizable Divider Enhancement" logic provided in the prompt.
+- **Status**: [x] Completed
+- **Changes Implemented**:
+  - Implemented `_buildTabletLayout` with resizable left pane.
+  - Left pane features transparent background, responsive poster (full width), and horizontal stats layout on wider screens.
+  - Right pane uses `CustomScrollView` with sticky tabs.
+  - Resizable divider implemented.
+  - Fixed alignment and spacing issues.
 ### 2. Home Home & Home Page (Priority: High)
 - **Files**: [lib/screens/homescreen.dart](file:///home/jica/repo/DailyAL/lib/screens/homescreen.dart), [lib/pages/homepage.dart](file:///home/jica/repo/DailyAL/lib/pages/homepage.dart)
 - **Current State**: [homescreen.dart](file:///home/jica/repo/DailyAL/lib/screens/homescreen.dart) has logic for `NavigationRail` but [homepage.dart](file:///home/jica/repo/DailyAL/lib/pages/homepage.dart) layout is mostly single column logic (`_columnWidget`).
