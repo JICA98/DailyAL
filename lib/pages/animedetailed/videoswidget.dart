@@ -20,12 +20,14 @@ class VideosWidget extends StatefulWidget {
   final double horizPadding;
   final List<ThemeSong>? openingSongs;
   final List<ThemeSong>? endingSongs;
+  final String? fallbackImageUrl;
   const VideosWidget({
     required this.horizPadding,
     this.videos,
     Key? key,
     this.openingSongs,
     this.endingSongs,
+    this.fallbackImageUrl,
   }) : super(key: key);
 
   @override
@@ -82,8 +84,8 @@ class _VideosWidgetState extends State<VideosWidget> {
     return videoTiles(widget.videos!.promo
             ?.map((e) => VideoTile(
                   e.title,
-                  e.trailer?.url,
-                  e.trailer?.images?.largeImageUrl,
+                  e.trailer?.url ?? e.trailer?.embedUrl,
+                  e.trailer?.images?.largeImageUrl ?? widget.fallbackImageUrl,
                 ))
             .toList() ??
         []);

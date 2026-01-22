@@ -321,6 +321,7 @@ class _ContentDetailedScreenState extends State<ContentDetailedScreen>
       horizPadding: horizPadding,
       endingSongs: contentDetailed?.endingSongs,
       openingSongs: contentDetailed?.openingSongs,
+      fallbackImageUrl: _url,
     );
     if (isAnimeVideosBlank) return sp;
     if (isStreamingBlank) return vW;
