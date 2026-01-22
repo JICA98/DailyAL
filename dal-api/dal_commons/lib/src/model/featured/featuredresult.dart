@@ -15,6 +15,9 @@ class FeaturedResult extends SearchResult {
     };
   }
 
+  @override
+  List<FeaturedBaseNode>? get data => super.data as List<FeaturedBaseNode>?;
+
   factory FeaturedResult.fromMap(Map<String, dynamic>? map) {
     return map == null
         ? FeaturedResult()
@@ -36,10 +39,4 @@ class FeaturedResult extends SearchResult {
 
   @override
   int get hashCode => data.hashCode ^ paging.hashCode;
-
-
-
-
-
-
 }

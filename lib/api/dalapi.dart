@@ -130,7 +130,7 @@ class DalApi {
         : [];
   }
 
-  Future<SearchResult> searchFeaturedArticles({
+  Future<FeaturedResult> searchFeaturedArticles({
     String? query,
     int page = 1,
     String? tag,

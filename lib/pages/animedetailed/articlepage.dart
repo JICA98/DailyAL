@@ -1,17 +1,11 @@
 import 'package:dailyanimelist/api/dalapi.dart';
-import 'package:dailyanimelist/api/malapi.dart';
-import 'package:dailyanimelist/main.dart';
 import 'package:dailyanimelist/screens/featurescreen.dart';
-import 'package:dailyanimelist/screens/plainscreen.dart';
 import 'package:dailyanimelist/widgets/avatarwidget.dart';
 import 'package:dailyanimelist/widgets/customfuture.dart';
 import 'package:dailyanimelist/widgets/forum/nextprev.dart';
 import 'package:dailyanimelist/widgets/loading/shimmerwidget.dart';
 import 'package:dailyanimelist/widgets/shimmecolor.dart';
-import 'package:dailyanimelist/widgets/slivers.dart';
-import 'package:dailyanimelist/widgets/user/contentlistwidget.dart';
 import 'package:dal_commons/dal_commons.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../../constant.dart';
@@ -37,10 +31,10 @@ class ArticlePage extends StatefulWidget {
 
 class _ArticlePageState extends State<ArticlePage>
     with AutomaticKeepAliveClientMixin<ArticlePage> {
-  Future<SearchResult>? articleFuture;
+  Future<FeaturedResult>? articleFuture;
   int page = 1;
 
-  Future<SearchResult> _getArticles() async {
+  Future<FeaturedResult> _getArticles() async {
     return DalApi.i.searchFeaturedArticles(
       id: widget.id,
       category: widget.additonalCategory!,
@@ -66,10 +60,9 @@ class _ArticlePageState extends State<ArticlePage>
   Widget build(BuildContext context) {
     return articleFuture == null
         ? ShimmerWidget()
-        : CFutureBuilder<SearchResult>(
+        : CFutureBuilder<FeaturedResult>(
             future: articleFuture,
-            done: (s) =>
-                _aritcleWidget((s.data?.data ?? []) as List<FeaturedBaseNode>),
+            done: (s) => _aritcleWidget((s.data?.data ?? [])),
             loadingChild: _loadingWidget,
           );
   }

@@ -27,13 +27,14 @@ class MalConnect {
     final isDalLocal = url.startsWith('http://localhost:8080');
     final response = await _options.retry(
       // Make a GET request
-      () {
+      () async {
         if (isDalLocal) {
-          return HandlerCore()
+          var value = await HandlerCore()
               .handleRequestAsString(Uri.parse(url))
-              .then((value) {
-            return http.Response(value ?? '', 200);
-          }).timeout(_retryDuration);
+              .timeout(_retryDuration);
+          return http.Response.bytes(utf8.encode(value ?? ''), 200, headers: {
+            HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8'
+          });
         }
         return http
             .get(Uri.parse(url), headers: headers)
@@ -173,13 +174,16 @@ class MalConnect {
     required bool useTimeout,
     Duration? timeoutDuration,
     required Function() onTimeout,
-  }) {
+  }) async {
     final isDalLocal = url.startsWith('http://0.0.0.0:8080');
     if (retryOnFail) {
       return retryGet(url, headers);
     } else if (isDalLocal) {
-      return HandlerCore().handleRequestAsString(Uri.parse(url)).then((value) {
-        return http.Response(value ?? '', 200);
+      var value = await HandlerCore()
+          .handleRequestAsString(Uri.parse(url))
+          .timeout(_retryDuration);
+      return http.Response.bytes(utf8.encode(value ?? ''), 200, headers: {
+        HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8'
       });
     } else if (useTimeout) {
       return http
