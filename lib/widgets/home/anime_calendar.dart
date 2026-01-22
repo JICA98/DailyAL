@@ -51,7 +51,9 @@ class _Filter {
 }
 
 class AnimeCalendarWidget extends StatefulWidget {
-  const AnimeCalendarWidget({Key? key}) : super(key: key);
+  final bool showCloseButton;
+  const AnimeCalendarWidget({Key? key, this.showCloseButton = true})
+      : super(key: key);
 
   @override
   State<AnimeCalendarWidget> createState() => _AnimeCalendarWidgetState();
@@ -194,6 +196,7 @@ class _AnimeCalendarWidgetState extends State<AnimeCalendarWidget> {
         actions: _actions(
           onClose: onClose,
           onRefesh: onRefesh,
+          showCloseButton: widget.showCloseButton,
         ),
       ),
       body: child,
@@ -214,16 +217,18 @@ class _AnimeCalendarWidgetState extends State<AnimeCalendarWidget> {
 List<Widget> _actions({
   VoidCallback? onClose,
   VoidCallback? onRefesh,
+  bool showCloseButton = true,
 }) {
   return [
     IconButton(
       onPressed: onRefesh,
       icon: Icon(Icons.refresh),
     ),
-    IconButton(
-      onPressed: onClose,
-      icon: Icon(Icons.close),
-    )
+    if (showCloseButton)
+      IconButton(
+        onPressed: onClose,
+        icon: Icon(Icons.close),
+      )
   ];
 }
 
@@ -637,7 +642,8 @@ class __ScheduleCustomListState extends State<_ScheduleCustomList> {
     });
   }
 
-  String _getCalendarTitle(ScheduleData schedule, Node anime, Recurrence? recurrence) {
+  String _getCalendarTitle(
+      ScheduleData schedule, Node anime, Recurrence? recurrence) {
     return recurrence != null
         ? '${anime.title} Episode Release Reminder'
         : 'Ep ${schedule.episode ?? '?'} - ${anime.title}';

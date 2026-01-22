@@ -28,12 +28,14 @@ class UserPopSlideOpenPage extends StatefulWidget {
   final String? username;
   final bool isSelf;
   final bool isFullScreen;
+  final bool showCloseBtn;
   const UserPopSlideOpenPage({
     super.key,
     this.onUiChange,
     this.username,
     required this.isSelf,
     this.isFullScreen = false,
+    this.showCloseBtn = true,
   });
 
   @override
@@ -359,18 +361,18 @@ class _UserPopSlideOpenPageState extends State<UserPopSlideOpenPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               if (!isTablet)
-              IconButton(
-                icon: Icon(Icons.settings),
-                onPressed: () {
-                  gotoPage(
-                      context: context,
-                      newPage: SettingsPage(
-                        onUiChange: () {
-                          if (widget.onUiChange != null) widget.onUiChange!();
-                        },
-                      ));
-                },
-              ),
+                IconButton(
+                  icon: Icon(Icons.settings),
+                  onPressed: () {
+                    gotoPage(
+                        context: context,
+                        newPage: SettingsPage(
+                          onUiChange: () {
+                            if (widget.onUiChange != null) widget.onUiChange!();
+                          },
+                        ));
+                  },
+                ),
               if (!_isFullScreen && !isTablet)
                 Center(
                   child: Container(
@@ -395,15 +397,16 @@ class _UserPopSlideOpenPageState extends State<UserPopSlideOpenPage> {
                 if (!isSelf && prof != null && prof.id != null)
                   _reportUserWidget(prof)
               ],
-              IconButton(
-                icon: Icon(
-                  Icons.close,
-                  weight: 25.0,
+              if (widget.showCloseBtn)
+                IconButton(
+                  icon: Icon(
+                    Icons.close,
+                    weight: 25.0,
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
                 ),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
             ],
           ),
         ),

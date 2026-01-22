@@ -106,10 +106,12 @@ class UserProfileType {
 class UserProfilePage extends StatefulWidget {
   final bool isSelf;
   final String? username;
+  final bool showCloseBtn;
   const UserProfilePage({
     super.key,
     required this.isSelf,
     this.username,
+    this.showCloseBtn = true,
   });
 
   @override
@@ -257,7 +259,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
       floatingActionButton: _floatingActionBtn(prof),
       actions: [
         SB.w20,
-        if (id != null)
+        if (id != null && widget.showCloseBtn)
           StreamBuilder<bool>(
               stream: _expandUserProfile.stream,
               initialData: _expandUserProfile.initialData,

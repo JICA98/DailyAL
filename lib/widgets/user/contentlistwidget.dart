@@ -633,7 +633,8 @@ class _ContentAllWidgetState extends State<ContentAllWidget>
     NodeStatusValue nsv = NodeStatusValue.fromListStatus(myListStatus);
     return ((widget.displayType == DisplayType.grid ||
                 widget.displayType == DisplayType.list_horiz) &&
-            contentTypes.contains(widget.category))
+            (contentTypes.contains(widget.category) ||
+                widget.category.equals('news')))
         ? CFutureBuilder(
             future: DalApi.i.scheduleForMalIds,
             loadingChild: _buildAnimeGridCard(null, nsv, context),

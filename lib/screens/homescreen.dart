@@ -171,12 +171,14 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               autoFocus: false, showBackButton: false, onClose: _onSearchClose),
           animation: animation),
       profileIndex: OpacityAnima(
-          child: UserPopSlideOpenPage(isSelf: true, isFullScreen: true),
+          child: UserPopSlideOpenPage(
+              isSelf: true, isFullScreen: true, showCloseBtn: false),
           animation: animation),
-      bookmarksIndex:
-          OpacityAnima(child: BookMarksWidget(), animation: animation),
-      calendarIndex:
-          OpacityAnima(child: AnimeCalendarWidget(), animation: animation),
+      bookmarksIndex: OpacityAnima(
+          child: BookMarksWidget(showCloseButton: false), animation: animation),
+      calendarIndex: OpacityAnima(
+          child: AnimeCalendarWidget(showCloseButton: false),
+          animation: animation),
     };
   }
 

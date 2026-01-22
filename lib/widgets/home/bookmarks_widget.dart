@@ -149,7 +149,9 @@ StreamBuilder bookmarkStream<T>({
 }
 
 class BookMarksWidget extends StatefulWidget {
-  const BookMarksWidget({Key? key}) : super(key: key);
+  final bool showCloseButton;
+  const BookMarksWidget({Key? key, this.showCloseButton = true})
+      : super(key: key);
 
   @override
   State<BookMarksWidget> createState() => _BookMarksWidgetState();
@@ -318,8 +320,9 @@ class _BookMarksWidgetState extends State<BookMarksWidget> {
         tabs: tabs.map((e) => Tab(text: e.displayTxt)).toList(),
       ),
       actions: [
-        IconButton(
-            onPressed: () => Navigator.pop(context), icon: Icon(Icons.close))
+        if (widget.showCloseButton)
+          IconButton(
+              onPressed: () => Navigator.pop(context), icon: Icon(Icons.close))
       ],
     );
   }
