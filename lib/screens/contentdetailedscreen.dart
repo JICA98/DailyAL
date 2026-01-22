@@ -47,6 +47,8 @@ import 'package:dal_commons/commons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:intl/intl.dart';
+import 'package:dailyanimelist/util/responsive_helper.dart';
+import 'package:dailyanimelist/widgets/common/adaptive_layout.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
 import '../constant.dart';
@@ -123,26 +125,42 @@ class _ContentDetailedScreenState extends State<ContentDetailedScreen>
   final GlobalKey _listKey = GlobalKey();
   List<GlobalKey> _globalKeys = [];
   ScheduleData? _scheduleData;
-  double _leftPanelWidth = 500.0; // Default width for left panel
+  double get _leftPanelWidth {
+    final screenWidth = MediaQuery.of(context).size.width;
+    // Default starting width logic
+    return switch (_screenSize) {
+      ScreenSize.medium => screenWidth * 0.40,
+      ScreenSize.expanded => screenWidth * 0.35,
+      ScreenSize.large => 450.0,
+      ScreenSize.extraLarge => 500.0,
+      _ => screenWidth,
+    };
+  }
 
+  // State variable to track user-resized width
+  double? _userDefinedLeftPanelWidth;
+
+  double get _currentLeftPanelWidth =>
+      _userDefinedLeftPanelWidth ?? _leftPanelWidth;
+
+  double get _maxLeftPanelWidth {
+    return switch (_screenSize) {
+      ScreenSize.medium => 350.0,
+      ScreenSize.expanded => 550.0,
+      _ => 650.0,
+    };
+  }
+
+  double get _minLeftPanelWidth => 300.0;
   // Tablet detection and responsive values
-  bool get _isTablet {
-    final width = MediaQuery.of(context).size.width;
-    return width >= 600; // Material Design tablet breakpoint
-  }
+  ScreenSize get _screenSize => ResponsiveHelper.getScreenSize(context);
 
-  bool get _isLargeTablet {
-    final width = MediaQuery.of(context).size.width;
-    return width >= 840; // Large tablet/desktop breakpoint
-  }
+  // Compatibility getters (keeping these to avoid rewriting entire file logic for now)
+  bool get _isTablet => ResponsiveHelper.isTabletOrLarger(context);
+  bool get _isLargeTablet => ResponsiveHelper.isExpandedOrLarger(context);
+  bool get _isPhone => ResponsiveHelper.isCompact(context);
 
-  bool get _isPhone => !_isTablet && !_isLargeTablet;
-
-  double get horizPadding => _isLargeTablet
-      ? 17.0
-      : _isTablet
-          ? 15.0
-          : 12.0;
+  double get horizPadding => ResponsiveHelper.getHorizontalPadding(context);
 
   int get _id => (widget.node != null ? widget.node!.id : widget.id)!;
 
@@ -374,7 +392,8 @@ class _ContentDetailedScreenState extends State<ContentDetailedScreen>
             onViewAll: _relatedAll,
             additionalWidget: PlainButton(
               padding: EdgeInsets.zero,
-              onPressed: () => _relatedAll(selectedView: RelatedSelectedView.graph),
+              onPressed: () =>
+                  _relatedAll(selectedView: RelatedSelectedView.graph),
               child: Icon(Icons.graphic_eq),
             ),
           ),
@@ -482,12 +501,12 @@ class _ContentDetailedScreenState extends State<ContentDetailedScreen>
                 ),
               )),
       TabType.Score_Stats => VisibleSection(
-            S.current.Score_Stats,
-            ScoreStatisticsWidget(
-              id: _id,
-              horizPadding: horizPadding,
-            ),
+          S.current.Score_Stats,
+          ScoreStatisticsWidget(
+            id: _id,
+            horizPadding: horizPadding,
           ),
+        ),
     };
   }
 
@@ -761,7 +780,8 @@ class _ContentDetailedScreenState extends State<ContentDetailedScreen>
     );
   }
 
-  void _relatedAll({RelatedSelectedView selectedView = RelatedSelectedView.list}) {
+  void _relatedAll(
+      {RelatedSelectedView selectedView = RelatedSelectedView.list}) {
     gotoPage(
         context: context,
         newPage: TitlebarScreen(
@@ -907,7 +927,11 @@ class _ContentDetailedScreenState extends State<ContentDetailedScreen>
             showContentEdit ? FloatingActionButtonLocation.centerFloat : null,
         floatingActionButton: _floatingActionBtn(),
         floatingActionButtonAnimator: NoScalingAnimation(),
-        body: _isTablet ? _buildTabletLayout() : _buildPhoneLayout(),
+        body: AdaptiveLayout(
+          compactBuilder: (context) => _buildPhoneLayout(),
+          mediumBuilder: (context) => _buildTabletLayout(),
+          expandedBuilder: (context) => _buildTabletLayout(),
+        ),
       ),
     );
   }
@@ -962,60 +986,82 @@ class _ContentDetailedScreenState extends State<ContentDetailedScreen>
       children: [
         // Left pane - Fixed details
         SizedBox(
-          width: _leftPanelWidth,
-          child: Material(
-            elevation: 2,
-            child: CustomScrollView(
-              slivers: [
-                _leftPaneAppBar,
-                SliverToBoxAdapter(
-                  child: Padding(
-                    padding: EdgeInsets.all(horizPadding),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        // Synopsis section
-                        if (contentDetailed != null)
-                          _getVisibleSectionByTitle(S.current.Synopsis)
-                                  ?.child ??
-                              SB.z,
-                        SB.h20,
-                        // More Info section
-                        if (contentDetailed != null)
-                          _getVisibleSectionByTitle(S.current.More_Info)
-                                  ?.child ??
-                              SB.z,
-                      ],
+          width: _currentLeftPanelWidth,
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              new Background(
+                context: context,
+                forceBg: user.pref.showAnimeMangaBg,
+                url: widget.node?.mainPicture?.large != null
+                    ? widget.node?.mainPicture?.large
+                    : contentDetailed?.mainPicture?.large,
+              ),
+              Material(
+                color: Colors.transparent,
+                elevation: 0,
+                child: CustomScrollView(
+                  slivers: [
+                    // Minified App Bar with Background
+                    SliverAppBar(
+                      pinned: true,
+                      floating: false,
+                      toolbarHeight: kToolbarHeight,
+                      automaticallyImplyLeading: true, // Enable back button
+                      leading: BackButton(),
+                      backgroundColor: Colors.transparent,
+                      elevation: 0,
                     ),
-                  ),
+                    SliverToBoxAdapter(
+                      child: Padding(
+                        padding: EdgeInsets.all(horizPadding),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            // Tablet Side Content (Poster + Info)
+                            _tabletSideContent,
+                            SB.h20,
+                            // Details section (Synopsis, Genres, etc.)
+                            if (contentDetailed != null) ...[
+                              _getVisibleSectionByTitle(S.current.Synopsis)
+                                      ?.child ??
+                                  SB.z,
+                              SB.h20,
+                              _getVisibleSectionByTitle(S.current.More_Info)
+                                      ?.child ??
+                                  SB.z,
+                            ]
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
-        // Resizable divider with shimmer effect
-        ShimmerConditionally(
-          showShimmer: contentDetailed == null,
-          baseColor: Theme.of(context).scaffoldBackgroundColor,
-          highlightColor:
-              Theme.of(context).scaffoldBackgroundColor.withOpacity(.3),
-          child: MouseRegion(
-            cursor: SystemMouseCursors.resizeColumn,
-            child: GestureDetector(
-              onHorizontalDragUpdate: (details) {
-                setState(() {
-                  _leftPanelWidth += details.delta.dx;
-                  _leftPanelWidth = _leftPanelWidth.clamp(350.0, 550.0);
-                });
-              },
-              child: Container(
-                width: 8,
-                color: Theme.of(context).dividerColor.withOpacity(0.3),
-                child: Center(
-                  child: Container(
-                    width: 2,
-                    color: Theme.of(context).dividerColor,
-                  ),
+        // Resizable divider
+        MouseRegion(
+          cursor: SystemMouseCursors.resizeColumn,
+          child: GestureDetector(
+            onHorizontalDragUpdate: (details) {
+              setState(() {
+                double newWidth =
+                    (_userDefinedLeftPanelWidth ?? _leftPanelWidth) +
+                        details.delta.dx;
+                _userDefinedLeftPanelWidth =
+                    newWidth.clamp(_minLeftPanelWidth, _maxLeftPanelWidth);
+              });
+            },
+            child: Container(
+              width: 8,
+              color: Theme.of(context).dividerColor.withOpacity(0.1),
+              child: Center(
+                child: Container(
+                  width: 2,
+                  height: 40,
+                  color: Theme.of(context).dividerColor.withOpacity(0.5),
                 ),
               ),
             ),
@@ -1168,35 +1214,6 @@ class _ContentDetailedScreenState extends State<ContentDetailedScreen>
               icon: Icon(Icons.search)),
           _appMenuWidget(),
         ]);
-  }
-
-  // Left pane app bar for tablets (without title in collapsed state)
-  SliverAppBar get _leftPaneAppBar {
-    final expandedHeight = _isLargeTablet
-        ? 520.0
-        : _isTablet
-            ? 490.0
-            : 460.0;
-
-    return SliverAppBar(
-        pinned: true,
-        floating: false,
-        snap: false,
-        expandedHeight: expandedHeight,
-        toolbarHeight: 40.0,
-        title: SizedBox.shrink(), // No title on left pane
-        flexibleSpace: FlexibleSpaceBar(
-          collapseMode: CollapseMode.pin,
-          background: ShimmerConditionally(
-            showShimmer: contentDetailed == null,
-            child: animeHeader,
-            baseColor: Theme.of(context).scaffoldBackgroundColor,
-            highlightColor:
-                Theme.of(context).scaffoldBackgroundColor.withOpacity(.3),
-          ),
-        ),
-        bottom: null, // No tabs on left pane
-        actions: []); // No actions on left pane - moved to right pane
   }
 
   Widget _appMenuWidget() {
@@ -1490,7 +1507,7 @@ class _ContentDetailedScreenState extends State<ContentDetailedScreen>
 
   Widget get animeDetailsHeader {
     return Padding(
-      padding: EdgeInsets.only(left: 20),
+      padding: EdgeInsets.only(left: _isTablet ? 0 : 20),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -1748,49 +1765,171 @@ class _ContentDetailedScreenState extends State<ContentDetailedScreen>
     );
   }
 
-  Widget get _tabletHeaderLayout {
-    // Calculate poster width based on left panel width
-    // Use 50-60% of panel width for poster, with min/max constraints
-    final posterWidth = (_leftPanelWidth * 0.55).clamp(180.0, 320.0);
-
-    return Center(
-      child: ConstrainedBox(
-        constraints: BoxConstraints(maxWidth: 1200),
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: horizPadding),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 10.0),
-                child: SizedBox(
-                  width: posterWidth,
-                  child: animeCard,
-                ),
-              ),
-              Expanded(
-                child: animeDetailsHeader,
-              ),
-            ],
-          ),
-        ),
-      ),
+  Widget get _tabletSideContent {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: horizPadding),
+      child: LayoutBuilder(builder: (context, constraints) {
+        final width = constraints.maxWidth;
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Poster
+            Container(
+              // constraints: BoxConstraints(maxWidth: 400), // Removed cap as requested to use full width
+              child: animeCard,
+            ),
+            SB.h20,
+            // Title
+            _titleWidget,
+            SB.h10,
+            // Info
+            _buildResponsiveDetailsHeader(width),
+          ],
+        );
+      }),
     );
   }
 
+  Widget _buildResponsiveDetailsHeader(double width) {
+    if (width > 420) {
+      return Wrap(
+        spacing: 20,
+        runSpacing: 15,
+        children: [
+          _buildDetailSection(
+            child: _rankScoreRow(),
+          ),
+          _buildDetailSection(
+            title: S.current.Popularity,
+            content: "# " + (contentDetailed?.popularity?.toString() ?? '?'),
+          ),
+          _buildDetailSection(
+            title: S.current.Members,
+            content:
+                userCountFormat.format(contentDetailed?.numListUsers ?? 0.0),
+          ),
+          _buildDetailSection(
+            title: widget.category.equals("anime")
+                ? S.current.Aired
+                : S.current.Serialization,
+            content: _getAiredString(),
+          ),
+          _buildDetailSection(
+            title: widget.category.equals("anime")
+                ? S.current.Studios
+                : S.current.Authors,
+            content: _getStudiosString(),
+          ),
+          _buildDetailSection(
+            title: "Media",
+            content: _getMediaString(),
+          ),
+        ],
+      );
+    } else {
+      return animeDetailsHeader;
+    }
+  }
+
+  Widget _buildDetailSection({String? title, String? content, Widget? child}) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        if (title != null) ...[
+          Text(title,
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  color: Theme.of(context)
+                      .textTheme
+                      .bodySmall
+                      ?.color
+                      ?.withOpacity(0.7))),
+          const SizedBox(height: 3),
+        ],
+        if (child != null) child,
+        if (content != null)
+          Text(content, style: Theme.of(context).textTheme.labelMedium),
+      ],
+    );
+  }
+
+  Widget _rankScoreRow() {
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Text(contentDetailed?.rank == null ? "# ?" : "# ${contentDetailed?.rank}",
+          style: TextStyle(fontSize: 20)),
+      const SizedBox(height: 5),
+      Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(height: 22, child: Image.asset("assets/images/star.png")),
+          const SizedBox(width: 5),
+          Text(
+              (contentDetailed?.mean == null
+                  ? "?"
+                  : ratingFormat.format(contentDetailed!.mean)),
+              style: TextStyle(fontSize: 24)),
+        ],
+      ),
+      Text(
+          "${userCountFormat.format(contentDetailed?.numScoringUsers ?? 0)} ${S.current.Users}",
+          style: Theme.of(context).textTheme.labelSmall),
+    ]);
+  }
+
+  String _getAiredString() {
+    return widget.category.equals("anime")
+        ? ((contentDetailed?.startSeason?.season?.toString().capitalize() ??
+                "?") +
+            " " +
+            (contentDetailed?.startSeason?.year?.toString() ?? "?"))
+        : ((contentDetailed?.serialization?.map((e) => e.name).join(", ")) ??
+            "?");
+  }
+
+  String _getStudiosString() {
+    if (widget.category.equals("anime")) {
+      return contentDetailed?.studios?.map((e) => e.name).join(", ") ?? "?";
+    } else {
+      return contentDetailed?.authors
+              ?.map((e) => e.author.firstName)
+              .join(", ") ??
+          "?";
+    }
+  }
+
+  String _getMediaString() {
+    String type = contentDetailed?.mediaType?.toUpperCase() ?? "?";
+    String count = "";
+    if (widget.category.equals("anime")) {
+      count = contentDetailed?.numEpisodes != null &&
+              contentDetailed!.numEpisodes != 0
+          ? "(${contentDetailed!.numEpisodes} eps)"
+          : "";
+    } else {
+      count = contentDetailed?.numVolumes != null &&
+              contentDetailed!.numVolumes != 0
+          ? "(${contentDetailed!.numVolumes} vols)"
+          : "";
+    }
+    return "$type $count";
+  }
+
+  // Legacy getter to avoid errors if referenced elsewhere (though we should check)
+  Widget get _tabletHeaderLayout => _tabletSideContent;
+
   Widget get _titleWidget {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 22),
+      padding: EdgeInsets.symmetric(horizontal: _isTablet ? 0 : 22),
       child: SizedBox(
         height: 40.0,
         width: double.infinity,
-        child: Center(
+        child: Align(
+          alignment: _isTablet ? Alignment.centerLeft : Alignment.center,
           child: AutoSizeCopyText(
             animeTitle,
             style: TextStyle(fontSize: 24),
             overflow: TextOverflow.fade,
-            textAlign: TextAlign.center,
+            textAlign: _isTablet ? TextAlign.start : TextAlign.center,
           ),
         ),
       ),
@@ -1849,40 +1988,34 @@ class _ContentDetailedScreenState extends State<ContentDetailedScreen>
     }
 
     // Calculate responsive dimensions
-    final posterHeight = _isLargeTablet
-        ? 380.0
-        : _isTablet
-            ? 340.0
-            : 320.0;
+    // Fixed height removed to allow natural scaling based on parent constraints
     final aspectRatio = 2 / 3; // Standard poster ratio
 
     return _heroWrapper(
       AspectRatio(
         aspectRatio: aspectRatio,
-        child: SizedBox(
-          height: posterHeight,
-          child: Stack(
-            children: [
-              InkWell(
-                onTap: () => zoomInImageList(context, urlList),
-                borderRadius: BorderRadius.circular(6),
-                child: CachedNetworkImage(
-                  imageUrl: urlList.first,
-                  placeholder: (context, url) => loadingInner(),
-                  errorWidget: (context, url, error) => loadingError(),
-                  imageBuilder: (context, imageProvider) => Ink(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(6),
-                        image: DecorationImage(
-                            fit: BoxFit.cover, image: imageProvider)),
-                  ),
+        // SizedBox removed, so it fills width
+        child: Stack(
+          children: [
+            InkWell(
+              onTap: () => zoomInImageList(context, urlList),
+              borderRadius: BorderRadius.circular(6),
+              child: CachedNetworkImage(
+                imageUrl: urlList.first,
+                placeholder: (context, url) => loadingInner(),
+                errorWidget: (context, url, error) => loadingError(),
+                imageBuilder: (context, imageProvider) => Ink(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(6),
+                      image: DecorationImage(
+                          fit: BoxFit.cover, image: imageProvider)),
                 ),
               ),
-              Positioned(top: 5, right: 5, child: langChangeWidget()),
-              if (contentDetailed != null)
-                Positioned(bottom: 5, right: 5, child: _contentCardBottom()),
-            ],
-          ),
+            ),
+            Positioned(top: 5, right: 5, child: langChangeWidget()),
+            if (contentDetailed != null)
+              Positioned(bottom: 5, right: 5, child: _contentCardBottom()),
+          ],
         ),
       ),
     );
