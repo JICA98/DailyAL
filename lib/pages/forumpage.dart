@@ -160,16 +160,39 @@ class _ForumPageState extends State<ForumPage> with TickerProviderStateMixin {
     final isTablet = ResponsiveHelper.isTabletOrLarger(context);
 
     if (isTablet) {
-      return NestedScrollView(
-        headerSliverBuilder: (_, __) => [],
-        body: RefreshIndicator(
-          onRefresh: () async {
-            _getStuff();
-          },
-          child: Padding(
-            padding: EdgeInsets.only(top: 20.0),
-            child: _forumPage(),
-          ),
+      return DefaultTabController(
+        length: 2,
+        child: Column(
+          children: [
+            // TabBar for tablet
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+              child: TabBar(
+                tabs: [
+                  Tab(text: S.current.Forums),
+                  Tab(text: S.current.Clubs),
+                ],
+              ),
+            ),
+            // Tab content
+            Expanded(
+              child: TabBarView(
+                children: [
+                  RefreshIndicator(
+                    onRefresh: () async {
+                      _getStuff();
+                    },
+                    child: Padding(
+                      padding: EdgeInsets.only(top: 10.0),
+                      child: _forumPage(),
+                    ),
+                  ),
+                  ClubsPage(hideAppBar: true),
+                ],
+              ),
+            ),
+          ],
         ),
       );
     }

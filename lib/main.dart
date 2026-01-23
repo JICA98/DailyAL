@@ -29,14 +29,15 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 late User user;
 int androidSDKVersion = 0;
 final int homeIndex = 0;
-final int forumIndex = 1;
+final int forumIndex = 1; // Used for phone navigation
+final int socialIndex =
+    1; // Used for tablet navigation (combines forums + clubs)
 final int userIndex = 2;
 final int exploreIndex = 3;
-final int clubsIndex = 4;
-final int searchIndex = 5;
-final int bookmarksIndex = 6;
-final int calendarIndex = 7;
-final int profileIndex = 8;
+final int searchIndex = 4;
+final int bookmarksIndex = 5;
+final int calendarIndex = 6;
+final int profileIndex = 7;
 GlobalKey<ScaffoldMessengerState> messenger = GlobalKey();
 
 void main() async {

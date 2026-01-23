@@ -4,7 +4,7 @@ import 'package:dailyanimelist/cache/cachemanager.dart';
 import 'package:dailyanimelist/constant.dart';
 import 'package:dailyanimelist/generated/l10n.dart';
 import 'package:dailyanimelist/notifservice.dart';
-import 'package:dailyanimelist/pages/clubspage.dart';
+
 import 'package:dailyanimelist/pages/explorepage.dart';
 import 'package:dailyanimelist/pages/forumpage.dart';
 import 'package:dailyanimelist/pages/homepage.dart';
@@ -162,10 +162,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   Map<int, Widget> _getTabletWidgets() {
     return {
       homeIndex: OpacityAnima(child: HomePage(), animation: animation),
-      forumIndex: OpacityAnima(child: ForumPage(), animation: animation),
+      socialIndex: OpacityAnima(child: ForumPage(), animation: animation),
       userIndex: OpacityAnima(child: UserPage(), animation: animation),
       exploreIndex: OpacityAnima(child: ExplorePage(), animation: animation),
-      clubsIndex: OpacityAnima(child: ClubsPage(), animation: animation),
       searchIndex: OpacityAnima(
           child: GeneralSearchScreen(
               autoFocus: false, showBackButton: false, onClose: _onSearchClose),
@@ -310,9 +309,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                             label: Text(S.current.Home),
                           ),
                           NavigationRailDestination(
-                            icon: Icon(Icons.forum_outlined),
-                            selectedIcon: Icon(Icons.forum),
-                            label: Text(S.current.Forums),
+                            icon: Icon(Icons.people_outline),
+                            selectedIcon: Icon(Icons.people),
+                            label: Text(S.current.Social),
                           ),
                           NavigationRailDestination(
                             icon: Icon(Icons.person_outline),
@@ -323,11 +322,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                             icon: Icon(Icons.explore_outlined),
                             selectedIcon: Icon(Icons.explore),
                             label: Text(S.current.Explore),
-                          ),
-                          NavigationRailDestination(
-                            icon: Icon(Icons.groups_outlined),
-                            selectedIcon: Icon(Icons.groups),
-                            label: Text(S.current.Clubs),
                           ),
                           NavigationRailDestination(
                             icon: Icon(Icons.search_outlined),
