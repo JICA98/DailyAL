@@ -318,5 +318,7 @@ K? switchCase<T, K>(
   return defaultValue;
 }
 
-String getDomainAsset(String e, [String domain = 'streaming']) =>
-    'https://dailyanimelist.web.app/assets/$domain/${e.trim()}.png';
+String getDomainAsset(String e, [String domain = 'streaming']) {
+  final ext = domain == 'genres' ? 'webp' : 'png';
+  return 'https://raw.githubusercontent.com/JICA98/DailyAL/psycho/web_assets/$domain/${e.trim()}.$ext';
+}
