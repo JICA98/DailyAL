@@ -12,7 +12,9 @@ import 'package:dailyanimelist/enums.dart';
 import 'package:dailyanimelist/generated/l10n.dart';
 import 'package:dailyanimelist/main.dart';
 import 'package:dailyanimelist/pages/animedetailed/intereststackwidget.dart';
+import 'package:dailyanimelist/screens/featurescreen.dart';
 import 'package:dailyanimelist/pages/search/allrankingwidget.dart';
+import 'package:dailyanimelist/pages/home/newswidget.dart';
 import 'package:dailyanimelist/pages/search/seasonalwidget.dart';
 import 'package:dailyanimelist/screens/contentdetailedscreen.dart';
 import 'package:dailyanimelist/user/user.dart';
@@ -935,9 +937,80 @@ class _GeneralSearchScreenState extends State<GeneralSearchScreen>
         return ClubList(
             clubs:
                 results.map<ClubHtml>((e) => e.content as ClubHtml).toList());
+      case "news":
+        return _buildNewsList();
       default:
         return _buildListResults(results, category);
     }
+  }
+
+  Widget _buildNewsList() {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final isTablet = ResponsiveHelper.isTabletOrLarger(context);
+        final crossAxisCount = isTablet ? 2 : 1;
+
+        if (isTablet) {
+          return GridView.builder(
+            itemCount: results.length,
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: crossAxisCount,
+              mainAxisSpacing: 10,
+              crossAxisSpacing: 10,
+              mainAxisExtent: 220,
+            ),
+            itemBuilder: (context, index) =>
+                _buildNewsItem(context, results[index], isTablet),
+          );
+        } else {
+          return ListView.builder(
+            itemCount: results.length,
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            itemBuilder: (context, index) =>
+                _buildNewsItem(context, results[index], isTablet),
+          );
+        }
+      },
+    );
+  }
+
+  Widget _buildNewsItem(BuildContext context, BaseNode node, bool isTablet) {
+    final item = node.content;
+    if (item is Featured) {
+      return Container(
+        height: isTablet ? 220 : 260,
+        child: Card(
+          child: InkWell(
+            onTap: () {
+              var id = item.id;
+              if (id != null)
+                gotoPage(
+                    context: context,
+                    newPage: FeaturedScreen(
+                      category: 'news',
+                      featureTitle: item.title,
+                      id: id,
+                      imgUrl: item.mainPicture?.large,
+                    ));
+            },
+            child: NewsTile(
+              node: item,
+              compact: true,
+              enableTagClicks: true,
+            ),
+          ),
+        ),
+      );
+    }
+    return SB.z;
+  }
+
+  Widget _unused() {
+    return SB.z;
   }
 
   Widget showGridLayout() {
