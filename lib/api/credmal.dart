@@ -67,6 +67,9 @@ class CredMal {
 
   static const String dalWeb = 'https://dailyanimelist.web.app/';
 
+  static const String webAssetsUrl =
+      'https://raw.githubusercontent.com/JICA98/DailyAL/refs/heads/psycho/web_assets/';
+
   static String get appConfigUrl {
     return '${environment['APP_CONFIG_URL']}';
   }

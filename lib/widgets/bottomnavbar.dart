@@ -49,7 +49,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
           ),
           BottomNavigationBarItem(
             label: '2',
-            icon: LineIcon.user(),
+            icon: LineIcon.list(),
           ),
           BottomNavigationBarItem(
             label: '3',

@@ -318,9 +318,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                             label: Text(S.current.Social),
                           ),
                           NavigationRailDestination(
-                            icon: Icon(Icons.person_outline),
-                            selectedIcon: Icon(Icons.person),
-                            label: Text(S.current.User),
+                            icon: Icon(Icons.list_outlined),
+                            selectedIcon: Icon(Icons.list),
+                            label: Text(S.current.List),
                           ),
                           NavigationRailDestination(
                             icon: Icon(Icons.explore_outlined),

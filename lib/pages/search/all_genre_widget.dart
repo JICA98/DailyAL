@@ -1,5 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:dailyanimelist/api/credmal.dart';
+
 import 'package:dailyanimelist/api/dalapi.dart';
 import 'package:dailyanimelist/constant.dart';
 import 'package:dailyanimelist/enums.dart';
@@ -89,7 +89,7 @@ class AllGenreWidget extends StatelessWidget {
                   onTap: () => _showGenresDialog(
                       context, e.value, map.values.toList()[e.key], category),
                   imageUrl:
-                      '${CredMal.dalWeb}assets/genres/${e.value.replaceAll(' ', '_').toLowerCase()}_$category.webp',
+                      'https://raw.githubusercontent.com/JICA98/DailyAL/refs/heads/psycho/web_assets/genres/${e.value.replaceAll(' ', '_').toLowerCase()}_$category.webp',
                   text: e.value,
                 ),
               ),

@@ -85,7 +85,7 @@ class AllRankingWidget extends StatelessWidget {
             borderRadius: borderRadius,
             bottomPadding: EdgeInsets.zero,
             onTap: () => _onCategoryTap(type, context),
-            imageUrl: '${CredMal.dalWeb}assets/${type}_$category.jpg',
+            imageUrl: '${CredMal.webAssetsUrl}${type}_$category.jpg',
             text: entry.value,
           );
         },
@@ -120,7 +120,7 @@ class AllRankingWidget extends StatelessWidget {
               context: context,
               borderRadius: borderRadius,
               onTap: () => _onCategoryTap(type, context),
-              imageUrl: '${CredMal.dalWeb}assets/${type}_$category.jpg',
+              imageUrl: '${CredMal.webAssetsUrl}${type}_$category.jpg',
               text: entry.value,
             ),
           );
