@@ -31,10 +31,10 @@ class AnimeCharacterWidget extends StatelessWidget {
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            mainAxisSpacing: 8,
-            crossAxisSpacing: 8,
+          gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+            maxCrossAxisExtent: 400,
+            mainAxisSpacing: 12,
+            crossAxisSpacing: 12,
             mainAxisExtent: 108,
           ),
           itemCount: animeCharacterList.length,
@@ -251,10 +251,10 @@ class MangaCharacterWidget extends StatelessWidget {
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            mainAxisSpacing: 8,
-            crossAxisSpacing: 8,
+          gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+            maxCrossAxisExtent: 400,
+            mainAxisSpacing: 12,
+            crossAxisSpacing: 12,
             mainAxisExtent: 108,
           ),
           itemCount: mangaCharacters.length,

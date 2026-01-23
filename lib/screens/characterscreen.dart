@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dailyanimelist/widgets/background.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dailyanimelist/api/dalapi.dart';
 import 'package:dailyanimelist/cache/topcharactermanager.dart';
@@ -16,6 +17,7 @@ import 'package:dailyanimelist/widgets/home/animecard.dart';
 import 'package:dailyanimelist/widgets/home/bookmarks_widget.dart';
 import 'package:dailyanimelist/widgets/shimmecolor.dart';
 import 'package:dailyanimelist/widgets/translator.dart';
+import 'package:dailyanimelist/util/responsive_helper.dart';
 import 'package:dal_commons/dal_commons.dart';
 import 'package:flutter/material.dart';
 
@@ -48,6 +50,7 @@ class _CharacterScreenState extends State<CharacterScreen> {
   bool _isSortingFavorites = false;
   List<VoicesFull> _originalVoices = [], _sortedVoices = [];
   bool _disposed = false;
+  int _currentImageIndex = 0;
 
   @override
   void initState() {
@@ -176,6 +179,108 @@ class _CharacterScreenState extends State<CharacterScreen> {
   }
 
   Widget content() {
+    if (ResponsiveHelper.isTabletOrLarger(context)) {
+      return _buildTabletLayout();
+    }
+    return _buildMobileLayout();
+  }
+
+  Widget _buildTabletLayout() {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          width: 400,
+          child: Stack(
+            children: [
+              if (characterPics.isNotEmpty)
+                Positioned.fill(
+                    child: Opacity(
+                  opacity: .3,
+                  child: Background(
+                    context: context,
+                    url: characterPics.tryAt(_currentImageIndex),
+                    forceBg: true,
+                  ),
+                )),
+              SingleChildScrollView(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  children: [
+                    SB.h20,
+                    heading(
+                        (chara.equals("character")
+                                ? characterInfo?.name
+                                : personInfo?.name) ??
+                            S.current.Loading_Content,
+                        alignment: Alignment.center),
+                    const SizedBox(height: 15),
+                    heading(
+                        (chara.equals("character")
+                                ? characterInfo?.nameKanji
+                                : ((personInfo?.givenName ?? "") +
+                                    ", " +
+                                    (personInfo?.familyName ?? ""))) ??
+                            "",
+                        alignment: Alignment.center,
+                        fontSize: 18),
+                    const SizedBox(height: 30),
+                    _imageSlider(viewportFraction: 0.75, aspectRatio: .9),
+                    const SizedBox(height: 30),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.favorite),
+                        const SizedBox(width: 15),
+                        title(
+                            chara.equals("character")
+                                ? (characterInfo?.favorites?.toString() ?? "?")
+                                : (personInfo?.favorites.toString() ?? "?"),
+                            opacity: 1,
+                            align: TextAlign.center,
+                            fontSize: 27),
+                        const SizedBox(width: 15),
+                        Icon(Icons.people)
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+        Expanded(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.only(top: 30, right: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                HeaderWidget(
+                  header: [S.current.About, S.current.Details],
+                  selectedIndex: pageIndex,
+                  onPressed: (_) {
+                    pageIndex = _;
+                    applyChanges();
+                  },
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      pageIndex == 0 ? _aboutWidget() : _detailsWidget()
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        )
+      ],
+    );
+  }
+
+  Widget _buildMobileLayout() {
     return SingleChildScrollView(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -186,7 +291,6 @@ class _CharacterScreenState extends State<CharacterScreen> {
               child: Padding(
                   padding: EdgeInsets.only(top: 30),
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       heading(
                           (chara.equals("character")
@@ -249,7 +353,8 @@ class _CharacterScreenState extends State<CharacterScreen> {
     );
   }
 
-  Widget _imageSlider() {
+  Widget _imageSlider(
+      {double viewportFraction = 0.45, double aspectRatio = 2}) {
     var isEmpty = characterPics.isEmpty;
     return GestureDetector(
       onTap: () {
@@ -277,9 +382,10 @@ class _CharacterScreenState extends State<CharacterScreen> {
           options: CarouselOptions(
               onPageChanged: (index, reason) {
                 listener.update(index);
+                if (mounted) setState(() => _currentImageIndex = index);
               },
-              aspectRatio: 2,
-              viewportFraction: 0.45,
+              aspectRatio: aspectRatio,
+              viewportFraction: viewportFraction,
               autoPlay: true,
               enableInfiniteScroll: true,
               enlargeCenterPage: true)),
@@ -288,8 +394,8 @@ class _CharacterScreenState extends State<CharacterScreen> {
 
   Widget _aboutWidget() {
     final content = chara.equals("character")
-            ? (characterInfo?.about ?? "...")
-            : (personInfo?.about ?? "...");
+        ? (characterInfo?.about ?? "...")
+        : (personInfo?.about ?? "...");
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -325,7 +431,6 @@ class _CharacterScreenState extends State<CharacterScreen> {
             rawList: _sortedVoices,
             showSort: true,
           ),
-
         _detailBuilder(
           title: chara.equals("character")
               ? "Mangaography"
@@ -335,7 +440,6 @@ class _CharacterScreenState extends State<CharacterScreen> {
               ? characterInfo?.manga?.map((e) => e.manga).toList()
               : personInfo?.manga?.map((e) => e.manga).toList(),
         ),
-
         _detailBuilder(
           title: chara.equals("character")
               ? S.current.Voice_Actors
@@ -392,7 +496,8 @@ class _CharacterScreenState extends State<CharacterScreen> {
                           if (_isSortingFavorites) return;
 
                           if (sort == VoiceSortType.favorites) {
-                            if (mounted) setState(() => _isSortingFavorites = true);
+                            if (mounted)
+                              setState(() => _isSortingFavorites = true);
 
                             // Preload top favorites for instant counts
                             try {
@@ -418,7 +523,8 @@ class _CharacterScreenState extends State<CharacterScreen> {
                             // Keep the spinner visible while finishing the rest
                             await _fetchMissingFavorites();
 
-                            if (mounted) setState(() => _isSortingFavorites = false);
+                            if (mounted)
+                              setState(() => _isSortingFavorites = false);
                             return;
                           }
 
@@ -437,8 +543,7 @@ class _CharacterScreenState extends State<CharacterScreen> {
                               value: VoiceSortType.favorites,
                               child: Text('Favorites')),
                           PopupMenuItem(
-                              value: VoiceSortType.title,
-                              child: Text('Title')),
+                              value: VoiceSortType.title, child: Text('Title')),
                         ],
                       ),
               ),
@@ -482,7 +587,8 @@ class _CharacterScreenState extends State<CharacterScreen> {
       final id = voice.character?.malId;
       if (id != null && !_favoritesCache.containsKey(id)) {
         try {
-          final data = await DalApi.i.getCharaPeopleInfo(id, DataUnionType.character);
+          final data =
+              await DalApi.i.getCharaPeopleInfo(id, DataUnionType.character);
           if (data is CharacterV4Data) {
             _favoritesCache[id] = data.favorites ?? 0;
           } else {
@@ -551,7 +657,8 @@ class CharacterCardLoader extends StatefulWidget {
   final dynamic role;
   final String category;
 
-  const CharacterCardLoader({required this.role, required this.category, super.key});
+  const CharacterCardLoader(
+      {required this.role, required this.category, super.key});
 
   @override
   State<CharacterCardLoader> createState() => _CharacterCardLoaderState();
@@ -563,10 +670,12 @@ class _CharacterCardLoaderState extends State<CharacterCardLoader> {
   @override
   void initState() {
     super.initState();
-    final String? title = (widget.category.equals("character") || widget.category.equals("person"))
-      ? widget.role?.name
-      : widget.role?.title;
-    final imageUrl = widget.role.images?.webp?.imageUrl ?? widget.role.images?.jpg?.imageUrl;
+    final String? title = (widget.category.equals("character") ||
+            widget.category.equals("person"))
+        ? widget.role?.name
+        : widget.role?.title;
+    final imageUrl =
+        widget.role.images?.webp?.imageUrl ?? widget.role.images?.jpg?.imageUrl;
 
     _node = Node(
       id: widget.role.malId,
@@ -605,9 +714,11 @@ class _CharacterCardLoaderState extends State<CharacterCardLoader> {
 
     // 2) Refresh via DalApi (also updates image if needed)
     try {
-      final data = await DalApi.i.getCharaPeopleInfo(_node.id!, DataUnionType.character);
+      final data =
+          await DalApi.i.getCharaPeopleInfo(_node.id!, DataUnionType.character);
       if (data is CharacterV4Data && mounted) {
-        final imageUrl = data.images?.webp?.imageUrl ?? data.images?.jpg?.imageUrl;
+        final imageUrl =
+            data.images?.webp?.imageUrl ?? data.images?.jpg?.imageUrl;
         _favoritesCache[_node.id!] = data.favorites ?? 0;
         setState(() {
           _node = Node(
@@ -621,8 +732,7 @@ class _CharacterCardLoaderState extends State<CharacterCardLoader> {
           );
         });
       }
-    } catch (_) {
-    }
+    } catch (_) {}
   }
 
   @override
@@ -632,7 +742,8 @@ class _CharacterCardLoaderState extends State<CharacterCardLoader> {
       height: 140,
       width: 105,
       onTap: () {
-        if (widget.category.equals("character") || widget.category.equals("person")) {
+        if (widget.category.equals("character") ||
+            widget.category.equals("person")) {
           gotoPage(
             context: context,
             newPage: CharacterScreen(

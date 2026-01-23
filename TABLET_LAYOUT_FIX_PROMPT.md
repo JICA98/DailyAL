@@ -92,6 +92,11 @@ Widget build(BuildContext context) {
 
 ### 3. Adaptive Component Sizing
 
+#### Character Screen Specifics
+- **Split Layout**: Use a `Row` with a fixed-width left panel (400px) and flexible right panel.
+- **Dynamic Background**: Use a `Stack` to place a `Background` widget behind the content.
+- **Carousel Sync**: Sync the background image with the carousel's current index.
+
 #### Poster/Image Cards
 ```dart
 // Adaptive poster dimensions
