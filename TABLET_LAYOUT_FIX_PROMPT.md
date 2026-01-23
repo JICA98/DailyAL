@@ -97,6 +97,10 @@ Widget build(BuildContext context) {
 - **Dynamic Background**: Use a `Stack` to place a `Background` widget behind the content.
 - **Carousel Sync**: Sync the background image with the carousel's current index.
 
+#### Forum Screen Specifics
+- **Master-Detail Layout**: Use `Row` with 350px width for topic list (Master) and Expanded for posts (Detail).
+- **Navigation Override**: On tablets, selecting a topic updates the right pane instead of pushing a new route.
+
 #### Poster/Image Cards
 ```dart
 // Adaptive poster dimensions

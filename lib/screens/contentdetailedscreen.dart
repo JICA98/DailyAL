@@ -685,15 +685,12 @@ class _ContentDetailedScreenState extends State<ContentDetailedScreen>
   }
 
   void _forumShowAll() {
-    final screen = widget.category.equals("anime")
-        ? ForumTopicsScreenLess(animeId: _id, padding: EdgeInsets.only(top: 20))
-        : ForumTopicsScreenLess(
-            mangaId: _id, padding: EdgeInsets.only(top: 20));
     gotoPage(
       context: context,
-      newPage: TitlebarScreen(
-        screen,
-        appbarTitle: S.current.Forums,
+      newPage: ForumTopicsScreen(
+        animeId: widget.category.equals("anime") ? _id : null,
+        mangaId: widget.category.equals("anime") ? null : _id,
+        title: S.current.Forums,
         actions: [
           PopupMenuBuilder(
             menuItems: [

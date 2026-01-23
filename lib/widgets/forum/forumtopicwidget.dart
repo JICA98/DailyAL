@@ -1,5 +1,3 @@
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:dailyanimelist/main.dart';
 import 'package:dailyanimelist/pages/userpage.dart';
 import 'package:dailyanimelist/screens/forumposts.dart';
 import 'package:dailyanimelist/generated/l10n.dart';
@@ -10,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../../constant.dart';
-import '../avatarwidget.dart';
 
 class ForumTopicsList extends StatelessWidget {
   final List<ForumTopicsData>? topics;
@@ -83,19 +80,31 @@ class ForumTopicWidget extends StatelessWidget {
   final ForumTopicsData topic;
   final DateFormat dateFormat = new DateFormat('EEE, MMM d, yyyy');
   final VoidCallback? onUiChange;
-  ForumTopicWidget({required this.topic, this.onUiChange});
+  final Function(ForumTopicsData)? onTopicSelect;
+  final bool isSelected;
+  ForumTopicWidget(
+      {required this.topic,
+      this.onUiChange,
+      this.onTopicSelect,
+      this.isSelected = false});
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     return Material(
+      color:
+          isSelected ? Theme.of(context).highlightColor.withOpacity(0.1) : null,
       child: InkWell(
         onTap: () {
-          gotoPage(
-              context: context,
-              newPage: ForumPostsScreen(
-                topic: topic,
-                onUiChange: onUiChange,
-              ));
+          if (onTopicSelect != null) {
+            onTopicSelect!(topic);
+          } else {
+            gotoPage(
+                context: context,
+                newPage: ForumPostsScreen(
+                  topic: topic,
+                  onUiChange: onUiChange,
+                ));
+          }
         },
         onLongPress: () {
           if (topic?.lastPostCreatedAt != null) {

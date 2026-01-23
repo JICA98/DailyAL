@@ -111,6 +111,7 @@ class AnimeGridCard extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: horizPadding),
       child: SizedBox(
         height: gridHeight,
+        width: gridHeight == null ? width : null,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,

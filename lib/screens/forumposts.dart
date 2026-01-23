@@ -28,11 +28,13 @@ class ForumPostsScreen extends StatefulWidget {
   final bool isEmptyTopic;
   final VoidCallback? onUiChange;
   final bool showOnlyPosts;
+  final bool showAppbar;
   const ForumPostsScreen(
       {Key? key,
       this.topic,
       this.isEmptyTopic = false,
       this.showOnlyPosts = false,
+      this.showAppbar = true,
       this.onUiChange})
       : super(key: key);
   @override
@@ -55,6 +57,7 @@ class _ForumPostsScreenState extends State<ForumPostsScreen> {
   List<String> sortTypeValues = [S.current.Oldest, S.current.Newest];
   bool enableShare = false;
   Set<ForumTopicPost> selectedPosts = {};
+  Future<ForumTopicData?>? _topicFuture;
 
   @override
   void initState() {
@@ -64,6 +67,26 @@ class _ForumPostsScreenState extends State<ForumPostsScreen> {
       viewportBoundaryGetter: () =>
           Rect.fromLTRB(0, 100, 0, MediaQuery.of(context).padding.bottom),
     );
+    _fetchTopicData();
+  }
+
+  void _fetchTopicData() {
+    int offset = (pageIndex -
+                (sortType == S.current.Newest
+                    ? (((topic?.numberOfPosts ?? 0) - postLimit) / postLimit)
+                        .ceil()
+                    : 0))
+            .abs() *
+        postLimit;
+
+    bool fromCache = sortType == S.current.Newest
+        ? (pageIndex != 0)
+        : (widget.topic?.numberOfPosts != null
+            ? (pageIndex !=
+                ((widget.topic!.numberOfPosts! / postLimit).ceil() - 1))
+            : true);
+
+    _topicFuture = getForumTopic(offset: offset, fromCache: fromCache);
   }
 
   Future<ForumTopicData?> getForumTopic(
@@ -91,10 +114,10 @@ class _ForumPostsScreenState extends State<ForumPostsScreen> {
         ?.animateTo(0,
             curve: Curves.ease, duration: Duration(milliseconds: 600))
         .then((value) {
-      if (mounted)
-        setState(() {
-          pageIndex = index;
-        });
+      setState(() {
+        pageIndex = index;
+        _fetchTopicData();
+      });
     });
   }
 
@@ -103,6 +126,7 @@ class _ForumPostsScreenState extends State<ForumPostsScreen> {
     if (mounted)
       setState(() {
         sortType = value;
+        _fetchTopicData();
       });
   }
 
@@ -191,21 +215,7 @@ class _ForumPostsScreenState extends State<ForumPostsScreen> {
     return Padding(
       padding: EdgeInsets.only(top: 0),
       child: FutureBuilder<ForumTopicData?>(
-        future: getForumTopic(
-            fromCache: sortType.equals(S.current.Newest)
-                ? (pageIndex != 0)
-                : (widget.topic?.numberOfPosts != null
-                    ? (pageIndex !=
-                        ((widget.topic!.numberOfPosts! / postLimit).ceil() - 1))
-                    : true),
-            offset: (pageIndex -
-                        (sortType.equals(S.current.Newest)
-                            ? (((topic?.numberOfPosts ?? 0) - postLimit) /
-                                    postLimit)
-                                .ceil()
-                            : 0))
-                    .abs() *
-                postLimit),
+        future: _topicFuture,
         builder: (context, snapshot) {
           logDal(snapshot.connectionState);
           if (snapshot.hasData &&
@@ -397,12 +407,16 @@ class _ForumPostsScreenState extends State<ForumPostsScreen> {
       !(topic?.numberOfPosts != null && topic!.numberOfPosts! <= postLimit);
 
   Widget headerWidget({ForumTopicsData? forumTopic}) {
+    if (!widget.showAppbar) {
+      return SliverToBoxAdapter(child: _buildTabletHeader(forumTopic));
+    }
     return SliverLayoutBuilder(builder: (context, c) {
       return SliverAppBar(
         pinned: true,
         floating: false,
         snap: false,
-        automaticallyImplyLeading: selectedPosts.length <= 0,
+        automaticallyImplyLeading:
+            widget.showAppbar && selectedPosts.length <= 0,
         title: selectedPosts.length > 0
             ? _sharePrefix
             : (c.scrollOffset > 120 ? Text(forumTopic?.title ?? '') : null),
@@ -417,7 +431,7 @@ class _ForumPostsScreenState extends State<ForumPostsScreen> {
                     selectedOption: sortType,
                     onChanged: (value) => changeSortType(value),
                   ),
-                searchIconButton(context),
+                if (widget.showAppbar) searchIconButton(context),
                 SB.w20,
               ],
         expandedHeight: showBottom ? 270 : 230,
@@ -428,6 +442,44 @@ class _ForumPostsScreenState extends State<ForumPostsScreen> {
             FlexibleSpaceBar(background: headerBackground(forumTopic)),
       );
     });
+  }
+
+  Widget _buildTabletHeader(ForumTopicsData? forumTopic) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(height: 30),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: ForumPostHeader(
+                  dateFormat: dateFormat,
+                  forumTopic: forumTopic,
+                  sizedbox: SB.h20,
+                ),
+              ),
+              if (topic?.numberOfPosts != null)
+                SelectButton(
+                  popupText: S.current.Order_by,
+                  child: Icon(Icons.sort),
+                  options: sortTypeValues,
+                  selectedOption: sortType,
+                  onChanged: (value) => changeSortType(value),
+                ),
+            ],
+          ),
+        ),
+        if (showBottom)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 10),
+            child: showPageWidget(noOfPosts: topic?.numberOfPosts ?? 0),
+          ),
+        Divider(thickness: 1),
+      ],
+    );
   }
 
   Widget headerBackground(ForumTopicsData? forumTopic) {
