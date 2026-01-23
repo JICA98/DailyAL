@@ -26,27 +26,10 @@ class AnimeCharacterWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (type == DisplayType.grid) {
-      if (ResponsiveHelper.isTabletOrLarger(context)) {
-        return GridView.builder(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-          gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-            maxCrossAxisExtent: 400,
-            mainAxisSpacing: 12,
-            crossAxisSpacing: 12,
-            mainAxisExtent: 108,
-          ),
-          itemCount: animeCharacterList.length,
-          itemBuilder: (context, index) =>
-              _buildTabletCharacterWidget(animeCharacterList[index]),
-        );
-      } else {
-        return _buildPagingGridView(
-            animeCharacterList.length,
-            (i, pageIndex) =>
-                _buildCharacterWidget(animeCharacterList[pageIndex * 3 + i]));
-      }
+      return _buildPagingGridView(
+          animeCharacterList.length,
+          (i, pageIndex) =>
+              _buildCharacterWidget(animeCharacterList[pageIndex * 3 + i]));
     } else {
       return _buildListView();
     }
@@ -83,7 +66,8 @@ class AnimeCharacterWidget extends StatelessWidget {
                 SizedBox(width: 10),
                 Expanded(
                   child: _buildNameAndRole(details?.characterName ?? "?",
-                      details?.characterType ?? ""),
+                      details?.characterType ?? "",
+                      maxLines: 2),
                 ),
               ],
             ),
@@ -96,7 +80,8 @@ class AnimeCharacterWidget extends StatelessWidget {
                 Expanded(
                   child: _buildSeiyuuNameAndRole(
                       details?.seiyuuName ?? 'Unknown',
-                      details?.seiyuuOrigin ?? ''),
+                      details?.seiyuuOrigin ?? '',
+                      maxLines: 2),
                 ),
                 SizedBox(width: 10),
                 _seiyuuWidget(details?.seiyuuId, details?.seiyuuPicture,
@@ -145,28 +130,49 @@ class AnimeCharacterWidget extends StatelessWidget {
   }
 }
 
-Widget _buildSeiyuuNameAndRole(String name, String origin) {
+Widget _buildSeiyuuNameAndRole(String name, String origin, {int? maxLines}) {
   return Column(
     mainAxisAlignment: MainAxisAlignment.end,
     crossAxisAlignment: CrossAxisAlignment.end,
+    mainAxisSize: MainAxisSize.min,
     children: [
-      title(name, opacity: 1, align: TextAlign.end),
+      title(name,
+          opacity: 1,
+          align: TextAlign.end,
+          textOverflow: TextOverflow.ellipsis,
+          maxLines: maxLines),
       SB.h5,
       if (origin.isNotBlank)
-        title(origin, opacity: .8, fontSize: 11, align: TextAlign.end),
+        title(origin,
+            opacity: .8,
+            fontSize: 11,
+            align: TextAlign.end,
+            textOverflow: TextOverflow.ellipsis,
+            maxLines: 1),
     ],
   );
 }
 
-Widget _buildNameAndRole(String characterName, String characterType) {
+Widget _buildNameAndRole(String characterName, String characterType,
+    {int? maxLines}) {
   return Column(
     mainAxisAlignment: MainAxisAlignment.start,
     crossAxisAlignment: CrossAxisAlignment.start,
+    mainAxisSize: MainAxisSize.min,
     children: [
-      title(characterName, opacity: 1, align: TextAlign.start),
+      title(characterName,
+          opacity: 1,
+          align: TextAlign.start,
+          textOverflow: TextOverflow.ellipsis,
+          maxLines: maxLines),
       SB.h5,
       if (characterType.isNotBlank)
-        title(characterType, opacity: .8, fontSize: 11, align: TextAlign.start),
+        title(characterType,
+            opacity: .8,
+            fontSize: 11,
+            align: TextAlign.start,
+            textOverflow: TextOverflow.ellipsis,
+            maxLines: 1),
     ],
   );
 }
@@ -247,12 +253,15 @@ class MangaCharacterWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     if (type == DisplayType.grid) {
       if (ResponsiveHelper.isTabletOrLarger(context)) {
+        final screenWidth = MediaQuery.of(context).size.width;
+        // For foldable devices or narrow screens, use smaller max extent
+        final maxExtent = screenWidth < 800 ? 300.0 : 400.0;
         return GridView.builder(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
           gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-            maxCrossAxisExtent: 400,
+            maxCrossAxisExtent: maxExtent,
             mainAxisSpacing: 12,
             crossAxisSpacing: 12,
             mainAxisExtent: 108,
@@ -513,7 +522,7 @@ Widget _buildPagingGridView(
           itemCount:
               pageIndex == lastPage ? (length % 3 == 0 ? 3 : length % 3) : 3,
           scrollDirection: Axis.vertical,
-          padding: EdgeInsets.zero,
+          padding: EdgeInsets.only(right: 12),
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (_, i) => itemBuilder(i, pageIndex),

@@ -975,6 +975,7 @@ Widget title(
   FontWeight? fontWeight = FontWeight.normal,
   bool selectable = false,
   double? scaleFactor,
+  int? maxLines,
 }) {
   title = title ?? '';
   textStyle ??= TextStyle();
@@ -994,6 +995,7 @@ Widget title(
       title,
       // overflow: TextOverflow.ellipsis,
       overflow: textOverflow,
+      maxLines: maxLines,
       textAlign: align,
       textScaleFactor: scaleFactor,
       style: TextStyle(

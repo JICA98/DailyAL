@@ -265,80 +265,96 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     );
 
     if (useNavigationRail) {
+      final isShortScreen = MediaQuery.of(context).size.height < 700;
       return Scaffold(
         body: Row(
           children: [
-            NavigationRail(
-              selectedIndex: pageIndex,
-              onDestinationSelected: (value) => _onSelected(value),
-              labelType: NavigationRailLabelType.all,
-              leading: Padding(
-                padding: const EdgeInsets.only(bottom: 40.0, top: 10.0),
-                child: SizedBox(
-                  height: 60,
-                  width: 60,
-                  child: CircleAvatar(
-                    backgroundImage:
-                        AssetImage('assets/images/dal-black-bg.png'),
-                    radius: 48.0,
+            LayoutBuilder(
+              builder: (context, constraints) {
+                return SingleChildScrollView(
+                  child: ConstrainedBox(
+                    constraints:
+                        BoxConstraints(minHeight: constraints.maxHeight),
+                    child: IntrinsicHeight(
+                      child: NavigationRail(
+                        selectedIndex: pageIndex,
+                        onDestinationSelected: (value) => _onSelected(value),
+                        labelType: isShortScreen
+                            ? NavigationRailLabelType.none
+                            : NavigationRailLabelType.all,
+                        leading: Padding(
+                          padding:
+                              const EdgeInsets.only(bottom: 40.0, top: 10.0),
+                          child: SizedBox(
+                            height: 60,
+                            width: 60,
+                            child: CircleAvatar(
+                              backgroundImage:
+                                  AssetImage('assets/images/dal-black-bg.png'),
+                              radius: 48.0,
+                            ),
+                          ),
+                        ), // Top spacing
+                        trailing: Expanded(
+                          child: Align(
+                            alignment: Alignment.bottomCenter,
+                            child: Padding(
+                              padding: const EdgeInsets.only(bottom: 20.0),
+                            ),
+                          ),
+                        ),
+                        destinations: [
+                          NavigationRailDestination(
+                            icon: Icon(Icons.home_outlined),
+                            selectedIcon: Icon(Icons.home),
+                            label: Text(S.current.Home),
+                          ),
+                          NavigationRailDestination(
+                            icon: Icon(Icons.forum_outlined),
+                            selectedIcon: Icon(Icons.forum),
+                            label: Text(S.current.Forums),
+                          ),
+                          NavigationRailDestination(
+                            icon: Icon(Icons.person_outline),
+                            selectedIcon: Icon(Icons.person),
+                            label: Text(S.current.User),
+                          ),
+                          NavigationRailDestination(
+                            icon: Icon(Icons.explore_outlined),
+                            selectedIcon: Icon(Icons.explore),
+                            label: Text(S.current.Explore),
+                          ),
+                          NavigationRailDestination(
+                            icon: Icon(Icons.groups_outlined),
+                            selectedIcon: Icon(Icons.groups),
+                            label: Text(S.current.Clubs),
+                          ),
+                          NavigationRailDestination(
+                            icon: Icon(Icons.search_outlined),
+                            selectedIcon: Icon(Icons.search),
+                            label: Text(S.current.Search),
+                          ),
+                          NavigationRailDestination(
+                            icon: Icon(Icons.bookmarks_outlined),
+                            selectedIcon: Icon(Icons.bookmarks),
+                            label: Text(S.current.Bookmarks),
+                          ),
+                          NavigationRailDestination(
+                            icon: Icon(Icons.calendar_today_outlined),
+                            selectedIcon: Icon(Icons.calendar_today),
+                            label: Text(S.current.Calendar),
+                          ),
+                          NavigationRailDestination(
+                            label: Text(S.current.Profile),
+                            icon: _userProfileWidget(),
+                            selectedIcon: _userProfileWidget(isSelected: true),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
-                ),
-              ), // Top spacing
-              trailing: Expanded(
-                child: Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Padding(
-                    padding: const EdgeInsets.only(bottom: 20.0),
-                  ),
-                ),
-              ),
-              destinations: [
-                NavigationRailDestination(
-                  icon: Icon(Icons.home_outlined),
-                  selectedIcon: Icon(Icons.home),
-                  label: Text(S.current.Home),
-                ),
-                NavigationRailDestination(
-                  icon: Icon(Icons.forum_outlined),
-                  selectedIcon: Icon(Icons.forum),
-                  label: Text(S.current.Forums),
-                ),
-                NavigationRailDestination(
-                  icon: Icon(Icons.person_outline),
-                  selectedIcon: Icon(Icons.person),
-                  label: Text(S.current.User),
-                ),
-                NavigationRailDestination(
-                  icon: Icon(Icons.explore_outlined),
-                  selectedIcon: Icon(Icons.explore),
-                  label: Text(S.current.Explore),
-                ),
-                NavigationRailDestination(
-                  icon: Icon(Icons.groups_outlined),
-                  selectedIcon: Icon(Icons.groups),
-                  label: Text(S.current.Clubs),
-                ),
-                NavigationRailDestination(
-                  icon: Icon(Icons.search_outlined),
-                  selectedIcon: Icon(Icons.search),
-                  label: Text(S.current.Search),
-                ),
-                NavigationRailDestination(
-                  icon: Icon(Icons.bookmarks_outlined),
-                  selectedIcon: Icon(Icons.bookmarks),
-                  label: Text(S.current.Bookmarks),
-                ),
-                NavigationRailDestination(
-                  icon: Icon(Icons.calendar_today_outlined),
-                  selectedIcon: Icon(Icons.calendar_today),
-                  label: Text(S.current.Calendar),
-                ),
-                NavigationRailDestination(
-                  label: Text(S.current.Profile),
-                  icon: _userProfileWidget(),
-                  selectedIcon: _userProfileWidget(isSelected: true),
-                ),
-              ],
+                );
+              },
             ),
             VerticalDivider(thickness: 1, width: 1),
             Expanded(child: bodyContent),

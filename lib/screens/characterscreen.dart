@@ -186,11 +186,15 @@ class _CharacterScreenState extends State<CharacterScreen> {
   }
 
   Widget _buildTabletLayout() {
+    final screenWidth = MediaQuery.of(context).size.width;
+    // For foldable devices or narrow screens, use smaller left panel
+    final leftPanelWidth = screenWidth < 800 ? 280.0 : 400.0;
+
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          width: 400,
+          width: leftPanelWidth,
           child: Stack(
             children: [
               if (characterPics.isNotEmpty)
