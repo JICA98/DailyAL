@@ -34,7 +34,8 @@ final int socialIndex =
     1; // Used for tablet navigation (combines forums + clubs)
 final int userIndex = 2;
 final int exploreIndex = 3;
-final int searchIndex = 4;
+final int phoneProfileIndex = 4; // Used for phone navigation
+final int searchIndex = 4; // Used for tablet navigation
 final int bookmarksIndex = 5;
 final int calendarIndex = 6;
 final int profileIndex = 7;

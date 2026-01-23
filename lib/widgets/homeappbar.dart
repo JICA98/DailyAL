@@ -1,5 +1,6 @@
 import 'package:dailyanimelist/generated/l10n.dart';
-import 'package:dailyanimelist/pages/userpop.dart';
+import 'package:dailyanimelist/pages/settings_page.dart';
+
 import 'package:dailyanimelist/user/user.dart';
 import 'package:dailyanimelist/widgets/custombutton.dart';
 import 'package:dailyanimelist/widgets/home/bookmarks_widget.dart';
@@ -11,7 +12,6 @@ import '../api/maluser.dart';
 import '../constant.dart';
 import '../main.dart';
 import '../screens/generalsearchscreen.dart';
-import 'avatarwidget.dart';
 
 Future<UserProf> _userProfileFuture = MalUser.getUserInfo(
     fields: ["anime_statistics", "manga_statistics"], fromCache: true);
@@ -66,11 +66,17 @@ class _AppBarHomeState extends State<AppBarHome> {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          widget.titleWidget ?? title('DailyAL', fontSize: 20),
+          widget.titleWidget ??
+              SizedBox(
+                height: 35,
+                width: 35,
+                child: CircleAvatar(
+                  backgroundImage: AssetImage('assets/images/dal-black-bg.png'),
+                  radius: 48.0,
+                ),
+              ),
           Expanded(child: SB.z),
           _appBarActions(),
-          SB.w5,
-          _userProfileWidget,
         ],
       ),
     );
@@ -103,6 +109,8 @@ class _AppBarHomeState extends State<AppBarHome> {
                 _bookMarksButton(),
                 SB.w10,
                 _calendarButton(),
+                SB.w10,
+                _settingsIcon
               ],
             ),
           ),
@@ -111,43 +119,13 @@ class _AppBarHomeState extends State<AppBarHome> {
     );
   }
 
-  Widget get _userProfileWidget {
-    return Material(
-      color: Colors.transparent,
-      child: Container(
-        // height: 50,
-        child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-          child: Container(
-              child: Container(
-            height: 27,
-            width: 27,
-            child: AvatarWidget(
-              url: userProf?.picture,
-              onTap: () {
-                if (user.status != AuthStatus.AUTHENTICATED) {
-                  Scaffold.of(context).openEndDrawer();
-                  return;
-                }
-                showModalBottomSheet(
-                    context: context,
-                    isScrollControlled: true,
-                    builder: (context) {
-                      return UserPopSlideOpenPage(
-                        isSelf: true,
-                        username: userProf?.name,
-                        onUiChange: () {
-                          _refreshFuture();
-                          getUserProfile();
-                          widget.onUiChange?.call();
-                        },
-                      );
-                    });
-              },
-            ),
-          )),
-        ),
-      ),
+  Widget get _settingsIcon {
+    return ToolTipButton(
+      message: S.current.Settings,
+      padding: const EdgeInsets.symmetric(horizontal: 7.0),
+      usePadding: true,
+      onTap: () => gotoPage(context: context, newPage: SettingsPage()),
+      child: Icon(Icons.settings_outlined, size: iconSize),
     );
   }
 

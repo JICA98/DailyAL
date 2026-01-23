@@ -1,0 +1,7 @@
+{
+    "servers": [
+        "https://dal-api.onrender.com/",
+        "http://ec2-35-88-137-169.us-west-2.compute.amazonaws.com:8080/"
+    ],
+    "preferredServer": "http://ec2-35-88-137-169.us-west-2.compute.amazonaws.com:8080/"
+}
