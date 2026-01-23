@@ -10,7 +10,7 @@ use crate::{
 
 use axum::{
     extract::{Multipart, Path, State},
-    http::HeaderMap,
+    http::{HeaderMap, StatusCode},
     Json,
 };
 use serde_json::{json, Value};
@@ -65,13 +65,14 @@ pub async fn delete_image(
 pub async fn get_review_summary(
     State(data): State<Arc<AppState>>,
     body: String,
-) -> Json<ReviewResponse> {
-    Json(
-        data.anime_service
-            .summarize_review(body.as_str())
-            .await
-            .unwrap(),
-    )
+) -> Result<Json<ReviewResponse>, (StatusCode, String)> {
+    match data.anime_service.summarize_review(body.as_str()).await {
+        Ok(response) => Ok(Json(response)),
+        Err(e) => {
+            println!("Error in get_review_summary: {:?}", e);
+            Err((StatusCode::INTERNAL_SERVER_ERROR, format!("{:?}", e)))
+        }
+    }
 }
 
 pub async fn start_schedules(State(data): State<Arc<AppState>>) -> Json<Value> {

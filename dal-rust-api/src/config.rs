@@ -7,11 +7,13 @@ pub struct Secrets {
     pub rediscloud_url: String,
     pub subastorage_url: String,
     pub subastorage_key: String,
-    pub gemini_api_key: String,
     pub dynamo_db: aws_sdk_dynamodb::Client,
     pub table_name: String,
     pub ai_api_url: String,
     pub anime_db_url: String,
+    pub llm_api_key: String,
+    pub llm_model_name: String,
+    pub llm_api_url: String,
 }
 
 #[derive(Debug, Clone)]
@@ -29,7 +31,6 @@ impl Config {
         let subastorage_url =
             std::env::var("SUPABASE_URL_STORAGE").expect("missing SUPABASE_URL_STORAGE");
         let subastorage_key = std::env::var("SUPABASE_API_KEY").expect("missing SUPABASE_API_KEY");
-        let gemini_api_key = std::env::var("GEMINI_API_KEY").expect("missing GEMINI_API_KEY");
         let region = std::env::var("REGION");
         let region_provider = RegionProviderChain::first_try(region.map(Region::new).ok())
             .or_default_provider()
@@ -39,17 +40,22 @@ impl Config {
         let table_name = std::env::var("TABLE_NAME").expect("missing TABLE_NAME");
         let ai_api_url = std::env::var("AI_API_URL").expect("missing AI_API_URL");
         let anime_db_url = std::env::var("ANIME_DB_URL").expect("missing ANIME_DB_URL");
+        let llm_api_key = std::env::var("LLM_API_KEY").expect("missing LLM_API_KEY");
+        let llm_model_name = std::env::var("LLM_MODEL_NAME").expect("missing LLM_MODEL_NAME");
+        let llm_api_url = std::env::var("LLM_API_URL").expect("missing LLM_API_URL");
         let secrets = Secrets {
             mal_client_id,
             bearer_secret,
             rediscloud_url,
             subastorage_url,
             subastorage_key,
-            gemini_api_key,
             dynamo_db,
             table_name,
             ai_api_url,
             anime_db_url,
+            llm_api_key,
+            llm_model_name,
+            llm_api_url,
         };
 
         Config { secrets, base_url }

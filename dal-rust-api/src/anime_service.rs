@@ -21,7 +21,7 @@ pub struct AnimeService {
     pub config: Config,
     pub mal_api: crate::mal_api::MalAPI,
     pub cache_service: crate::cache_service::CacheService,
-    pub ai_service: crate::gemini_api::GeminiAPI,
+    pub ai_service: crate::llm_client::LLMClient,
     pub anime_link_service: crate::anime_link_service::AnimeLinkService,
 }
 
@@ -206,7 +206,10 @@ impl AnimeService {
         format!("{:x}", finish)
     }
 
-    pub async fn summarize_review(&self, reviews: &str) -> Result<ReviewResponse, reqwest::Error> {
+    pub async fn summarize_review(
+        &self,
+        reviews: &str,
+    ) -> Result<ReviewResponse, Box<dyn Error + Send + Sync>> {
         println!("Summarizing review {}", reviews.len());
 
         let hash_str = self.hash_str(reviews);
@@ -222,12 +225,8 @@ impl AnimeService {
             return Ok(cached_review.unwrap());
         } else {
             println!("Cache miss for {}", hash_str);
-            let review_response_data: ReviewResponseData = self
-                .ai_service
-                .talk(REVIEW_SYSTEM, reviews)
-                .await
-                .map(|text| serde_json::from_str(&text).unwrap())
-                .unwrap();
+            let json_str = self.ai_service.talk(REVIEW_SYSTEM, reviews).await?;
+            let review_response_data: ReviewResponseData = serde_json::from_str(&json_str)?;
 
             let review_response = review_response_data.data.clone();
 

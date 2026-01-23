@@ -49,7 +49,7 @@ pub async fn setup_app(config: Config) -> Router {
             mal_api,
             anime_link_service,
             cache_service,
-            ai_service: crate::gemini_api::GeminiAPI {
+            ai_service: crate::llm_client::LLMClient {
                 config: config.clone(),
             },
         },

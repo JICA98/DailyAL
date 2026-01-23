@@ -158,26 +158,6 @@ pub struct ReviewItem {
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct GeminiReponse {
-    pub candidates: Vec<Candidates>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct Candidates {
-    pub content: Content,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct Content {
-    pub parts: Vec<Parts>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct Parts {
-    pub text: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AnimeLink {
     pub title: Option<String>,
     pub picture: Option<String>,
@@ -293,4 +273,34 @@ fn get_score(anime: &Value) -> f64 {
         .map(|f| f.parse::<f64>().unwrap())
         .or_else(|| Some(0.0))
         .unwrap_or(0.0)
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct OpenAIResponse {
+    pub id: Option<String>,
+    pub object: Option<String>,
+    pub created: Option<i64>,
+    pub model: Option<String>,
+    pub choices: Vec<Choice>,
+    pub usage: Option<Usage>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct Choice {
+    pub index: i64,
+    pub message: Message,
+    pub finish_reason: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct Message {
+    pub role: String,
+    pub content: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct Usage {
+    pub prompt_tokens: i64,
+    pub completion_tokens: i64,
+    pub total_tokens: i64,
 }
