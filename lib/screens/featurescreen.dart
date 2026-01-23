@@ -7,14 +7,12 @@ import 'package:dailyanimelist/api/malapi.dart';
 import 'package:dailyanimelist/enums.dart';
 import 'package:dailyanimelist/screens/forumposts.dart';
 import 'package:dailyanimelist/screens/tabscreen.dart';
-import 'package:dailyanimelist/widgets/avatarwidget.dart';
 import 'package:dailyanimelist/widgets/background.dart';
 import 'package:dailyanimelist/widgets/custombutton.dart';
 import 'package:dailyanimelist/widgets/featured/tagswidget.dart';
 import 'package:dailyanimelist/widgets/home/bookmarks_widget.dart';
 import 'package:dailyanimelist/widgets/loading/shimmerwidget.dart';
 import 'package:dailyanimelist/widgets/slivers.dart';
-import 'package:dailyanimelist/widgets/translator.dart';
 import 'package:dailyanimelist/widgets/user/contentlistwidget.dart';
 import 'package:dal_commons/dal_commons.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +20,6 @@ import 'package:dailyanimelist/generated/l10n.dart';
 
 import 'package:dailyanimelist/screens/generalsearchscreen.dart';
 import '../constant.dart';
-import '../main.dart';
 
 class FeaturedScreen extends StatefulWidget {
   final int id;
@@ -194,7 +191,7 @@ class _FeaturedScreenState extends State<FeaturedScreen> {
           ClipRRect(
             borderRadius: BorderRadius.circular(12),
             child: CachedNetworkImage(
-              imageUrl: widget.imgUrl!,
+              imageUrl: widget.imgUrl ?? '',
               fit: BoxFit.cover,
               width: double.infinity,
               height: imageWidth * 1.4,

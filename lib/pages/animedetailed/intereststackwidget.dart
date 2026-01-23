@@ -22,6 +22,11 @@ import 'package:dal_commons/commons.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import 'package:dailyanimelist/widgets/background.dart';
+import 'package:dailyanimelist/util/responsive_helper.dart';
+import 'package:dailyanimelist/widgets/shimmecolor.dart';
+import 'package:dailyanimelist/widgets/loading/shimmerwidget.dart';
+
 class InterestStackContentList extends StatelessWidget {
   final DisplayType type;
   final double horizPadding;
@@ -221,26 +226,152 @@ class InterestStackDetailedWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return _buildFutureWidget(
-      (detailed) => TitlebarScreen(
-        Stack(
-          children: [
-            conditional(
-              on: detailed != null,
-              child: NestedScrollView(
-                headerSliverBuilder: (_, i) => _topSlivers(context, detailed),
-                body: _bodyWidget(detailed),
+      (detailed) => ResponsiveHelper.isTabletOrLarger(context)
+          ? _buildTabletLayout(context, detailed)
+          : TitlebarScreen(
+              Stack(
+                children: [
+                  conditional(
+                    on: detailed != null,
+                    child: NestedScrollView(
+                      headerSliverBuilder: (_, i) =>
+                          _topSlivers(context, detailed),
+                      body: _bodyWidget(detailed),
+                    ),
+                    parent: (child) => DefaultTabController(
+                      length: _tabs(detailed).length,
+                      child: child,
+                    ),
+                  ),
+                  _buildBackButton(context, detailed),
+                ],
               ),
-              parent: (child) => DefaultTabController(
-                length: _tabs(detailed).length,
-                child: child,
+              useAppbar: false,
+              floatingActionButton: _buildFloatingAction(detailed),
+            ),
+    );
+  }
+
+  Widget _buildTabletLayout(
+      BuildContext context, InterestStackDetailed? detailed) {
+    if (detailed == null) {
+      return Scaffold(
+        body: ShimmerColor(
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                width: 400,
+                child: Column(
+                  children: [
+                    Align(alignment: Alignment.topLeft, child: BackButton()),
+                    Expanded(child: ShimmerWidget()),
+                  ],
+                ),
+              ),
+              Expanded(child: ShimmerWidget()),
+            ],
+          ),
+        ),
+      );
+    }
+    return Scaffold(
+      body: _ResizableTabletLayout(
+        leftChild: Stack(
+          children: [
+            if (stack?.imageUrls != null && stack!.imageUrls!.isNotEmpty)
+              Opacity(
+                opacity: 0.5,
+                child: Background(
+                  context: context,
+                  url: stack!.imageUrls![0],
+                  height: double.infinity,
+                  width: double.infinity,
+                  forceBg: true,
+                ),
+              ),
+            SingleChildScrollView(
+              padding: ResponsiveHelper.getContentPadding(context),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: _buildTabletBackButton(context),
+                  ),
+                  Center(
+                      child: _picturesWidget(context, detailed,
+                          height: 350, width: 250)),
+                  SB.h20,
+                  _titleWidget(context, detailed),
+                  SB.h20,
+                  _dateWidget(detailed, asSliver: false),
+                  SB.h20,
+                  if (detailed?.node?.description != null &&
+                      detailed!.node!.description!.isNotBlank)
+                    SysonpsisWidget(
+                      genres: [],
+                      synopsis: detailed.node?.description ?? '',
+                      characterLimit: 400,
+                      horizPadding: 0,
+                    ),
+                ],
               ),
             ),
-            _buildBackButton(context, detailed),
           ],
         ),
-        useAppbar: false,
-        floatingActionButton: _buildFloatingAction(detailed),
+        rightChild: DefaultTabController(
+          length: _tabs(detailed).length,
+          child: Scaffold(
+            appBar: AppBar(
+              title: Text(_title(detailed)),
+              automaticallyImplyLeading: false,
+              bottom: TabBar(
+                isScrollable: true,
+                tabAlignment: TabAlignment.start,
+                tabs: _tabs(detailed)
+                    .map((e) => Tab(text: e.standardize()))
+                    .toList(),
+              ),
+              actions: [
+                _buildShareButton(context, detailed),
+                _buildBrowserButton(context, detailed),
+              ],
+            ),
+            body: _bodyWidget(detailed),
+          ),
+        ),
       ),
+      floatingActionButton: _buildFloatingAction(detailed),
+    );
+  }
+
+  Widget _buildBrowserButton(
+      BuildContext context, InterestStackDetailed? detailed) {
+    return IconButton(
+      icon: Icon(Icons.open_in_browser),
+      onPressed: () => launchURLWithConfirmation(
+          _buildDalNode(stack)?.toUrl() ?? '',
+          context: context),
+    );
+  }
+
+  Widget _buildTabletBackButton(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 20.0),
+      child: BackButton(),
+    );
+  }
+
+  Widget _buildShareButton(
+      BuildContext context, InterestStackDetailed? detailed) {
+    return IconButton(
+      icon: Icon(Icons.share),
+      onPressed: () => openShareBuilder(
+          context,
+          buildShareInputs(
+              detailed?.node ?? stack, _buildDalNode(stack)?.toUrl() ?? ''),
+          S.current.Interest_Stack),
     );
   }
 
@@ -335,10 +466,11 @@ class InterestStackDetailedWidget extends StatelessWidget {
   }
 
   Container _picturesWidget(
-      BuildContext context, InterestStackDetailed? detailed) {
+      BuildContext context, InterestStackDetailed? detailed,
+      {double? height, double? width}) {
     return Container(
-      height: 240,
-      width: 170,
+      height: height ?? 240,
+      width: width ?? 170,
       child: _buildStackPicttures(
           context, stack?.imageUrls!.reversed.toList() ?? []),
     );
@@ -408,8 +540,8 @@ class InterestStackDetailedWidget extends StatelessWidget {
     );
   }
 
-  _dateWidget(InterestStackDetailed? detailed) {
-    return SliverWrapper(Padding(
+  Widget _dateWidget(InterestStackDetailed? detailed, {bool asSliver = true}) {
+    final child = Padding(
       padding: padding,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -422,7 +554,9 @@ class InterestStackDetailedWidget extends StatelessWidget {
             title(detailed!.node!.updatedAt, fontSize: 10)
         ],
       ),
-    ));
+    );
+    if (asSliver) return SliverWrapper(child);
+    return child;
   }
 
   _bodyWidget(InterestStackDetailed? detailed) {
@@ -658,21 +792,29 @@ class SpaciousContentWidget extends StatelessWidget {
         SB.w10,
         if (detailed.synopsis != null) _synopsisWidget(context, detailed),
         SB.w10,
-        editIconButton(
-          value,
-          () {
-            if (onEdit != null) {
-              onEdit!();
-            } else {
-              showContentEditSheet(
-                context,
-                category,
-                detailed,
-                updateCache: updateCache,
-              );
-            }
-          },
-          6.0,
+        SizedBox(
+          height: 35,
+          width: 35,
+          child: IconButton.filledTonal(
+            onPressed: () {
+              if (onEdit != null) {
+                onEdit!();
+              } else {
+                showContentEditSheet(
+                  context,
+                  category,
+                  detailed,
+                  updateCache: updateCache,
+                );
+              }
+            },
+            icon: Icon(Icons.edit, size: 16),
+            style: IconButton.styleFrom(
+              backgroundColor:
+                  Theme.of(context).colorScheme.surfaceContainerHighest,
+              foregroundColor: Theme.of(context).colorScheme.onSurfaceVariant,
+            ),
+          ),
         ),
         SB.w10,
       ],
@@ -707,6 +849,63 @@ class SpaciousContentWidget extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class _ResizableTabletLayout extends StatefulWidget {
+  final Widget leftChild;
+  final Widget rightChild;
+  const _ResizableTabletLayout({
+    Key? key,
+    required this.leftChild,
+    required this.rightChild,
+  }) : super(key: key);
+
+  @override
+  State<_ResizableTabletLayout> createState() => _ResizableTabletLayoutState();
+}
+
+class _ResizableTabletLayoutState extends State<_ResizableTabletLayout> {
+  double _leftPanelWidth = 400.0;
+  static const double _minLeftPanelWidth = 350.0;
+  static const double _maxLeftPanelWidth = 600.0;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          width: _leftPanelWidth,
+          child: widget.leftChild,
+        ),
+        MouseRegion(
+          cursor: SystemMouseCursors.resizeColumn,
+          child: GestureDetector(
+            onHorizontalDragUpdate: (details) {
+              setState(() {
+                _leftPanelWidth = (_leftPanelWidth + details.delta.dx)
+                    .clamp(_minLeftPanelWidth, _maxLeftPanelWidth);
+              });
+            },
+            child: Container(
+              width: 8,
+              color: Theme.of(context).dividerColor.withOpacity(0.1),
+              child: Center(
+                child: Container(
+                  width: 2,
+                  height: 40,
+                  color: Theme.of(context).dividerColor.withOpacity(0.5),
+                ),
+              ),
+            ),
+          ),
+        ),
+        Expanded(
+          child: widget.rightChild,
+        ),
+      ],
     );
   }
 }
