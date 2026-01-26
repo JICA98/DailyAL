@@ -52,3 +52,8 @@ app.*.map.json
 
 android/app/proguard-rules.prop
 CLAUDE.md
+
+# Linux Packaging
+linux/packaging/AppDir/
+linux/packaging/*.AppImage
+linux/packaging/.DirIcon
