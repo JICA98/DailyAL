@@ -36,7 +36,15 @@ chmod +x "$APP_DIR/AppRun"
 # Current AppRun: exec ./usr/bin/dailyanimelist "$@"
 # This invokes the symlink, which should work.
 
+# Check for appimagetool
+if [ ! -f "appimagetool.AppImage" ]; then
+    echo "appimagetool not found. Downloading..."
+    wget "https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-x86_64.AppImage" -O appimagetool.AppImage
+    chmod +x appimagetool.AppImage
+fi
+
 # Generate AppImage
+rm -f "$OUTPUT_NAME"
 ./appimagetool.AppImage "$APP_DIR" "$OUTPUT_NAME"
 
 echo "AppImage created: $OUTPUT_NAME"
