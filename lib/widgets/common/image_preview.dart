@@ -103,6 +103,15 @@ Future<void> saveImageBytes(Uint8List bytes) async {
 }
 
 void saveImage(String url) async {
+  if (Platform.isLinux || Platform.isWindows || Platform.isMacOS) {
+    try {
+      var path = await downloadImage(url);
+      showToast('Image saved to $path');
+    } catch (e) {
+      showToast('Error downloading image');
+    }
+    return;
+  }
   var path = await downloadImage(url);
   File file = File(path);
   var fileName = _getFileName(path);
