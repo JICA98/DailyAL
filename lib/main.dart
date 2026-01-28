@@ -11,8 +11,8 @@ import 'package:dailyanimelist/theme/theme.dart';
 import 'package:dailyanimelist/user/user.dart';
 import 'package:dailyanimelist/util/error/error_reporting.dart';
 import 'package:dailyanimelist/util/pathutils.dart';
-import 'package:dailyanimelist/util/streamutils.dart';
 import 'package:dailyanimelist/util/linux_desktop_helper.dart';
+import 'package:dailyanimelist/util/streamutils.dart';
 import 'package:dailyanimelist/widgets/customfuture.dart';
 import 'package:dal_api/dal_local_api.dart';
 import 'package:dal_commons/dal_commons.dart';
@@ -54,8 +54,10 @@ void main() async {
     if (Platform.isLinux) {
       await LinuxDesktopHelper.init();
     }
-    final androidInfo = await DeviceInfoPlugin().androidInfo;
-    androidSDKVersion = androidInfo.version.sdkInt;
+    if (Platform.isAndroid) {
+      final androidInfo = await DeviceInfoPlugin().androidInfo;
+      androidSDKVersion = androidInfo.version.sdkInt;
+    }
     await FlutterDisplayMode.setHighRefreshRate();
   } catch (e) {}
 

@@ -538,33 +538,23 @@ Future<void> showToast(String message, {Toast? toast}) async {
 void _showDesktopToast(String message) {
   final overlay = MyApp.navigatorKey.currentState?.overlay;
   if (overlay == null) return;
-
   final entry = OverlayEntry(
-    builder: (context) => Positioned(
-      bottom: 50.0,
-      left: 0,
-      right: 0,
-      child: Center(
-        child: Material(
-          color: Colors.transparent,
-          child: Container(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(25.0),
-              color: Colors.black.withOpacity(0.8),
-            ),
-            child: Text(
-              message,
-              textAlign: TextAlign.center,
-              style: const TextStyle(color: Colors.white),
-            ),
-          ),
-        ),
-      ),
-    ),
-  );
-
+      builder: (context) => Positioned(
+          bottom: 50.0,
+          left: 0,
+          right: 0,
+          child: Center(
+              child: Material(
+                  color: Colors.transparent,
+                  child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 24.0, vertical: 12.0),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(25.0),
+                          color: Colors.black.withOpacity(0.8)),
+                      child: Text(message,
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(color: Colors.white)))))));
   overlay.insert(entry);
   Future.delayed(const Duration(seconds: 3)).then((_) {
     if (entry.mounted) entry.remove();

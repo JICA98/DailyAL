@@ -34,7 +34,7 @@ class LinuxDesktopHelper extends TrayListener {
 
   /// Returns true if 'notify-send' is available on the path.
   static bool get hasLibNotify => _hasLibNotify;
-  
+
   static String? _appIconPath;
   /// The absolute path to the extracted app logo on the disk.
   static String? get appIconPath => _appIconPath;
@@ -103,7 +103,7 @@ class LinuxDesktopHelper extends TrayListener {
           : 'data/flutter_assets/assets/images/dal-black-bg.png';
 
       await trayManager.setIcon(iconPath);
-      
+
       List<MenuItem> items = [
         MenuItem(
           key: 'show_window',
@@ -207,11 +207,11 @@ class LinuxDesktopHelper extends TrayListener {
   static void showMissingDependencyNotice() {
     if (Platform.isLinux) {
       List<String> missingPackages = [];
-      
+
       if (!_hasLibNotify) {
         missingPackages.add('libnotify-bin');
       }
-      
+
       if (!_trayInitialized) {
         missingPackages.add('libayatana-appindicator3-dev');
         missingPackages.add('libdbusmenu-gtk3-dev');

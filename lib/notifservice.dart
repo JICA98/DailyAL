@@ -1,6 +1,6 @@
-import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'dart:async';
 
 import 'package:dailyanimelist/api/dalapi.dart';
 import 'package:dailyanimelist/api/malapi.dart';
@@ -12,9 +12,9 @@ import 'package:dailyanimelist/screens/openscreen.dart';
 import 'package:dailyanimelist/widgets/user/contentlistwidget.dart';
 import 'package:dailyanimelist/util/linux_desktop_helper.dart';
 import 'package:dal_commons/commons.dart';
-import 'package:window_manager/window_manager.dart';
 import 'package:dal_commons/dal_commons.dart';
 import 'package:flutter/material.dart';
+import 'package:window_manager/window_manager.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
@@ -75,17 +75,14 @@ class NotificationService {
     final AndroidInitializationSettings initializationSettingsAndroid =
         AndroidInitializationSettings('ic_stat_name');
 
-    const LinuxInitializationSettings initializationSettingsLinux =
-        LinuxInitializationSettings(defaultActionName: 'Open');
-
     tz.initializeTimeZones();
 
     final InitializationSettings initializationSettings =
         InitializationSettings(
             android: initializationSettingsAndroid,
-            linux: initializationSettingsLinux,
             iOS: null,
-            macOS: null);
+            macOS: null,
+            linux: LinuxInitializationSettings(defaultActionName: 'Open'));
 
     await flutterLocalNotificationsPlugin.initialize(
       initializationSettings,

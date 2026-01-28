@@ -128,7 +128,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   ));
         }
       }
-      
+
       if (Platform.isLinux) {
         _traySubscription = LinuxDesktopHelper.onNavigationEvent.listen((event) {
           int targetIndex = homeIndex;
