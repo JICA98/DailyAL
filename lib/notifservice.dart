@@ -338,10 +338,12 @@ class NotificationService {
       if (Platform.isLinux) {
         final delay = exactDate?.difference(DateTime.now()) ?? addTime;
         if (delay.isNegative) {
-          await _showLinuxNotification(serviceId, node, title, body, episode);
+          await _showLinuxNotification(
+              serviceId, node, title, body, episode, imagePath);
         } else {
           Timer(delay, () async {
-            await _showLinuxNotification(serviceId, node, title, body, episode);
+            await _showLinuxNotification(
+                serviceId, node, title, body, episode, imagePath);
           });
         }
       } else {
@@ -376,7 +378,7 @@ class NotificationService {
   }
 
   Future<void> _showLinuxNotification(int serviceId, Node node, String? title,
-      String? body, int episode) async {
+      String? body, int episode, String? imagePath) async {
     final cleanTitle = _replaceTags(title) ??
         "DailyAnimeList - ${S.current.Episode_Reminder}";
     final cleanBody = _replaceTags(body) ??
