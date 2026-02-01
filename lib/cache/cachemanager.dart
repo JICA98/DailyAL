@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:dailyanimelist/constant.dart';
 import 'package:dailyanimelist/util/streamutils.dart';
 import 'package:dailyanimelist/widgets/user/contentbuilder.dart';
 import 'package:dal_commons/dal_commons.dart';
@@ -187,6 +188,7 @@ class CacheManager {
       }
     } catch (e) {
       logDal(e);
+      showToast(e.toString());
     }
   }
 }

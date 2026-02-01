@@ -132,8 +132,7 @@ class _SettingsPageState extends State<SettingsPage> {
               text: S.current.Buy_Me_A_Copy,
               desc: S.current.Buy_Me_A_Copy_Desc,
               iconData: Icons.coffee,
-              onPressed: () =>
-                  launchURL("https://www.buymeacoffee.com/dailyanimelist"),
+              onPressed: () => launchURL("https://ko-fi.com/abhaybyte"),
             );
           else
             return SB.z;
@@ -145,11 +144,6 @@ class _SettingsPageState extends State<SettingsPage> {
           iconData: Icons.language,
           desc: S.current.Language_settings_desc_v2,
           onPressed: () => _openLanguageSettings(context)),
-      PlainButton(
-        onPressed: () =>
-            launchURLWithConfirmation('https://flutter.dev/', context: context),
-        child: title('${S.current.Made_With_Flutter} Flutter'),
-      ),
       if (Platform.isLinux || Platform.isWindows || Platform.isMacOS)
         OptionTile(
           text: "Clear App Storage",
@@ -158,6 +152,11 @@ class _SettingsPageState extends State<SettingsPage> {
           color: Colors.red,
           onPressed: () => _clearAppStorage(context),
         ),
+      PlainButton(
+        onPressed: () =>
+            launchURLWithConfirmation('https://flutter.dev/', context: context),
+        child: title('${S.current.Made_With_Flutter} Flutter'),
+      ),
       SB.h120,
     ];
   }
