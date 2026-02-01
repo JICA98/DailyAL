@@ -1,4 +1,5 @@
 import 'package:dailyanimelist/api/dalapi.dart';
+import 'package:dailyanimelist/cache/cachemanager.dart';
 import 'package:dailyanimelist/constant.dart';
 import 'package:dailyanimelist/generated/l10n.dart';
 import 'package:dailyanimelist/icons/dub_icons.dart';
@@ -18,6 +19,8 @@ import 'package:dailyanimelist/pages/settings/userprefsetting.dart';
 import 'package:dailyanimelist/widgets/custombutton.dart';
 import 'package:dailyanimelist/widgets/customfuture.dart';
 import 'package:dal_commons/dal_commons.dart';
+import 'package:dailyanimelist/main.dart';
+import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
@@ -108,9 +111,9 @@ class _SettingsPageState extends State<SettingsPage> {
             gotoPage(context: context, newPage: AnimeMangaSettings());
           }),
       OptionTile(
-          text: S.current.Dub_Settings,
-          iconData: DubIcons.preferredDubIcon,
-          desc: S.current.Dub_Settings_Desc,
+        text: S.current.Dub_Settings,
+        iconData: DubIcons.preferredDubIcon,
+        desc: S.current.Dub_Settings_Desc,
         onPressed: () => gotoPage(context: context, newPage: DubSettingsPage()),
       ),
       OptionTile(
@@ -147,8 +150,29 @@ class _SettingsPageState extends State<SettingsPage> {
             launchURLWithConfirmation('https://flutter.dev/', context: context),
         child: title('${S.current.Made_With_Flutter} Flutter'),
       ),
+      if (Platform.isLinux || Platform.isWindows || Platform.isMacOS)
+        OptionTile(
+          text: "Clear App Storage",
+          iconData: Icons.delete_forever,
+          desc: "Clear all app data and settings.",
+          color: Colors.red,
+          onPressed: () => _clearAppStorage(context),
+        ),
       SB.h120,
     ];
+  }
+
+  void _clearAppStorage(BuildContext context) async {
+    final result = await showConfirmationDialog(
+      context: context,
+      alertTitle: "Clear App Storage?",
+      desc: "This will remove all data and settings. App will restart.",
+    );
+    if (result) {
+      await CacheManager.instance.clearAppStorage();
+      showToast("App Storage Cleared");
+      RestartApp.restartApp(context);
+    }
   }
 
   Widget get _aboutTile {
@@ -181,15 +205,6 @@ class _SettingsPageState extends State<SettingsPage> {
               if (widget.onUiChange != null) widget.onUiChange!();
             },
           ),
-        ));
-  }
-
-  void _openDubSettings(BuildContext context) {
-    gotoPage(
-        context: context,
-        newPage: SettingSliverScreen(
-          titleString: "Dub Settings",
-          child: DubSettingsPage(),
         ));
   }
 }

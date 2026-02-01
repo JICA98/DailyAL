@@ -17,6 +17,7 @@ class OptionTile extends StatelessWidget {
   final EdgeInsetsGeometry? contentPadding;
   final Widget? subtitle;
   final bool smallTiles;
+  final Color? color;
   const OptionTile({
     Key? key,
     this.text,
@@ -31,6 +32,7 @@ class OptionTile extends StatelessWidget {
     this.authOnly = false,
     this.smallTiles = false,
     this.subtitle,
+    this.color,
   }) : super(key: key);
 
   @override
@@ -42,13 +44,23 @@ class OptionTile extends StatelessWidget {
             minVerticalPadding: smallTiles ? 0.0 : null,
             dense: smallTiles,
             isThreeLine: multiLine,
-            contentPadding: smallTiles ? const EdgeInsets.symmetric(horizontal: 20, vertical: 0) : contentPadding,
+            contentPadding: smallTiles
+                ? const EdgeInsets.symmetric(horizontal: 20, vertical: 0)
+                : contentPadding,
             trailing: trailing,
             subtitle: subtitle ??
                 (desc == null ? null : title(desc, opacity: .7, fontSize: 12)),
-            leading: iconData == null ? null : Icon(iconData),
+            leading: iconData == null
+                ? null
+                : Icon(
+                    iconData,
+                    color: color,
+                  ),
             title: Text(text ?? '',
-                style: TextStyle(fontSize: smallTiles ? 13 : 16)),
+                style: TextStyle(
+                  fontSize: smallTiles ? 13 : 16,
+                  color: color,
+                )),
           )
         : const SizedBox();
   }
@@ -83,7 +95,7 @@ class _AccordionOptionTileState extends State<AccordionOptionTile> {
   @override
   void initState() {
     super.initState();
-    isOpen = widget.isOpen ?? false;
+    isOpen = widget.isOpen;
   }
 
   @override

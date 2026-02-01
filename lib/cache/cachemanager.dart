@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:dailyanimelist/util/streamutils.dart';
 import 'package:dailyanimelist/widgets/user/contentbuilder.dart';
 import 'package:dal_commons/dal_commons.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CacheManager {
@@ -171,5 +172,21 @@ class CacheManager {
 
   void setFirstTime(String s) {
     setValue(s, "true");
+  }
+
+  Future<void> clearAppStorage() async {
+    try {
+      await resetData();
+      final supportDir = await getApplicationSupportDirectory();
+      final cacheDir = await getApplicationCacheDirectory();
+      if (supportDir.existsSync()) {
+        await supportDir.delete(recursive: true);
+      }
+      if (cacheDir.existsSync()) {
+        await cacheDir.delete(recursive: true);
+      }
+    } catch (e) {
+      logDal(e);
+    }
   }
 }
