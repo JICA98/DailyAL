@@ -70,13 +70,14 @@ class _ExplorePageState extends State<ExplorePage> {
     final contentPadding = ResponsiveHelper.getContentPadding(context);
     return CustomScrollView(
       slivers: [
-        SB.lh35,
-        if (!isTablet)
+        if (!isTablet) ...[
+          SB.lh35,
           _wrapSliver(AppBarHome(
             onUiChange: () {
               if (mounted) setState(() {});
             },
           )),
+        ],
         _buildAnimeMangaPicker,
         SB.lh20,
         _wrapSliver(_randomPickerWidget),

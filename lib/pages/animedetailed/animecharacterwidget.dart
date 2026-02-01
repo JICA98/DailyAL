@@ -3,6 +3,7 @@ import 'package:dailyanimelist/constant.dart';
 import 'package:dailyanimelist/generated/l10n.dart';
 
 import 'package:dailyanimelist/screens/characterscreen.dart';
+import 'package:dailyanimelist/widgets/character_va_tile.dart';
 import 'package:dailyanimelist/screens/generalsearchscreen.dart';
 import 'package:dailyanimelist/widgets/avatarwidget.dart';
 import 'package:dailyanimelist/widgets/customfuture.dart';
@@ -396,81 +397,13 @@ class _AllCharsWidgetState extends State<AllCharsWidget> {
   }
 
   Widget _buildCharTile(Character char) {
-    final favorites = char.charInfo?.favorites;
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Expanded(
-            child: Row(
-              children: [
-                _characterWidget(
-                  char.charInfo?.id,
-                  char.characterImage?.large ?? char.characterImage?.medium,
-                  height: 80,
-                  width: 60,
-                ),
-                SB.w10,
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _buildNameAndRole(
-                        char.charInfo?.name ?? '',
-                        _roleMap[char.charInfo?.role ?? 's'] ?? 'Unknown',
-                      ),
-                      SB.h5,
-                      if (favorites != null)
-                        Row(
-                          children: [
-                            const Icon(Icons.favorite,
-                                size: 14, color: Colors.redAccent),
-                            const SizedBox(width: 5),
-                            Text(
-                              favorites.toString(),
-                              style: const TextStyle(fontSize: 12),
-                            ),
-                          ],
-                        ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-          if (char.staffInfoList != null && char.staffInfoList!.isNotEmpty)
-            Expanded(
-              child: Padding(
-                padding: EdgeInsets.only(
-                    top: char.staffInfoList!.length == 1 ? 0 : 25),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: char.staffInfoList!
-                      .map((staff) => Padding(
-                            padding: const EdgeInsets.only(bottom: 10),
-                            child: Row(
-                              children: [
-                                Expanded(
-                                    child: _buildSeiyuuNameAndRole(
-                                        staff.name!, staff.language!)),
-                                SB.w10,
-                                _seiyuuWidget(
-                                  staff.id,
-                                  staff.image?.large ?? staff.image?.medium,
-                                  height: 80,
-                                  width: 60,
-                                ),
-                              ],
-                            ),
-                          ))
-                      .toList(),
-                ),
-              ),
-            )
-        ],
-      ),
+    return CharacterVATile(
+      characterId: char.charInfo?.id,
+      characterImage: char.characterImage?.large ?? char.characterImage?.medium,
+      characterName: char.charInfo?.name ?? '',
+      characterRole: _roleMap[char.charInfo?.role ?? 's'] ?? 'Unknown',
+      favorites: char.charInfo?.favorites,
+      staffList: char.staffInfoList ?? [],
     );
   }
 
