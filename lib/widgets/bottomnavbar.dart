@@ -85,6 +85,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
             url: userProf.data?.picture,
             height: 27,
             width: 27,
+            enableZoom: false,
           ),
         );
       },

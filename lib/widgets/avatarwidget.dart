@@ -18,6 +18,7 @@ class AvatarWidget extends StatelessWidget {
   final BoxFit? fit;
   final bool? userRoundBorderforLoading;
   final VoidCallback? onLongPress;
+  final bool enableZoom;
   const AvatarWidget({
     this.height = 100,
     this.width = 100,
@@ -30,6 +31,7 @@ class AvatarWidget extends StatelessWidget {
     this.username,
     this.useUserImageOnError = true,
     this.isNetworkImage = true,
+    this.enableZoom = false,
   });
   @override
   Widget build(BuildContext context) {
@@ -42,7 +44,9 @@ class AvatarWidget extends StatelessWidget {
         child: InkWell(
           onLongPress: onLongPress != null
               ? onLongPress
-              : (url != null ? () => zoomInImage(context, url!, isNetworkImage) : null),
+              : (url != null && enableZoom
+                  ? () => zoomInImage(context, url!, isNetworkImage)
+                  : null),
           onTap: onTap == null
               ? null
               : () {
