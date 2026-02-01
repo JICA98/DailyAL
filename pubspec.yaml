@@ -33,6 +33,7 @@ dependencies:
   cached_network_image: ^3.4.1
   flutter_secure_storage: ^9.2.2
   url_launcher: ^6.3.0
+  flutter_web_auth_2: ^5.0.0
   shimmer: ^3.0.0
   intl: ^0.20.0
   fluttertoast: ^9.0.0

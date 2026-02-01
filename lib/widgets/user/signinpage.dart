@@ -7,7 +7,6 @@ import 'package:dailyanimelist/widgets/custombutton.dart';
 import 'package:dal_commons/dal_commons.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'dart:io';
 
 import '../../constant.dart';
 import '../../main.dart';
@@ -136,16 +135,14 @@ class _SigninWidgetState extends State<SigninWidget> {
           ),
         ),
         SB.h30,
-        if (kDebugMode ||
-            Platform.isLinux ||
-            Platform.isWindows ||
-            Platform.isMacOS)
+        // Keep manual input only for debug mode as a fallback
+        if (kDebugMode)
           Container(
             padding: EdgeInsets.symmetric(horizontal: 20),
             width: 500,
             child: TextFormField(
-              decoration:
-                  InputDecoration(hintText: "Enter callback URL manually"),
+              decoration: InputDecoration(
+                  hintText: "Enter callback URL manually (debug)"),
               onFieldSubmitted: (value) async {
                 var uri = Uri.tryParse(value);
                 if (uri == null || !(await MalAuth.checkIfSignIn(uri))) {

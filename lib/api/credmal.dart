@@ -1,4 +1,6 @@
+import 'dart:io';
 import 'package:dal_commons/commons.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class CredMal {
@@ -34,8 +36,25 @@ class CredMal {
     return '${environment['MAL_CLIENT_SECRET']}';
   }
 
-  ///Redirect Uri
-  static final String redirectUri = "com.teen.dailyanimelist://login-callback";
+  /// Redirect Uri - platform-specific for OAuth callback
+  /// Android/iOS: custom URL scheme
+  /// Linux/Windows/macOS: localhost for flutter_web_auth_2
+  static String get redirectUri {
+    if (!kIsWeb &&
+        (Platform.isLinux || Platform.isWindows || Platform.isMacOS)) {
+      return "http://localhost:8585/callback";
+    }
+    return "com.teen.dailyanimelist://login-callback";
+  }
+
+  /// Callback URL scheme for flutter_web_auth_2
+  static String get callbackUrlScheme {
+    if (!kIsWeb &&
+        (Platform.isLinux || Platform.isWindows || Platform.isMacOS)) {
+      return "http://localhost:8585";
+    }
+    return "com.teen.dailyanimelist";
+  }
 
   //oauthEndPoint
   static final String oauthEndPoint =

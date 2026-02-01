@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 import 'dart:math';
 
 import 'package:dailyanimelist/api/auth/authresp.dart';
@@ -10,8 +11,9 @@ import 'package:dailyanimelist/user/user.dart';
 import 'package:dailyanimelist/widgets/web/c_webview.dart';
 import 'package:dal_commons/dal_commons.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter_web_auth_2/flutter_web_auth_2.dart';
 import 'package:http/http.dart' as http;
-import 'package:url_launcher/url_launcher.dart';
 
 import '../../constant.dart';
 
@@ -60,7 +62,7 @@ class MalAuth {
     try {
       var response = await httpPostAsync(url, body: body);
       AuthResponse authResponse =
-          AuthResponse.fromJson(jsonDecode(response.body ?? "{}"));
+          AuthResponse.fromJson(jsonDecode(response.body));
       user.authResponse = authResponse;
       user.status = AuthStatus.AUTHENTICATED;
       user.setIntance();
@@ -95,7 +97,7 @@ class MalAuth {
     try {
       var response = await httpPostAsync(url, body: body);
       AuthResponse authResponse =
-          AuthResponse.fromJson(jsonDecode(response.body ?? "{}"));
+          AuthResponse.fromJson(jsonDecode(response.body));
       user.authResponse = authResponse;
       user.status = AuthStatus.AUTHENTICATED;
       user.updateUserStatus();
@@ -119,7 +121,40 @@ class MalAuth {
         "&state=OAuthLogin&redirect_uri=" +
         CredMal.redirectUri;
     await CacheManager.instance.setValue('cc', cc);
-    launchWebView(url);
+
+    // Use flutter_web_auth_2 for desktop platforms (Linux, Windows, macOS)
+    if (!kIsWeb &&
+        (Platform.isLinux || Platform.isWindows || Platform.isMacOS)) {
+      try {
+        logDal('Starting OAuth with flutter_web_auth_2 for desktop');
+        final result = await FlutterWebAuth2.authenticate(
+          url: url,
+          callbackUrlScheme: CredMal.callbackUrlScheme,
+          options: const FlutterWebAuth2Options(
+            useWebview: false, // Use system browser with localhost callback
+          ),
+        );
+
+        logDal('OAuth callback received: $result');
+        final uri = Uri.parse(result);
+        final code = uri.queryParameters['code'];
+
+        if (code != null) {
+          await onCodeReceived(code, cc);
+        } else {
+          logDal('No code received from OAuth callback');
+          user.status = AuthStatus.UNAUTHENTICATED;
+          user.updateUserStatus();
+        }
+      } catch (e) {
+        logDal('OAuth error on desktop: $e');
+        user.status = AuthStatus.UNAUTHENTICATED;
+        user.updateUserStatus();
+      }
+    } else {
+      // For mobile platforms, use the existing webview approach
+      launchWebView(url);
+    }
   }
 
   static Future<void> signOut() async {
