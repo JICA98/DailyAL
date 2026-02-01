@@ -130,7 +130,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       }
 
       if (Platform.isLinux) {
-        _traySubscription = LinuxDesktopHelper.onNavigationEvent.listen((event) {
+        _traySubscription =
+            LinuxDesktopHelper.onNavigationEvent.listen((event) {
           int targetIndex = homeIndex;
           switch (event) {
             case LinuxTrayEvent.search:
@@ -369,7 +370,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                             label: Text(S.current.Calendar),
                           ),
                           NavigationRailDestination(
-                            label: Text(S.current.Profile),
+                            label: Text(user.status == AuthStatus.AUTHENTICATED
+                                ? S.current.Profile
+                                : S.current.Settings),
                             icon: _userProfileWidget(),
                             selectedIcon: _userProfileWidget(isSelected: true),
                           ),
@@ -404,6 +407,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   }
 
   void _onSelected(int value) {
+    if (value == profileIndex && user.status != AuthStatus.AUTHENTICATED) {
+      gotoPage(context: context, newPage: SettingsPage());
+      return;
+    }
     _animationController.reset();
     _animationController.forward();
     if (mounted)
@@ -414,13 +421,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   Widget _userProfileWidget({bool isSelected = false}) {
     if (user.status != AuthStatus.AUTHENTICATED) {
-      return IconButton(
-        icon: Icon(Icons.settings_outlined),
-        onPressed: () {
-          gotoPage(context: context, newPage: SettingsPage());
-        },
-        tooltip: S.current.Settings,
-      );
+      return Icon(isSelected ? Icons.settings : Icons.settings_outlined);
     }
     return CFutureBuilder<UserProf?>(
         loadingChild: SB.z,

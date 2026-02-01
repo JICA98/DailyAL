@@ -822,9 +822,12 @@ class _ReviewGeneratedSummaryState extends State<ReviewGeneratedSummary> {
             contentPadding: EdgeInsets.zero,
             backgroundColor: Theme.of(context).colorScheme.surface,
             content: SingleChildScrollView(
-              child: ReviewGeneratedSummary(
-                reviews: widget.reviews,
-                reviewSummaryFuture: reviewSummaryFuture,
+              child: Container(
+                width: ResponsiveHelper.isTabletOrLarger(context) ? 500 : null,
+                child: ReviewGeneratedSummary(
+                  reviews: widget.reviews,
+                  reviewSummaryFuture: reviewSummaryFuture,
+                ),
               ),
             ),
             actions: [
