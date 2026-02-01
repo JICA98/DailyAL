@@ -1,3 +1,5 @@
+import 'dart:async' as async;
+import 'dart:io';
 import 'package:dailyanimelist/api/credmal.dart';
 import 'package:dailyanimelist/api/dalapi.dart';
 import 'package:dailyanimelist/cache/cachemanager.dart';
@@ -17,6 +19,7 @@ import 'package:dailyanimelist/screens/contentdetailedscreen.dart';
 import 'package:dailyanimelist/screens/generalsearchscreen.dart';
 import 'package:dailyanimelist/user/user.dart';
 import 'package:dailyanimelist/util/responsive_helper.dart';
+import 'package:dailyanimelist/util/linux_desktop_helper.dart';
 import 'package:dailyanimelist/widgets/avatarwidget.dart';
 import 'package:dailyanimelist/widgets/background.dart';
 import 'package:dailyanimelist/widgets/bottomnavbar.dart';
@@ -71,6 +74,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   final backImagePages = [homeIndex];
 
   Map<int, Widget> homeWidgets = {};
+  async.StreamSubscription? _traySubscription;
 
   @override
   void initState() {
@@ -123,6 +127,27 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     child: FeatureShowCase(),
                   ));
         }
+      }
+
+      if (Platform.isLinux) {
+        _traySubscription = LinuxDesktopHelper.onNavigationEvent.listen((event) {
+          int targetIndex = homeIndex;
+          switch (event) {
+            case LinuxTrayEvent.search:
+              targetIndex = searchIndex;
+              break;
+            case LinuxTrayEvent.userList:
+              targetIndex = userIndex;
+              break;
+            case LinuxTrayEvent.calendar:
+              targetIndex = calendarIndex;
+              break;
+            case LinuxTrayEvent.home:
+              targetIndex = homeIndex;
+              break;
+          }
+          _onSelected(targetIndex);
+        });
       }
     });
   }
@@ -197,6 +222,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   @override
   void dispose() {
     _animationController.dispose();
+    _traySubscription?.cancel();
     super.dispose();
   }
 

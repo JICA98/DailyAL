@@ -1021,9 +1021,6 @@ class _ContentDetailedScreenState extends State<ContentDetailedScreen>
                             SB.h20,
                             // Details section (Synopsis, Genres, etc.)
                             if (contentDetailed != null) ...[
-                              _getVisibleSectionByTitle(S.current.Synopsis)
-                                      ?.child ??
-                                  SB.z,
                               SB.h20,
                               _getVisibleSectionByTitle(S.current.More_Info)
                                       ?.child ??
@@ -1138,8 +1135,7 @@ class _ContentDetailedScreenState extends State<ContentDetailedScreen>
 
     // Filter out sections shown in left pane
     final rightPaneSections = visibleSections.where((section) {
-      return section.title != S.current.Synopsis &&
-          section.title != S.current.More_Info;
+      return section.title != S.current.More_Info;
     }).toList();
 
     return SliverList(

@@ -11,6 +11,7 @@ import 'package:dailyanimelist/theme/theme.dart';
 import 'package:dailyanimelist/user/user.dart';
 import 'package:dailyanimelist/util/error/error_reporting.dart';
 import 'package:dailyanimelist/util/pathutils.dart';
+import 'package:dailyanimelist/util/linux_desktop_helper.dart';
 import 'package:dailyanimelist/util/streamutils.dart';
 import 'package:dailyanimelist/widgets/customfuture.dart';
 import 'package:dal_api/dal_local_api.dart';
@@ -50,13 +51,18 @@ void main() async {
     WidgetsFlutterBinding.ensureInitialized();
     ErrorReporting.init();
     await StreamUtils.i.init();
-    final androidInfo = await DeviceInfoPlugin().androidInfo;
-    androidSDKVersion = androidInfo.version.sdkInt;
+    if (Platform.isLinux) {
+      await LinuxDesktopHelper.init();
+    }
+    if (Platform.isAndroid) {
+      final androidInfo = await DeviceInfoPlugin().androidInfo;
+      androidSDKVersion = androidInfo.version.sdkInt;
+    }
     await FlutterDisplayMode.setHighRefreshRate();
   } catch (e) {}
 
   Node? node;
-  if (!kIsWeb && Platform.isAndroid) {
+  if (!kIsWeb && (Platform.isAndroid || Platform.isLinux)) {
     await NotificationService().init();
     node = await NotificationService().onSelectWhileAsleep();
   }

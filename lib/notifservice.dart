@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:async';
 
 import 'package:dailyanimelist/api/dalapi.dart';
 import 'package:dailyanimelist/api/malapi.dart';
@@ -9,9 +10,11 @@ import 'package:dailyanimelist/generated/l10n.dart';
 import 'package:dailyanimelist/main.dart';
 import 'package:dailyanimelist/screens/openscreen.dart';
 import 'package:dailyanimelist/widgets/user/contentlistwidget.dart';
+import 'package:dailyanimelist/util/linux_desktop_helper.dart';
 import 'package:dal_commons/commons.dart';
 import 'package:dal_commons/dal_commons.dart';
 import 'package:flutter/material.dart';
+import 'package:window_manager/window_manager.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
@@ -76,7 +79,10 @@ class NotificationService {
 
     final InitializationSettings initializationSettings =
         InitializationSettings(
-            android: initializationSettingsAndroid, iOS: null, macOS: null);
+            android: initializationSettingsAndroid,
+            iOS: null,
+            macOS: null,
+            linux: LinuxInitializationSettings(defaultActionName: 'Open'));
 
     await flutterLocalNotificationsPlugin.initialize(
       initializationSettings,
@@ -115,6 +121,10 @@ class NotificationService {
 
       if (_node != null) {
         logDal("--> payload works");
+        if (Platform.isLinux) {
+          await windowManager.show();
+          await windowManager.focus();
+        }
         gotoPage(
             context: MyApp.navigatorKey.currentContext!,
             newPage: OpenScreen(notifNode: _node));
@@ -322,32 +332,79 @@ class NotificationService {
     }
 
     try {
-      await flutterLocalNotificationsPlugin.zonedSchedule(
-        serviceId * 100 + node.id!,
-        _replaceTags(title) ?? "DailyAnimeList - ${S.current.Episode_Reminder}",
-        _replaceTags(body) ??
-            "${node.title} - Episode $episode ${S.current.just_got_aired}!!",
-        exactDate != null
-            ? tz.TZDateTime.from(exactDate, tz.local)
-            : tz.TZDateTime.now(tz.local).add(addTime),
-        NotificationDetails(
-          android: AndroidNotificationDetails(
-            channel.channelId,
-            channel.channelName,
-            channelDescription: channel.channelDescription,
-            priority: Priority.high,
-            styleInformation: styleInfo,
-            icon: 'ic_stat_name',
-            largeIcon: largeIconBitmap,
-            category: AndroidNotificationCategory.reminder,
-          ),
-        ),
-        androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
-        payload: jsonEncode(node.toJson()),
-        matchDateTimeComponents: DateTimeComponents.time
-      );
+      if (Platform.isLinux) {
+        final delay = exactDate?.difference(DateTime.now()) ?? addTime;
+        if (delay.isNegative) {
+          await _showLinuxNotification(
+              serviceId, node, title, body, episode, imagePath);
+        } else {
+          Timer(delay, () async {
+            await _showLinuxNotification(
+                serviceId, node, title, body, episode, imagePath);
+          });
+        }
+      } else {
+        await flutterLocalNotificationsPlugin.zonedSchedule(
+            serviceId * 100 + node.id!,
+            _replaceTags(title) ??
+                "DailyAnimeList - ${S.current.Episode_Reminder}",
+            _replaceTags(body) ??
+                "${node.title} - Episode $episode ${S.current.just_got_aired}!!",
+            exactDate != null
+                ? tz.TZDateTime.from(exactDate, tz.local)
+                : tz.TZDateTime.now(tz.local).add(addTime),
+            NotificationDetails(
+              android: AndroidNotificationDetails(
+                channel.channelId,
+                channel.channelName,
+                channelDescription: channel.channelDescription,
+                priority: Priority.high,
+                styleInformation: styleInfo,
+                icon: 'ic_stat_name',
+                largeIcon: largeIconBitmap,
+                category: AndroidNotificationCategory.reminder,
+              ),
+            ),
+            androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+            payload: jsonEncode(node.toJson()),
+            matchDateTimeComponents: DateTimeComponents.time);
+      }
     } catch (e) {
       logDal(e);
+    }
+  }
+
+  Future<void> _showLinuxNotification(int serviceId, Node node, String? title,
+      String? body, int episode, String? imagePath) async {
+    final cleanTitle = _replaceTags(title) ??
+        "DailyAnimeList - ${S.current.Episode_Reminder}";
+    final cleanBody = _replaceTags(body) ??
+        "${node.title} - Episode $episode ${S.current.just_got_aired}!!";
+
+    if (LinuxDesktopHelper.hasLibNotify) {
+      try {
+        final iconPath = LinuxDesktopHelper.appIconPath;
+        final LinuxNotificationIcon? linuxIcon =
+            iconPath != null ? FilePathLinuxIcon(iconPath) : null;
+
+        await flutterLocalNotificationsPlugin.show(
+          serviceId * 100 + node.id!,
+          cleanTitle,
+          cleanBody,
+          NotificationDetails(
+            linux: LinuxNotificationDetails(
+              urgency: LinuxNotificationUrgency.normal,
+              icon: linuxIcon,
+            ),
+          ),
+          payload: jsonEncode(node.toJson()),
+        );
+      } catch (e) {
+        logDal('Native Linux notification failed, falling back to overlay: $e');
+        showToast('$cleanTitle\n$cleanBody');
+      }
+    } else {
+      showToast('$cleanTitle\n$cleanBody');
     }
   }
 
@@ -375,6 +432,7 @@ class NotificationService {
   }
 
   Future<void> askForPermission() async {
+    if (Platform.isLinux) return;
     if (user.pref.notifPref.onPTWGoesToWatching ||
         user.pref.notifPref.onWatchingListUpdated) {
       final notifPerm = await Permission.notification.status;
@@ -398,6 +456,7 @@ class NotificationService {
   }
 
   Future<bool> _askNotifPermissionUsingLocal() async {
+    if (Platform.isLinux) return true;
     FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
         FlutterLocalNotificationsPlugin();
     return ((await _getAlarmPerm(flutterLocalNotificationsPlugin)) ?? false) &&
