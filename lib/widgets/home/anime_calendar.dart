@@ -10,6 +10,7 @@ import 'package:dailyanimelist/util/streamutils.dart';
 import 'package:dailyanimelist/widgets/avatarwidget.dart';
 import 'package:dailyanimelist/widgets/custombutton.dart';
 import 'package:dailyanimelist/widgets/customfuture.dart';
+import 'package:dailyanimelist/widgets/home/accordion.dart';
 import 'package:dailyanimelist/widgets/slivers.dart';
 import 'package:dal_commons/commons.dart';
 import 'package:flutter/material.dart';
@@ -45,9 +46,15 @@ class SchduledNode {
 class _Filter {
   final String displayText;
   final String value;
-  bool isApplied = true;
+  final bool isAll;
+  bool isApplied;
 
-  _Filter({required this.displayText, required this.value});
+  _Filter({
+    required this.displayText,
+    required this.value,
+    this.isAll = false,
+    this.isApplied = true,
+  });
 }
 
 class AnimeCalendarWidget extends StatefulWidget {
@@ -106,9 +113,10 @@ class _AnimeCalendarWidgetState extends State<AnimeCalendarWidget> {
   }
 
   Widget _buildScheduleTree(SearchResult? result, Map<int, ScheduleData>? map) {
+    // Include all anime from the season, filtering is done in the child widget
     Map<int, Node> nodes = HashMap.fromEntries(result?.data
-            ?.where(_onlyWithStatus)
-            .map((e) => e.content)
+            ?.map((e) => e.content)
+            .where((e) => e != null && e.id != null)
             .map((e) => MapEntry(e!.id!, e)) ??
         []);
     final schedulesList = map?.entries
@@ -130,18 +138,6 @@ class _AnimeCalendarWidgetState extends State<AnimeCalendarWidget> {
       }
     }
     return _buildCustomScrollView(dayMap);
-  }
-
-  bool _onlyWithStatus(BaseNode node) {
-    if (node.content?.myListStatus != null) {
-      if (node.content!.myListStatus is MyAnimeListStatus) {
-        final status = node.content?.myListStatus as MyAnimeListStatus?;
-        if (status?.status == null) return false;
-        return status!.status!.equals("watching") ||
-            status.status!.equals("plan_to_watch");
-      }
-    }
-    return false;
   }
 
   bool _onlyWithSchedule(MapEntry<int, ScheduleData> e, Map<int, Node> nodes) {
@@ -248,12 +244,21 @@ class _ScheduleCustomList extends StatefulWidget {
 
 class __ScheduleCustomListState extends State<_ScheduleCustomList> {
   final _filters = [
+    _Filter(
+        displayText: S.current.All,
+        value: 'all',
+        isAll: true,
+        isApplied: false),
     _Filter(displayText: S.current.Plan_To_Watch, value: 'plan_to_watch'),
     _Filter(displayText: S.current.Watching, value: 'watching'),
   ];
 
-  List<String> get _selectedFilters =>
-      _filters.where((e) => e.isApplied).map((e) => e.value).toList();
+  bool get _isAllSelected => _filters.any((e) => e.isAll && e.isApplied);
+
+  List<String> get _selectedFilters => _filters
+      .where((e) => !e.isAll && e.isApplied)
+      .map((e) => e.value)
+      .toList();
 
   static const _weekdaysMap = {
     1: 'monday',
@@ -307,24 +312,80 @@ class __ScheduleCustomListState extends State<_ScheduleCustomList> {
   List<Widget> _weekChildren(int weekIndex) {
     final mapEntry = _mapAtIndex(weekIndex);
     final hasCurrentNode = mapEntry.value.any((e) => e.currentDay);
+    final filteredNodes = mapEntry.value.where(_filterScheduleNode).toList();
+    final itemCount = filteredNodes.where((e) => !e.currentDay).length;
+
     return [
       SliverWrapper(
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20.0),
-          child: title(_weekdaysMap[mapEntry.key]!.capitalize()),
+        Accordion(
+          title: '${_weekdaysMap[mapEntry.key]!.capitalize()} ($itemCount)',
+          isOpen: true,
+          titlePadding:
+              const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
+          child: hasCurrentNode
+              ? StreamBuilder<int>(
+                  stream: _streamListener.stream,
+                  builder: (context, snapshot) {
+                    _setLatestTimestamp(mapEntry, snapshot);
+                    return _buildDayContent(filteredNodes, weekIndex);
+                  },
+                )
+              : _buildDayContent(filteredNodes, weekIndex),
         ),
       ),
-      if (hasCurrentNode)
-        StreamBuilder<int>(
-          stream: _streamListener.stream,
-          builder: (context, snapshot) {
-            _setLatestTimestamp(mapEntry, snapshot);
-            return _listTiles(mapEntry, weekIndex);
-          },
-        )
-      else
-        _listTiles(mapEntry, weekIndex)
     ];
+  }
+
+  Widget _buildDayContent(List<SchduledNode> nodes, int weekIndex) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        // Use 2 columns on larger screens (≥600px)
+        final isLargeScreen = constraints.maxWidth >= 600;
+
+        if (!isLargeScreen) {
+          // Single column layout for smaller screens
+          return Column(
+            children: nodes
+                .mapIndexed((i, n) => _buildAnimeListTile(i, n, weekIndex))
+                .toList(),
+          );
+        }
+
+        // Two column grid layout for larger screens
+        final List<Widget> rows = [];
+        for (int i = 0; i < nodes.length; i++) {
+          final node = nodes[i];
+          if (node.currentDay) {
+            // Current day tile spans full width
+            rows.add(_buildAnimeListTile(i, node, weekIndex));
+          } else {
+            // Find next non-current-day node for pairing
+            final nextIndex = i + 1;
+            if (nextIndex < nodes.length && !nodes[nextIndex].currentDay) {
+              rows.add(Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(child: _buildAnimeListTile(i, node, weekIndex)),
+                  Expanded(
+                      child: _buildAnimeListTile(
+                          nextIndex, nodes[nextIndex], weekIndex)),
+                ],
+              ));
+              i++; // Skip the next node since we already processed it
+            } else {
+              // Odd item, place it alone
+              rows.add(Row(
+                children: [
+                  Expanded(child: _buildAnimeListTile(i, node, weekIndex)),
+                  const Expanded(child: SizedBox.shrink()),
+                ],
+              ));
+            }
+          }
+        }
+        return Column(children: rows);
+      },
+    );
   }
 
   void _setLatestTimestamp(
@@ -334,20 +395,12 @@ class __ScheduleCustomListState extends State<_ScheduleCustomList> {
     });
   }
 
-  SliverListWrapper _listTiles(
-      MapEntry<int, List<SchduledNode>> mapEntry, int weekIndex) {
-    return SliverListWrapper(
-      mapEntry.value
-          .where(_filterScheduleNode)
-          .mapIndexed((i, n) => _buildAnimeListTile(i, n, weekIndex))
-          .toList(),
-    );
-  }
-
   bool _filterScheduleNode(SchduledNode e) {
     if (e.currentDay) return true;
+    // When "All" is selected, show all anime without status filtering
+    if (_isAllSelected) return true;
     return _selectedFilters
-        .contains((e.anime.myListStatus as MyAnimeListStatus).status);
+        .contains((e.anime.myListStatus as MyAnimeListStatus?)?.status);
   }
 
   Widget _buildAnimeListTile(int index, SchduledNode node, int dayIndex) {
@@ -461,7 +514,28 @@ class __ScheduleCustomListState extends State<_ScheduleCustomList> {
         onPressed: () {
           if (mounted)
             setState(() {
-              filter.isApplied = !filter.isApplied;
+              if (filter.isAll) {
+                // When "All" is toggled on, disable other filters
+                filter.isApplied = !filter.isApplied;
+                if (filter.isApplied) {
+                  for (final f in _filters) {
+                    if (!f.isAll) f.isApplied = false;
+                  }
+                }
+              } else {
+                // When a specific filter is toggled
+                filter.isApplied = !filter.isApplied;
+                // If user disabled all specific filters, enable "All"
+                final anySpecificApplied =
+                    _filters.any((f) => !f.isAll && f.isApplied);
+                final allFilter = _filters.firstWhere((f) => f.isAll);
+                if (!anySpecificApplied) {
+                  allFilter.isApplied = true;
+                } else {
+                  // If a specific filter is enabled, disable "All"
+                  allFilter.isApplied = false;
+                }
+              }
             });
         },
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
