@@ -225,7 +225,7 @@ class _ForumPostsScreenState extends State<ForumPostsScreen> {
                 ? _customScrollView([
                     sliverHeader,
                     _sliverWidgets([showNoContent()]),
-                    SB.h120,
+                    SB.lh120,
                   ])
                 : _customScrollView([
                     sliverHeader,
