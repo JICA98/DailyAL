@@ -105,14 +105,14 @@ class _RelatedAnimeWidgetState extends State<RelatedAnimeWidget>
       if (_graph is AnimeGraph) {
         return _graphWidget(_graph);
       } else {
-        return _noContentView();
+        return _noContentView(isLoading: _graph == null);
       }
     }
   }
 
-  Widget _noContentView() {
+  Widget _noContentView({bool isLoading = false}) {
     return TitlebarScreen(
-      Center(child: showNoContent()),
+      Center(child: isLoading ? CircularProgressIndicator() : showNoContent()),
       appbarTitle: _appBarTitle,
       actions: _getActions(false),
       autoIncludeSearch: false,

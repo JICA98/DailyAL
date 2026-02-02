@@ -208,6 +208,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       calendarIndex: OpacityAnima(
           child: AnimeCalendarWidget(showCloseButton: false),
           animation: animation),
+      settingsIndex: OpacityAnima(child: SettingsPage(), animation: animation),
     };
   }
 
@@ -370,11 +371,14 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                             label: Text(S.current.Calendar),
                           ),
                           NavigationRailDestination(
-                            label: Text(user.status == AuthStatus.AUTHENTICATED
-                                ? S.current.Profile
-                                : S.current.Settings),
+                            label: Text(S.current.Profile),
                             icon: _userProfileWidget(),
                             selectedIcon: _userProfileWidget(isSelected: true),
+                          ),
+                          NavigationRailDestination(
+                            icon: Icon(Icons.settings_outlined),
+                            selectedIcon: Icon(Icons.settings),
+                            label: Text(S.current.Settings),
                           ),
                         ],
                       ),
@@ -407,6 +411,15 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   }
 
   void _onSelected(int value) {
+    if (value == settingsIndex) {
+      _animationController.reset();
+      _animationController.forward();
+      if (mounted)
+        setState(() {
+          pageIndex = settingsIndex;
+        });
+      return;
+    }
     if (value == profileIndex && user.status != AuthStatus.AUTHENTICATED) {
       gotoPage(context: context, newPage: SettingsPage());
       return;

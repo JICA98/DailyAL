@@ -40,6 +40,7 @@ final int searchIndex = 4; // Used for tablet navigation
 final int bookmarksIndex = 5;
 final int calendarIndex = 6;
 final int profileIndex = 7;
+final int settingsIndex = 8;
 GlobalKey<ScaffoldMessengerState> messenger = GlobalKey();
 
 void main() async {
