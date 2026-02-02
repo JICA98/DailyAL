@@ -17,7 +17,6 @@
 ## Download
 
 [![GitHub Releases](https://img.shields.io/github/v/tag/jica98/dailyal?label=Github&logo=github&logoColor=FFFFFF)](https://github.com/JICA98/DailyAL/releases)
-[![Play Store](https://img.shields.io/badge/Play%20Store-Download-3DDC84?logo=google-play&logoColor=FFFFFF)](https://play.google.com/store/apps/details?id=io.github.jica98)
 [![f-droid](https://img.shields.io/f-droid/v/io.github.jica98?logo=f-droid&logoColor=FFFFFF)](https://f-droid.org/packages/io.github.jica98/)
  
 </div>
