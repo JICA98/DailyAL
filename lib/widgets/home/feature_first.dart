@@ -66,7 +66,8 @@ class _FeatureShowCaseState extends State<FeatureShowCase> {
       _FlagType.homePageSize => homePageTileSizeOption((_) => setState(() {})),
       _FlagType.prefferedTitle =>
         preferredTitleOptionTile((_) => setState(() {})),
-      _FlagType.startUpPage => startUpPageFeature((_) => setState(() {})),
+      _FlagType.startUpPage =>
+        startUpPageFeature((_) => setState(() {}), isTablet: false),
     };
   }
 

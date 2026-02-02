@@ -41,7 +41,9 @@ class UserPreferences {
   HomePageTileSize homePageTileSize;
   TitleLang preferredAnimeTitle;
   AnimeMangaPagePreferences animeMangaPagePreferences;
-  int startUpPage;
+  int startUpPage; // Deprecated, kept for migration
+  int startUpPageMobile; // Startup page for phone (0-4)
+  int startUpPageTablet; // Startup page for tablet (0-7)
   LinkType preferredLinkType;
   bool allowYoutubePlayer;
   String preferredFont;
@@ -79,6 +81,8 @@ class UserPreferences {
     required this.preferredAnimeTitle,
     required this.animeMangaPagePreferences,
     required this.startUpPage,
+    required this.startUpPageMobile,
+    required this.startUpPageTablet,
     required this.showAnimeMangaCard,
     required this.preferredLinkType,
     required this.allowYoutubePlayer,
@@ -99,8 +103,8 @@ class UserPreferences {
         _showAiringInfo = false,
         _showDubStatus = false;
     String _dubLanguage = 'english',
-           _dubIconStyle = '0',
-           _dubMinSourceCount = '1';
+        _dubIconStyle = '0',
+        _dubMinSourceCount = '1';
     Brightness _brightness = Brightness.dark;
     bool _showPriority = false,
         _autoTranslateSynopsis = false,
@@ -244,7 +248,13 @@ class UserPreferences {
             firstTimePref: FirstTimePref.fromJson(json['firstTimePref']),
             preferredAnimeTitle: TitleLang.values
                 .elementAt(json['preferredAnimeTitle'] ?? TitleLang.ro.index),
-            startUpPage: min(json['startUpPage'] ?? 0, 3),
+            startUpPage: min(json['startUpPage'] ?? 0, 7),
+            // Migrate from old startUpPage if new fields don't exist
+            startUpPageMobile: min(
+                json['startUpPageMobile'] ?? (min(json['startUpPage'] ?? 0, 4)),
+                4),
+            startUpPageTablet:
+                min(json['startUpPageTablet'] ?? (json['startUpPage'] ?? 0), 7),
             preferredLinkType: LinkType.values.firstWhere(
               (e) => e.name == json['preferredLinkType'],
               orElse: () => LinkType.streaming,
@@ -287,6 +297,8 @@ class UserPreferences {
             homePageTileSize: HomePageTileSize.l,
             preferredAnimeTitle: TitleLang.ro,
             startUpPage: 0,
+            startUpPageMobile: 0,
+            startUpPageTablet: 0,
             preferredLinkType: LinkType.streaming,
             showAnimeMangaCard: false,
             allowYoutubePlayer: false,
@@ -331,6 +343,8 @@ class UserPreferences {
       'animeMangaPagePreferences': animeMangaPagePreferences,
       'showAnimeMangaCard': showAnimeMangaCard,
       'startUpPage': startUpPage,
+      'startUpPageMobile': startUpPageMobile,
+      'startUpPageTablet': startUpPageTablet,
       'allowYoutubePlayer': allowYoutubePlayer,
       'preferredLinkType': preferredLinkType.name,
       'preferredFont': preferredFont,

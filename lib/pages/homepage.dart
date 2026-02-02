@@ -161,7 +161,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final isTablet = ResponsiveHelper.isTabletOrLarger(context);
+    // Use isExpandedOrLarger for consistency with homescreen navigation
+    final isTablet = ResponsiveHelper.isExpandedOrLarger(context);
 
     return Padding(
       padding: EdgeInsets.only(left: 0, right: 0, top: 0),

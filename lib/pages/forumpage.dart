@@ -157,7 +157,8 @@ class _ForumPageState extends State<ForumPage> with TickerProviderStateMixin {
   }
 
   Widget _buildForumPage() {
-    final isTablet = ResponsiveHelper.isTabletOrLarger(context);
+    // Use isExpandedOrLarger for consistency with homescreen navigation
+    final isTablet = ResponsiveHelper.isExpandedOrLarger(context);
 
     if (isTablet) {
       return DefaultTabController(
@@ -243,7 +244,8 @@ class _ForumPageState extends State<ForumPage> with TickerProviderStateMixin {
   }
 
   Widget _forumPage() {
-    final isTablet = ResponsiveHelper.isTabletOrLarger(context);
+    // Use isExpandedOrLarger for consistency with homescreen navigation
+    final isTablet = ResponsiveHelper.isExpandedOrLarger(context);
     final contentPadding = ResponsiveHelper.getContentPadding(context);
     final sectionSpacing = ResponsiveHelper.getSectionSpacing(context);
 

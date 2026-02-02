@@ -93,7 +93,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     homeWidgets = _getPhoneWidgets();
 
     if (widget.pageIndex != null) {
-      pageIndex = widget.pageIndex! % 4; // Use 4 for initial calculation
+      // Widget pageIndex takes precedence
+      pageIndex = widget.pageIndex!;
     } else {
       pageIndex = user.pref.startUpPage;
     }
@@ -168,9 +169,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     if (homeWidgets.length != newWidgets.length) {
       setState(() {
         homeWidgets = newWidgets;
-        // Adjust pageIndex if it's out of bounds
-        if (pageIndex >= homeWidgets.length) {
-          pageIndex = 0;
+        // Use the appropriate startup page for the current screen size
+        if (useNavigationRail) {
+          pageIndex =
+              user.pref.startUpPageTablet.clamp(0, homeWidgets.length - 1);
+        } else {
+          pageIndex = user.pref.startUpPageMobile.clamp(0, phoneProfileIndex);
         }
       });
     }
@@ -393,9 +397,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         ),
       );
     } else {
+      // On phone, clamp pageIndex to valid phone navigation range (0-4)
+      final phonePageIndex = pageIndex.clamp(0, phoneProfileIndex);
       return Scaffold(
         bottomNavigationBar: BottomNavBar(
-          startIndex: pageIndex,
+          startIndex: phonePageIndex,
           onChanged: (value) {
             _animationController.reset();
             _animationController.forward();

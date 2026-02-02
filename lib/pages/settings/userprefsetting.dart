@@ -6,6 +6,7 @@ import 'package:dailyanimelist/enums.dart';
 import 'package:dailyanimelist/pages/settings/optiontile.dart';
 import 'package:dailyanimelist/screens/contentdetailedscreen.dart';
 import 'package:dailyanimelist/screens/generalsearchscreen.dart';
+import 'package:dailyanimelist/util/responsive_helper.dart';
 import 'package:dailyanimelist/widgets/avatarwidget.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:line_icons/line_icons.dart';
@@ -57,25 +58,50 @@ Widget preferredTitleOptionTile(ValueChanged<TitleLang> valueChanged) {
   );
 }
 
-final _options = [
-  S.current.Home_Page,
-  S.current.Forums_Page,
-  S.current.listPage,
-  S.current.Explore,
-];
+// Phone navigation options (indexes 0-3)
+List<String> _getPhoneOptions() => [
+      S.current.Home_Page, // homeIndex = 0
+      S.current.Forums_Page, // forumIndex = 1
+      S.current.listPage, // userIndex = 2
+      S.current.Explore, // exploreIndex = 3
+    ];
 
-Widget startUpPageFeature(ValueChanged<int> onChanged) {
+// Tablet navigation options (indexes 0-7, excluding settings which opens in place)
+List<String> _getTabletOptions() => [
+      S.current.Home_Page, // homeIndex = 0
+      S.current.Social, // socialIndex = 1
+      S.current.listPage, // userIndex = 2
+      S.current.Explore, // exploreIndex = 3
+      S.current.Search, // searchIndex = 4
+      S.current.Bookmarks, // bookmarksIndex = 5
+      S.current.Calendar, // calendarIndex = 6
+      S.current.Profile, // profileIndex = 7
+    ];
+
+Widget startUpPageFeature(ValueChanged<int> onChanged,
+    {required bool isTablet}) {
+  final options = isTablet ? _getTabletOptions() : _getPhoneOptions();
+  // Use the appropriate field based on device type
+  final currentValue =
+      isTablet ? user.pref.startUpPageTablet : user.pref.startUpPageMobile;
+  final currentIndex = currentValue.clamp(0, options.length - 1);
+
   return OptionTile(
     iconData: Icons.navigation,
     text: S.current.StartUp_page,
     trailing: SelectButton(
       popupText: S.current.StartUp_page,
-      selectedOption: _options[user.pref.startUpPage],
-      options: _options,
+      selectedOption: options[currentIndex],
+      options: options,
       onChanged: (value) {
-        user.pref.startUpPage = _options.indexOf(value);
+        final newIndex = options.indexOf(value);
+        if (isTablet) {
+          user.pref.startUpPageTablet = newIndex;
+        } else {
+          user.pref.startUpPageMobile = newIndex;
+        }
         user.setIntance(updateAuth: false);
-        onChanged(user.pref.startUpPage);
+        onChanged(newIndex);
       },
     ),
   );
@@ -281,9 +307,12 @@ class _UserPrefSettingsState extends State<UserPrefSettings> {
               ),
             ),
           SB.h10,
-          startUpPageFeature((value) {
-            if (mounted) setState(() {});
-          }),
+          startUpPageFeature(
+            (value) {
+              if (mounted) setState(() {});
+            },
+            isTablet: ResponsiveHelper.isExpandedOrLarger(context),
+          ),
           SB.h120
         ],
       ),
