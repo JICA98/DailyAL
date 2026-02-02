@@ -18,6 +18,8 @@
 
 [![GitHub Releases](https://img.shields.io/github/v/tag/jica98/dailyal?label=Github&logo=github&logoColor=FFFFFF)](https://github.com/JICA98/DailyAL/releases)
 [![f-droid](https://img.shields.io/f-droid/v/io.github.jica98?logo=f-droid&logoColor=FFFFFF)](https://f-droid.org/packages/io.github.jica98/)
+
+> **Note:** The app has been delisted from the Google Play Store. Please use GitHub Releases or F-Droid to download the app.
  
 </div>
 
