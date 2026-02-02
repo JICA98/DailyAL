@@ -5,3 +5,4 @@ Icon=daily_al
 Type=Application
 Categories=Utility;
 Terminal=false
+StartupWMClass=com.teen.dailyanimelist
