@@ -1056,6 +1056,16 @@ class MessageLookup extends MessageLookupByLibrary {
     "Priority_level_qn": MessageLookupByLibrary.simpleMessage(
       "ما هو مستوى أولويتك لمشاهدة / قراءة هذا؟",
     ),
+    "Private_Note": MessageLookupByLibrary.simpleMessage("ملاحظة خاصة"),
+    "Private_Note_Desc": MessageLookupByLibrary.simpleMessage(
+      "يتم حفظها محليًا، ولن يتم إرسالها إلى الخوادم أبدًا",
+    ),
+    "Private_Note_Hint": MessageLookupByLibrary.simpleMessage(
+      "اكتب ملاحظتك الخاصة هنا...",
+    ),
+    "Private_Note_Local_Only": MessageLookupByLibrary.simpleMessage(
+      "هذه الملاحظة محلية فقط ولن يتمت مزامنتها.",
+    ),
     "Profile": MessageLookupByLibrary.simpleMessage("الملف الشخصي"),
     "Profile_Page": MessageLookupByLibrary.simpleMessage("الصفحة الشخصية"),
     "Profile_bg_removed": MessageLookupByLibrary.simpleMessage(
@@ -1297,6 +1307,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "Show_Menu": MessageLookupByLibrary.simpleMessage("قائمة العرض"),
     "Show_Original": MessageLookupByLibrary.simpleMessage(
       "إظهار النسخة الأصلية",
+    ),
+    "Show_Private_Review": MessageLookupByLibrary.simpleMessage(
+      "إظهار الملاحظة الخاصة",
+    ),
+    "Show_Private_Review_Desc": MessageLookupByLibrary.simpleMessage(
+      "إظهار حقل الملاحظة الخاصة في شاشة التحرير",
     ),
     "Show_Spoiler": MessageLookupByLibrary.simpleMessage("عرض المفسد"),
     "Show_priority_in_anime_manga_list": MessageLookupByLibrary.simpleMessage(

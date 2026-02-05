@@ -321,12 +321,7 @@ class S {
 
   /// `Score Stats`
   String get Score_Stats {
-    return Intl.message(
-      'Score Stats',
-      name: 'Score_Stats',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Score Stats', name: 'Score_Stats', desc: '', args: []);
   }
 
   /// `Pictures`
@@ -7612,6 +7607,66 @@ class S {
   /// `Calendar`
   String get Calendar {
     return Intl.message('Calendar', name: 'Calendar', desc: '', args: []);
+  }
+
+  /// `Private Note`
+  String get Private_Note {
+    return Intl.message(
+      'Private Note',
+      name: 'Private_Note',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Show Private Review`
+  String get Show_Private_Review {
+    return Intl.message(
+      'Show Private Review',
+      name: 'Show_Private_Review',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Show private note field in the edit screen`
+  String get Show_Private_Review_Desc {
+    return Intl.message(
+      'Show private note field in the edit screen',
+      name: 'Show_Private_Review_Desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Saved locally, never sent to servers`
+  String get Private_Note_Desc {
+    return Intl.message(
+      'Saved locally, never sent to servers',
+      name: 'Private_Note_Desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Write your private note here...`
+  String get Private_Note_Hint {
+    return Intl.message(
+      'Write your private note here...',
+      name: 'Private_Note_Hint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This note is local only and won't be synced.`
+  String get Private_Note_Local_Only {
+    return Intl.message(
+      'This note is local only and won\'t be synced.',
+      name: 'Private_Note_Local_Only',
+      desc: '',
+      args: [],
+    );
   }
 }
 

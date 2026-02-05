@@ -1100,6 +1100,16 @@ class MessageLookup extends MessageLookupByLibrary {
     "Priority_level_qn": MessageLookupByLibrary.simpleMessage(
       "Bunu izlemek/okumak için öncelik düzeyiniz nedir?",
     ),
+    "Private_Note": MessageLookupByLibrary.simpleMessage("Özel Not"),
+    "Private_Note_Desc": MessageLookupByLibrary.simpleMessage(
+      "Yerel olarak kaydedilir, asla sunuculara gönderilmez",
+    ),
+    "Private_Note_Hint": MessageLookupByLibrary.simpleMessage(
+      "Özel notunuzu buraya yazın...",
+    ),
+    "Private_Note_Local_Only": MessageLookupByLibrary.simpleMessage(
+      "Bu not yalnızca yereldir ve senkronize edilmeyecektir.",
+    ),
     "Profile": MessageLookupByLibrary.simpleMessage("Profil"),
     "Profile_Page": MessageLookupByLibrary.simpleMessage("Profil sayfası"),
     "Profile_bg_removed": MessageLookupByLibrary.simpleMessage(
@@ -1348,6 +1358,12 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "Show_Menu": MessageLookupByLibrary.simpleMessage("Menüyü göster"),
     "Show_Original": MessageLookupByLibrary.simpleMessage("Orjinali göster"),
+    "Show_Private_Review": MessageLookupByLibrary.simpleMessage(
+      "Özel Notu Göster",
+    ),
+    "Show_Private_Review_Desc": MessageLookupByLibrary.simpleMessage(
+      "Düzenleme ekranında özel not alanını göster",
+    ),
     "Show_Spoiler": MessageLookupByLibrary.simpleMessage("Spoiler\'ı Göster"),
     "Show_priority_in_anime_manga_list": MessageLookupByLibrary.simpleMessage(
       "Anime/manga listesinde önceliği göster",

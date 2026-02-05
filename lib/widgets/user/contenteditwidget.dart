@@ -78,7 +78,8 @@ class _ContentEditWidgetState extends State<ContentEditWidget> {
   dynamic contentDetailed;
   late TextEditingController episodeController,
       chapterController,
-      volumesController;
+      volumesController,
+      privateNoteController;
 
   bool modifyStartDate = false;
 
@@ -112,6 +113,7 @@ class _ContentEditWidgetState extends State<ContentEditWidget> {
     super.initState();
     reset();
     contentDetailed = widget.contentDetailed;
+    _loadPrivateNote();
     showAddOptions = isFloating && user.status == AuthStatus.AUTHENTICATED;
     if (widget.updateCache && user.status == AuthStatus.AUTHENTICATED) {
       cacheUpdated = false;
@@ -156,6 +158,31 @@ class _ContentEditWidgetState extends State<ContentEditWidget> {
     });
   }
 
+  void _loadPrivateNote() async {
+    final note =
+        await CacheManager.instance.getValueForService('private_note', "$_id");
+    if (note != null && mounted) {
+      privateNoteController.text = note;
+    }
+  }
+
+  void _savePrivateNote() {
+    if (_id != null) {
+      CacheManager.instance.setValueForService(
+          'private_note', "$_id", privateNoteController.text);
+    }
+  }
+
+  @override
+  void dispose() {
+    _savePrivateNote();
+    privateNoteController.dispose();
+    episodeController.dispose();
+    chapterController.dispose();
+    volumesController.dispose();
+    super.dispose();
+  }
+
   int? get _id {
     if (widget.id != null) {
       return widget.id;
@@ -171,6 +198,7 @@ class _ContentEditWidgetState extends State<ContentEditWidget> {
     episodeController = new TextEditingController(text: "0");
     chapterController = new TextEditingController(text: "0");
     volumesController = new TextEditingController(text: "0");
+    privateNoteController = new TextEditingController();
     statusValue = null;
     starValue = null;
   }
@@ -864,6 +892,30 @@ class _ContentEditWidgetState extends State<ContentEditWidget> {
                   child: rewatchWidget,
                 ),
               ),
+              if (user.pref.animeMangaPagePreferences.showPrivateNotes)
+                Padding(
+                  padding: EdgeInsets.only(top: 10, bottom: 20),
+                  child: field(
+                      S.current.Private_Note,
+                      TextFormField(
+                        controller: privateNoteController,
+                        minLines: 5,
+                        maxLines: null,
+                        scrollPhysics: const AlwaysScrollableScrollPhysics(),
+                        decoration: InputDecoration(
+                          hintText: S.current.Private_Note_Hint,
+                          helperText: S.current.Private_Note_Local_Only,
+                          prefixIcon: Icon(Icons.lock_outline),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                      ),
+                      S.current.Private_Note_Desc,
+                      null,
+                      CrossAxisAlignment.start,
+                      EdgeInsets.only(left: 20, bottom: 8)),
+                ),
               sectionHeading(S.current.Dates_Priority, isOpen: isDatesOpen,
                   onChange: () {
                 if (mounted)

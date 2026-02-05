@@ -940,6 +940,16 @@ class MessageLookup extends MessageLookupByLibrary {
     "Priority_level_qn": MessageLookupByLibrary.simpleMessage(
       "これを見る/読むためのあなたの優先レベルは何ですか？",
     ),
+    "Private_Note": MessageLookupByLibrary.simpleMessage("プライベートノート"),
+    "Private_Note_Desc": MessageLookupByLibrary.simpleMessage(
+      "ローカルに保存され、サーバーには送信されません",
+    ),
+    "Private_Note_Hint": MessageLookupByLibrary.simpleMessage(
+      "ここにプライベートノートを書いてください...",
+    ),
+    "Private_Note_Local_Only": MessageLookupByLibrary.simpleMessage(
+      "このノートはローカルのみであり、同期されません。",
+    ),
     "Profile": MessageLookupByLibrary.simpleMessage("プロフィール"),
     "Profile_Page": MessageLookupByLibrary.simpleMessage("自己紹介ページ"),
     "Profile_bg_removed": MessageLookupByLibrary.simpleMessage(
@@ -1150,6 +1160,12 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "Show_Menu": MessageLookupByLibrary.simpleMessage("メニューを表示"),
     "Show_Original": MessageLookupByLibrary.simpleMessage("オリジナルを見せる"),
+    "Show_Private_Review": MessageLookupByLibrary.simpleMessage(
+      "プライベートレビューを表示",
+    ),
+    "Show_Private_Review_Desc": MessageLookupByLibrary.simpleMessage(
+      "編集画面にプライベートノートフィールドを表示する",
+    ),
     "Show_Spoiler": MessageLookupByLibrary.simpleMessage("スポイラーを見せる"),
     "Show_priority_in_anime_manga_list": MessageLookupByLibrary.simpleMessage(
       "アニメ/マンガリストの優先順位を表示します",

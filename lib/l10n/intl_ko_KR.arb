@@ -1016,5 +1016,11 @@
     "Add_To_Calendar_Prompt": "\ub2ec\ub825\uc5d0 \ucd94\uac00\ud558\uc2ed\uc2dc\uc624",
     "Add_Recurring_Event": "\ub9e4\uc8fc \ubc18\ubcf5",
     "Add_Recurring_Event_Desc": "\uc8fc\uac04 \uc774\ubca4\ud2b8\ub85c \ud5a5\ud6c4 \uc5d0\ud53c\uc18c\ub4dc\ub97c \ucd94\uac00\ud558\uc2ed\uc2dc\uc624",
-    "Add": "\ucd94\uac00\ud558\ub2e4"
+    "Add": "\ucd94\uac00\ud558\ub2e4",
+    "Private_Note": "개인 메모",
+    "Show_Private_Review": "개인 메모 표시",
+    "Show_Private_Review_Desc": "편집 화면에서 개인 메모 필드를 표시합니다.",
+    "Private_Note_Desc": "로컬에 저장되며 서버로 전송되지 않습니다.",
+    "Private_Note_Hint": "여기에 개인 메모를 작성하세요...",
+    "Private_Note_Local_Only": "이 메모는 로컬 전용이며 동기화되지 않습니다."
 }

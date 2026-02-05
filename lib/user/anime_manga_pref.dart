@@ -17,12 +17,14 @@ class AnimeMangaPagePreferences {
   String? defaultMangaTab;
   String? defaultAnimeAddToList;
   String? defaultMangaAddToList;
+  bool showPrivateNotes;
   List<ContentCardProps>? contentCardProps;
 
   AnimeMangaPagePreferences({
     required this.animeTabs,
     required this.mangaTabs,
     this.timezonePref = TimezonePref.local,
+    this.showPrivateNotes = false,
     this.defaultTab,
     this.defaultAnimeTab,
     this.defaultMangaTab,

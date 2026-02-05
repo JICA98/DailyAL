@@ -1017,5 +1017,11 @@
     "Add_To_Calendar_Prompt": "Adicione ao calend\u00e1rio",
     "Add_Recurring_Event": "Recorrente semanalmente",
     "Add_Recurring_Event_Desc": "Adicione epis\u00f3dios futuros como eventos semanais",
-    "Add": "Adicionar"
+    "Add": "Adicionar",
+    "Private_Note": "Nota Privada",
+    "Show_Private_Review": "Mostrar Nota Privada",
+    "Show_Private_Review_Desc": "Mostrar campo de nota privada na tela de edição",
+    "Private_Note_Desc": "Salvo localmente, nunca enviado para servidores",
+    "Private_Note_Hint": "Escreva sua nota privada aqui...",
+    "Private_Note_Local_Only": "Esta nota é apenas local e não será sincronizada."
 }

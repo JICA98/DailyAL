@@ -139,6 +139,19 @@ class _AnimeMangaSettingsState extends State<AnimeMangaSettings> {
                   ),
                 ),
                 OptionTile(
+                  text: S.current.Show_Private_Review,
+                  iconData: Icons.notes_rounded,
+                  multiLine: true,
+                  desc: S.current.Show_Private_Review_Desc,
+                  onPressed: () => _changePrivateNotes(
+                      !user.pref.animeMangaPagePreferences.showPrivateNotes),
+                  trailing: ToggleButton(
+                    toggleValue:
+                        user.pref.animeMangaPagePreferences.showPrivateNotes,
+                    onToggled: (value) => _changePrivateNotes(value),
+                  ),
+                ),
+                OptionTile(
                   text: S.current.Anime_Timezone_Pref,
                   iconData: Icons.timelapse_rounded,
                   multiLine: false,
@@ -243,6 +256,12 @@ class _AnimeMangaSettingsState extends State<AnimeMangaSettings> {
 
   void _changeCountDown(bool value) {
     user.pref.showCountDownInDetailed = value;
+    user.setIntance();
+    setState(() {});
+  }
+
+  void _changePrivateNotes(bool value) {
+    user.pref.animeMangaPagePreferences.showPrivateNotes = value;
     user.setIntance();
     setState(() {});
   }

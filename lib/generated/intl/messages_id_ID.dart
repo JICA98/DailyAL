@@ -1112,6 +1112,16 @@ class MessageLookup extends MessageLookupByLibrary {
     "Priority_level_qn": MessageLookupByLibrary.simpleMessage(
       "Apa tingkat prioritas Anda untuk menonton / membaca ini?",
     ),
+    "Private_Note": MessageLookupByLibrary.simpleMessage("Catatan Pribadi"),
+    "Private_Note_Desc": MessageLookupByLibrary.simpleMessage(
+      "Disimpan secara lokal, tidak pernah dikirim ke server",
+    ),
+    "Private_Note_Hint": MessageLookupByLibrary.simpleMessage(
+      "Tulis catatan pribadi Anda di sini...",
+    ),
+    "Private_Note_Local_Only": MessageLookupByLibrary.simpleMessage(
+      "Catatan ini hanya bersifat lokal dan tidak akan disinkronkan.",
+    ),
     "Profile": MessageLookupByLibrary.simpleMessage("Profil"),
     "Profile_Page": MessageLookupByLibrary.simpleMessage("Halaman profil"),
     "Profile_bg_removed": MessageLookupByLibrary.simpleMessage(
@@ -1361,6 +1371,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "Show_Menu": MessageLookupByLibrary.simpleMessage("Tampilkan Menu"),
     "Show_Original": MessageLookupByLibrary.simpleMessage(
       "Menunjukkan yang asli",
+    ),
+    "Show_Private_Review": MessageLookupByLibrary.simpleMessage(
+      "Tampilkan Catatan Pribadi",
+    ),
+    "Show_Private_Review_Desc": MessageLookupByLibrary.simpleMessage(
+      "Tampilkan kolom catatan pribadi di layar edit",
     ),
     "Show_Spoiler": MessageLookupByLibrary.simpleMessage("Tampilkan Spoiler."),
     "Show_priority_in_anime_manga_list": MessageLookupByLibrary.simpleMessage(

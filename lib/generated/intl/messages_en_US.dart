@@ -1073,6 +1073,16 @@ class MessageLookup extends MessageLookupByLibrary {
     "Priority_level_qn": MessageLookupByLibrary.simpleMessage(
       "What is your priority level to watch/read this?",
     ),
+    "Private_Note": MessageLookupByLibrary.simpleMessage("Private Note"),
+    "Private_Note_Desc": MessageLookupByLibrary.simpleMessage(
+      "Saved locally, never sent to servers",
+    ),
+    "Private_Note_Hint": MessageLookupByLibrary.simpleMessage(
+      "Write your private note here...",
+    ),
+    "Private_Note_Local_Only": MessageLookupByLibrary.simpleMessage(
+      "This note is local only and won\'t be synced.",
+    ),
     "Profile": MessageLookupByLibrary.simpleMessage("Profile"),
     "Profile_Page": MessageLookupByLibrary.simpleMessage("Profile Page"),
     "Profile_bg_removed": MessageLookupByLibrary.simpleMessage(
@@ -1206,6 +1216,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "Score_Distribution": MessageLookupByLibrary.simpleMessage(
       "Score Distribution",
     ),
+    "Score_Stats": MessageLookupByLibrary.simpleMessage("Score Stats"),
     "Screening": MessageLookupByLibrary.simpleMessage("Screening"),
     "Search": MessageLookupByLibrary.simpleMessage("Search"),
     "SearchBarHintText": MessageLookupByLibrary.simpleMessage(
@@ -1317,6 +1328,12 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "Show_Menu": MessageLookupByLibrary.simpleMessage("Show Menu"),
     "Show_Original": MessageLookupByLibrary.simpleMessage("Show Original"),
+    "Show_Private_Review": MessageLookupByLibrary.simpleMessage(
+      "Show Private Review",
+    ),
+    "Show_Private_Review_Desc": MessageLookupByLibrary.simpleMessage(
+      "Show private note field in the edit screen",
+    ),
     "Show_Spoiler": MessageLookupByLibrary.simpleMessage("Show Spoiler"),
     "Show_dub_status_AnimeList_Desc": MessageLookupByLibrary.simpleMessage(
       "Show dub (English) status of an anime in list",

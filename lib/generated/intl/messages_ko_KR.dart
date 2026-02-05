@@ -920,6 +920,16 @@ class MessageLookup extends MessageLookupByLibrary {
     "Priority_level_qn": MessageLookupByLibrary.simpleMessage(
       "이것을 보거나 읽을 우선 순위 수준은 무엇입니까?",
     ),
+    "Private_Note": MessageLookupByLibrary.simpleMessage("개인 메모"),
+    "Private_Note_Desc": MessageLookupByLibrary.simpleMessage(
+      "로컬에 저장되며 서버로 전송되지 않습니다.",
+    ),
+    "Private_Note_Hint": MessageLookupByLibrary.simpleMessage(
+      "여기에 개인 메모를 작성하세요...",
+    ),
+    "Private_Note_Local_Only": MessageLookupByLibrary.simpleMessage(
+      "이 메모는 로컬 전용이며 동기화되지 않습니다.",
+    ),
     "Profile": MessageLookupByLibrary.simpleMessage("프로필"),
     "Profile_Page": MessageLookupByLibrary.simpleMessage("프로필 페이지"),
     "Profile_bg_removed": MessageLookupByLibrary.simpleMessage(
@@ -1122,6 +1132,10 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "Show_Menu": MessageLookupByLibrary.simpleMessage("메뉴 보기"),
     "Show_Original": MessageLookupByLibrary.simpleMessage("원본보기"),
+    "Show_Private_Review": MessageLookupByLibrary.simpleMessage("개인 메모 표시"),
+    "Show_Private_Review_Desc": MessageLookupByLibrary.simpleMessage(
+      "편집 화면에서 개인 메모 필드를 표시합니다.",
+    ),
     "Show_Spoiler": MessageLookupByLibrary.simpleMessage("쇼 스포일러"),
     "Show_priority_in_anime_manga_list": MessageLookupByLibrary.simpleMessage(
       "Anime / Manga 목록에서 우선 순위를 표시합니다",
