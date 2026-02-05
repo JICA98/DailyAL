@@ -159,8 +159,20 @@ class _ContentEditWidgetState extends State<ContentEditWidget> {
   }
 
   void _loadPrivateNote() async {
-    final note =
-        await CacheManager.instance.getValueForService('private_note', "$_id");
+    // Try loading with category-specific key first
+    String? note = await CacheManager.instance.getValueForService(
+        'private_note', "${widget.category} - $_id");
+    
+    // Fallback: try loading legacy key (without category) if specific one doesn't exist
+    if (note == null) {
+      note = await CacheManager.instance.getValueForService('private_note', "$_id");
+      // If legacy note exists, save it with new key format for future
+      if (note != null) {
+        CacheManager.instance.setValueForService(
+            'private_note', "${widget.category} - $_id", note);
+      }
+    }
+
     if (note != null && mounted) {
       privateNoteController.text = note;
     }
@@ -168,8 +180,9 @@ class _ContentEditWidgetState extends State<ContentEditWidget> {
 
   void _savePrivateNote() {
     if (_id != null) {
+      // Save with category to avoid ID collisions between Anime and Manga
       CacheManager.instance.setValueForService(
-          'private_note', "$_id", privateNoteController.text);
+          'private_note', "${widget.category} - $_id", privateNoteController.text);
     }
   }
 
@@ -1481,11 +1494,19 @@ class _ContentEditWidgetState extends State<ContentEditWidget> {
   void _scrollToEpisodeCount() {
     const duration = const Duration(milliseconds: 200);
     Future.delayed(duration).then(
-      (value) => _episodeScrollController.scrollTo(
-        index: _episodeCount(),
-        alignment: 0.6,
-        duration: duration,
-      ),
+      (value) {
+        if (mounted && _episodeScrollController.isAttached) {
+          try {
+            _episodeScrollController.scrollTo(
+              index: _episodeCount(),
+              alignment: 0.6,
+              duration: duration,
+            );
+          } catch (e) {
+            // Ignore scroll errors if list is not ready
+          }
+        }
+      },
     );
   }
 
