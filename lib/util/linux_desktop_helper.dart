@@ -54,12 +54,62 @@ class LinuxDesktopHelper extends TrayListener {
     try {
       await _initTimezone();
       await _checkDependencies();
+      await _extractAppIcon(); // Extract logo for system notifications
+      await _installSystemIcon(); // Install icon for dock/taskbar
       await _initWindowManager();
       await _instance._initTray();
-      await _extractAppIcon(); // Extract logo for system notifications
       print('DEBUG: Linux Desktop Helper initialized successfully');
     } catch (e) {
       print('ERROR: Failed to initialize Linux Desktop Helper: $e');
+    }
+  }
+
+  /// Installs the app icon in the system icon directories so GNOME/KDE can find it.
+  /// This makes the icon appear correctly in the dock/taskbar.
+  static Future<void> _installSystemIcon() async {
+    try {
+      final String homeDir = Platform.environment['HOME'] ?? '';
+      if (homeDir.isEmpty) return;
+
+      // Icon sizes that desktop environments expect
+      final List<String> sizes = ['48x48', '128x128', '256x256', '512x512'];
+      final String iconName = 'com.teen.dailyanimelist.png';
+      
+      for (final size in sizes) {
+        final String iconDir = '$homeDir/.local/share/icons/hicolor/$size/apps';
+        final Directory dir = Directory(iconDir);
+        
+        // Create directory if it doesn't exist
+        if (!await dir.exists()) {
+          await dir.create(recursive: true);
+        }
+        
+        // Copy icon to system location
+        final String iconPath = '$iconDir/$iconName';
+        final File iconFile = File(iconPath);
+        
+        // Only copy if it doesn't exist or is outdated
+        if (!await iconFile.exists()) {
+          final ByteData data = await rootBundle.load('assets/images/dal-black-bg.png');
+          final List<int> bytes = data.buffer.asUint8List();
+          await iconFile.writeAsBytes(bytes);
+          print('DEBUG: Installed icon to: $iconPath');
+        }
+      }
+      
+      // Update icon cache (ignore errors if gtk-update-icon-cache is not available)
+      try {
+        await Process.run('gtk-update-icon-cache', [
+          '-f',
+          '-t',
+          '$homeDir/.local/share/icons/hicolor'
+        ]);
+        print('DEBUG: Updated icon cache');
+      } catch (e) {
+        // Icon cache update is optional, app will still work
+      }
+    } catch (e) {
+      print('WARNING: Could not install system icon: $e');
     }
   }
 

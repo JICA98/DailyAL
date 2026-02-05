@@ -17,6 +17,14 @@ G_DEFINE_TYPE(MyApplication, my_application, GTK_TYPE_APPLICATION)
 // Implements GApplication::activate.
 static void my_application_activate(GApplication* application) {
   MyApplication* self = MY_APPLICATION(application);
+  
+  // NOTE: This file (my_application.cc) is ONLY compiled for Linux builds.
+  // It does NOT affect Android, macOS, Windows, or web builds.
+  // Set application name for GNOME to find the icon in ~/.local/share/icons/
+  // This must be set BEFORE creating the window
+  g_set_application_name("DailyAL");
+  g_set_prgname("com.teen.dailyanimelist");
+  
   GtkWindow* window =
       GTK_WINDOW(gtk_application_window_new(GTK_APPLICATION(application)));
 
