@@ -5,17 +5,18 @@ import 'package:permission_handler/permission_handler.dart';
 // To save the file in the device
 class FileStorage {
   static Future<String> getExternalDocumentPath() async {
-    // To check whether permission is given for this app or not.
-    var status = await Permission.storage.status;
-    if (!status.isGranted) {
-      // If not we will ask for permission first
-      await Permission.storage.request();
-    }
-    Directory _directory = Directory("");
+    Directory _directory;
+    
     if (Platform.isAndroid) {
-      // Redirects it to download folder in android
+      // Android: Check storage permissions and use Download folder
+      var status = await Permission.storage.status;
+      if (!status.isGranted) {
+        await Permission.storage.request();
+      }
       _directory = Directory("/storage/emulated/0/Download");
     } else {
+      // Desktop platforms (Linux, macOS, Windows) and iOS: use app documents directory
+      // This works generically across all desktop platforms
       _directory = await getApplicationDocumentsDirectory();
     }
 

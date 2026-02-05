@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:dailyanimelist/cache/cachemanager.dart';
@@ -55,7 +56,10 @@ class _BackUpAndRestorePageState extends State<BackUpAndRestorePage> {
         if (path != null) {
           File file = File(path);
           final bytes = await file.readAsBytes();
-          final data = String.fromCharCodes(bytes);
+          
+          // Use utf8.decode to properly handle special characters (tildes, ñ, emojis, etc.)
+          final data = utf8.decode(bytes);
+          
           final result = await CacheManager.instance.restoreData(data);
           if (result) {
             user = await User.getInstance();
@@ -69,7 +73,9 @@ class _BackUpAndRestorePageState extends State<BackUpAndRestorePage> {
           return;
         }
       }
-    } catch (e) {}
+    } catch (e) {
+      print('Restore error: $e');
+    }
     showToast(S.current.Cancelled_Restore);
   }
 
