@@ -10,7 +10,7 @@ permissions:
   contents: write
 
 jobs:
-  build:
+  build-linux-android:
     runs-on: ubuntu-latest
     
     steps:
@@ -71,11 +71,64 @@ jobs:
     - name: Upload Artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: release-artifacts
+        name: release-artifacts-linux-android
         path: release-artifacts/*
 
+  build-windows:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        channel: 'stable'
+
+    - name: Enable Windows Desktop
+      run: flutter config --enable-windows-desktop
+
+    - name: Get Dependencies
+      run: flutter pub get
+
+    - name: Build Windows Release
+      run: flutter build windows --release
+
+    - name: Compress Windows Build
+      run: |
+        Compress-Archive -Path build/windows/x64/runner/Release/* -DestinationPath DailyAL-Windows.zip
+
+    - name: Generate SHA1 Checksum
+      run: |
+        Get-FileHash DailyAL-Windows.zip -Algorithm SHA1 | Select-Object -ExpandProperty Hash > DailyAL-Windows.zip.sha1
+
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: release-artifacts-windows
+        path: |
+          DailyAL-Windows.zip
+          DailyAL-Windows.zip.sha1
+
+  release:
+    needs: [build-linux-android, build-windows]
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/20')
+    
+    steps:
+    - name: Download Linux/Android Artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: release-artifacts-linux-android
+        path: release-artifacts
+
+    - name: Download Windows Artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: release-artifacts-windows
+        path: release-artifacts
+
     - name: Create Release
-      if: startsWith(github.ref, 'refs/tags/20')
       uses: softprops/action-gh-release@v1
       with:
         files: |
@@ -83,3 +136,5 @@ jobs:
           release-artifacts/app-release.apk.sha1
           release-artifacts/DailyAL-x86_64.AppImage
           release-artifacts/DailyAL-x86_64.AppImage.sha1
+          release-artifacts/DailyAL-Windows.zip
+          release-artifacts/DailyAL-Windows.zip.sha1
