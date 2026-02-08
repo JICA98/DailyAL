@@ -212,53 +212,13 @@ class NotificationService {
             channel,
           );
         } else {
-          _scheduleUsingMal(
-            node?.broadcast,
-            myListStatus,
-            node,
-            nowDate,
-            body,
-            channel,
-          );
+          logDal("No schedule data for ${node.title}");
         }
       }
     }
 
     user.pref.notifPref.daySubscribed = nowDate;
     user.setIntance();
-  }
-
-  void _scheduleUsingMal(
-    Broadcast? broadcast,
-    MyAnimeListStatus myListStatus,
-    Node node,
-    DateTime nowDate,
-    String body,
-    NotificationChannel channel,
-  ) {
-    if (broadcast?.startTime != null &&
-        broadcast?.dayOfTheWeek != null &&
-        myListStatus.status != null &&
-        node.status!.equals('currently_airing') &&
-        _weekMap.containsKey(broadcast!.dayOfTheWeek)) {
-      var weekday = _weekMap[broadcast.dayOfTheWeek]!;
-      var timeSplit = broadcast.startTime!.split(":");
-      var hours = int.tryParse(timeSplit[0])!;
-      var mins = int.tryParse(timeSplit[1])!;
-      String title = "${node.title} - ${S.current.A_new_episode_is_out}";
-      var nextDate = nowDate.nextDate(weekday);
-      nextDate = nextDate.add(Duration(
-          hours: hours - 9, minutes: mins + nowDate.timeZoneOffset.inMinutes));
-
-      showNotification(
-        serviceId: 21,
-        title: title,
-        body: body,
-        node: node,
-        exactDate: nextDate,
-        channel: channel,
-      );
-    }
   }
 
   void _scheduleUsingLiveChart(
@@ -367,7 +327,8 @@ class NotificationService {
             ),
             androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
             payload: jsonEncode(node.toJson()),
-            matchDateTimeComponents: DateTimeComponents.time);
+            uiLocalNotificationDateInterpretation:
+                UILocalNotificationDateInterpretation.absoluteTime);
       }
     } catch (e) {
       logDal(e);
@@ -376,8 +337,8 @@ class NotificationService {
 
   Future<void> _showLinuxNotification(int serviceId, Node node, String? title,
       String? body, int episode, String? imagePath) async {
-    final cleanTitle = _replaceTags(title) ??
-        "DailyAnimeList - ${S.current.Episode_Reminder}";
+    final cleanTitle =
+        _replaceTags(title) ?? "DailyAnimeList - ${S.current.Episode_Reminder}";
     final cleanBody = _replaceTags(body) ??
         "${node.title} - Episode $episode ${S.current.just_got_aired}!!";
 
