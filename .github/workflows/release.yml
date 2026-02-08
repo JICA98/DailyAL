@@ -95,7 +95,7 @@ jobs:
       run: flutter build windows --release
 
     - name: Create MSIX
-      run: dart run msix:create
+      run: dart run msix:create --install-certificate false
 
     - name: Compress Windows Build
       run: |
