@@ -193,3 +193,13 @@ flutter:
   # see https://flutter.dev/custom-fonts/#from-packages
 flutter_intl:
   enabled: true
+
+msix_config:
+  display_name: DailyAL
+  publisher_display_name: Teen
+  identity_name: com.teen.dailyanimelist
+  publisher: CN=Teen
+  msix_version: 1.0.0.0
+  logo_path: windows/runner/resources/app_icon.ico
+  capabilities:
+    - internetClient
