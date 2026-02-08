@@ -126,18 +126,38 @@ class CacheManager {
   Future<String> getBackUpData() async {
     final pref = await _pref;
     final allData = <String, String>{};
-    final keys = [
+    
+    // Fixed keys that should always be backed up
+    final fixedKeys = [
       'user',
       StreamUtils.i.key(StreamType.book_marks),
       '${UserContentBuilder.serviceName} - anime-@me',
       '${UserContentBuilder.serviceName} - manga-@me',
     ];
-    for (var key in keys) {
+    
+    // Get all keys from SharedPreferences
+    final allKeys = pref.getKeys();
+    
+    // Combine fixed keys with dynamic private notes
+    final keysToBackup = <String>{...fixedKeys};
+    
+    // Add all private note keys
+    for (var key in allKeys) {
+      // The key format in setValueForService is "$serviceName - $key"
+      // So for 'private_note', it is "private_note - 123"
+      if (key.startsWith('private_note - ')) {
+        keysToBackup.add(key);
+      }
+    }
+    
+    // Collect data for all keys
+    for (var key in keysToBackup) {
       String? data = pref.get(key)?.toString();
       if (data != null) {
         allData[key] = data;
       }
     }
+    
     return jsonEncode(allData);
   }
 

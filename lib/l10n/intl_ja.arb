@@ -1016,5 +1016,11 @@
     "Add_To_Calendar_Prompt": "\u30ab\u30ec\u30f3\u30c0\u30fc\u306b\u8ffd\u52a0\u3057\u307e\u3059",
     "Add_Recurring_Event": "\u6bce\u9031\u7e70\u308a\u8fd4\u3057",
     "Add_Recurring_Event_Desc": "Add future episodes as weekly events",
-    "Add": "\u8ffd\u52a0"
+    "Add": "\u8ffd\u52a0",
+    "Private_Note": "プライベートノート",
+    "Show_Private_Review": "プライベートレビューを表示",
+    "Show_Private_Review_Desc": "編集画面にプライベートノートフィールドを表示する",
+    "Private_Note_Desc": "ローカルに保存され、サーバーには送信されません",
+    "Private_Note_Hint": "ここにプライベートノートを書いてください...",
+    "Private_Note_Local_Only": "このノートはローカルのみであり、同期されません。"
 }

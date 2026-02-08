@@ -1132,6 +1132,16 @@ class MessageLookup extends MessageLookupByLibrary {
     "Priority_level_qn": MessageLookupByLibrary.simpleMessage(
       "Какой у вас приоритет при просмотре/чтении этого?",
     ),
+    "Private_Note": MessageLookupByLibrary.simpleMessage("Личная заметка"),
+    "Private_Note_Desc": MessageLookupByLibrary.simpleMessage(
+      "Сохранено локально, никогда не отправляется на серверы",
+    ),
+    "Private_Note_Hint": MessageLookupByLibrary.simpleMessage(
+      "Напишите здесь свою личную заметку...",
+    ),
+    "Private_Note_Local_Only": MessageLookupByLibrary.simpleMessage(
+      "Эта заметка только локальная и не будет синхронизирована.",
+    ),
     "Profile": MessageLookupByLibrary.simpleMessage("Профиль"),
     "Profile_Page": MessageLookupByLibrary.simpleMessage("Страница профиля"),
     "Profile_bg_removed": MessageLookupByLibrary.simpleMessage(
@@ -1386,6 +1396,12 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "Show_Menu": MessageLookupByLibrary.simpleMessage("Показать меню"),
     "Show_Original": MessageLookupByLibrary.simpleMessage("Показать оригинал"),
+    "Show_Private_Review": MessageLookupByLibrary.simpleMessage(
+      "Показать личную заметку",
+    ),
+    "Show_Private_Review_Desc": MessageLookupByLibrary.simpleMessage(
+      "Показать поле личной заметки на экране редактирования",
+    ),
     "Show_Spoiler": MessageLookupByLibrary.simpleMessage("Показать спойлер"),
     "Show_priority_in_anime_manga_list": MessageLookupByLibrary.simpleMessage(
       "Показывать приоритет в списке аниме/манги",

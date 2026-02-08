@@ -1067,25 +1067,28 @@ Future<dynamic> showContentEditSheet(
   return showCupertinoDialog(
       context: context,
       barrierDismissible: true,
-      builder: (context) => AnimatedPadding(
-            padding: MediaQuery.of(context).viewInsets,
-            duration: const Duration(milliseconds: 100),
-            curve: Curves.decelerate,
-            child: ContentEditWidget(
-              category: category,
-              showAdditional: true,
-              contentDetailed: content,
-              isCacheRefreshed: true,
-              updateCache: updateCache,
-              onDelete: () {
-                if (onDelete != null) onDelete();
-              },
-              onListStatusChange: (status) {
-                if (onListStatusChange != null) onListStatusChange(status);
-              },
-              onUpdate: (value) {
-                if (onUpdate != null) onUpdate(value);
-              },
+      builder: (context) => Scaffold(
+            backgroundColor: Colors.transparent,
+            resizeToAvoidBottomInset: true,
+            body: GestureDetector(
+              onTap: () => Navigator.pop(context),
+              behavior: HitTestBehavior.opaque,
+              child: ContentEditWidget(
+                category: category,
+                showAdditional: true,
+                contentDetailed: content,
+                isCacheRefreshed: true,
+                updateCache: updateCache,
+                onDelete: () {
+                  if (onDelete != null) onDelete();
+                },
+                onListStatusChange: (status) {
+                  if (onListStatusChange != null) onListStatusChange(status);
+                },
+                onUpdate: (value) {
+                  if (onUpdate != null) onUpdate(value);
+                },
+              ),
             ),
           ));
 }

@@ -1014,5 +1014,11 @@
     "Add_To_Calendar_Prompt": "Takvime ekle",
     "Add_Recurring_Event": "Tekrarlayan haftal\u0131k",
     "Add_Recurring_Event_Desc": "Haftal\u0131k etkinlikler olarak gelecekteki b\u00f6l\u00fcmleri ekleyin",
-    "Add": "Eklemek"
+    "Add": "Eklemek",
+    "Private_Note": "\u00d6zel Not",
+    "Show_Private_Review": "\u00d6zel Notu G\u00f6ster",
+    "Show_Private_Review_Desc": "D\u00fczenleme ekran\u0131nda \u00f6zel not alan\u0131n\u0131 g\u00f6ster",
+    "Private_Note_Desc": "Yerel olarak kaydedilir, asla sunuculara g\u00f6nderilmez",
+    "Private_Note_Hint": "\u00d6zel notunuzu buraya yaz\u0131n...",
+    "Private_Note_Local_Only": "Bu not yaln\u0131zca yereldir ve senkronize edilmeyecektir."
 }

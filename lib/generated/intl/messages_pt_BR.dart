@@ -1162,6 +1162,16 @@ class MessageLookup extends MessageLookupByLibrary {
     "Priority_level_qn": MessageLookupByLibrary.simpleMessage(
       "Qual é o seu nível de prioridade para assistir / ler isso?",
     ),
+    "Private_Note": MessageLookupByLibrary.simpleMessage("Nota Privada"),
+    "Private_Note_Desc": MessageLookupByLibrary.simpleMessage(
+      "Salvo localmente, nunca enviado para servidores",
+    ),
+    "Private_Note_Hint": MessageLookupByLibrary.simpleMessage(
+      "Escreva sua nota privada aqui...",
+    ),
+    "Private_Note_Local_Only": MessageLookupByLibrary.simpleMessage(
+      "Esta nota é apenas local e não será sincronizada.",
+    ),
     "Profile": MessageLookupByLibrary.simpleMessage("Perfil"),
     "Profile_Page": MessageLookupByLibrary.simpleMessage("Página de perfil"),
     "Profile_bg_removed": MessageLookupByLibrary.simpleMessage(
@@ -1420,6 +1430,12 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "Show_Menu": MessageLookupByLibrary.simpleMessage("Mostrar Menu"),
     "Show_Original": MessageLookupByLibrary.simpleMessage("Mostrar original"),
+    "Show_Private_Review": MessageLookupByLibrary.simpleMessage(
+      "Mostrar Nota Privada",
+    ),
+    "Show_Private_Review_Desc": MessageLookupByLibrary.simpleMessage(
+      "Mostrar campo de nota privada na tela de edição",
+    ),
     "Show_Spoiler": MessageLookupByLibrary.simpleMessage("Mostrar spoiler"),
     "Show_priority_in_anime_manga_list": MessageLookupByLibrary.simpleMessage(
       "Mostrar prioridade na lista de anime / mangá",

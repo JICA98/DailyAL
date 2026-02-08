@@ -1016,5 +1016,11 @@
     "Add_To_Calendar_Prompt": "Tambahkan ke Kalender",
     "Add_Recurring_Event": "Berulang mingguan",
     "Add_Recurring_Event_Desc": "Tambahkan episode masa depan sebagai acara mingguan",
-    "Add": "Menambahkan"
+    "Add": "Menambahkan",
+    "Private_Note": "Catatan Pribadi",
+    "Show_Private_Review": "Tampilkan Catatan Pribadi",
+    "Show_Private_Review_Desc": "Tampilkan kolom catatan pribadi di layar edit",
+    "Private_Note_Desc": "Disimpan secara lokal, tidak pernah dikirim ke server",
+    "Private_Note_Hint": "Tulis catatan pribadi Anda di sini...",
+    "Private_Note_Local_Only": "Catatan ini hanya bersifat lokal dan tidak akan disinkronkan."
 }
