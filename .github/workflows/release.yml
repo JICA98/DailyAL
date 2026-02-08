@@ -97,11 +97,22 @@ jobs:
     - name: Create MSIX
       run: dart run msix:create
 
+    - name: Compress Windows Build
+      run: |
+        Compress-Archive -Path build/windows/x64/runner/Release/* -DestinationPath DailyAL-Windows.zip
+
+    - name: Generate SHA1 Checksum
+      run: |
+        Get-FileHash DailyAL-Windows.zip -Algorithm SHA1 | Select-Object -ExpandProperty Hash > DailyAL-Windows.zip.sha1
+
     - name: Upload Artifacts
       uses: actions/upload-artifact@v4
       with:
         name: release-artifacts-windows
-        path: build/windows/runner/Release/*.msix
+        path: |
+          build/windows/runner/Release/*.msix
+          DailyAL-Windows.zip
+          DailyAL-Windows.zip.sha1
 
   release:
     needs: [build-linux-android, build-windows]
@@ -130,3 +141,5 @@ jobs:
           release-artifacts/DailyAL-x86_64.AppImage
           release-artifacts/DailyAL-x86_64.AppImage.sha1
           release-artifacts/*.msix
+          release-artifacts/DailyAL-Windows.zip
+          release-artifacts/DailyAL-Windows.zip.sha1
