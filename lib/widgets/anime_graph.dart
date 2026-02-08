@@ -7,7 +7,7 @@ import 'package:dailyanimelist/enums.dart';
 import 'package:dailyanimelist/generated/l10n.dart';
 import 'package:dailyanimelist/screens/contentdetailedscreen.dart';
 import 'package:dailyanimelist/screens/plainscreen.dart';
-import 'package:dailyanimelist/widgets/common/image_preview.dart';
+
 import 'package:dailyanimelist/widgets/home/animecard.dart';
 import 'package:dailyanimelist/widgets/selectbottom.dart';
 import 'package:dal_commons/commons.dart' as dal;
@@ -54,18 +54,20 @@ class _AnimeGraphWidgetState extends State<AnimeGraphWidget> {
     _GraphOrderType.by_sequel: S.current.Graph_Order_By_Sequel,
     _GraphOrderType.from_selected: S.current.Graph_Order_From_Selected,
   };
-  _GraphOrderType _graphOrderType = _GraphOrderType.by_sequel;
+  _GraphOrderType _graphOrderType = _GraphOrderType.from_selected;
+  late int _selectedId;
 
   @override
   void initState() {
     super.initState();
+    _selectedId = widget.id;
     widget.graph.nodes?.forEach((node) => _nodeMap[node.id!] = node);
     _setGraph();
 
     _algorithm = SugiyamaAlgorithm(SugiyamaConfiguration()
       ..bendPointShape = CurvedBendPointShape(curveLength: 120.0)
-      ..nodeSeparation = 40
-      ..levelSeparation = 80);
+      ..nodeSeparation = 60
+      ..levelSeparation = 100);
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _setInitialPosition();
@@ -151,7 +153,7 @@ class _AnimeGraphWidgetState extends State<AnimeGraphWidget> {
 
   void _setInitialPosition([Size? size]) {
     final position = _algorithm.nodeData.keys.firstWhere((e) {
-      return e.key?.value == widget.id;
+      return e.key?.value == _selectedId;
     }).position;
     final contextSize = size ?? MediaQuery.of(context).size;
     _controller.value = Matrix4.identity()
@@ -229,6 +231,7 @@ class _AnimeGraphWidgetState extends State<AnimeGraphWidget> {
         children: [
           IconButton.filled(
             onPressed: () {
+              _selectedId = widget.id;
               _setInitialPosition();
               if (mounted) setState(() {});
             },
@@ -327,7 +330,7 @@ class _AnimeGraphWidgetState extends State<AnimeGraphWidget> {
       child: Center(
         child: AutoSizeText(
           a.title ?? "",
-          maxLines: 2,
+          maxLines: 3,
           minFontSize: 10.0,
           textAlign: TextAlign.center,
         ),
@@ -419,7 +422,7 @@ class _AnimeGraphWidgetState extends State<AnimeGraphWidget> {
       child: InkWell(
         borderRadius: BorderRadius.circular(64),
         onTap: () => _setExpanded(a),
-        onLongPress: () => zoomInImage(context, imageUrl),
+        onLongPress: () => _onNodeSelect(a),
         child: Ink(
           child: CircleAvatar(
             backgroundImage: NetworkImage(imageUrl),
@@ -430,6 +433,7 @@ class _AnimeGraphWidgetState extends State<AnimeGraphWidget> {
     final myListStatus = widget.statusMap[a.id];
     final value = NodeStatusValue.fromListStatus(myListStatus);
     final contains = _expandedIds.contains(a.id);
+    final isSelected = _selectedId == a.id;
     final statusOutline = Container(
       height: 140.0,
       width: 140.0,
@@ -471,7 +475,7 @@ class _AnimeGraphWidgetState extends State<AnimeGraphWidget> {
       width: 140.0,
       child: Stack(
         children: [
-          if (widget.id == a.id) centerBorder,
+          if (isSelected) centerBorder,
           if (value.color != null || contains) statusOutline,
           Positioned(
             top: 10,
@@ -495,5 +499,13 @@ class _AnimeGraphWidgetState extends State<AnimeGraphWidget> {
                 medium: a.mainPicture?.medium,
               )),
         ));
+  }
+
+  void _onNodeSelect(dal.GraphNode a) {
+    if (a.id != null) {
+      _selectedId = a.id!;
+      _setInitialPosition();
+      if (mounted) setState(() {});
+    }
   }
 }
