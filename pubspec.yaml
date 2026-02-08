@@ -95,6 +95,7 @@ dev_dependencies:
   json_serializable: ^6.7.1
   build_runner: ^2.1.7
   intl_utils: ^2.8.4
+  msix: ^3.16.13
 
 flutter:
   generate: true
