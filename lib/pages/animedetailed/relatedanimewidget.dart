@@ -76,7 +76,7 @@ class _RelatedAnimeWidgetState extends State<RelatedAnimeWidget>
       if (_graph is AnimeGraph && nullOrEmpty(_graph.edges)) {
         throw Error();
       }
-      if ((then - now) > 1) {
+      if ((then - now) > 1 && _selectedView == RelatedSelectedView.list) {
         showSnackBar(_graphSnackBar(), Duration(seconds: 3));
       }
     } catch (e) {
