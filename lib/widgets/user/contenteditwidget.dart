@@ -160,12 +160,13 @@ class _ContentEditWidgetState extends State<ContentEditWidget> {
 
   void _loadPrivateNote() async {
     // Try loading with category-specific key first
-    String? note = await CacheManager.instance.getValueForService(
-        'private_note', "${widget.category} - $_id");
-    
+    String? note = await CacheManager.instance
+        .getValueForService('private_note', "${widget.category} - $_id");
+
     // Fallback: try loading legacy key (without category) if specific one doesn't exist
     if (note == null) {
-      note = await CacheManager.instance.getValueForService('private_note', "$_id");
+      note = await CacheManager.instance
+          .getValueForService('private_note', "$_id");
       // If legacy note exists, save it with new key format for future
       if (note != null) {
         CacheManager.instance.setValueForService(
@@ -181,8 +182,8 @@ class _ContentEditWidgetState extends State<ContentEditWidget> {
   void _savePrivateNote() {
     if (_id != null) {
       // Save with category to avoid ID collisions between Anime and Manga
-      CacheManager.instance.setValueForService(
-          'private_note', "${widget.category} - $_id", privateNoteController.text);
+      CacheManager.instance.setValueForService('private_note',
+          "${widget.category} - $_id", privateNoteController.text);
     }
   }
 
@@ -907,7 +908,8 @@ class _ContentEditWidgetState extends State<ContentEditWidget> {
               ),
               if (user.pref.animeMangaPagePreferences.showPrivateNotes)
                 Padding(
-                  padding: EdgeInsets.only(top: 10, bottom: 20),
+                  padding:
+                      EdgeInsets.only(top: 10, bottom: 20, right: 15, left: 15),
                   child: field(
                       S.current.Private_Note,
                       TextFormField(
