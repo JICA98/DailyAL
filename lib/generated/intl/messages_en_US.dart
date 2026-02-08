@@ -1504,7 +1504,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "Top_Manga": MessageLookupByLibrary.simpleMessage("Top Manga"),
     "Top_Manga_Bypopularity": MessageLookupByLibrary.simpleMessage(
-      "Top Manga Bypopularity",
+      "Top Manga by Popularity",
     ),
     "Top_Manhua": MessageLookupByLibrary.simpleMessage("Top Manhua"),
     "Top_Manhwa": MessageLookupByLibrary.simpleMessage("Top Manhwa"),

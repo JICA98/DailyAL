@@ -239,10 +239,10 @@ class S {
     return Intl.message('Top Manhua', name: 'Top_Manhua', desc: '', args: []);
   }
 
-  /// `Top Manga Bypopularity`
+  /// `Top Manga by Popularity`
   String get Top_Manga_Bypopularity {
     return Intl.message(
-      'Top Manga Bypopularity',
+      'Top Manga by Popularity',
       name: 'Top_Manga_Bypopularity',
       desc: '',
       args: [],
