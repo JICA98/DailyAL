@@ -197,6 +197,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "دعم تطوير هذا التطبيق هنا",
     ),
     "CGDCT": MessageLookupByLibrary.simpleMessage("CGDCT"),
+    "Calendar": MessageLookupByLibrary.simpleMessage("تقويم"),
     "Cancel": MessageLookupByLibrary.simpleMessage("يلغي"),
     "Cancelled_Restore": MessageLookupByLibrary.simpleMessage(
       "تم إلغاء الاستعادة",
@@ -378,6 +379,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "هل ترغب في تسجيل الخروج؟",
     ),
     "Doujunshi": MessageLookupByLibrary.simpleMessage("طريقة الاتجاه"),
+    "Download_ICS": MessageLookupByLibrary.simpleMessage("تحميل .ics"),
     "Drag_the_field": MessageLookupByLibrary.simpleMessage(
       "اسحب الحقل أو استخدم مفاتيح الأسهم لتحريك الحقل",
     ),
@@ -443,6 +445,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "Error_Adding_Event_To_Calendar": MessageLookupByLibrary.simpleMessage(
       "خطأ في إضافة حدث إلى التقويم",
     ),
+    "Error_Saving_File": MessageLookupByLibrary.simpleMessage(
+      "خطأ في حفظ الملف!",
+    ),
     "Error_removing_image": MessageLookupByLibrary.simpleMessage(
       "حدث خطأ أثناء إزالة الصورة",
     ),
@@ -493,6 +498,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "Female": MessageLookupByLibrary.simpleMessage("أنثى"),
     "Figures": MessageLookupByLibrary.simpleMessage("الأرقام"),
+    "File_Saved": MessageLookupByLibrary.simpleMessage(
+      "تم حفظ الملف في مجلد التنزيل!",
+    ),
     "Filter": MessageLookupByLibrary.simpleMessage("منقي"),
     "Filter_After_search": MessageLookupByLibrary.simpleMessage(
       "سيتم استخدام هذه المرشحات عند إجراء البحث التالي",
@@ -1201,6 +1209,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "Sci_fi": MessageLookupByLibrary.simpleMessage("SCI-FI."),
     "Score": MessageLookupByLibrary.simpleMessage("نتيجة"),
     "Score_Distribution": MessageLookupByLibrary.simpleMessage("توزيع النتيجة"),
+    "Score_Stats": MessageLookupByLibrary.simpleMessage("إحصائيات النتيجة"),
     "Screening": MessageLookupByLibrary.simpleMessage("تحري"),
     "Search": MessageLookupByLibrary.simpleMessage("يبحث"),
     "SearchBarHintText": MessageLookupByLibrary.simpleMessage(
@@ -1280,6 +1289,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "ضبط مهلة.حاول مرة اخرى.",
     ),
     "Share": MessageLookupByLibrary.simpleMessage("يشارك"),
+    "Share_ICS": MessageLookupByLibrary.simpleMessage("مشاركة .ics"),
     "Shoujo": MessageLookupByLibrary.simpleMessage("شوجو"),
     "Should_be_aplhanumeric": MessageLookupByLibrary.simpleMessage(
       "يجب أن تكون أبجدية رقمية",
@@ -1315,6 +1325,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "إظهار حقل الملاحظة الخاصة في شاشة التحرير",
     ),
     "Show_Spoiler": MessageLookupByLibrary.simpleMessage("عرض المفسد"),
+    "Show_dub_status_AnimeList_Desc": MessageLookupByLibrary.simpleMessage(
+      "إظهار حالة الدبلجة (الإنجليزية) لأنيمي في القائمة",
+    ),
     "Show_priority_in_anime_manga_list": MessageLookupByLibrary.simpleMessage(
       "إظهار الأولوية في قائمة أنيمي / مانغا",
     ),
@@ -1554,6 +1567,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "Video_Game": MessageLookupByLibrary.simpleMessage("لعبة فيديو"),
     "Videos": MessageLookupByLibrary.simpleMessage("أشرطة فيديو"),
     "View_All": MessageLookupByLibrary.simpleMessage("عرض الكل"),
+    "View_Related_Graph_Tooltip": MessageLookupByLibrary.simpleMessage(
+      "عرض الرسم البياني أنيمي / مانغا ذات الصلة",
+    ),
     "View_all_Discussions": MessageLookupByLibrary.simpleMessage(
       "عرض جميع المناقشات",
     ),

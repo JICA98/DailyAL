@@ -205,6 +205,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Dukung pengembangan aplikasi ini di sini",
     ),
     "CGDCT": MessageLookupByLibrary.simpleMessage("CGDCT"),
+    "Calendar": MessageLookupByLibrary.simpleMessage("Kalender"),
     "Cancel": MessageLookupByLibrary.simpleMessage("Membatalkan"),
     "Cancelled_Restore": MessageLookupByLibrary.simpleMessage(
       "Pemulihan Dibatalkan",
@@ -402,6 +403,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Apakah Anda ingin keluar?",
     ),
     "Doujunshi": MessageLookupByLibrary.simpleMessage("Cara arah"),
+    "Download_ICS": MessageLookupByLibrary.simpleMessage("Unduh .ics"),
     "Drag_the_field": MessageLookupByLibrary.simpleMessage(
       "Seret bidang atau gunakan tombol panah untuk memindahkan bidang",
     ),
@@ -475,6 +477,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "Error_Adding_Event_To_Calendar": MessageLookupByLibrary.simpleMessage(
       "Kesalahan Menambahkan Acara ke Kalender",
     ),
+    "Error_Saving_File": MessageLookupByLibrary.simpleMessage(
+      "Terjadi kesalahan saat menyimpan file!",
+    ),
     "Error_removing_image": MessageLookupByLibrary.simpleMessage(
       "Terjadi kesalahan saat menghapus gambar",
     ),
@@ -527,6 +532,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "Female": MessageLookupByLibrary.simpleMessage("Perempuan"),
     "Figures": MessageLookupByLibrary.simpleMessage("Angka"),
+    "File_Saved": MessageLookupByLibrary.simpleMessage(
+      "File disimpan ke folder unduhan!",
+    ),
     "Filter": MessageLookupByLibrary.simpleMessage("Saring"),
     "Filter_After_search": MessageLookupByLibrary.simpleMessage(
       "Filter ini akan digunakan ketika Anda melakukan pencarian berikutnya",
@@ -1263,6 +1271,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "Score_Distribution": MessageLookupByLibrary.simpleMessage(
       "Distribusi Skor",
     ),
+    "Score_Stats": MessageLookupByLibrary.simpleMessage("Statistik Skor"),
     "Screening": MessageLookupByLibrary.simpleMessage("Penyaringan"),
     "Search": MessageLookupByLibrary.simpleMessage("Mencari"),
     "SearchBarHintText": MessageLookupByLibrary.simpleMessage(
@@ -1344,6 +1353,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Pengaturan waktu habis.Silakan coba lagi.",
     ),
     "Share": MessageLookupByLibrary.simpleMessage("Membagikan"),
+    "Share_ICS": MessageLookupByLibrary.simpleMessage("Bagikan .ics"),
     "Shoujo": MessageLookupByLibrary.simpleMessage("Shoujo."),
     "Should_be_aplhanumeric": MessageLookupByLibrary.simpleMessage(
       "Harus alfanumerik",
@@ -1379,6 +1389,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Tampilkan kolom catatan pribadi di layar edit",
     ),
     "Show_Spoiler": MessageLookupByLibrary.simpleMessage("Tampilkan Spoiler."),
+    "Show_dub_status_AnimeList_Desc": MessageLookupByLibrary.simpleMessage(
+      "Tampilkan status dubbing (Bahasa Inggris) suatu anime dalam daftar",
+    ),
     "Show_priority_in_anime_manga_list": MessageLookupByLibrary.simpleMessage(
       "Tampilkan prioritas dalam daftar anime / manga",
     ),
@@ -1632,6 +1645,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "Video_Game": MessageLookupByLibrary.simpleMessage("Video game"),
     "Videos": MessageLookupByLibrary.simpleMessage("Video"),
     "View_All": MessageLookupByLibrary.simpleMessage("Lihat semua"),
+    "View_Related_Graph_Tooltip": MessageLookupByLibrary.simpleMessage(
+      "Lihat grafik anime/manga terkait",
+    ),
     "View_all_Discussions": MessageLookupByLibrary.simpleMessage(
       "Lihat semua Diskusi",
     ),

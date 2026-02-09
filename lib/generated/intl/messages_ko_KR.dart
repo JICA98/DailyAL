@@ -169,6 +169,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "여기에서 이 앱의 개발을 지원하세요.",
     ),
     "CGDCT": MessageLookupByLibrary.simpleMessage("CGDCT"),
+    "Calendar": MessageLookupByLibrary.simpleMessage("달력"),
     "Cancel": MessageLookupByLibrary.simpleMessage("취소"),
     "Cancelled_Restore": MessageLookupByLibrary.simpleMessage("취소된 복원"),
     "Cannot_launch": MessageLookupByLibrary.simpleMessage("실행할 수 없음"),
@@ -322,6 +323,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "로그 아웃하고 싶습니까?",
     ),
     "Doujunshi": MessageLookupByLibrary.simpleMessage("방향의 방법"),
+    "Download_ICS": MessageLookupByLibrary.simpleMessage(".ics 다운로드"),
     "Drag_the_field": MessageLookupByLibrary.simpleMessage(
       "필드를 드래그하거나 화살표 키를 사용하여 필드를 이동하세요.",
     ),
@@ -383,6 +385,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "Error_Adding_Event_To_Calendar": MessageLookupByLibrary.simpleMessage(
       "캘린더에 이벤트를 추가하는 오류",
     ),
+    "Error_Saving_File": MessageLookupByLibrary.simpleMessage(
+      "파일을 저장하는 중에 오류가 발생했습니다.",
+    ),
     "Error_removing_image": MessageLookupByLibrary.simpleMessage(
       "이미지를 삭제하는 중에 오류가 발생했습니다.",
     ),
@@ -433,6 +438,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "Female": MessageLookupByLibrary.simpleMessage("여자"),
     "Figures": MessageLookupByLibrary.simpleMessage("수치"),
+    "File_Saved": MessageLookupByLibrary.simpleMessage("다운로드 폴더에 파일이 저장되었습니다!"),
     "Filter": MessageLookupByLibrary.simpleMessage("필터"),
     "Filter_After_search": MessageLookupByLibrary.simpleMessage(
       "이 필터는 다음 검색을 수행 할 때 사용됩니다.",
@@ -1041,6 +1047,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "Sci_fi": MessageLookupByLibrary.simpleMessage("Sci-Fi"),
     "Score": MessageLookupByLibrary.simpleMessage("점수"),
     "Score_Distribution": MessageLookupByLibrary.simpleMessage("점수 분포"),
+    "Score_Stats": MessageLookupByLibrary.simpleMessage("점수 통계"),
     "Screening": MessageLookupByLibrary.simpleMessage("상영"),
     "Search": MessageLookupByLibrary.simpleMessage("찾다"),
     "SearchBarHintText": MessageLookupByLibrary.simpleMessage("애니메이션, 만화 등 검색"),
@@ -1108,6 +1115,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "설정 시간이 초과되었습니다.다시 시도하십시오.",
     ),
     "Share": MessageLookupByLibrary.simpleMessage("공유하다"),
+    "Share_ICS": MessageLookupByLibrary.simpleMessage(".ics 공유"),
     "Shoujo": MessageLookupByLibrary.simpleMessage("쇼 조"),
     "Should_be_aplhanumeric": MessageLookupByLibrary.simpleMessage(
       "영숫자여야 합니다.",
@@ -1137,6 +1145,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "편집 화면에서 개인 메모 필드를 표시합니다.",
     ),
     "Show_Spoiler": MessageLookupByLibrary.simpleMessage("쇼 스포일러"),
+    "Show_dub_status_AnimeList_Desc": MessageLookupByLibrary.simpleMessage(
+      "목록에 있는 애니메이션의 더빙(영어) 상태 표시",
+    ),
     "Show_priority_in_anime_manga_list": MessageLookupByLibrary.simpleMessage(
       "Anime / Manga 목록에서 우선 순위를 표시합니다",
     ),
@@ -1345,6 +1356,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "Video_Game": MessageLookupByLibrary.simpleMessage("비디오 게임"),
     "Videos": MessageLookupByLibrary.simpleMessage("비디오"),
     "View_All": MessageLookupByLibrary.simpleMessage("모두보기"),
+    "View_Related_Graph_Tooltip": MessageLookupByLibrary.simpleMessage(
+      "관련 애니메이션/만화 그래프 보기",
+    ),
     "View_all_Discussions": MessageLookupByLibrary.simpleMessage("모든 토론을 봅니다"),
     "Views": MessageLookupByLibrary.simpleMessage("견해"),
     "Visual_Arts": MessageLookupByLibrary.simpleMessage("시각예술"),

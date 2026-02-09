@@ -177,6 +177,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "ここでこのアプリの開発をサポート",
     ),
     "CGDCT": MessageLookupByLibrary.simpleMessage("CGDCT"),
+    "Calendar": MessageLookupByLibrary.simpleMessage("カレンダー"),
     "Cancel": MessageLookupByLibrary.simpleMessage("キャンセル"),
     "Cancelled_Restore": MessageLookupByLibrary.simpleMessage("キャンセルされた復元"),
     "Cannot_launch": MessageLookupByLibrary.simpleMessage("起動できません"),
@@ -328,6 +329,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "あなたはログアウトしたいですか？",
     ),
     "Doujunshi": MessageLookupByLibrary.simpleMessage("道順し"),
+    "Download_ICS": MessageLookupByLibrary.simpleMessage(".icsをダウンロード"),
     "Drag_the_field": MessageLookupByLibrary.simpleMessage(
       "フィールドをドラッグするか、矢印キーを使用してフィールドを移動します",
     ),
@@ -393,6 +395,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "Error_Adding_Event_To_Calendar": MessageLookupByLibrary.simpleMessage(
       "カレンダーにイベントを追加するエラー",
     ),
+    "Error_Saving_File": MessageLookupByLibrary.simpleMessage(
+      "ファイルの保存中にエラーが発生しました!",
+    ),
     "Error_removing_image": MessageLookupByLibrary.simpleMessage(
       "画像の削除中にエラーが発生しました",
     ),
@@ -443,6 +448,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "Female": MessageLookupByLibrary.simpleMessage("女性"),
     "Figures": MessageLookupByLibrary.simpleMessage("数字"),
+    "File_Saved": MessageLookupByLibrary.simpleMessage(
+      "ダウンロードフォルダにファイルが保存されました！",
+    ),
     "Filter": MessageLookupByLibrary.simpleMessage("フィルター"),
     "Filter_After_search": MessageLookupByLibrary.simpleMessage(
       "次回の検索が行われるときは、これらのフィルタが使用されます。",
@@ -1065,6 +1073,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "Sci_fi": MessageLookupByLibrary.simpleMessage("サイド"),
     "Score": MessageLookupByLibrary.simpleMessage("スコア"),
     "Score_Distribution": MessageLookupByLibrary.simpleMessage("スコア分布"),
+    "Score_Stats": MessageLookupByLibrary.simpleMessage("スコア統計"),
     "Screening": MessageLookupByLibrary.simpleMessage("ふるい分け"),
     "Search": MessageLookupByLibrary.simpleMessage("検索"),
     "SearchBarHintText": MessageLookupByLibrary.simpleMessage("アニメ、マンガなどを検索"),
@@ -1134,6 +1143,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "セットアップがタイムアウトしました。もう一度やり直してください。",
     ),
     "Share": MessageLookupByLibrary.simpleMessage("シェア"),
+    "Share_ICS": MessageLookupByLibrary.simpleMessage(".icsを共有する"),
     "Shoujo": MessageLookupByLibrary.simpleMessage("千条"),
     "Should_be_aplhanumeric": MessageLookupByLibrary.simpleMessage(
       "英数字である必要があります",
@@ -1167,6 +1177,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "編集画面にプライベートノートフィールドを表示する",
     ),
     "Show_Spoiler": MessageLookupByLibrary.simpleMessage("スポイラーを見せる"),
+    "Show_dub_status_AnimeList_Desc": MessageLookupByLibrary.simpleMessage(
+      "アニメの吹き替え（英語）ステータスをリストに表示します",
+    ),
     "Show_priority_in_anime_manga_list": MessageLookupByLibrary.simpleMessage(
       "アニメ/マンガリストの優先順位を表示します",
     ),
@@ -1371,6 +1384,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "Video_Game": MessageLookupByLibrary.simpleMessage("テレビゲーム"),
     "Videos": MessageLookupByLibrary.simpleMessage("動画"),
     "View_All": MessageLookupByLibrary.simpleMessage("全体を見る"),
+    "View_Related_Graph_Tooltip": MessageLookupByLibrary.simpleMessage(
+      "関連するアニメ/マンガのグラフを表示",
+    ),
     "View_all_Discussions": MessageLookupByLibrary.simpleMessage(
       "すべてのディスカッションを表示します",
     ),
