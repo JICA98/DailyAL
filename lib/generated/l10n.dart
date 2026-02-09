@@ -5759,6 +5759,41 @@ class S {
     );
   }
 
+  /// `Download .ics`
+  String get Download_ICS {
+    return Intl.message(
+      'Download .ics',
+      name: 'Download_ICS',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Share .ics`
+  String get Share_ICS {
+    return Intl.message('Share .ics', name: 'Share_ICS', desc: '', args: []);
+  }
+
+  /// `File saved to download folder!`
+  String get File_Saved {
+    return Intl.message(
+      'File saved to download folder!',
+      name: 'File_Saved',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error saving file!`
+  String get Error_Saving_File {
+    return Intl.message(
+      'Error saving file!',
+      name: 'Error_Saving_File',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Discord Invite`
   String get DiscordInvite {
     return Intl.message(

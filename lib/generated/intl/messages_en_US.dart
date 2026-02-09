@@ -397,6 +397,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Do you wish to logout?",
     ),
     "Doujunshi": MessageLookupByLibrary.simpleMessage("Doujunshi"),
+    "Download_ICS": MessageLookupByLibrary.simpleMessage("Download .ics"),
     "Drag_the_field": MessageLookupByLibrary.simpleMessage(
       "Drag the field or use arrow keys to move the field",
     ),
@@ -466,6 +467,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "Error_Adding_Event_To_Calendar": MessageLookupByLibrary.simpleMessage(
       "Error adding event to calendar",
     ),
+    "Error_Saving_File": MessageLookupByLibrary.simpleMessage(
+      "Error saving file!",
+    ),
     "Error_removing_image": MessageLookupByLibrary.simpleMessage(
       "Error removing image",
     ),
@@ -518,6 +522,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "Female": MessageLookupByLibrary.simpleMessage("Female"),
     "Figures": MessageLookupByLibrary.simpleMessage("Figures"),
+    "File_Saved": MessageLookupByLibrary.simpleMessage(
+      "File saved to download folder!",
+    ),
     "Filter": MessageLookupByLibrary.simpleMessage("Filter"),
     "Filter_After_search": MessageLookupByLibrary.simpleMessage(
       "These filters will be used when you do your next search",
@@ -1302,6 +1309,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Setup Timed out. Please try again.",
     ),
     "Share": MessageLookupByLibrary.simpleMessage("Share"),
+    "Share_ICS": MessageLookupByLibrary.simpleMessage("Share .ics"),
     "Shoujo": MessageLookupByLibrary.simpleMessage("Shoujo"),
     "Should_be_aplhanumeric": MessageLookupByLibrary.simpleMessage(
       "Should be alphanumeric",
