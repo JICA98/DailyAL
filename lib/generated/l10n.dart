@@ -6784,10 +6784,10 @@ class S {
     );
   }
 
-  /// `Show card around the content in list view (comfirtable) wherever possible`
+  /// `Show card around the content in list view (Comfortable) wherever possible`
   String get showAnimeMangaCardDesc {
     return Intl.message(
-      'Show card around the content in list view (comfirtable) wherever possible',
+      'Show card around the content in list view (Comfortable) wherever possible',
       name: 'showAnimeMangaCardDesc',
       desc: '',
       args: [],

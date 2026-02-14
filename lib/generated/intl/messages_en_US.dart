@@ -1688,7 +1688,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Show content card",
     ),
     "showAnimeMangaCardDesc": MessageLookupByLibrary.simpleMessage(
-      "Show card around the content in list view (comfirtable) wherever possible",
+      "Show card around the content in list view (Comfortable) wherever possible",
     ),
     "suggested_anime": MessageLookupByLibrary.simpleMessage("Suggested Anime"),
     "sunday": MessageLookupByLibrary.simpleMessage("Sunday"),
