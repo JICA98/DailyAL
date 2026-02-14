@@ -5,6 +5,16 @@ on:
     tags:
       - '20*'
   workflow_dispatch:
+    inputs:
+      platform:
+        description: 'Platform to build'
+        required: true
+        default: 'all'
+        type: choice
+        options:
+          - all
+          - linux-android
+          - windows
 
 permissions:
   contents: write
@@ -12,6 +22,7 @@ permissions:
 jobs:
   build-linux-android:
     runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'push' || inputs.platform == 'all' || inputs.platform == 'linux-android' }}
     
     steps:
     - uses: actions/checkout@v4
@@ -76,6 +87,7 @@ jobs:
 
   build-windows:
     runs-on: windows-latest
+    if: ${{ github.event_name == 'push' || inputs.platform == 'all' || inputs.platform == 'windows' }}
 
     steps:
     - uses: actions/checkout@v4
@@ -120,16 +132,18 @@ jobs:
   release:
     needs: [build-linux-android, build-windows]
     runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/tags/20')
+    if: ${{ always() && startsWith(github.ref, 'refs/tags/20') }}
     
     steps:
     - name: Download Linux/Android Artifacts
+      if: ${{ needs.build-linux-android.result == 'success' }}
       uses: actions/download-artifact@v4
       with:
         name: release-artifacts-linux-android
         path: release-artifacts
 
     - name: Download Windows Artifacts
+      if: ${{ needs.build-windows.result == 'success' }}
       uses: actions/download-artifact@v4
       with:
         name: release-artifacts-windows
