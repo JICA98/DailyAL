@@ -97,22 +97,25 @@ jobs:
     - name: Create MSIX
       run: dart run msix:create --install-certificate false
 
-    - name: Compress Windows Build
+    - name: Separate MSIX and Compress Windows Build
       run: |
-        Compress-Archive -Path build/windows/x64/runner/Release/* -DestinationPath DailyAL-Windows.zip
+        Move-Item -Path build/windows/x64/runner/Release/*.msix -Destination DailyAL-Windows-x64.msix
+        Compress-Archive -Path build/windows/x64/runner/Release/* -DestinationPath DailyAL-Windows-x64.zip
 
-    - name: Generate SHA1 Checksum
+    - name: Generate SHA1 Checksums
       run: |
-        Get-FileHash DailyAL-Windows.zip -Algorithm SHA1 | Select-Object -ExpandProperty Hash > DailyAL-Windows.zip.sha1
+        Get-FileHash DailyAL-Windows-x64.zip -Algorithm SHA1 | Select-Object -ExpandProperty Hash > DailyAL-Windows-x64.zip.sha1
+        Get-FileHash DailyAL-Windows-x64.msix -Algorithm SHA1 | Select-Object -ExpandProperty Hash > DailyAL-Windows-x64.msix.sha1
 
     - name: Upload Artifacts
       uses: actions/upload-artifact@v4
       with:
         name: release-artifacts-windows
         path: |
-          build/windows/runner/Release/*.msix
-          DailyAL-Windows.zip
-          DailyAL-Windows.zip.sha1
+          DailyAL-Windows-x64.msix
+          DailyAL-Windows-x64.msix.sha1
+          DailyAL-Windows-x64.zip
+          DailyAL-Windows-x64.zip.sha1
 
   release:
     needs: [build-linux-android, build-windows]
@@ -140,6 +143,7 @@ jobs:
           release-artifacts/app-release.apk.sha1
           release-artifacts/DailyAL-x86_64.AppImage
           release-artifacts/DailyAL-x86_64.AppImage.sha1
-          release-artifacts/*.msix
-          release-artifacts/DailyAL-Windows.zip
-          release-artifacts/DailyAL-Windows.zip.sha1
+          release-artifacts/DailyAL-Windows-x64.msix
+          release-artifacts/DailyAL-Windows-x64.msix.sha1
+          release-artifacts/DailyAL-Windows-x64.zip
+          release-artifacts/DailyAL-Windows-x64.zip.sha1
