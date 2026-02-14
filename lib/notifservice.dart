@@ -85,7 +85,7 @@ class NotificationService {
             linux: LinuxInitializationSettings(defaultActionName: 'Open'));
 
     await flutterLocalNotificationsPlugin.initialize(
-      initializationSettings,
+      settings: initializationSettings,
       onDidReceiveBackgroundNotificationResponse:
           onDidReceiveBackgroundNotificationResponse,
       onDidReceiveNotificationResponse: onDidReceiveNotificationResponse,
@@ -305,30 +305,29 @@ class NotificationService {
         }
       } else {
         await flutterLocalNotificationsPlugin.zonedSchedule(
-            serviceId * 100 + node.id!,
-            _replaceTags(title) ??
-                "DailyAnimeList - ${S.current.Episode_Reminder}",
-            _replaceTags(body) ??
-                "${node.title} - Episode $episode ${S.current.just_got_aired}!!",
-            exactDate != null
-                ? tz.TZDateTime.from(exactDate, tz.local)
-                : tz.TZDateTime.now(tz.local).add(addTime),
-            NotificationDetails(
-              android: AndroidNotificationDetails(
-                channel.channelId,
-                channel.channelName,
-                channelDescription: channel.channelDescription,
-                priority: Priority.high,
-                styleInformation: styleInfo,
-                icon: 'ic_stat_name',
-                largeIcon: largeIconBitmap,
-                category: AndroidNotificationCategory.reminder,
-              ),
+          id: serviceId * 100 + node.id!,
+          title: _replaceTags(title) ??
+              "DailyAnimeList - ${S.current.Episode_Reminder}",
+          body: _replaceTags(body) ??
+              "${node.title} - Episode $episode ${S.current.just_got_aired}!!",
+          scheduledDate: exactDate != null
+              ? tz.TZDateTime.from(exactDate, tz.local)
+              : tz.TZDateTime.now(tz.local).add(addTime),
+          notificationDetails: NotificationDetails(
+            android: AndroidNotificationDetails(
+              channel.channelId,
+              channel.channelName,
+              channelDescription: channel.channelDescription,
+              priority: Priority.high,
+              styleInformation: styleInfo,
+              icon: 'ic_stat_name',
+              largeIcon: largeIconBitmap,
+              category: AndroidNotificationCategory.reminder,
             ),
-            androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
-            payload: jsonEncode(node.toJson()),
-            uiLocalNotificationDateInterpretation:
-                UILocalNotificationDateInterpretation.absoluteTime);
+          ),
+          androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+          payload: jsonEncode(node.toJson()),
+        );
       }
     } catch (e) {
       logDal(e);
@@ -349,10 +348,10 @@ class NotificationService {
             iconPath != null ? FilePathLinuxIcon(iconPath) : null;
 
         await flutterLocalNotificationsPlugin.show(
-          serviceId * 100 + node.id!,
-          cleanTitle,
-          cleanBody,
-          NotificationDetails(
+          id: serviceId * 100 + node.id!,
+          title: cleanTitle,
+          body: cleanBody,
+          notificationDetails: NotificationDetails(
             linux: LinuxNotificationDetails(
               urgency: LinuxNotificationUrgency.normal,
               icon: linuxIcon,
