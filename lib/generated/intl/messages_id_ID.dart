@@ -839,6 +839,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "Logout_desc": MessageLookupByLibrary.simpleMessage("Keluar dari aplikasi"),
     "Love": MessageLookupByLibrary.simpleMessage("Cinta"),
     "Love_Polygon": MessageLookupByLibrary.simpleMessage("Cinta_Poligon"),
+    "Love_Status_Quo": MessageLookupByLibrary.simpleMessage("Love Status Quo"),
     "Love_it": MessageLookupByLibrary.simpleMessage("Suka sekali"),
     "Low": MessageLookupByLibrary.simpleMessage("Rendah"),
     "MAL_API_Licence": MessageLookupByLibrary.simpleMessage("Perjanjian MAL"),
@@ -888,6 +889,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "Medium": MessageLookupByLibrary.simpleMessage("Medium"),
     "Members": MessageLookupByLibrary.simpleMessage("Anggota."),
     "Meme": MessageLookupByLibrary.simpleMessage("Mim."),
+    "Memoir": MessageLookupByLibrary.simpleMessage("Memoir"),
     "Military": MessageLookupByLibrary.simpleMessage("Militer"),
     "Min_title_length": MessageLookupByLibrary.simpleMessage(
       "Min.Panjang judul adalah 3",
@@ -1612,6 +1614,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Pembaruan & Pengumuman",
     ),
     "Updating": MessageLookupByLibrary.simpleMessage("Memperbarui"),
+    "Urban_Fantasy": MessageLookupByLibrary.simpleMessage("Urban Fantasy"),
     "Url": MessageLookupByLibrary.simpleMessage("Url"),
     "Url_open_conf": MessageLookupByLibrary.simpleMessage(
       "Tautan ini akan membawa Anda ke",
@@ -1652,6 +1655,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Lihat semua Diskusi",
     ),
     "Views": MessageLookupByLibrary.simpleMessage("Tampilan"),
+    "Villainess": MessageLookupByLibrary.simpleMessage("Villainess"),
     "Visual_Arts": MessageLookupByLibrary.simpleMessage("Seni visual"),
     "Voice_Acting_Roles": MessageLookupByLibrary.simpleMessage(
       "Peran akting suara",

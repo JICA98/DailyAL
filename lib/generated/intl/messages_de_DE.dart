@@ -853,6 +853,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "Love": MessageLookupByLibrary.simpleMessage("Liebe"),
     "Love_Polygon": MessageLookupByLibrary.simpleMessage("Liebe_Polygon"),
+    "Love_Status_Quo": MessageLookupByLibrary.simpleMessage("Love Status Quo"),
     "Love_it": MessageLookupByLibrary.simpleMessage("Liebe es"),
     "Low": MessageLookupByLibrary.simpleMessage("Niedrig"),
     "MAL_API_Licence": MessageLookupByLibrary.simpleMessage("MAL-Vereinbarung"),
@@ -906,6 +907,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "Medium": MessageLookupByLibrary.simpleMessage("Mittel"),
     "Members": MessageLookupByLibrary.simpleMessage("Mitglieder"),
     "Meme": MessageLookupByLibrary.simpleMessage("Meme"),
+    "Memoir": MessageLookupByLibrary.simpleMessage("Memoir"),
     "Military": MessageLookupByLibrary.simpleMessage("Militär"),
     "Min_title_length": MessageLookupByLibrary.simpleMessage(
       "Mindest.Titellänge ist 3",
@@ -1646,6 +1648,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Updates & Ankündigungen.",
     ),
     "Updating": MessageLookupByLibrary.simpleMessage("Aktualisierung"),
+    "Urban_Fantasy": MessageLookupByLibrary.simpleMessage("Urban Fantasy"),
     "Url": MessageLookupByLibrary.simpleMessage("URL"),
     "Url_open_conf": MessageLookupByLibrary.simpleMessage(
       "Dieser Link bringt Sie dazu",
@@ -1686,6 +1689,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Alle Diskussionen anzeigen.",
     ),
     "Views": MessageLookupByLibrary.simpleMessage("Ansichten"),
+    "Villainess": MessageLookupByLibrary.simpleMessage("Villainess"),
     "Visual_Arts": MessageLookupByLibrary.simpleMessage("Bildende Kunst"),
     "Voice_Acting_Roles": MessageLookupByLibrary.simpleMessage(
       "Stimmschaufende Rollen",

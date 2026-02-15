@@ -793,6 +793,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "Love": MessageLookupByLibrary.simpleMessage("حب"),
     "Love_Polygon": MessageLookupByLibrary.simpleMessage("الحب_المضلع"),
+    "Love_Status_Quo": MessageLookupByLibrary.simpleMessage("Love Status Quo"),
     "Love_it": MessageLookupByLibrary.simpleMessage("أحبها"),
     "Low": MessageLookupByLibrary.simpleMessage("قليل"),
     "MAL_API_Licence": MessageLookupByLibrary.simpleMessage(
@@ -842,6 +843,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "Medium": MessageLookupByLibrary.simpleMessage("واسطة"),
     "Members": MessageLookupByLibrary.simpleMessage("أعضاء"),
     "Meme": MessageLookupByLibrary.simpleMessage("انا انا"),
+    "Memoir": MessageLookupByLibrary.simpleMessage("Memoir"),
     "Military": MessageLookupByLibrary.simpleMessage("جيش"),
     "Min_title_length": MessageLookupByLibrary.simpleMessage(
       "دقيقة.طول العنوان هو 3",
@@ -1534,6 +1536,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "التحديثات والإعلانات",
     ),
     "Updating": MessageLookupByLibrary.simpleMessage("تحديث"),
+    "Urban_Fantasy": MessageLookupByLibrary.simpleMessage("Urban Fantasy"),
     "Url": MessageLookupByLibrary.simpleMessage("عنوان Url"),
     "Url_open_conf": MessageLookupByLibrary.simpleMessage(
       "هذا الرابط سوف يأخذك إلى",
@@ -1574,6 +1577,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "عرض جميع المناقشات",
     ),
     "Views": MessageLookupByLibrary.simpleMessage("الآراء"),
+    "Villainess": MessageLookupByLibrary.simpleMessage("Villainess"),
     "Visual_Arts": MessageLookupByLibrary.simpleMessage("الفنون البصرية"),
     "Voice_Acting_Roles": MessageLookupByLibrary.simpleMessage(
       "صوت التمثيل الأدوار",

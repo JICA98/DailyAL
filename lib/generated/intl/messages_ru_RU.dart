@@ -855,6 +855,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "Love_Polygon": MessageLookupByLibrary.simpleMessage(
       "Любовь_Многоугольник",
     ),
+    "Love_Status_Quo": MessageLookupByLibrary.simpleMessage("Love Status Quo"),
     "Love_it": MessageLookupByLibrary.simpleMessage("Любить это"),
     "Low": MessageLookupByLibrary.simpleMessage("Низкий"),
     "MAL_API_Licence": MessageLookupByLibrary.simpleMessage("Соглашение ТЗА"),
@@ -906,6 +907,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "Medium": MessageLookupByLibrary.simpleMessage("Середина"),
     "Members": MessageLookupByLibrary.simpleMessage("Члены"),
     "Meme": MessageLookupByLibrary.simpleMessage("Мем"),
+    "Memoir": MessageLookupByLibrary.simpleMessage("Memoir"),
     "Military": MessageLookupByLibrary.simpleMessage("Военный"),
     "Min_title_length": MessageLookupByLibrary.simpleMessage(
       "Мин. длина заголовка равна 3",
@@ -1646,6 +1648,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Обновления и объявления",
     ),
     "Updating": MessageLookupByLibrary.simpleMessage("Обновление"),
+    "Urban_Fantasy": MessageLookupByLibrary.simpleMessage("Urban Fantasy"),
     "Url": MessageLookupByLibrary.simpleMessage("URL"),
     "Url_open_conf": MessageLookupByLibrary.simpleMessage(
       "Эта ссылка приведет вас к",
@@ -1690,6 +1693,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Просмотреть все обсуждения",
     ),
     "Views": MessageLookupByLibrary.simpleMessage("Взгляды"),
+    "Villainess": MessageLookupByLibrary.simpleMessage("Villainess"),
     "Visual_Arts": MessageLookupByLibrary.simpleMessage(
       "Изобразительное искусство",
     ),

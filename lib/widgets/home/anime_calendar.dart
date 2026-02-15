@@ -789,30 +789,51 @@ class __ScheduleCustomListState extends State<_ScheduleCustomList> {
         DateTime.fromMillisecondsSinceEpoch(schedule.timestamp! * 1000);
     final endDate = startDate.add(Duration(minutes: 25));
 
-    int occurrences = 1;
-    if (useRecurring && anime.numEpisodes != null && schedule.episode != null) {
-      final total = anime.numEpisodes!;
-      final nextEp = schedule.episode!;
-      occurrences = total - nextEp + 1;
-      if (occurrences < 1) occurrences = 1;
-    }
-
     final buffer = StringBuffer();
     buffer.writeln('BEGIN:VCALENDAR');
     buffer.writeln('VERSION:2.0');
     buffer.writeln('PRODID:-//DailyAL//NONSGML v1.0//EN');
 
-    for (int i = 0; i < occurrences; i++) {
-      final ep = (schedule.episode ?? 1) + i;
-      final start = startDate.add(Duration(days: 7 * i));
-      final end = endDate.add(Duration(days: 7 * i));
-      final timestamp = start.millisecondsSinceEpoch ~/ 1000;
+    // Check if we should generate a recurring event instead of multiple events
+    bool canGenerateRecurring =
+        useRecurring && anime.numEpisodes != null && schedule.episode != null;
 
-      final description =
-          _getAnimeDescription(anime, schedule, ep, timestamp).toString();
-      final title = _getCalendarTitle(schedule, anime, null, ep);
+    if (canGenerateRecurring) {
+      // Generate a single recurring event
+      final total = anime.numEpisodes!;
+      final nextEp = schedule.episode!;
+      int occurrences = total - nextEp + 1;
+      if (occurrences < 1) occurrences = 1;
 
-      buffer.write(_generateEventString(title, description, start, end));
+      final description = _getAnimeDescription(anime, schedule).toString();
+      final title = _getCalendarTitle(schedule, anime, null);
+
+      buffer.write(_generateRecurringEventString(
+          title, description, startDate, endDate, occurrences));
+    } else {
+      // Generate multiple individual events (existing behavior)
+      int occurrences = 1;
+      if (useRecurring &&
+          anime.numEpisodes != null &&
+          schedule.episode != null) {
+        final total = anime.numEpisodes!;
+        final nextEp = schedule.episode!;
+        occurrences = total - nextEp + 1;
+        if (occurrences < 1) occurrences = 1;
+      }
+
+      for (int i = 0; i < occurrences; i++) {
+        final ep = (schedule.episode ?? 1) + i;
+        final start = startDate.add(Duration(days: 7 * i));
+        final end = endDate.add(Duration(days: 7 * i));
+        final timestamp = start.millisecondsSinceEpoch ~/ 1000;
+
+        final description =
+            _getAnimeDescription(anime, schedule, ep, timestamp).toString();
+        final title = _getCalendarTitle(schedule, anime, null, ep);
+
+        buffer.write(_generateEventString(title, description, start, end));
+      }
     }
 
     buffer.writeln('END:VCALENDAR');
@@ -841,6 +862,23 @@ class __ScheduleCustomListState extends State<_ScheduleCustomList> {
     buffer.writeln('DTEND:${dateFormat.format(end.toUtc())}');
     buffer.writeln('SUMMARY:$title');
     buffer.writeln('DESCRIPTION:${description.replaceAll('\n', '\\n')}');
+    buffer.writeln('END:VEVENT');
+    return buffer.toString();
+  }
+
+  String _generateRecurringEventString(String title, String description,
+      DateTime start, DateTime end, int occurrences) {
+    final dateFormat = DateFormat("yyyyMMdd'T'HHmmss'Z'");
+    final buffer = StringBuffer();
+    buffer.writeln('BEGIN:VEVENT');
+    buffer.writeln(
+        'UID:${start.millisecondsSinceEpoch}-${title.hashCode}@dailyal');
+    buffer.writeln('DTSTAMP:${dateFormat.format(DateTime.now().toUtc())}');
+    buffer.writeln('DTSTART:${dateFormat.format(start.toUtc())}');
+    buffer.writeln('DTEND:${dateFormat.format(end.toUtc())}');
+    buffer.writeln('SUMMARY:$title');
+    buffer.writeln('DESCRIPTION:${description.replaceAll('\n', '\\n')}');
+    buffer.writeln('RRULE:FREQ=WEEKLY;COUNT=$occurrences');
     buffer.writeln('END:VEVENT');
     return buffer.toString();
   }

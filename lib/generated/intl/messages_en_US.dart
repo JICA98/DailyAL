@@ -817,6 +817,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "Logout_desc": MessageLookupByLibrary.simpleMessage("Logout from the app"),
     "Love": MessageLookupByLibrary.simpleMessage("Love"),
     "Love_Polygon": MessageLookupByLibrary.simpleMessage("Love_Polygon"),
+    "Love_Status_Quo": MessageLookupByLibrary.simpleMessage("Love Status Quo"),
     "Love_it": MessageLookupByLibrary.simpleMessage("Love it"),
     "Low": MessageLookupByLibrary.simpleMessage("Low"),
     "MAL_API_Licence": MessageLookupByLibrary.simpleMessage("MAL Agreement"),
@@ -866,6 +867,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "Medium": MessageLookupByLibrary.simpleMessage("Medium"),
     "Members": MessageLookupByLibrary.simpleMessage("Members"),
     "Meme": MessageLookupByLibrary.simpleMessage("Meme"),
+    "Memoir": MessageLookupByLibrary.simpleMessage("Memoir"),
     "Military": MessageLookupByLibrary.simpleMessage("Military"),
     "Min_title_length": MessageLookupByLibrary.simpleMessage(
       "Min. title length is 3",
@@ -1554,6 +1556,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Updates & Announcements",
     ),
     "Updating": MessageLookupByLibrary.simpleMessage("Updating"),
+    "Urban_Fantasy": MessageLookupByLibrary.simpleMessage("Urban Fantasy"),
     "Url": MessageLookupByLibrary.simpleMessage("Url"),
     "Url_open_conf": MessageLookupByLibrary.simpleMessage(
       "This link will take you to",
@@ -1594,6 +1597,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "View all Discussions",
     ),
     "Views": MessageLookupByLibrary.simpleMessage("Views"),
+    "Villainess": MessageLookupByLibrary.simpleMessage("Villainess"),
     "Visual_Arts": MessageLookupByLibrary.simpleMessage("Visual_Arts"),
     "Voice_Acting_Roles": MessageLookupByLibrary.simpleMessage(
       "Voice Acting Roles",

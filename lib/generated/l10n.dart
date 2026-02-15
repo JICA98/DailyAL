@@ -7703,6 +7703,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Love Status Quo`
+  String get Love_Status_Quo {
+    return Intl.message(
+      'Love Status Quo',
+      name: 'Love_Status_Quo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Urban Fantasy`
+  String get Urban_Fantasy {
+    return Intl.message(
+      'Urban Fantasy',
+      name: 'Urban_Fantasy',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Villainess`
+  String get Villainess {
+    return Intl.message('Villainess', name: 'Villainess', desc: '', args: []);
+  }
+
+  /// `Memoir`
+  String get Memoir {
+    return Intl.message('Memoir', name: 'Memoir', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

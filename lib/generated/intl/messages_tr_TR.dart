@@ -835,6 +835,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "Love": MessageLookupByLibrary.simpleMessage("Aşk"),
     "Love_Polygon": MessageLookupByLibrary.simpleMessage("Aşk_Poligon"),
+    "Love_Status_Quo": MessageLookupByLibrary.simpleMessage("Love Status Quo"),
     "Love_it": MessageLookupByLibrary.simpleMessage("Onu seviyorum"),
     "Low": MessageLookupByLibrary.simpleMessage("Düşük"),
     "MAL_API_Licence": MessageLookupByLibrary.simpleMessage("MAL Anlaşması"),
@@ -886,6 +887,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "Medium": MessageLookupByLibrary.simpleMessage("Orta"),
     "Members": MessageLookupByLibrary.simpleMessage("Üyeler"),
     "Meme": MessageLookupByLibrary.simpleMessage("Meme"),
+    "Memoir": MessageLookupByLibrary.simpleMessage("Memoir"),
     "Military": MessageLookupByLibrary.simpleMessage("Askeri"),
     "Min_title_length": MessageLookupByLibrary.simpleMessage(
       "Min. başlık uzunluğu 3",
@@ -1602,6 +1604,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Güncellemeler ve Duyurular",
     ),
     "Updating": MessageLookupByLibrary.simpleMessage("Güncelleniyor"),
+    "Urban_Fantasy": MessageLookupByLibrary.simpleMessage("Urban Fantasy"),
     "Url": MessageLookupByLibrary.simpleMessage("URL"),
     "Url_open_conf": MessageLookupByLibrary.simpleMessage(
       "Bu bağlantı sizi şuraya götürecektir:",
@@ -1644,6 +1647,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Tüm Tartışmaları Görüntüle",
     ),
     "Views": MessageLookupByLibrary.simpleMessage("Görüntüleme"),
+    "Villainess": MessageLookupByLibrary.simpleMessage("Villainess"),
     "Visual_Arts": MessageLookupByLibrary.simpleMessage("Görsel Sanatlar"),
     "Voice_Acting_Roles": MessageLookupByLibrary.simpleMessage(
       "Seslendirme Rolleri",

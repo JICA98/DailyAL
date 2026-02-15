@@ -327,6 +327,7 @@ class NotificationService {
           ),
           androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
           payload: jsonEncode(node.toJson()),
+          matchDateTimeComponents: DateTimeComponents.dayOfWeekAndTime,
         );
       }
     } catch (e) {

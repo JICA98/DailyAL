@@ -1027,5 +1027,9 @@
     "Show_Private_Review_Desc": "Show private note field in the edit screen",
     "Private_Note_Desc": "Saved locally, never sent to servers",
     "Private_Note_Hint": "Write your private note here...",
-    "Private_Note_Local_Only": "This note is local only and won't be synced."
+    "Private_Note_Local_Only": "This note is local only and won't be synced.",
+    "Love_Status_Quo": "Love Status Quo",
+    "Urban_Fantasy": "Urban Fantasy",
+    "Villainess": "Villainess",
+    "Memoir": "Memoir"
 }
