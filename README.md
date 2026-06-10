@@ -1,3 +1,35 @@
+
+<div align="right">
+  <details>
+    <summary >🌐 Language</summary>
+    <div>
+      <div align="center">
+        <a href="https://openaitx.github.io/view.html?user=JICA98&project=DailyAL&lang=en">English</a>
+        | <a href="https://openaitx.github.io/view.html?user=JICA98&project=DailyAL&lang=zh-CN">简体中文</a>
+        | <a href="https://openaitx.github.io/view.html?user=JICA98&project=DailyAL&lang=zh-TW">繁體中文</a>
+        | <a href="https://openaitx.github.io/view.html?user=JICA98&project=DailyAL&lang=ja">日本語</a>
+        | <a href="https://openaitx.github.io/view.html?user=JICA98&project=DailyAL&lang=ko">한국어</a>
+        | <a href="https://openaitx.github.io/view.html?user=JICA98&project=DailyAL&lang=hi">हिन्दी</a>
+        | <a href="https://openaitx.github.io/view.html?user=JICA98&project=DailyAL&lang=th">ไทย</a>
+        | <a href="https://openaitx.github.io/view.html?user=JICA98&project=DailyAL&lang=fr">Français</a>
+        | <a href="https://openaitx.github.io/view.html?user=JICA98&project=DailyAL&lang=de">Deutsch</a>
+        | <a href="https://openaitx.github.io/view.html?user=JICA98&project=DailyAL&lang=es">Español</a>
+        | <a href="https://openaitx.github.io/view.html?user=JICA98&project=DailyAL&lang=it">Italiano</a>
+        | <a href="https://openaitx.github.io/view.html?user=JICA98&project=DailyAL&lang=ru">Русский</a>
+        | <a href="https://openaitx.github.io/view.html?user=JICA98&project=DailyAL&lang=pt">Português</a>
+        | <a href="https://openaitx.github.io/view.html?user=JICA98&project=DailyAL&lang=nl">Nederlands</a>
+        | <a href="https://openaitx.github.io/view.html?user=JICA98&project=DailyAL&lang=pl">Polski</a>
+        | <a href="https://openaitx.github.io/view.html?user=JICA98&project=DailyAL&lang=ar">العربية</a>
+        | <a href="https://openaitx.github.io/view.html?user=JICA98&project=DailyAL&lang=fa">فارسی</a>
+        | <a href="https://openaitx.github.io/view.html?user=JICA98&project=DailyAL&lang=tr">Türkçe</a>
+        | <a href="https://openaitx.github.io/view.html?user=JICA98&project=DailyAL&lang=vi">Tiếng Việt</a>
+        | <a href="https://openaitx.github.io/view.html?user=JICA98&project=DailyAL&lang=id">Bahasa Indonesia</a>
+        | <a href="https://openaitx.github.io/view.html?user=JICA98&project=DailyAL&lang=as">অসমীয়া</
+      </div>
+    </div>
+  </details>
+</div>
+
 <div align="center">
 
 <a href="https://dailyanimelist.web.app/">
