@@ -1,4 +1,3 @@
-```yaml
 name: Build and Release
 
 on:
@@ -275,4 +274,3 @@ jobs:
             release-artifacts/DailyAL-Windows-x64.msix.sha1
             release-artifacts/DailyAL-Windows-x64.zip
             release-artifacts/DailyAL-Windows-x64.zip.sha1
-```
