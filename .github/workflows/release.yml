@@ -34,6 +34,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # ----------------------------------------
+      # SETUP
+      # ----------------------------------------
+
       - name: Set up Java
         uses: actions/setup-java@v4
         with:
@@ -63,26 +67,31 @@ jobs:
       - name: Enable Linux Desktop
         run: flutter config --enable-linux-desktop
 
+      - name: Upgrade Android Gradle Wrapper
+        run: |
+          sed -i 's/gradle-8.13-all.zip/gradle-8.14.3-all.zip/' \
+            android/gradle/wrapper/gradle-wrapper.properties
+
       - name: Get Dependencies
         run: flutter pub get
 
-      # ======================================
+      # ----------------------------------------
       # ANDROID DEBUG
-      # ======================================
+      # ----------------------------------------
 
       - name: Build Android Debug APK
         run: flutter build apk --debug
 
-      # ======================================
+      # ----------------------------------------
       # ANDROID RELEASE
-      # ======================================
+      # ----------------------------------------
 
       - name: Build Android Release APK
         run: flutter build apk --release
 
-      # ======================================
+      # ----------------------------------------
       # LINUX DEBUG
-      # ======================================
+      # ----------------------------------------
 
       - name: Build Linux Debug
         run: flutter build linux --debug
@@ -92,9 +101,9 @@ jobs:
           cd build/linux/x64/debug
           tar -czf DailyAL-Linux-Debug.tar.gz bundle
 
-      # ======================================
+      # ----------------------------------------
       # LINUX RELEASE
-      # ======================================
+      # ----------------------------------------
 
       - name: Build Linux Release
         run: flutter build linux --release
@@ -104,30 +113,26 @@ jobs:
           chmod +x linux/packaging/package.sh
           ./linux/packaging/package.sh
 
-      # ======================================
+      # ----------------------------------------
       # PREPARE ARTIFACTS
-      # ======================================
+      # ----------------------------------------
 
       - name: Prepare Artifacts
         run: |
           mkdir -p release-artifacts
 
-          # Android
           cp build/app/outputs/flutter-apk/app-debug.apk \
             release-artifacts/DailyAL-Android-Debug.apk
 
           cp build/app/outputs/flutter-apk/app-release.apk \
             release-artifacts/DailyAL-Android-Release.apk
 
-          # Linux Debug
           cp build/linux/x64/debug/DailyAL-Linux-Debug.tar.gz \
             release-artifacts/
 
-          # Linux AppImage
           cp linux/packaging/DailyAL-x86_64.AppImage \
             release-artifacts/
 
-          # SHA1 checksums
           cd release-artifacts
 
           sha1sum DailyAL-Android-Debug.apk > DailyAL-Android-Debug.apk.sha1
@@ -153,6 +158,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # ----------------------------------------
+      # SETUP
+      # ----------------------------------------
+
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
@@ -164,12 +173,18 @@ jobs:
       - name: Get Dependencies
         run: flutter pub get
 
-      # ======================================
+      # ----------------------------------------
       # WINDOWS DEBUG
-      # ======================================
+      # ----------------------------------------
 
       - name: Build Windows Debug
-        run: flutter build windows --debug
+        shell: pwsh
+        run: |
+          Remove-Item -Recurse -Force build/windows -ErrorAction SilentlyContinue
+
+          $env:CXXFLAGS = "/D_SILENCE_EXPERIMENTAL_COROUTINE_DEPRECATION_WARNINGS"
+
+          flutter build windows --debug
 
       - name: Package Windows Debug
         run: |
@@ -177,12 +192,16 @@ jobs:
             -Path build/windows/x64/runner/Debug/* `
             -DestinationPath DailyAL-Windows-Debug.zip
 
-      # ======================================
+      # ----------------------------------------
       # WINDOWS RELEASE
-      # ======================================
+      # ----------------------------------------
 
       - name: Build Windows Release
-        run: flutter build windows --release
+        shell: pwsh
+        run: |
+          $env:CXXFLAGS = "/D_SILENCE_EXPERIMENTAL_COROUTINE_DEPRECATION_WARNINGS"
+
+          flutter build windows --release
 
       - name: Create MSIX
         run: dart run msix:create --install-certificate false
@@ -197,11 +216,12 @@ jobs:
             -Path build/windows/x64/runner/Release/* `
             -DestinationPath DailyAL-Windows-x64.zip
 
-      # ======================================
+      # ----------------------------------------
       # CHECKSUMS
-      # ======================================
+      # ----------------------------------------
 
       - name: Generate SHA1 Checksums
+        shell: pwsh
         run: |
           Get-FileHash DailyAL-Windows-Debug.zip -Algorithm SHA1 |
             Select-Object -ExpandProperty Hash |
@@ -238,7 +258,7 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    if: ${{ always() && startsWith(github.ref, 'refs/tags/20') }}
+    if: ${{ always() && startsWith(github.ref, 'refs/tags/20') && (needs.build-linux-android.result == 'success' || needs.build-windows.result == 'success') }}
 
     steps:
 
